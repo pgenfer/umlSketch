@@ -1,0 +1,9 @@
+F:\Projects\YumlFrontEnd\source\YumlFrontEnd\YumlFrontEnd.test\bin\Debug\YumlFrontEnd.test.dll
+F:\Projects\YumlFrontEnd\source\YumlFrontEnd\YumlFrontEnd.test\bin\Debug\YumlFrontEnd.test.pdb
+F:\Projects\YumlFrontEnd\source\YumlFrontEnd\YumlFrontEnd.test\bin\Debug\nunit.framework.dll
+F:\Projects\YumlFrontEnd\source\YumlFrontEnd\YumlFrontEnd.test\bin\Debug\YumlFrontEnd.dll
+F:\Projects\YumlFrontEnd\source\YumlFrontEnd\YumlFrontEnd.test\bin\Debug\YumlFrontEnd.pdb
+F:\Projects\YumlFrontEnd\source\YumlFrontEnd\YumlFrontEnd.test\bin\Debug\nunit.framework.xml
+F:\Projects\YumlFrontEnd\source\YumlFrontEnd\YumlFrontEnd.test\obj\Debug\YumlFrontEnd.test.csprojResolveAssemblyReference.cache
+F:\Projects\YumlFrontEnd\source\YumlFrontEnd\YumlFrontEnd.test\obj\Debug\YumlFrontEnd.test.dll
+F:\Projects\YumlFrontEnd\source\YumlFrontEnd\YumlFrontEnd.test\obj\Debug\YumlFrontEnd.test.pdb

@@ -1,0 +1,9 @@
+Zunächst ist die Idee, dass der Anwender sich über eine grafische Oberfläche einfach Klassen
+zusammenstellen kann.
+
+In einem anderen Bildschirmbereich werden seine Klassen permanent mit Yuml dargestellt, sobald sich etwas geändert hat.
+
+Die Metadaten der Klassen werden z.B. als json gespeichert.
+
+In einem nächsten Schritt sollen aus bestehende .NET Assemblies eingelesen werden können, so
+dass aus diesen dann auch automatisch Klassen generiert werden können.

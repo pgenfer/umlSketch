@@ -1,0 +1,4 @@
+- Erfassen, welche Daten benötigt werden, um ein UML Diagramm zu speichern
+- Ein Json Format definieren, in dem die Daten gespeichert werden
+- Domänenmodell erstellen, um Daten zu speichern
+- Konverter, um aus dem Domänenmodell ein UML Diagramm zu generieren.
