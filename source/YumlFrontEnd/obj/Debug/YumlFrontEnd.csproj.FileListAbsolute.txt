@@ -1,5 +1,0 @@
-F:\Projects\YumlFrontEnd\source\YumlFrontEnd\bin\Debug\YumlFrontEnd.dll
-F:\Projects\YumlFrontEnd\source\YumlFrontEnd\bin\Debug\YumlFrontEnd.pdb
-F:\Projects\YumlFrontEnd\source\YumlFrontEnd\obj\Debug\YumlFrontEnd.csprojResolveAssemblyReference.cache
-F:\Projects\YumlFrontEnd\source\YumlFrontEnd\obj\Debug\YumlFrontEnd.dll
-F:\Projects\YumlFrontEnd\source\YumlFrontEnd\obj\Debug\YumlFrontEnd.pdb
