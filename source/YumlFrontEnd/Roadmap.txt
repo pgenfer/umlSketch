@@ -1,0 +1,21 @@
+﻿Goal is to provide a useable application as fast as possible.
+
+Therefore, the following steps are necessary:
+
+1. Save/Load the classifier dictionary to/from file
+	1.1 Automap from Domain -> Dto (for saving) -> Done
+	1.2 Automap from Dto -> Domain (for loading) -> Done
+	1.3 Map system types to existing types (don't serialize them)
+2. Print the classifier in yuml format
+	2.1 Print simple classes with name and property list
+	2.2 Store color for class
+3. Have a UI where the classifiers data are visible
+	3.1 Use Caliburn micro -> Done
+	3.2 Use simple controls
+	3.3 Use either Modern UI or sketch UI -> Done
+	3.4 Title bar and maybe window controls should also have sketch style
+4. Have a UI where the yuml diagram is rendered
+5. Add relations to diagram
+6. Add methods to classifiers
+7. Add notes
+8. Import from assembly, synchronize with existing classes

@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="YumlFrontEnd.editor.PropertyListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+             xmlns:local="clr-namespace:YumlFrontEnd.editor"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+  <UserControl.Resources>
+    <Style BasedOn="{StaticResource TextBlock-Sketch}"
+           TargetType="TextBlock" />
+  </UserControl.Resources>
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <local:ExpanderButton x:Name="ExpandOrCollapse"
+                          IsExpanded="{Binding IsExpanded}"
+                          Style="{StaticResource ExpanderButtonStyle}"
+                          Grid.Column="0" />
+    <TextBlock Text="Properties"
+               FontWeight="Bold"
+               Margin="5"
+               Grid.Column="1" />
+    <ItemsControl Name="Items"
+                  Grid.Column="1"
+                  Grid.Row="1"
+                  Visibility="{Binding IsExpanded,Converter={StaticResource _booleanToVisibility}}">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <ContentControl caliburn:View.Model="{Binding}"/>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </Grid>
+</UserControl>
