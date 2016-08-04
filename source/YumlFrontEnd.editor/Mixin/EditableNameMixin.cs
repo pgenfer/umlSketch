@@ -20,6 +20,10 @@ namespace YumlFrontEnd.editor
         /// </summary>
         private readonly NameMixin _name = new NameMixin();
         /// <summary>
+        /// the name before the edit operation started
+        /// </summary>
+        private string _originalName = string.Empty;
+        /// <summary>
         /// flag that tracks whether the name can be edited at the moment
         /// </summary>
         private bool _editable = false;
@@ -27,17 +31,32 @@ namespace YumlFrontEnd.editor
         public void StartEditing()
         {
             IsEditable = true;
+            _originalName = Name;
         }
 
         public void StopEditing(EventArgs args)
         {
             var keyboardArgs = args as KeyEventArgs;
-            // stop edit mode if special key is pressed
-            if (keyboardArgs != null &&
-               (keyboardArgs.Key == Key.Enter ||
-                keyboardArgs.Key == Key.Return ||
-                keyboardArgs.Key == Key.Escape))
-                IsEditable = false;
+            if(keyboardArgs != null)
+            {
+                switch(keyboardArgs.Key)
+                {
+                    case Key.Enter:
+                        // important: we can only disable edit mode 
+                        // it text is not empty, otherwise the text box would not be visible
+                        if (string.IsNullOrEmpty(Name))
+                            return;
+                        _originalName = Name;
+                        IsEditable = false;
+                        break;
+                    case Key.Escape:
+                        if (string.IsNullOrEmpty(_originalName))
+                            return;
+                        Name = _originalName;
+                        IsEditable = false;
+                        break;
+                }
+            }
             // TODO: handle other cancel events
         }
 
@@ -46,6 +65,12 @@ namespace YumlFrontEnd.editor
             get { return _name.Name; }
             set { _name.Name = value; NotifyOfPropertyChange(nameof(Name)); }
         }
+
+        /// <summary>
+        /// the name that is stored in this mixin before 
+        /// the edit operation completes
+        /// </summary>
+        public string OriginalName { get { return _originalName; } }
 
         public bool IsEditable
         {

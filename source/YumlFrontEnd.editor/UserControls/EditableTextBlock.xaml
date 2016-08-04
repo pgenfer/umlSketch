@@ -14,12 +14,32 @@
             TargetType="TextBox" />
   </UserControl.Resources>
   <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <TextBlock Text="X"
+               Margin="5"
+               Grid.Column="0"
+               Foreground="Red"
+               Visibility="{Binding HasError,Converter={StaticResource _booleanToVisibility}}"
+               HorizontalAlignment="Left">
+      <TextBlock.ToolTip>
+        <TextBlock Text="{Binding Error}"/>
+      </TextBlock.ToolTip>
+    </TextBlock>
+               
     <TextBlock Name="Name"
-            Grid.Column="1"
-            caliburn:Message.Attach="[Event MouseLeftButtonDown] = [Action StartEditing]"/>
-    <TextBox Text="{Binding Name}"
+               Margin="0,5"
+               Grid.Column="1"
+               caliburn:Message.Attach="[Event MouseLeftButtonDown] = [Action StartEditing]"
+               Visibility="{Binding IsEditable,Converter={local:BooleanToCollapseConverter}}"
+               HorizontalAlignment="Left"/>
+    <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
+             MinWidth="25"
              Grid.Column="1"
              Visibility="{Binding IsEditable,Converter={StaticResource _booleanToVisibility}}"
-             caliburn:Message.Attach="[Event PreviewKeyDown] = [Action StopEditing($eventArgs)]"/>
+             caliburn:Message.Attach="[Event PreviewKeyDown] = [Action StopEditing($eventArgs)]"
+             HorizontalAlignment="Left"/>    
   </Grid>
 </UserControl>

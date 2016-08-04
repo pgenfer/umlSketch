@@ -1231,7 +1231,13 @@
 				<ControlTemplate TargetType="{x:Type TextBox}">
 					<Grid>
 						<!-- The implementation places the Content into the ScrollViewer. It must be named PART_ContentHost for the control to function -->
-						<ScrollViewer Style="{DynamicResource ScrollViewer-Sketch2}" x:Name="PART_ContentHost" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" BorderBrush="{TemplateBinding BorderBrush}" FontFamily="./#Segoe Print" d:IsStaticText="False"/>
+						<ScrollViewer Style="{DynamicResource ScrollViewer-Sketch2}" 
+                          x:Name="PART_ContentHost" 
+                          Background="{TemplateBinding Background}" 
+                          Foreground="{TemplateBinding Foreground}" 
+                          BorderBrush="{TemplateBinding BorderBrush}" 
+                          FontFamily="./#Segoe Print" 
+                          d:IsStaticText="False"/>
 					</Grid>
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsFocused" Value="True">
@@ -1247,6 +1253,20 @@
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
 		<Setter Property="FontWeight" Value="{DynamicResource FontWeight-Sketch}"/>
 		<Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
+    <Setter Property="Validation.ErrorTemplate">
+      <Setter.Value>
+        <ControlTemplate>
+          <!-- The implementation places the Content into the ScrollViewer. It must be named PART_ContentHost for the control to function -->
+          <ScrollViewer Style="{DynamicResource ScrollViewer-Sketch2}"
+                        x:Name="PART_ContentHost"
+                        Background="Red"
+                        Foreground="{TemplateBinding Foreground}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        FontFamily="./#Segoe Print"
+                        d:IsStaticText="False"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
 		<Style.Triggers>
 			<Trigger Property="IsEnabled" Value="False">
 				<Setter Property="Foreground" Value="{DynamicResource DisabledForeground-Sketch}"/>

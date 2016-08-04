@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yuml;
 
 namespace YumlFrontEnd.editor
 {
-    internal class MainViewModel : PropertyChangedBase
+    internal class MainViewModel : Screen
     {
-        public MainViewModel()
+        public MainViewModel(ClassifierValidationService validationService)
         {
-            ClassifierList = new ClassifierListViewModel();
+            ClassifierList = new ClassifierListViewModel(validationService);
         }
 
         public ClassifierListViewModel ClassifierList { get; private set; }
