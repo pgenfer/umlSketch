@@ -26,7 +26,7 @@ namespace Yuml
         /// <param name="className"></param>
         /// <returns></returns>
         [Pure]
-        public bool IsClassNameFree(string className) => !_dictionary.ContainsKey(className);
+        public virtual bool IsClassNameFree(string className) => !_dictionary.ContainsKey(className);
 
         /// <summary>
         /// searches a class with the given name.

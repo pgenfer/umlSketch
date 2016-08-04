@@ -15,8 +15,6 @@ namespace Yuml
             _classifiers = classifiers;
         }
 
-        public ClassifierValidationService() { }
-
         /// <summary>
         /// validates whether the given name would be valid for a
         /// classifier
