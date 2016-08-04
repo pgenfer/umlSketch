@@ -102,6 +102,8 @@
     <Compile Include="PropertyList.cs" />
     <Compile Include="ArchitectureLoader\ReflectionArchitectureLoader.cs" />
     <Compile Include="Serializer\Dto\ClassifierDto.cs" />
+    <Compile Include="Serializer\Dto\MethodDto.cs" />
+    <Compile Include="Serializer\Dto\ParameterDto.cs" />
     <Compile Include="Serializer\Dto\PropertyDto.cs" />
     <Compile Include="Serializer\DomainDtoConverter.cs" />
     <Compile Include="Serializer\FileName.cs" />

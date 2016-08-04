@@ -14,6 +14,11 @@ namespace Yuml.Serializer.Dto
     {
         public string Name { get; set; }
         public List<PropertyDto> Properties { get; set; }
+        public List<MethodDto> Methods { get; set; }
         public bool IsVisible { get; set; }
+
+        public override bool Equals(object obj) => 
+            obj is ClassifierDto && Name == ((ClassifierDto)obj).Name;
+        public override int GetHashCode() => Name.GetHashCode();
     }
 }

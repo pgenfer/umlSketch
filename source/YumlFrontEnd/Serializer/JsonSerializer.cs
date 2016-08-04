@@ -14,8 +14,14 @@ namespace Yuml.Serializer
         {
             var toDtoConverter = new DomainDtoConverter();
             var classifierList = toDtoConverter.ToDto(classifiers);
+            return SaveDto(classifierList);
+            
+        }
+
+        internal JsonContent SaveDto(IEnumerable<ClassifierDto> classifierDtos)
+        {
             var jsonString = JsonConvert.SerializeObject(
-                classifierList,
+                classifierDtos,
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
@@ -27,10 +33,15 @@ namespace Yuml.Serializer
 
         public ClassifierDictionary Load(JsonContent jsonContent)
         {
-            var classifierDtos = JsonConvert.DeserializeObject<List<ClassifierDto>>(jsonContent.Value);
+            var classifierDtos = LoadDto(jsonContent);
             var toDomainConverter = new DomainDtoConverter();
-            return toDomainConverter.ToDomain(classifierDtos);
-            
+            return toDomainConverter.ToDomain(classifierDtos);            
+        }
+
+        internal IEnumerable<ClassifierDto> LoadDto(JsonContent jsonContent)
+        {
+            var classifierDtos = JsonConvert.DeserializeObject<List<ClassifierDto>>(jsonContent.Value);
+            return classifierDtos;
         }
     }
 }

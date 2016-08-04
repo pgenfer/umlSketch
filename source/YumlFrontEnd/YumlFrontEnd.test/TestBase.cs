@@ -22,6 +22,12 @@ namespace Yuml.Test
 
         internal readonly ClassifierDto StringDto = new ClassifierDto{Name = "string"};
         internal readonly ClassifierDto IntegerDto = new ClassifierDto { Name = "int" };
+        internal readonly ClassifierDto VoidDto = new ClassifierDto { Name = "void" };
+
+        /// <summary>
+        /// a dto to a service class that provides some methods
+        /// </summary>
+        internal readonly ClassifierDto ServiceDto = new ClassifierDto { Name = "Service" };
 
         /// <summary>
         /// setup the classifiers that can be used during tests
@@ -43,6 +49,18 @@ namespace Yuml.Test
             IntegerDto.Properties = new List<PropertyDto>
             {
                 new PropertyDto { Name = "TypeName", Type = StringDto }
+            };
+            ServiceDto.Methods = new List<MethodDto>
+            {
+                new MethodDto
+                {
+                    Name = "ServiceMethod",
+                    ReturnType = VoidDto,
+                    Parameters = new List<ParameterDto>
+                    {
+                        new ParameterDto {Name = "args",ParameterType = StringDto }
+                    }
+                }
             };
         }
 
