@@ -56,6 +56,19 @@ namespace Yuml
         public IEnumerator<Property> GetEnumerator() =>  _list.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _list.GetEnumerator();
 
-        public override string ToString() => string.Join(Environment.NewLine, _list.Select(x => x.ToString()));      
+        public void WriteTo(ClassWriter classWriter)
+        {
+            Requires(classWriter != null);
+
+            foreach (var property in this.Where(x => x.IsVisible))
+            {
+                var propertyWriter = classWriter.WithNewProperty();
+                propertyWriter = property.WriteTo(propertyWriter);
+                classWriter = propertyWriter.Finish();
+            }                
+        }
+
+        public override string ToString() => 
+            string.Join(Environment.NewLine, _list.Select(x => x.ToString()));      
     }
 }

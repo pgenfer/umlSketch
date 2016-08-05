@@ -94,8 +94,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchitectureLoader\ReflectionTypeLoaderTests.cs" />
-    <Compile Include="ClassifierDictionaryTests.cs" />
+    <Compile Include="Domain\ClassifierDictionaryTests.cs" />
+    <Compile Include="DiagramWriter\DiagramWriterTest.cs" />
+    <Compile Include="Domain\ClassifierTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serializer\JsonApplicationSettingSerializerTest.cs" />
     <Compile Include="Serializer\JsonSerializerTests.cs" />
     <Compile Include="Serializer\ToDomainConverterTest.cs" />
     <Compile Include="Serializer\ToDtoConverterTest.cs" />

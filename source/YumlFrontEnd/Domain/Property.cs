@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
 {
@@ -40,5 +41,12 @@ namespace Yuml
             set { _name.Name = value; }
         }
         public override string ToString() => $"{Type.Name} {Name}";
+
+        public PropertyWriter WriteTo(PropertyWriter propertyWriter)
+        {
+            Requires(propertyWriter != null);
+
+            return propertyWriter.WithType(Type.Name).WithName(Name);
+        }
     }
 }

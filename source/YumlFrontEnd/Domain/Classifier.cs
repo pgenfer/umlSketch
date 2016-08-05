@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
 {
@@ -48,5 +49,14 @@ namespace Yuml
         public void ShowOrHideAllProperties(bool showOrHide) => _properties.ShowOrHideAllProperties(showOrHide);
         public Property CreateProperty(string name, Classifier type) => _properties.CreateProperty(name, type);
         public IEnumerator<Property> GetEnumerator() => _properties.GetEnumerator();
+
+        public ClassWriter WriteTo(ClassWriter classWriter)
+        {
+            Requires(classWriter != null);
+
+            classWriter.WithName(Name);
+            Properties.WriteTo(classWriter);
+            return classWriter;
+        }
     }
 }

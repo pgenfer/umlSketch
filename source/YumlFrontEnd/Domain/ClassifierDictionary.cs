@@ -103,5 +103,18 @@ namespace Yuml
             :this(classifiers.ToArray())
         {           
         }
+
+        public void WriteTo(DiagramWriter writer)
+        {
+            Requires(writer != null);
+
+            foreach(var classifier in _dictionary.Values.Where(x => x.IsVisible))
+            {
+                var classWriter = writer.StartClass();
+                classWriter = classifier.WriteTo(classWriter);
+                classWriter.Finish();
+
+            }
+        }
     }
 }

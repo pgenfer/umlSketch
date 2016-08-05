@@ -93,14 +93,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Serializer\JsonApplicationSettingSerializer.cs" />
+    <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="ClassDiagram.cs" />
-    <Compile Include="ClassifierDictionary.cs" />
+    <Compile Include="Settings\DiagramDirection.cs" />
+    <Compile Include="Settings\DiagramSize.cs" />
+    <Compile Include="Domain\ClassifierDictionary.cs" />
+    <Compile Include="DiagramWriter\ClassWriter.cs" />
+    <Compile Include="DiagramWriter\DiagramContentMixin.cs" />
+    <Compile Include="DiagramWriter\DiagramWriter.cs" />
+    <Compile Include="DiagramWriter\PropertyWriter.cs" />
     <Compile Include="Validation\ClassifierValidationService.cs" />
-    <Compile Include="Method.cs" />
+    <Compile Include="Domain\Method.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Classifier.cs" />
-    <Compile Include="Property.cs" />
-    <Compile Include="PropertyList.cs" />
+    <Compile Include="Domain\Classifier.cs" />
+    <Compile Include="Domain\Property.cs" />
+    <Compile Include="Domain\PropertyList.cs" />
     <Compile Include="ArchitectureLoader\ReflectionArchitectureLoader.cs" />
     <Compile Include="Serializer\Dto\ClassifierDto.cs" />
     <Compile Include="Serializer\Dto\MethodDto.cs" />
