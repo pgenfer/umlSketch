@@ -11,7 +11,7 @@ namespace Yuml.Test
 {
     public class JsonSerializerTest : TestBase
     {
-        [TestDescription(@"Ensures that the classifier dictionary is stored correcctly")]
+        [TestDescription("Ensures that the classifier dictionary is stored correctly")]
         public void SaveLoad_Test()
         {
             var fromClassifiers = new ClassifierDictionary(String);
@@ -29,23 +29,53 @@ namespace Yuml.Test
             Assert.AreEqual(1, toClassifiers.ElementAt(0).Properties.Count());
         }
 
-        [TestDescription(@"Checks that method Dtos are stored correctly")]
+        [TestDescription("Checks that method Dtos are stored correctly")]
         public void SaveLoad_MethodDtos()
         {
-            var classifierDtos = new List<ClassifierDto>
+            var diagramDto = new DiagramDataDto
             {
-                StringDto,IntegerDto,ServiceDto
+                Classifiers = new List<ClassifierDto>
+                {
+                    StringDto,IntegerDto,ServiceDto
+                }
             };
 
             var serializer = new JsonSerializer();
-            var content = serializer.SaveDto(classifierDtos);
-            var restoredDtos = serializer.LoadDto(content).ToList();
+            var content = serializer.SaveDto(diagramDto);
+            var restoredDtos = serializer
+                .LoadDto(content)
+                .Classifiers
+                .ToList();
 
             var service = restoredDtos.Single(x => x.Name == "Service");
             // ensure that classifiers references are reused
             Assert.AreSame(restoredDtos[0], service.Methods[0].Parameters[0].ParameterType);
             // ensure that all method data was read correctly
             Assert.AreEqual(service.Methods[0],ServiceDto.Methods[0]);
+        }
+
+        [TestDescription("Checks that relations are stored correctly")]
+        public void SaveLoad_ReleationsDto()
+        {
+            var diagramDto = new DiagramDataDto
+            {
+                Classifiers = new List<ClassifierDto> { CarDto, TireDto },
+                Relations = new List<RelationDto> { CarHasTiresDto }
+            };
+
+            var serializer = new JsonSerializer();
+            var json = serializer.SaveDto(diagramDto);
+
+            var newDiagramDto = serializer.LoadDto(json);
+            var loadedCar = newDiagramDto.Classifiers[0];
+            var loadedTire = newDiagramDto.Classifiers[1];
+            var relation = newDiagramDto.Relations.Single();
+
+            Assert.AreSame(loadedCar, relation.Start);
+            Assert.AreSame(loadedTire, relation.End);
+            Assert.AreEqual("has", relation.Name);
+            Assert.AreEqual(Relation.Aggregation, relation.Relation);
+            Assert.AreEqual(Multiplicity.ZeroToMany, relation.EndMultiplicity);
         }
     }
 }

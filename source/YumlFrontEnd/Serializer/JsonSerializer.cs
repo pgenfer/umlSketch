@@ -13,15 +13,21 @@ namespace Yuml.Serializer
         public JsonContent Save(ClassifierDictionary classifiers)
         {
             var toDtoConverter = new DomainDtoConverter();
-            var classifierList = toDtoConverter.ToDto(classifiers);
-            return SaveDto(classifierList);
+            var classifierList = toDtoConverter
+                .ToDto(classifiers)
+                .ToList();
+            // TODO: fix this when relations are implemented
+            // in the domain model, currently we only store the
+            // classifiers
+            var diagramDto = new DiagramDataDto() { Classifiers = classifierList };
+            return SaveDto(diagramDto);
             
         }
 
-        internal JsonContent SaveDto(IEnumerable<ClassifierDto> classifierDtos)
+        internal JsonContent SaveDto(DiagramDataDto completeDiagramData)
         {
             var jsonString = JsonConvert.SerializeObject(
-                classifierDtos,
+                completeDiagramData,
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
@@ -33,15 +39,18 @@ namespace Yuml.Serializer
 
         public ClassifierDictionary Load(JsonContent jsonContent)
         {
-            var classifierDtos = LoadDto(jsonContent);
             var toDomainConverter = new DomainDtoConverter();
-            return toDomainConverter.ToDomain(classifierDtos);            
+
+            var diagramDto = LoadDto(jsonContent);
+            // TODO: currently only the classifiers are handled
+            // but we also have to handle relations here
+            return toDomainConverter.ToDomain(diagramDto.Classifiers);            
         }
 
-        internal IEnumerable<ClassifierDto> LoadDto(JsonContent jsonContent)
+        internal DiagramDataDto LoadDto(JsonContent jsonContent)
         {
-            var classifierDtos = JsonConvert.DeserializeObject<List<ClassifierDto>>(jsonContent.Value);
-            return classifierDtos;
+            var diagramDto = JsonConvert.DeserializeObject<DiagramDataDto>(jsonContent.Value);
+            return diagramDto;
         }
     }
 }

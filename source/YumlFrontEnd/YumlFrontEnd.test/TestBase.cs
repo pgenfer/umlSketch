@@ -20,9 +20,17 @@ namespace Yuml.Test
         /// </summary>
         protected readonly Classifier String = new Classifier("string");
 
+        // some default data types
         internal readonly ClassifierDto StringDto = new ClassifierDto{Name = "string"};
         internal readonly ClassifierDto IntegerDto = new ClassifierDto { Name = "int" };
         internal readonly ClassifierDto VoidDto = new ClassifierDto { Name = "void" };
+
+        // some classifiers used for relations
+        internal readonly ClassifierDto CarDto = new ClassifierDto { Name = "Car" };
+        internal readonly ClassifierDto TireDto = new ClassifierDto { Name = "Tyre" };
+
+        // relations
+        internal readonly RelationDto CarHasTiresDto = new RelationDto();
 
         /// <summary>
         /// a dto to a service class that provides some methods
@@ -64,10 +72,22 @@ namespace Yuml.Test
             };
         }
 
+        private void InitRelationDtos()
+        {
+            CarHasTiresDto.Start = CarDto;
+            CarHasTiresDto.End = TireDto;
+            // a car would only have a limited number of tires, but we assume there can be unlimited tires
+            CarHasTiresDto.EndMultiplicity = Multiplicity.ZeroToMany;
+            // the tires exist after the car was destroyed (might depend on the use case)
+            CarHasTiresDto.Relation = Relation.Aggregation;
+            CarHasTiresDto.Name = "has";
+        }
+
         protected TestBase()
         {
             InitClassifiers();
             InitClassifierDtos();
+            InitRelationDtos();
         }
     }
 }

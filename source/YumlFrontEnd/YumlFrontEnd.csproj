@@ -93,6 +93,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Serializer\Dto\DiagramDataDto.cs" />
+    <Compile Include="Serializer\Dto\Multiplicity.cs" />
+    <Compile Include="Serializer\Dto\Relation.cs" />
+    <Compile Include="Serializer\Dto\RelationDto.cs" />
     <Compile Include="Serializer\JsonApplicationSettingSerializer.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="ClassDiagram.cs" />
