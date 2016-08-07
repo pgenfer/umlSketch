@@ -13,13 +13,13 @@ namespace Yuml.Serializer.Dto
     internal class ParameterDto
     {
         public string Name { get; set; }
-        public ClassifierDto ParameterType { get; set; }
+        public ClassifierDto Type { get; set; }
 
         public override bool Equals(object obj) => 
             obj is ParameterDto && 
             Name == ((ParameterDto)obj).Name && 
-            ParameterType.Equals(((ParameterDto)obj).ParameterType);
+            Type.Equals(((ParameterDto)obj).Type);
 
-        public override int GetHashCode() => Name.GetHashCode() ^ ParameterType.GetHashCode();
+        public override int GetHashCode() => Name.GetHashCode() ^ Type.GetHashCode();
     }
 }

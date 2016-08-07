@@ -30,27 +30,41 @@ namespace Yuml.Serializer.Dto
 
         private void RegisterMappings()
         {
+            // TODO: check if preserve references is everywhere necessary
+
             // store the classfier mappings so that we can resolve them later
-            Dictionary<Classifier, ClassifierDto> classifierMappings = new Dictionary<Classifier, ClassifierDto>();
             _mapperConfiguration = new MapperConfiguration(x =>
             {
-                x.CreateMap<Classifier, ClassifierDto>()
-                .PreserveReferences(); // needed, otherwise properties will not reference existing classifiers
-                x.CreateMap<Property, PropertyDto>()
-                .PreserveReferences(); // needed, otherwise properties will not reference existing classifiers
-                x.CreateMap<ClassifierDto, Classifier>()
-                .PreserveReferences();
-                x.CreateMap<PropertyDto, Property>()
-                .PreserveReferences();
-                x.CreateMap<List<PropertyDto>, PropertyList>()
-                .PreserveReferences()
-                .AfterMap((s,d) =>
-                {
-                    // map the property DTOs to correct property domain objects
-                    // and add them  to the property list
-                    foreach (var propertyDto in s)
-                        d.AddExistingProperty(_mapper.Map<Property>(propertyDto));                        
-                });                
+                // classifier mapping
+                x.CreateMap<Classifier, ClassifierDto>().PreserveReferences(); 
+                x.CreateMap<ClassifierDto, Classifier>().PreserveReferences();
+                // property mapping
+                x.CreateMap<Property, PropertyDto>().PreserveReferences(); 
+                x.CreateMap<PropertyDto, Property>().PreserveReferences();
+                x.CreateMap<List<PropertyDto>, PropertyList>().PreserveReferences()
+                    .AfterMap((s, d) =>
+                    {
+                        foreach(var property in s)
+                            d.AddExistingMember(_mapper.Map<Property>(property));
+                    });
+                // method mapping
+                x.CreateMap<Method, MethodDto>().PreserveReferences();
+                x.CreateMap<MethodDto, Method>().PreserveReferences();
+                x.CreateMap<List<MethodDto>, MethodList>().PreserveReferences()
+                    .AfterMap((s, d) =>
+                    {
+                        foreach (var member in s)
+                            d.AddExistingMember(_mapper.Map<Method>(member));
+                    });
+                // parameter mapping
+                x.CreateMap<Parameter, ParameterDto>().PreserveReferences();
+                x.CreateMap<ParameterDto, Parameter>().PreserveReferences();
+                x.CreateMap<List<ParameterDto>, ParameterList>().PreserveReferences()
+                    .AfterMap((s, d) =>
+                    {
+                       foreach(var parameter in s)
+                            d.AddExistingMember(_mapper.Map<Parameter>(parameter));
+                    });
             });
 
             _mapper = _mapperConfiguration.CreateMapper();

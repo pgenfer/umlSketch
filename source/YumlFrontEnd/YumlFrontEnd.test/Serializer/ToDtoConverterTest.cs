@@ -14,7 +14,6 @@ namespace Yuml.Test
         public void Classifiers_ConvertToDto_KeepReferences()
         {
             // Arrange
-
             var classifiers = new ClassifierDictionary(Integer, String);
             var converter = new DomainDtoConverter();
 
@@ -25,6 +24,21 @@ namespace Yuml.Test
             // for the dto and the type of the string's property
             Assert.AreEqual(dtos[0], dtos[1].Properties[0].Type);
             Assert.AreEqual(dtos[1], dtos[0].Properties[0].Type);
+        }
+
+        [TestDescription("Ensures that the DTO converter converts methods correctly with their references")]
+        public void ClassifierWithMethod_ConvertToDto_KeepReferences()
+        {
+            // Arrange
+            var classifiers = new ClassifierDictionary(Void, String, Service);
+            var converter = new DomainDtoConverter();
+
+            // Act
+            var dtos = converter.ToDto(classifiers).ToArray();
+
+            // Assert
+            Assert.AreEqual(dtos[0], dtos[2].Methods[0].ReturnType);
+            Assert.AreEqual(dtos[1], dtos[2].Methods[0].Parameters[0].Type);
         }
     }
 }

@@ -11,12 +11,8 @@ namespace Yuml
     /// <summary>
     /// handles the interaction with a list of properties
     /// </summary>
-    public class PropertyList : IEnumerable<Property>
+    public class PropertyList : BaseList<Property>
     {
-        private readonly List<Property> _list = new List<Property>();
-
-        public PropertyList() { }
-
         /// <summary>
         /// sets visible flag to all properties of the list
         /// </summary>
@@ -36,25 +32,8 @@ namespace Yuml
             Requires(type != null);
             Ensures(_list.Count == OldValue(_list.Count) + 1);
 
-            var property = new Property(name, type);
-            _list.Add(property);
-            return property;
+            return AddNewMember(new Property(name, type));
         }
-
-        /// <summary>
-        /// adds a property to this property list.
-        /// Should only be used by serializer.
-        /// </summary>
-        /// <param name="p">Property that should be added to the list</param>
-        internal void AddExistingProperty(Property p)
-        {
-            Requires(p != null);
-
-            _list.Add(p);
-        }
-
-        public IEnumerator<Property> GetEnumerator() =>  _list.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => _list.GetEnumerator();
 
         public void WriteTo(ClassWriter classWriter)
         {

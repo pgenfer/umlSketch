@@ -17,9 +17,10 @@ namespace Yuml
     /// </summary>
     public class Classifier : IVisible
     {
-        private NameMixin _name = new NameMixin();
-        private IVisible _visible = new VisibleMixin();
+        private readonly NameMixin _name = new NameMixin();
+        private readonly IVisible _visible = new VisibleMixin();
         private PropertyList _properties = new PropertyList();
+        private MethodList _methods = new MethodList();
 
         public Classifier(string name)
         {
@@ -38,7 +39,14 @@ namespace Yuml
             internal set { _name.Name = value; }
         }
 
+        /// <summary>
+        /// internal setter is only used by serialization, should not be used by other production code
+        /// </summary>
         public PropertyList Properties { get { return _properties; } internal set { _properties = value; } }
+        /// <summary>
+        /// internal setter only used by serialization, should not be used by other production code
+        /// </summary>
+        public MethodList Methods { get { return _methods; } internal set { _methods = value; } }
 
         public override string ToString() => _name.ToString();
 
@@ -58,5 +66,7 @@ namespace Yuml
             Properties.WriteTo(classWriter);
             return classWriter;
         }
+
+        public Method CreateMethod(string name, Classifier type) => _methods.CreateMethod(name, type);
     }
 }

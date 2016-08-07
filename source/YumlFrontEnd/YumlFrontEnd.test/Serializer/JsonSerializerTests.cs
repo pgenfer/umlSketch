@@ -49,7 +49,7 @@ namespace Yuml.Test
 
             var service = restoredDtos.Single(x => x.Name == "Service");
             // ensure that classifiers references are reused
-            Assert.AreSame(restoredDtos[0], service.Methods[0].Parameters[0].ParameterType);
+            Assert.AreSame(restoredDtos[0], service.Methods[0].Parameters[0].Type);
             // ensure that all method data was read correctly
             Assert.AreEqual(service.Methods[0],ServiceDto.Methods[0]);
         }

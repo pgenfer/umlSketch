@@ -29,5 +29,26 @@ namespace Yuml.Test.Serializer
             Assert.AreEqual(classifierDictionary.ElementAt(1),
                 classifierDictionary.ElementAt(0).Properties.ElementAt(0).Type);
         }
+
+        [TestDescription("Checks that methods are converted correctly between domain and dto")]
+        public void Methods_ConvertToDtoAndDomain()
+        {
+            // Arrange
+            var dtos = new List<ClassifierDto> {VoidDto, StringDto, ServiceDto};
+            var converter = new DomainDtoConverter();
+            // Act
+            var classifierDictionary = converter.ToDomain(dtos);
+            // Assert return type has correct reference
+            Assert.AreEqual(
+                classifierDictionary.ElementAt(0),
+                classifierDictionary.ElementAt(2).Methods.ElementAt(0).ReturnType);
+            // Assert parameters have correct reference
+            Assert.AreEqual(
+                classifierDictionary.ElementAt(1),
+                classifierDictionary
+                    .ElementAt(2).Methods
+                    .ElementAt(0).Parameters
+                    .ElementAt(0).Type);
+        }
     }
 }

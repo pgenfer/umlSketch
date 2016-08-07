@@ -14,8 +14,8 @@ namespace Yuml
     /// </summary>
     public class Property : IVisible
     {
-        private IVisible _visible = new VisibleMixin();
-        private NameMixin _name = new NameMixin();
+        private readonly IVisible _visible = new VisibleMixin();
+        private readonly NameMixin _name = new NameMixin();
 
         public Property(string name, Classifier type)
         {

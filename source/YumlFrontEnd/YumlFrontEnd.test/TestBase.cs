@@ -19,16 +19,22 @@ namespace Yuml.Test
         /// dummy classifier that represents a string
         /// </summary>
         protected readonly Classifier String = new Classifier("string");
+        /// <summary>
+        /// void data type
+        /// </summary>
+        protected readonly Classifier Void = new Classifier("void");
+        /// <summary>
+        /// a classifier that has a method
+        /// </summary>
+        protected readonly Classifier Service = new Classifier("Service");
 
         // some default data types
         internal readonly ClassifierDto StringDto = new ClassifierDto{Name = "string"};
         internal readonly ClassifierDto IntegerDto = new ClassifierDto { Name = "int" };
         internal readonly ClassifierDto VoidDto = new ClassifierDto { Name = "void" };
-
         // some classifiers used for relations
         internal readonly ClassifierDto CarDto = new ClassifierDto { Name = "Car" };
         internal readonly ClassifierDto TireDto = new ClassifierDto { Name = "Tyre" };
-
         // relations
         internal readonly RelationDto CarHasTiresDto = new RelationDto();
 
@@ -46,6 +52,9 @@ namespace Yuml.Test
             String.CreateProperty("Length", Integer);
             // integer has a property for its type name
             Integer.CreateProperty("TypeName", String);
+
+            Service.CreateMethod("DoSomething", Void)
+                .CreateParameter(String, "firstParameter");
         }
 
         private void InitClassifierDtos()
@@ -66,7 +75,7 @@ namespace Yuml.Test
                     ReturnType = VoidDto,
                     Parameters = new List<ParameterDto>
                     {
-                        new ParameterDto {Name = "args",ParameterType = StringDto }
+                        new ParameterDto {Name = "args",Type = StringDto }
                     }
                 }
             };

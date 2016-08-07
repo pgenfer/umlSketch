@@ -14,6 +14,7 @@ namespace Yuml
     {
         private readonly IVisible _visible = new VisibleMixin();
         private readonly NameMixin _name = new NameMixin();
+        private ParameterList _parameters = new ParameterList();
 
         public bool IsVisible
         {
@@ -27,8 +28,17 @@ namespace Yuml
             set { _name.Name = value; }
         }
 
-        public override string ToString() => _name.ToString();
+        public override string ToString()
+        {
+            return $"{ReturnType} {Name} ({string.Join(",",_parameters.Select(x => x.ToString()))})";
+        }
 
+        /// <summary>
+        /// internal setter is only used for serialization.
+        /// </summary>
+        public ParameterList Parameters { get { return _parameters;} internal set { _parameters = value; } }
+
+        // TODO: return type can be changed by user
         public Classifier ReturnType { get;}
 
         public Method(string name, Classifier returnType)
@@ -36,5 +46,7 @@ namespace Yuml
             Name = name;
             ReturnType = returnType;
         }
+        public IEnumerator<Parameter> GetEnumerator() => _parameters.GetEnumerator();
+        public Parameter CreateParameter(Classifier type, string name) => _parameters.CreateParameter(type, name);
     }
 }
