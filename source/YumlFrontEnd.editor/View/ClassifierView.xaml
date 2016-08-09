@@ -27,20 +27,21 @@
     <StackPanel Orientation="Horizontal"
                 Grid.Column="1">
       <local:EditableTextBlock Margin="5"
-                               Width="200" 
+                               Width="200"
                                caliburn:Bind.Model="{Binding}"/>
+<!--
       <Button Content="+"
-              Width="20"
-              Height="20">
+                   Width="20"
+                   Height="20">
         <Button.Style>
-          <Style 
+          <Style
             BasedOn="{StaticResource CircleButton-Sketch}"
             TargetType="{x:Type Button}">
             <Style.Setters>
               <Setter Property="BorderBrush" Value="LightGreen"/>
               <Setter Property="Foreground" Value="LightGreen"/>
             </Style.Setters>
-            
+
           </Style>
         </Button.Style>
       </Button>
@@ -59,7 +60,7 @@
           </Style>
         </Button.Style>
       </Button>
-        
+-->
     </StackPanel>
     <ContentControl
         Grid.Row="1"

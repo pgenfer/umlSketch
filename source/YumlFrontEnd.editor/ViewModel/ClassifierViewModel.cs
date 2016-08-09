@@ -9,34 +9,33 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Yuml;
+using Yuml.Commands;
+using static System.Diagnostics.Contracts.Contract;
 
 namespace YumlFrontEnd.editor
 {
-    internal class ClassifierViewModel : PropertyChangedBase
+    /// <summary>
+    /// view model for interaction with a single classifier object
+    /// </summary>
+    internal class ClassifierViewModel : 
+        ViewModelBase<IClassiferCommands>
     {
-        private ExpandableMixin _expanded = new ExpandableMixin();
-        private EditableNameMixin _name = new EditableNameMixin();
-        private readonly ClassifierValidationService _validationService;
-        private bool _hasError = false;
-        private string _errorMessage = string.Empty;
-
-
-        public ClassifierViewModel(ClassifierValidationService validationService)
+        private readonly ExpandableMixin _expanded = new ExpandableMixin();
+        private readonly EditableNameMixin _name;
+        
+        public ClassifierViewModel(
+            IValidateNameService validationService, 
+            IClassiferCommands commands):base(commands)
         {
+            Requires(validationService != null);
+            Requires(commands != null);
+
+            _name = new EditableNameMixin(validationService,commands.RenameCommand);
+
             Properties = new PropertyListViewModel();
-            // also delegate events
+            // delegate events
+            _name.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
             _expanded.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
-            _name.PropertyChanged += OnMixinPropertyChanged;
-
-            _validationService = validationService;
-        }
-
-        private void OnMixinPropertyChanged(object sender, PropertyChangedEventArgs args)
-        {
-            NotifyOfPropertyChange(args.PropertyName);
-            // revalidate the name whenever it changes
-            if (args.PropertyName == nameof(Name))
-                ValidateName();
         }
 
         public PropertyListViewModel Properties { get; private set; }
@@ -54,7 +53,7 @@ namespace YumlFrontEnd.editor
         }
 
         public void StartEditing() => _name.StartEditing();
-        public void StopEditing(EventArgs args) => _name.StopEditing(args);
+        public void StopEditing(Confirmation configuration) => _name.StopEditing(configuration);
         public override string ToString() => _name.ToString();
 
         public bool IsExpanded
@@ -62,28 +61,18 @@ namespace YumlFrontEnd.editor
             get { return _expanded.IsExpanded; }
             set { _expanded.IsExpanded = value; }
         }
-
-        public bool HasError
-        {
-            get { return _hasError; }
-            set { _hasError = value; NotifyOfPropertyChange(nameof(HasError)); }
-        }
-
-        public string Error
-        {
-            get { return _errorMessage; }
-            set { _errorMessage = value; NotifyOfPropertyChange(nameof(Error)); }
-        }
-
-        private void ValidateName()
-        {
-            var result = _validationService.CheckName(OriginalName,Name);
-            HasError = result.HasError;
-            Error = result.Message;           
-        }
-        
         public void ExpandOrCollapse() => _expanded.ExpandOrCollapse();
 
-        public string OriginalName => _name.OriginalName;
+        public bool HasNameError
+        {
+            get { return _name.HasNameError; }
+            set { _name.HasNameError = value; }
+        }
+
+        public string NameErrorMessage
+        {
+            get { return _name.NameErrorMessage; }
+            set { _name.NameErrorMessage = value; }
+        }
     }
 }

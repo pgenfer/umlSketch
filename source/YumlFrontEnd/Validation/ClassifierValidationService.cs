@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Yuml
 {
-    public class ClassifierValidationService
+    public class ClassifierValidationService : IValidateNameService
     {
         private readonly ClassifierDictionary _classifiers;
 
@@ -16,13 +16,14 @@ namespace Yuml
         }
 
         /// <summary>
-        /// validates whether the given name would be valid for a
-        /// classifier
+        /// checks if the name of a classifier can be changed
+        /// from old name to new name.
+        /// Possible if there is no other classifier with the same name
         /// </summary>
-        /// <param name="oldName">old name of this classifier</param>
-        /// <param name="newName">new name the classifier would get</param>
+        /// <param name="oldName"></param>
+        /// <param name="newName"></param>
         /// <returns></returns>
-        public ValidationResult CheckName(string oldName, string newName)
+        public ValidationResult ValidateNameChange(string oldName, string newName)
         {
             if (string.IsNullOrEmpty(newName))
                 return new Error(Strings.ClassNameMustNotBeEmpty);
@@ -31,7 +32,7 @@ namespace Yuml
                 return new Success();
             // otherwise another class uses this name already
             if (!_classifiers.IsClassNameFree(newName))
-                return  new Error(Strings.ClassNameAlreadyExists);
+                return new Error(Strings.ClassNameAlreadyExists);
             return new Success();
         }
     }

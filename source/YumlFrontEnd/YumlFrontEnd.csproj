@@ -93,10 +93,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\BaseList.cs" />
-    <Compile Include="Domain\MethodList.cs" />
-    <Compile Include="Domain\Parameter.cs" />
-    <Compile Include="Domain\ParameterList.cs" />
+    <Compile Include="Command\Classifier\Single\DeleteClassifierCommand.cs" />
+    <Compile Include="Command\Classifier\Single\ClassifierCommands.cs" />
+    <Compile Include="Command\Classifier\List\ClassifierListCommands.cs" />
+    <Compile Include="Command\Classifier\List\IClassifierListCommands.cs" />
+    <Compile Include="Command\Classifier\List\QueryClassifiersCommand.cs" />
+    <Compile Include="Command\Classifier\Single\IClassiferCommands.cs" />
+    <Compile Include="Command\Classifier\Single\IRenameCommand.cs" />
+    <Compile Include="Command\Classifier\Single\SingleClassifierCommandBase.cs" />
+    <Compile Include="Command\Classifier\Single\RenameClassifierCommand.cs" />
+    <Compile Include="DomainObject\BaseList.cs" />
+    <Compile Include="DomainObject\MethodList.cs" />
+    <Compile Include="DomainObject\Parameter.cs" />
+    <Compile Include="DomainObject\ParameterList.cs" />
+    <Compile Include="Notification\ClassifierNotificationService.cs" />
     <Compile Include="Serializer\Dto\DiagramDataDto.cs" />
     <Compile Include="Serializer\Dto\Multiplicity.cs" />
     <Compile Include="Serializer\Dto\Relation.cs" />
@@ -106,17 +116,17 @@
     <Compile Include="ClassDiagram.cs" />
     <Compile Include="Settings\DiagramDirection.cs" />
     <Compile Include="Settings\DiagramSize.cs" />
-    <Compile Include="Domain\ClassifierDictionary.cs" />
+    <Compile Include="DomainObject\ClassifierDictionary.cs" />
     <Compile Include="DiagramWriter\ClassWriter.cs" />
     <Compile Include="DiagramWriter\DiagramContentMixin.cs" />
     <Compile Include="DiagramWriter\DiagramWriter.cs" />
     <Compile Include="DiagramWriter\PropertyWriter.cs" />
     <Compile Include="Validation\ClassifierValidationService.cs" />
-    <Compile Include="Domain\Method.cs" />
+    <Compile Include="DomainObject\Method.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Domain\Classifier.cs" />
-    <Compile Include="Domain\Property.cs" />
-    <Compile Include="Domain\PropertyList.cs" />
+    <Compile Include="DomainObject\Classifier.cs" />
+    <Compile Include="DomainObject\Property.cs" />
+    <Compile Include="DomainObject\PropertyList.cs" />
     <Compile Include="ArchitectureLoader\ReflectionArchitectureLoader.cs" />
     <Compile Include="Serializer\Dto\ClassifierDto.cs" />
     <Compile Include="Serializer\Dto\MethodDto.cs" />
@@ -132,6 +142,7 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Validation\Error.cs" />
+    <Compile Include="Validation\IValidateNameService.cs" />
     <Compile Include="Validation\Success.cs" />
     <Compile Include="Validation\Validation.cs" />
     <Compile Include="Validation\ValidationResult.cs" />
@@ -143,6 +154,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Command\Commands.txt" />
     <Content Include="Roadmap.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +166,7 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

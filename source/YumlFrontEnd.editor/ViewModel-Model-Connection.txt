@@ -1,0 +1,54 @@
+﻿How is the ViewModel communicating with the Domain Model?
+Given are the following requirements:
+	1. If possible, there should be an undo/redo functionality
+	2. If a domain model is changed, all necessary view models should reflect this change (e.g. name of a classifier changes)
+	3. Validation should always be handled by the domain layer
+
+Three possible approaches:
+
+1. ViewModel has direct reference to domain model (e.g. ClassifierViewModel -> Classifier)
+	+ Easy to implement
+	- No separation, logic is implemented directly in the view model
+	- If classifier is changed, it must update all other view models?
+	- No Undo / Redo
+
+2. ViewModel uses domain service, domain service provides methods to change domain
+	+ service layer separates ViewModel and model layer
+	+ ViewModels can be notified by service about the changes
+	- All use cases will be implemented in one service per domain object (e.g. ClassifierService, PropertyService etc...)
+	- This one service will have many dependencies (other validation services etc...)
+	- Undo / Redo can be implemented, but might be complicated
+
+3. ViewModel uses requests and commands to access domain layer
+	+ layers are separated by command objects
+	+ SRP is satisfied, every command is handling one use case (e.g. ChangeClassiferNameCommand, ChangeClassiferVisibilityCommand etc...)
+	+ Undo / Redo can be implemented on command level
+	- Where should the commands be created? In the view model or per DI? (not good, a viewmodel might need many commands)
+	- Notification might still be handled by service (since other viewmodels do not have access to the command).
+
+Solution:
+Use a mix of 2. + 3.
+All commands per domain object are owned by a class (together with the service). Let's call this IAvailableCommands
+The viewmodel will be initialized with an instance of this class and therefore has access
+to all commands.
+
+Example:
+interface IAvailableClassifierCommands
+{
+	RenameClassifierCommand Rename {get;}
+	ChangeVisibilityOfClassifierCommand ChangeVisibility {get;}
+	DeleteClassifierCommand Delete {get;}
+}
+
+The viewmodel that uses this interface could write the following code:
+_commands.Rename.Do(newName);
+
+We could even make a mixin out of this interface,
+in that case we could even simply write
+Rename.Do(newName);
+// and to undo it, we would write:
+Rename.Undo();
+
+It would be even better if we could omit the "Do" when calling the command,
+but this is not possible since C# does not support overriding the "()" operator.
+

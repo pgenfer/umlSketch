@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Yuml;
+using Yuml.Commands;
 
 namespace YumlFrontEnd.editor
 {
@@ -32,6 +33,13 @@ namespace YumlFrontEnd.editor
             ConfigureViewModel();
             ConfigureDomainModel();
 
+            // register handler to convert the keyboard events
+            // to correct confirmation result
+            var confirmEditNameAction = new ConfirmEditAction();
+            MessageBinder.SpecialValues.Add(
+                confirmEditNameAction.ParameterName,
+                confirmEditNameAction.ConvertKeyToConfirmation);
+
             // update all bindings when the property changes
             //ConventionManager.ApplyUpdateSourceTrigger = (propert, dependecyObject, binding,propertyInfo) => 
             //    binding.UpdateSourceTrigger = System.Windows.Data.UpdateSourceTrigger.PropertyChanged;
@@ -44,13 +52,19 @@ namespace YumlFrontEnd.editor
 
         private void ConfigureDomainModel()
         {
+
+
             var classifierDictionary = new ClassifierDictionary();
+            var classifierNotificationService = new ClassifierNotificationService();
             // just for debug
             classifierDictionary.CreateNewClass("Integer");
             classifierDictionary.CreateNewClass("String");
             classifierDictionary.CreateNewClass("CodeProvider");
+
+            var classifierListCommands = new ClassifierListCommands(classifierDictionary, classifierNotificationService);
             var validationService = new ClassifierValidationService(classifierDictionary);
-            _container.Instance(validationService);
+            _container.Instance<IValidateNameService>(validationService);
+            _container.Instance(classifierListCommands);
         }
 
         protected override object GetInstance(Type service, string key) => _container.GetInstance(service, key);

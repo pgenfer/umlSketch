@@ -5,6 +5,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yuml.Commands;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
@@ -104,6 +105,17 @@ namespace Yuml
         {           
         }
 
+        public void RemoveClassifier(Classifier classifierToRemove)
+        {
+            Requires(classifierToRemove != null);
+            Requires(!string.IsNullOrEmpty(classifierToRemove.Name));
+            // the classifer should always be in the list,
+            // it does not make much sense to have "phantom classifiers"
+            Ensures(Count == OldValue(Count) - 1);
+
+            _dictionary.Remove(classifierToRemove.Name);
+        }
+
         public void WriteTo(DiagramWriter writer)
         {
             Requires(writer != null);
@@ -115,6 +127,18 @@ namespace Yuml
                 classWriter.Finish();
 
             }
+        }
+
+        public virtual void RenameClassifier(Classifier classifier,string newName)
+        {
+            Requires(classifier != null);
+            Requires(!string.IsNullOrEmpty(newName));
+            Ensures(IsClassNameFree(OldValue(classifier.Name)));
+            Ensures(classifier.Name != OldValue(classifier.Name));
+
+            _dictionary.Remove(classifier.Name);
+            classifier.Name = newName;
+            _dictionary.Add(newName, classifier);
         }
     }
 }

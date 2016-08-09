@@ -25,7 +25,7 @@ namespace Yuml.Test
         [TestDescription("Classifiers cannot have empty names")]
         public void ValidateClassifier_NameIsEmpty_Error()
         {
-            var validation = _validationService.CheckName(string.Empty, string.Empty);
+            var validation = _validationService.ValidateNameChange(string.Empty, string.Empty);
 
             Assert.IsTrue(validation.HasError);
             Assert.AreEqual(Strings.ClassNameMustNotBeEmpty, validation.Message);
@@ -37,7 +37,7 @@ namespace Yuml.Test
             var newName = "newName";
             _classifiers.IsClassNameFree(newName).Returns(false);
 
-            var validation = _validationService.CheckName("oldName", newName);
+            var validation = _validationService.ValidateNameChange("oldName", newName);
 
             Assert.IsTrue(validation.HasError);
             Assert.AreEqual(Strings.ClassNameAlreadyExists, validation.Message);
@@ -47,7 +47,7 @@ namespace Yuml.Test
         public void ValidationClassifier_NameNotChanged_NoError()
         {
             var newName = "newName";
-            var validation = _validationService.CheckName(newName, newName);
+            var validation = _validationService.ValidateNameChange(newName, newName);
 
             Assert.IsFalse(validation.HasError);
         }
@@ -56,7 +56,7 @@ namespace Yuml.Test
         public void ValidationClassifier_Initially_NoError()
         {
             var newName = "newName";
-            var validation = _validationService.CheckName(string.Empty, newName);
+            var validation = _validationService.ValidateNameChange(string.Empty, newName);
 
             Assert.IsFalse(validation.HasError);
         }
@@ -67,11 +67,9 @@ namespace Yuml.Test
             var newName = "newName";
             _classifiers.IsClassNameFree(newName).Returns(true);
 
-            var validation = _validationService.CheckName("oldName", newName);
+            var validation = _validationService.ValidateNameChange("oldName", newName);
 
             Assert.IsFalse(validation.HasError);
         }
-
-
     }
 }

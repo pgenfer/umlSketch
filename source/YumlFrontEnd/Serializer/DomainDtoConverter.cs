@@ -30,26 +30,31 @@ namespace Yuml.Serializer.Dto
 
         private void RegisterMappings()
         {
-            // TODO: check if preserve references is everywhere necessary
-
             // store the classfier mappings so that we can resolve them later
             _mapperConfiguration = new MapperConfiguration(x =>
             {
                 // classifier mapping
-                x.CreateMap<Classifier, ClassifierDto>().PreserveReferences(); 
-                x.CreateMap<ClassifierDto, Classifier>().PreserveReferences();
+                x.CreateMap<Classifier, ClassifierDto>()
+                    .PreserveReferences()
+                    .ReverseMap()
+                    .PreserveReferences();
                 // property mapping
-                x.CreateMap<Property, PropertyDto>().PreserveReferences(); 
-                x.CreateMap<PropertyDto, Property>().PreserveReferences();
+                x.CreateMap<Property, PropertyDto>()
+                    .PreserveReferences()
+                    .ReverseMap()
+                    .PreserveReferences();
                 x.CreateMap<List<PropertyDto>, PropertyList>().PreserveReferences()
                     .AfterMap((s, d) =>
                     {
-                        foreach(var property in s)
+                        foreach (var property in s)
                             d.AddExistingMember(_mapper.Map<Property>(property));
                     });
                 // method mapping
-                x.CreateMap<Method, MethodDto>().PreserveReferences();
-                x.CreateMap<MethodDto, Method>().PreserveReferences();
+                x.CreateMap<Method, MethodDto>()
+                    .PreserveReferences()
+                    .ReverseMap()
+                    .PreserveReferences();
+
                 x.CreateMap<List<MethodDto>, MethodList>().PreserveReferences()
                     .AfterMap((s, d) =>
                     {
@@ -57,12 +62,15 @@ namespace Yuml.Serializer.Dto
                             d.AddExistingMember(_mapper.Map<Method>(member));
                     });
                 // parameter mapping
-                x.CreateMap<Parameter, ParameterDto>().PreserveReferences();
-                x.CreateMap<ParameterDto, Parameter>().PreserveReferences();
+                x.CreateMap<Parameter, ParameterDto>()
+                    .PreserveReferences()
+                    .ReverseMap()
+                    .PreserveReferences();
+
                 x.CreateMap<List<ParameterDto>, ParameterList>().PreserveReferences()
                     .AfterMap((s, d) =>
                     {
-                       foreach(var parameter in s)
+                        foreach (var parameter in s)
                             d.AddExistingMember(_mapper.Map<Parameter>(parameter));
                     });
             });

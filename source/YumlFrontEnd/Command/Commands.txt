@@ -1,0 +1,13 @@
+﻿Commands are organized in the following way:
+
+1.  There is always one container class that holds the complete bunch of all available commands for a specific context,
+	e.g. all commands that operate on the complete classifier list or all commands that operate on a single classifier.
+	These classes always end with "Commands"
+2.  The commands itself. These are the items contained in the "Commands" classes. Every command class is responsible for a single
+	command. They simply end with "Command" in their name.
+
+Steps to add new commands:
+
+1. Create a class for the command, decide whether it operates on a single item or on the complete list.
+2. Add a method to the correct "Commands" list so that it can be accessed from outside.
+3. If necessary, let the view model implement and forward a call to the "Commands" list.

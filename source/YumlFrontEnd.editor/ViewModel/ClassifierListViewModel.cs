@@ -6,20 +6,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yuml;
+using Yuml.Commands;
+
 
 namespace YumlFrontEnd.editor
 {
-    internal class ClassifierListViewModel : PropertyChangedBase
+    /// <summary>
+    /// view model for handling a complete list of classifiers.
+    /// A separate view model is created for every classifier
+    /// </summary>
+    internal class ClassifierListViewModel : ViewModelBase<IClassifierListCommands>
     {
-        private BindableCollectionMixin<ClassifierViewModel> _classifiers =
+        private readonly BindableCollectionMixin<ClassifierViewModel> _classifiers =
             new BindableCollectionMixin<ClassifierViewModel>();
-       
 
-        public ClassifierListViewModel(ClassifierValidationService validationService)
+        public ClassifierListViewModel(
+            IValidateNameService validationService,
+            IClassifierListCommands commands) : base(commands)
         {
-            Items.Add(new ClassifierViewModel(validationService) { Name = "String" });               
-            Items.Add(new ClassifierViewModel(validationService) { Name = "Integer"});
-            Items.Add(new ClassifierViewModel(validationService) { Name = "CodeProvider"});
+            // create child view models and add them to the items list of
+            // this view model
+            Items.AddRange(
+                _commands
+                    .QueryAllClassifiers
+                    .Select(x =>
+                        InitViewModel(x,
+                            new ClassifierViewModel(
+                                validationService,
+                                commands.GetCommandsForClassifier(x)))));
         }
 
         public BindableCollection<ClassifierViewModel> Items => _classifiers.Items;

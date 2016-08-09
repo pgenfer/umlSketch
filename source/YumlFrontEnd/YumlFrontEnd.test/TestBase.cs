@@ -8,8 +8,12 @@ using Yuml.Serializer.Dto;
 
 namespace Yuml.Test
 {
-    [TestFixture]
-    public class TestBase
+
+    /// <summary>
+    /// test base class that already contains
+    /// some test dummy data that can be used by test cases
+    /// </summary>
+    public class TestBase : SimpleTestBase
     {
         /// <summary>
         /// dummy classifier that represents an integer
@@ -98,5 +102,24 @@ namespace Yuml.Test
             InitClassifierDtos();
             InitRelationDtos();
         }
+
+        
+    }
+
+    /// <summary>
+    /// base class that contains common helper functions
+    /// used by other test cases
+    /// </summary>
+    [TestFixture]
+    public class SimpleTestBase
+    {
+        private const int RandomStringLength = 10;
+        private const string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        public static string RandomString(int? seed = null) =>
+            new string(
+                Enumerable.Repeat(Alphabet, RandomStringLength)
+                .Select(s => s[new Random(seed ?? (int)DateTime.Now.Ticks).Next(s.Length)])
+                .ToArray());
     }
 }
