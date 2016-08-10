@@ -114,7 +114,6 @@
     <Compile Include="TestDescriptionAttribute.cs" />
     <Compile Include="Validation\ClassifierValidationServiceTests.cs" />
     <Compile Include="ViewModel\EditableMixinTest.cs" />
-    <Compile Include="ViewModel\SingleItemViewModelTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
