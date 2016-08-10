@@ -3,13 +3,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Yuml;
 
-namespace Yuml.Commands
+namespace Yuml.Command
 {
-    public class DeleteClassifierCommand : SingleClassifierCommandBase
+    public class DeleteClassifierBaseCommand : DomainObjectBaseCommand<Classifier>
     {
         private readonly ClassifierDictionary _classifierDictionary;
 
-        public DeleteClassifierCommand(
+        public DeleteClassifierBaseCommand(
             Classifier classifier,
             ClassifierDictionary classifierDictionary) : base(classifier)
         {
@@ -18,7 +18,7 @@ namespace Yuml.Commands
 
         public void Do()
         {
-            _classifierDictionary.RemoveClassifier(_classifier);
+            _classifierDictionary.RemoveClassifier(_domainObject);
             // TODO: do notification here by using a service
         }
     }

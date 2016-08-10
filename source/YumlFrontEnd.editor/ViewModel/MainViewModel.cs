@@ -5,17 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yuml;
-using Yuml.Commands;
+using Yuml.Command;
 
 namespace YumlFrontEnd.editor
 {
     internal class MainViewModel : Screen
     {
-        public MainViewModel(
-            IValidateNameService validationService,
-            ClassifierListCommands classifierCommands)
+        public MainViewModel(IListCommandContext<Classifier> classifierCommands)
         {
-            ClassifierList = new ClassifierListViewModel(validationService, classifierCommands);
+            ClassifierList = new ClassifierListViewModel(classifierCommands);
         }
 
         public ClassifierListViewModel ClassifierList { get; private set; }

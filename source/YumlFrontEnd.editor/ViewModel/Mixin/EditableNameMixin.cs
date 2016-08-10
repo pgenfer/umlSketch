@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Yuml;
-using Yuml.Commands;
+using Yuml.Command;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace YumlFrontEnd.editor
@@ -45,19 +45,13 @@ namespace YumlFrontEnd.editor
         /// command that will be executed when the editing of the name
         /// is completed
         /// </summary>
-        private readonly IRenameCommand _renameCommand;
-        /// <summary>
-        /// service used to validate if the new name would be appropriate
-        /// </summary>
-        private readonly IValidateNameService _validationService;
-
-        public EditableNameMixin(IValidateNameService validationService, IRenameCommand renameCommand)
+        private readonly IRenameCommand _command;
+      
+        public EditableNameMixin(IRenameCommand renameCommand)
         {
             Requires(renameCommand != null);
-            Requires(validationService != null);
 
-            _validationService = validationService;
-            _renameCommand = renameCommand;
+            _command = renameCommand;
         }
 
         public void StartEditing()
@@ -81,7 +75,7 @@ namespace YumlFrontEnd.editor
                         return;
                     // only fire change event if name did really change
                     if (_originalName != Name)
-                        _renameCommand.Do(Name);
+                        Rename(Name);
                     _originalName = Name;
                     IsEditable = false;
                     break;
@@ -113,7 +107,7 @@ namespace YumlFrontEnd.editor
 
         private void ValidateName()
         {
-            var result = _validationService.ValidateNameChange(_originalName, Name);
+            var result = CanRenameWith(Name);
             HasNameError = result.HasError;
             NameErrorMessage = result.Message;
         }
@@ -144,5 +138,7 @@ namespace YumlFrontEnd.editor
         }
 
         public override string ToString() => _name.ToString();
+        public void Rename(string newName) => _command.Rename(newName);
+        public ValidationResult CanRenameWith(string newName) => _command.CanRenameWith(newName);
     }
 }

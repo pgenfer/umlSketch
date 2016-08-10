@@ -4,25 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yuml;
+using Yuml.Command;
 
 namespace YumlFrontEnd.editor
 {
     /// <summary>
     /// view model that handles access to a complete list of properties
     /// </summary>
-    internal class PropertyListViewModel : PropertyChangedBase
+    internal class PropertyListViewModel : ListViewModelBase<Property>
     {
-        BindableCollectionMixin<PropertyViewModel> _properties = 
-            new BindableCollectionMixin<PropertyViewModel>();
-        private ExpandableMixin _expandable = new ExpandableMixin();
-
-        public PropertyListViewModel()
-        {
-            Items.Add(new PropertyViewModel { Name = "Length" });
-            _expandable.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
-        }
-
-        public BindableCollection<PropertyViewModel> Items => _properties.Items;
+        private readonly ExpandableMixin _expandable = new ExpandableMixin();
 
         public bool IsExpanded
         {
@@ -31,5 +23,9 @@ namespace YumlFrontEnd.editor
         }
 
         public void ExpandOrCollapse() => _expandable.ExpandOrCollapse();
+
+        public PropertyListViewModel(IListCommandContext<Property> listCommands):base(listCommands)
+        {
+        }
     }
 }

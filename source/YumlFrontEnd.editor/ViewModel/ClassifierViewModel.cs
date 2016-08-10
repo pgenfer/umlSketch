@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Yuml;
-using Yuml.Commands;
+using Yuml.Command;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace YumlFrontEnd.editor
@@ -17,44 +17,19 @@ namespace YumlFrontEnd.editor
     /// <summary>
     /// view model for interaction with a single classifier object
     /// </summary>
-    internal class ClassifierViewModel : 
-        ViewModelBase<IClassiferCommands>
+    internal class ClassifierViewModel : SingleItemViewModelBase<Classifier>
     {
         private readonly ExpandableMixin _expanded = new ExpandableMixin();
-        private readonly EditableNameMixin _name;
-        
+       
         public ClassifierViewModel(
-            IValidateNameService validationService, 
-            IClassiferCommands commands):base(commands)
+            ISingleClassifierCommands commands):base(commands)
         {
-            Requires(validationService != null);
-            Requires(commands != null);
-
-            _name = new EditableNameMixin(validationService,commands.RenameCommand);
-
-            Properties = new PropertyListViewModel();
-            // delegate events
-            _name.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
+            Properties = new PropertyListViewModel(commands.CommandsForProperties);
+                
             _expanded.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
         }
 
         public PropertyListViewModel Properties { get; private set; }
-
-        public string Name
-        {
-            get { return _name.Name; }
-            set { _name.Name = value;}
-        }
-
-        public bool IsEditable
-        {
-            get { return _name.IsEditable; }
-            set { _name.IsEditable = value; }
-        }
-
-        public void StartEditing() => _name.StartEditing();
-        public void StopEditing(Confirmation configuration) => _name.StopEditing(configuration);
-        public override string ToString() => _name.ToString();
 
         public bool IsExpanded
         {
@@ -62,17 +37,5 @@ namespace YumlFrontEnd.editor
             set { _expanded.IsExpanded = value; }
         }
         public void ExpandOrCollapse() => _expanded.ExpandOrCollapse();
-
-        public bool HasNameError
-        {
-            get { return _name.HasNameError; }
-            set { _name.HasNameError = value; }
-        }
-
-        public string NameErrorMessage
-        {
-            get { return _name.NameErrorMessage; }
-            set { _name.NameErrorMessage = value; }
-        }
     }
 }

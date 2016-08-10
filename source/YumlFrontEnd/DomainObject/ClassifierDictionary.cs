@@ -5,7 +5,6 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Yuml.Commands;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml

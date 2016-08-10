@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Yuml;
-using Yuml.Commands;
+using Yuml.Command;
 
 namespace YumlFrontEnd.editor
 {
@@ -52,19 +52,24 @@ namespace YumlFrontEnd.editor
 
         private void ConfigureDomainModel()
         {
-
-
             var classifierDictionary = new ClassifierDictionary();
-            var classifierNotificationService = new ClassifierNotificationService();
             // just for debug
-            classifierDictionary.CreateNewClass("Integer");
-            classifierDictionary.CreateNewClass("String");
+            var @string = classifierDictionary.CreateNewClass("String");
             classifierDictionary.CreateNewClass("CodeProvider");
+            var integer = classifierDictionary.CreateNewClass("Integer");
+            integer.CreateProperty("Size", integer);
+            integer.CreateProperty("TypeName", @string);
 
-            var classifierListCommands = new ClassifierListCommands(classifierDictionary, classifierNotificationService);
-            var validationService = new ClassifierValidationService(classifierDictionary);
-            _container.Instance<IValidateNameService>(validationService);
-            _container.Instance(classifierListCommands);
+            // setup services
+            var classifierNotificationService = new ClassifierNotificationService();
+
+            var classifierListCommands = new ClassifierListCommandContext(
+                classifierDictionary,
+                new ValidationServices(
+                    new ClassifierValidationService(classifierDictionary)), 
+                classifierNotificationService);
+            
+            _container.Instance<IListCommandContext<Classifier>>(classifierListCommands);
         }
 
         protected override object GetInstance(Type service, string key) => _container.GetInstance(service, key);

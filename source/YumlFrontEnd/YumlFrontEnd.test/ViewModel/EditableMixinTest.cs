@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using NSubstitute;
 using NUnit.Framework;
-using Yuml.Commands;
+using Yuml.Command;
 using YumlFrontEnd.editor;
 using static NSubstitute.Substitute;
 
@@ -18,23 +18,20 @@ namespace Yuml.Test
     {
         private EditableNameMixin _editableNameMixin;
         private IRenameCommand _renameCommand;
-        private IValidateNameService _validationService;
+        
 
         [SetUp]
         public void Init()
         {
             _renameCommand = For<IRenameCommand>();
-            _validationService = For<IValidateNameService>();
-            _editableNameMixin = new EditableNameMixin(_validationService, _renameCommand);
+            _editableNameMixin = new EditableNameMixin(_renameCommand);
         }
 
         [TestDescription("Rename command is called after name change")]
         public void StopEditing_RenameCalled()
         {
-            _validationService
-                .ValidateNameChange(
-                    Arg.Any<string>(),
-                    Arg.Any<string>())
+            _renameCommand
+                .CanRenameWith(Arg.Any<string>())
                 .ReturnsForAnyArgs(new Success());
 
             var newName = RandomString();
@@ -44,17 +41,15 @@ namespace Yuml.Test
             _editableNameMixin.StopEditing(Confirmation.Confirmed);
 
             // ensure that rename was called
-            _renameCommand.Received().Do(newName);
+            _renameCommand.Received().Rename(newName);
         }
 
         [TestDescription("Edit operation canceled, rename is not called")]
         public void StopEditing_RenameCanceled()
         {
-            _validationService
-               .ValidateNameChange(
-                   Arg.Any<string>(),
-                   Arg.Any<string>())
-               .ReturnsForAnyArgs(new Success());
+            _renameCommand
+                .CanRenameWith(Arg.Any<string>())
+                .ReturnsForAnyArgs(new Success());
 
             var oldName = RandomString(1);
             var newName = RandomString(2);
@@ -64,7 +59,7 @@ namespace Yuml.Test
             _editableNameMixin.StopEditing(Confirmation.Canceled);
 
             // ensure that rename was not called
-            _renameCommand.DidNotReceive().Do(newName);
+            _renameCommand.DidNotReceive().Rename(newName);
             // and that the name was not changed
             Assert.AreEqual(_editableNameMixin.Name,oldName);
         }

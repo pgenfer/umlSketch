@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Yuml.Commands;
+using Yuml.Command;
 using NSubstitute;
 using static NSubstitute.Substitute;
 
@@ -8,6 +8,7 @@ namespace Yuml.Test
     public class RenameClassifierCommandTest : SimpleTestBase
     {
         private ClassifierNotificationService _notificationService;
+        private IValidateNameService _validationService;
         private ClassifierDictionary _classifierDictionary;
         private IRenameCommand _renameCommand;
         private Classifier _classifier;
@@ -18,12 +19,15 @@ namespace Yuml.Test
         public void Init()
         {
             _notificationService = For<ClassifierNotificationService>();
+            _validationService = For<IValidateNameService>();
+
             _classifierDictionary = For<ClassifierDictionary>();
             _classifier = new Classifier("Integer");
 
             _renameCommand = new RenameClassifierCommand(
                 _classifier, 
                 _classifierDictionary,
+                _validationService,
                 _notificationService);
 
             _newName = RandomString();
@@ -32,7 +36,7 @@ namespace Yuml.Test
         [TestDescription("Rename command should change dictionary")]
         public void RenameClassifier()
         {
-            _renameCommand.Do(_newName);
+            _renameCommand.Rename(_newName);
             _classifierDictionary.Received().RenameClassifier(_classifier, _newName);
         }
 
@@ -40,7 +44,7 @@ namespace Yuml.Test
         public void RenameClassifier_Notify()
         {
             var oldName = _classifier.Name;
-            _renameCommand.Do(_newName);
+            _renameCommand.Rename(_newName);
             _notificationService.Received().FireNameChange(oldName, _newName);
         }
     }

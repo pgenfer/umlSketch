@@ -123,6 +123,7 @@
     <Compile Include="Converter\BooleanToCollapseConverter.cs" />
     <Compile Include="UserControls\Confirmation.cs" />
     <Compile Include="UserControls\ConfirmEditAction.cs" />
+    <Compile Include="ViewModel\ListViewModelBase.cs" />
     <Compile Include="ViewModel\Mixin\BindableCollectionMixin.cs" />
     <Compile Include="ViewModel\Mixin\EditableNameMixin.cs" />
     <Compile Include="ViewModel\Mixin\ExpandableMixin.cs" />
@@ -131,7 +132,7 @@
     </Compile>
     <Compile Include="UserControls\ExpanderButton.cs" />
     <Compile Include="ViewModel\AutoPropertyChange.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\SingleItemViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelConverter.cs" />
     <Compile Include="View\PropertyListView.xaml.cs">
       <DependentUpon>PropertyListView.xaml</DependentUpon>

@@ -5,19 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yuml;
+using Yuml.Command;
 
 namespace YumlFrontEnd.editor
 {
-    internal class PropertyViewModel : PropertyChangedBase
+    internal class PropertyViewModel : SingleItemViewModelBase<Property>
     {
-        private NameMixin _name = new NameMixin();
-
-        public string Name
+        public PropertyViewModel(ISinglePropertyCommands commands):base(commands)
         {
-            get { return _name.Name; }
-            set { _name.Name = value;NotifyOfPropertyChange(() => Name); }
+            // TODO: get the command for changing the property type here
         }
-
-        public override string ToString() => _name.ToString();
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System.Diagnostics.Contracts;
 using static System.Diagnostics.Contracts.Contract;
 
-namespace Yuml.Commands
+namespace Yuml.Command
 {
     /// <summary>
-    /// base interface used for renaming
+    /// generic command used to rename a domain object.
     /// </summary>
     [ContractClass(typeof(RenameCommandContract))]
     public interface IRenameCommand
     {
-        void Do(string newName);
+        void Rename(string newName);
+        ValidationResult CanRenameWith(string newName);
     }
 
     /// <summary>
@@ -22,6 +23,7 @@ namespace Yuml.Commands
         /// rename can only be executed when the new name is set
         /// </summary>
         /// <param name="newName"></param>
-        void IRenameCommand.Do(string newName) => Requires(!string.IsNullOrEmpty(newName));
+        void IRenameCommand.Rename(string newName) => Requires(!string.IsNullOrEmpty(newName));
+        ValidationResult IRenameCommand.CanRenameWith(string newName) => default(ValidationResult);
     }
 }

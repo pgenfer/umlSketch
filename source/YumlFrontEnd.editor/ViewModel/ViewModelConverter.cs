@@ -36,6 +36,7 @@ namespace YumlFrontEnd.editor
                 // classifier mapping
                 x.CreateMap<Classifier, ClassifierViewModel>()
                     .ForMember( d => d.Properties, c => c.Ignore());
+                x.CreateMap<Property, PropertyViewModel>();
             });
 
             _mapper = _mapperConfiguration.CreateMapper();

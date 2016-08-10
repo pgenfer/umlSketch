@@ -93,15 +93,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command\Classifier\Single\DeleteClassifierCommand.cs" />
-    <Compile Include="Command\Classifier\Single\ClassifierCommands.cs" />
-    <Compile Include="Command\Classifier\List\ClassifierListCommands.cs" />
-    <Compile Include="Command\Classifier\List\IClassifierListCommands.cs" />
-    <Compile Include="Command\Classifier\List\QueryClassifiersCommand.cs" />
-    <Compile Include="Command\Classifier\Single\IClassiferCommands.cs" />
-    <Compile Include="Command\Classifier\Single\IRenameCommand.cs" />
-    <Compile Include="Command\Classifier\Single\SingleClassifierCommandBase.cs" />
-    <Compile Include="Command\Classifier\Single\RenameClassifierCommand.cs" />
+    <Compile Include="Command\Property\RenamePropertyCommand.cs" />
+    <Compile Include="Context\Classifier\ClassifierListCommandContext.cs" />
+    <Compile Include="Context\Classifier\ClassifierSingleCommandContext.cs" />
+    <Compile Include="Context\General\ListCommandContextBase.cs" />
+    <Compile Include="Context\General\SingleCommandContextBase.cs" />
+    <Compile Include="Context\Property\ISinglePropertyCommands.cs" />
+    <Compile Include="Context\General\IListCommandContext.cs" />
+    <Compile Include="Context\General\ISingleCommandContext.cs" />
+    <Compile Include="Command\General\Single\DomainObjectBaseCommand.cs" />
+    <Compile Include="Command\General\Single\IDeleteCommand.cs" />
+    <Compile Include="Command\General\List\INewCommand.cs" />
+    <Compile Include="Command\General\List\IQuery.cs" />
+    <Compile Include="Command\General\Single\IShowOrHideCommand.cs" />
+    <Compile Include="Command\Classifier\DeleteClassifierCommand.cs" />
+    <Compile Include="Command\General\Single\IRenameCommand.cs" />
+    <Compile Include="Command\Classifier\RenameClassifierCommand.cs" />
+    <Compile Include="Command\General\List\Query.cs" />
+    <Compile Include="Context\Classifier\ISingleClassifierCommands.cs" />
+    <Compile Include="Context\Property\PropertyListCommandContext.cs" />
+    <Compile Include="Context\Property\PropertySingleCommandContext.cs" />
     <Compile Include="DomainObject\BaseList.cs" />
     <Compile Include="DomainObject\MethodList.cs" />
     <Compile Include="DomainObject\Parameter.cs" />
@@ -146,6 +157,7 @@
     <Compile Include="Validation\Success.cs" />
     <Compile Include="Validation\Validation.cs" />
     <Compile Include="Validation\ValidationResult.cs" />
+    <Compile Include="Validation\ValidationServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -166,7 +178,14 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Command\Method\" />
+    <Folder Include="Command\Parameter\" />
+    <Folder Include="Command\Relation\" />
+    <Folder Include="Context\Method\" />
+    <Folder Include="Context\Parameter\" />
+    <Folder Include="Context\Relation\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
