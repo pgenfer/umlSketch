@@ -8,8 +8,8 @@
                 <ResourceDictionary Source="/Microsoft.Expression.Prototyping.SketchControls;component/ScrollViewerStyles.xaml"/>
                 <ResourceDictionary Source="SketchStyles.xaml" />
                 <ResourceDictionary>
-                    <local:Bootstrapper x:Key="bootstrapper" />
-                  <BooleanToVisibilityConverter x:Key="_booleanToVisibility"/>
+                    <local:Bootstrapper x:Key="Bootstrapper" />
+                  <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
                     <Style x:Key="ExpanderButtonStyle"
                            TargetType="{x:Type local:ExpanderButton}"
                            BasedOn="{StaticResource CircleButton-Sketch}">

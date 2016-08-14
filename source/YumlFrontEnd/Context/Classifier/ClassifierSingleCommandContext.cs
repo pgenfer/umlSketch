@@ -12,21 +12,21 @@ namespace Yuml.Command
     {
         public ClassifierSingleCommandContext(
             Classifier classifier,
-            ClassifierDictionary classifierDictioanry,
-            ValidationServices validationServices,
-            ClassifierNotificationService classifierNotificationService)
+            ClassifierDictionary classifierDictionary,
+            NotificationServices notificationServices)
         {
             Rename = new RenameClassifierCommand(
                 classifier,
-                classifierDictioanry,
-                validationServices.Classifier,
-                classifierNotificationService);
+                classifierDictionary,
+                new ClassifierValidationService(classifierDictionary), 
+                notificationServices.Classifier);
             // TO DO: implement other commands
             CommandsForProperties = new PropertyListCommandContext(
                 classifier,
-                validationServices.Property); 
+                classifierDictionary,
+                new PropertyValidationService(classifier.Properties), 
+                notificationServices.Property); 
         }
-
 
         public IListCommandContext<Property> CommandsForProperties { get; }
     }

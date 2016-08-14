@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Diagnostics.Contracts.Contract;
@@ -81,7 +82,9 @@ namespace Yuml
         /// <summary>
         /// creates an empty dictionary with classifiers
         /// </summary>
-        public ClassifierDictionary(){ }
+        public ClassifierDictionary()
+        {
+        }
 
         /// <summary>
         /// used to initialize a dictionary with the given list of classifiers.
@@ -139,5 +142,10 @@ namespace Yuml
             classifier.Name = newName;
             _dictionary.Add(newName, classifier);
         }
+
+        /// <summary>
+        /// TODO: add special handling for system types here
+        /// </summary>
+        public virtual Classifier String => FindByName("string") ?? CreateNewClass("string");
     }
 }

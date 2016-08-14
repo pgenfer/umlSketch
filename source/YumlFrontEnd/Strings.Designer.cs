@@ -22,7 +22,7 @@ namespace Yuml {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Yuml {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Yuml.Strings", typeof(Strings).Assembly);
@@ -51,7 +51,7 @@ namespace Yuml {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,20 +61,29 @@ namespace Yuml {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A classifier with this name does already exist..
+        ///   Looks up a localized string similar to This name is already in use..
         /// </summary>
-        internal static string ClassNameAlreadyExists {
+        public static string NameAlreadyExists {
             get {
-                return ResourceManager.GetString("ClassNameAlreadyExists", resourceCulture);
+                return ResourceManager.GetString("NameAlreadyExists", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The name of a classifier cannot be empty.
+        ///   Looks up a localized string similar to The name may not be empty..
         /// </summary>
-        internal static string ClassNameMustNotBeEmpty {
+        public static string NameMustNotBeEmpty {
             get {
-                return ResourceManager.GetString("ClassNameMustNotBeEmpty", resourceCulture);
+                return ResourceManager.GetString("NameMustNotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Properties.
+        /// </summary>
+        public static string Properties {
+            get {
+                return ResourceManager.GetString("Properties", resourceCulture);
             }
         }
     }

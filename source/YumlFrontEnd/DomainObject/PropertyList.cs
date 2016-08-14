@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Diagnostics.Contracts.Contract;
 
@@ -45,6 +46,39 @@ namespace Yuml
                 propertyWriter = property.WriteTo(propertyWriter);
                 classWriter = propertyWriter.Finish();
             }                
+        }
+
+        private readonly Regex _findLastNumber = new Regex(@"(\d+)(?!.*\d)",RegexOptions.Compiled);
+
+        /// <summary>
+        /// creates a property with a useful name (e.g. New Property 1, New Property 2 etc...)
+        /// and a useful data type (e.g. the data type that was not used before)
+        /// </summary>
+        /// <returns></returns>
+        public Property CreateNewPropertyWithBestInitialValues(ClassifierDictionary systemClassifiers)
+        {
+            const string defaultName = "New Property";
+            var defaultPropertyNames = _list
+                .Where(x => x.Name.StartsWith(defaultName))
+                .Select(x => x.Name);
+            var highestNumber = 0;
+            foreach (var name in defaultPropertyNames)
+            {
+                var match = _findLastNumber.Match(name);
+                if (match.Success)
+                    highestNumber = int.Parse(match.Groups[1].ToString());
+            }
+            var newName = $"{defaultName} {++highestNumber}";
+
+            var bestType = _list
+                .GroupBy(x => x.Type)
+                .ToDictionary(y => y.Key, z => z.Count())
+                .OrderByDescending(x => x.Value)
+                .FirstOrDefault().Key;
+
+            var newProperty = CreateProperty(newName, bestType ?? systemClassifiers.String);
+
+            return newProperty;
         }
 
         public override string ToString() => 

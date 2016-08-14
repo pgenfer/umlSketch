@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Diagnostics.Contracts.Contract;
 
-namespace Yuml
+namespace Yuml.Notification
 {
-    /// <summary>
-    /// service that is used to propagate any changes
-    /// to classifiers
-    /// </summary>
-    public class ClassifierNotificationService
+    public class PropertyNotificationService
     {
-        private readonly NameChangedNotificationMixin _nameChanged =  new NameChangedNotificationMixin();
+        private readonly NameChangedNotificationMixin _nameChanged = new NameChangedNotificationMixin();
         private readonly NewItemNotificationMixin _newItemAdded = new NewItemNotificationMixin();
 
         public void FireNameChange(string oldName, string newName) => _nameChanged.FireNameChange(oldName, newName);

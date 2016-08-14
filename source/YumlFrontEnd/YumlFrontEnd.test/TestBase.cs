@@ -47,6 +47,18 @@ namespace Yuml.Test
         /// </summary>
         internal readonly ClassifierDto ServiceDto = new ClassifierDto { Name = "Service" };
 
+        [SetUp]
+        public void SetupTestCase()
+        {
+            Init();
+        }
+
+        /// <summary>
+        /// method can be overridden to provide test initialisation code
+        /// </summary>
+        protected virtual void Init() { }
+        
+        
         /// <summary>
         /// setup the classifiers that can be used during tests
         /// </summary>

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:local="clr-namespace:YumlFrontEnd.editor"
+             xmlns:yuml="clr-namespace:Yuml;assembly=YumlFrontEnd"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
   <UserControl.Resources>
@@ -13,25 +14,55 @@
   </UserControl.Resources>
   <Grid>
     <Grid.ColumnDefinitions>
+      <!-- the expander -->
       <ColumnDefinition Width="Auto" />
+      <!-- list caption -->
       <ColumnDefinition Width="*" />
+      <!-- buttons -->
+      <ColumnDefinition Width="Auto" />
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
+      <!-- header and buttons -->
       <RowDefinition Height="Auto" />
+      <!-- list content -->
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
+    <!-- expander -->
     <local:ExpanderButton x:Name="ExpandOrCollapse"
                           IsExpanded="{Binding IsExpanded}"
                           Style="{StaticResource ExpanderButtonStyle}"
                           Grid.Column="0" />
-    <TextBlock Text="Properties"
+    <!-- caption -->
+    <TextBlock Text="{x:Static yuml:Strings.Properties}"
+               Grid.Column="1"
+               Grid.Row="0"
                FontWeight="Bold"
-               Margin="5"
-               Grid.Column="1" />
+               Margin="5"/>
+    <!-- butons -->
+    <Button
+      x:Name="New"
+      Margin="10,0"
+      Grid.Column="2"
+      Grid.Row="0"
+      Content="+"
+      Width="20"
+      Height="20">
+      <Button.Style>
+        <Style
+          BasedOn="{StaticResource CircleButton-Sketch}"
+          TargetType="{x:Type Button}">
+          <Style.Setters>
+            <Setter Property="BorderBrush" Value="LightGreen"/>
+            <Setter Property="Foreground" Value="LightGreen"/>
+          </Style.Setters>
+        </Style>
+      </Button.Style>
+    </Button>
+    <!-- list content -->
     <ItemsControl Name="Items"
                   Grid.Column="1"
                   Grid.Row="1"
-                  Visibility="{Binding IsExpanded,Converter={StaticResource _booleanToVisibility}}">
+                  Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
           <ContentControl caliburn:View.Model="{Binding}"/>

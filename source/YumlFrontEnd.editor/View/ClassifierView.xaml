@@ -66,6 +66,6 @@
         Grid.Row="1"
         Grid.Column="1"
         caliburn:View.Model="{Binding Properties}"
-        Visibility="{Binding IsExpanded,Converter={StaticResource _booleanToVisibility}}"/>
+        Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}"/>
   </Grid>
 </UserControl>

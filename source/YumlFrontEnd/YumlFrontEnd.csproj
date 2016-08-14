@@ -93,6 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\Property\NewPropertyCommand.cs" />
     <Compile Include="Command\Property\RenamePropertyCommand.cs" />
     <Compile Include="Context\Classifier\ClassifierListCommandContext.cs" />
     <Compile Include="Context\Classifier\ClassifierSingleCommandContext.cs" />
@@ -118,6 +119,10 @@
     <Compile Include="DomainObject\Parameter.cs" />
     <Compile Include="DomainObject\ParameterList.cs" />
     <Compile Include="Notification\ClassifierNotificationService.cs" />
+    <Compile Include="Notification\NameChangedNotification.cs" />
+    <Compile Include="Notification\NewItemNotificationMixin.cs" />
+    <Compile Include="Notification\NotificationServices.cs" />
+    <Compile Include="Notification\PropertyNotificationService.cs" />
     <Compile Include="Serializer\Dto\DiagramDataDto.cs" />
     <Compile Include="Serializer\Dto\Multiplicity.cs" />
     <Compile Include="Serializer\Dto\Relation.cs" />
@@ -154,10 +159,11 @@
     </Compile>
     <Compile Include="Validation\Error.cs" />
     <Compile Include="Validation\IValidateNameService.cs" />
+    <Compile Include="Validation\PropertyValidationService.cs" />
     <Compile Include="Validation\Success.cs" />
+    <Compile Include="Validation\ValidateNameBase.cs" />
     <Compile Include="Validation\Validation.cs" />
     <Compile Include="Validation\ValidationResult.cs" />
-    <Compile Include="Validation\ValidationServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -174,8 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

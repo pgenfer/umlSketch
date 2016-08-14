@@ -102,6 +102,7 @@
     <Compile Include="ArchitectureLoader\ReflectionTypeLoaderTests.cs" />
     <Compile Include="Command\Classifier\Single\RenameClassifierCommandTest.cs" />
     <Compile Include="DomainObject\ClassifierDictionaryTest.cs" />
+    <Compile Include="DomainObject\PropertyListTest.cs" />
     <Compile Include="Domain\ClassifierDictionaryTests.cs" />
     <Compile Include="DiagramWriter\DiagramWriterTest.cs" />
     <Compile Include="Domain\ClassifierTest.cs" />

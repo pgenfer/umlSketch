@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ClassNameAlreadyExists" xml:space="preserve">
-    <value>A classifier with this name does already exist.</value>
+  <data name="NameAlreadyExists" xml:space="preserve">
+    <value>This name is already in use.</value>
   </data>
-  <data name="ClassNameMustNotBeEmpty" xml:space="preserve">
-    <value>The name of a classifier cannot be empty</value>
+  <data name="NameMustNotBeEmpty" xml:space="preserve">
+    <value>The name may not be empty.</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Properties</value>
   </data>
 </root>

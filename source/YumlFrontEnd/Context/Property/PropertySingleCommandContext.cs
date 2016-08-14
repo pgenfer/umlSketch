@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yuml.Notification;
 
 namespace Yuml.Command
 {
@@ -10,9 +11,13 @@ namespace Yuml.Command
     {
         public PropertySingleCommandContext(
             Property property,
-            IValidateNameService propertyValidationNameService)
+            IValidateNameService propertyValidationNameService,
+            PropertyNotificationService propertyNotifcationService)
         {
-            Rename = new RenamePropertyCommand(property);
+            Rename = new RenamePropertyCommand(
+                property,
+                propertyValidationNameService,
+                propertyNotifcationService);
             // TODO: implement change property type command
         }
     }

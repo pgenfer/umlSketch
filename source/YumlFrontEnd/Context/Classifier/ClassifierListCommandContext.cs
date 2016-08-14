@@ -10,17 +10,14 @@ namespace Yuml.Command
     public class ClassifierListCommandContext : ListCommandContextBase<Classifier>
     {
         private readonly ClassifierDictionary _classifiers;
-        private readonly ValidationServices _validationServices;
-        private readonly ClassifierNotificationService _notificationService;
+        private readonly NotificationServices _notificationService;
 
         public ClassifierListCommandContext(
             ClassifierDictionary classifiers,
-            ValidationServices validationServices,
-            ClassifierNotificationService notificationService)
+            NotificationServices notificationServices)
         {
             _classifiers = classifiers;
-            _validationServices = validationServices;
-            _notificationService = notificationService;
+            _notificationService = notificationServices;
 
             // setup commands
             All = new Query<Classifier>(() => classifiers);
@@ -30,7 +27,6 @@ namespace Yuml.Command
             new ClassifierSingleCommandContext(
                 domainObject, 
                 _classifiers,
-                _validationServices,
                 _notificationService);
     }
 }

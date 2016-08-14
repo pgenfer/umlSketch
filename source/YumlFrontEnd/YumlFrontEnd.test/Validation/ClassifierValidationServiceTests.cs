@@ -28,7 +28,7 @@ namespace Yuml.Test
             var validation = _validationService.ValidateNameChange(string.Empty, string.Empty);
 
             Assert.IsTrue(validation.HasError);
-            Assert.AreEqual(Strings.ClassNameMustNotBeEmpty, validation.Message);
+            Assert.AreEqual(Strings.NameMustNotBeEmpty, validation.Message);
         }
 
         [TestDescription("Classifiers cannot have duplicate names")]
@@ -40,7 +40,7 @@ namespace Yuml.Test
             var validation = _validationService.ValidateNameChange("oldName", newName);
 
             Assert.IsTrue(validation.HasError);
-            Assert.AreEqual(Strings.ClassNameAlreadyExists, validation.Message);
+            Assert.AreEqual(Strings.NameAlreadyExists, validation.Message);
         }
 
         [TestDescription("Classifier name was not changed")]

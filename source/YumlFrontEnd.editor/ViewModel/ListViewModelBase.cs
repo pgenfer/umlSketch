@@ -24,6 +24,12 @@ namespace YumlFrontEnd.editor
         public BindableCollection<SingleItemViewModelBase<TDomain>> Items => _items.Items;
 
         /// <summary>
+        /// factory function used to create a view model for a single item.
+        /// Will be initialized via reflection
+        /// </summary>
+        private Func<ISingleCommandContext,SingleItemViewModelBase<TDomain>> _singleItemViewFactory; 
+
+        /// <summary>
         /// the view model is able to initialize itself
         /// by using reflection. For this, it does the following:
         /// 1.List commands are provided by constructor parameter
@@ -54,17 +60,35 @@ namespace YumlFrontEnd.editor
             // if we have this constructor, get the concrete type of the command context and retrieve it
             if (constructor != null)
             {
-                // create single view models for every domain object
-                foreach (var domainObject in _commands.All.Get())
-                {
-                    // command context (as base interface, must be cast to concrete type)
-                    var singleCommandContextInstance = _commands.GetCommandsForSingleItem(domainObject);
-                    // use constructor to create the item and cast it to the correct type
-                    var singleViewModel = (SingleItemViewModelBase<TDomain>) constructor.Invoke(
-                        new object[] {singleCommandContextInstance});
-                    singleViewModel.Init(domainObject);
-                    Items.Add(singleViewModel);
-                }
+                // store the constructor for later use
+                _singleItemViewFactory = x => (SingleItemViewModelBase<TDomain>)constructor.Invoke(new object[] { x });
+                UpdateItemList();
+            }
+        }
+
+        public void New()
+        {
+            // execute the command
+            _commands.New.CreateNew();
+            // update the list of items to reflect the changes
+            UpdateItemList();
+        }
+
+        protected void UpdateItemList()
+        {
+            Items.Clear();
+            if (_singleItemViewFactory == null)
+                return;
+
+            // create single view models for every domain object
+            foreach (var domainObject in _commands.All.Get())
+            {
+                // command context (as base interface, must be cast to concrete type)
+                var singleCommandContextInstance = _commands.GetCommandsForSingleItem(domainObject);
+                // use constructor to create the item and cast it to the correct type
+                var singleViewModel = _singleItemViewFactory(singleCommandContextInstance);
+                singleViewModel.Init(domainObject);
+                Items.Add(singleViewModel);
             }
         }
 

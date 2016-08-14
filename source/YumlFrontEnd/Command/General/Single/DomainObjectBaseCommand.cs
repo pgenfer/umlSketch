@@ -11,7 +11,7 @@ namespace Yuml.Command
     /// </summary>
     /// <typeparam name="T">type of domain object
     /// this command operates on</typeparam>
-    public abstract class DomainObjectBaseCommand<T>
+    public abstract class DomainObjectBaseCommand<T> where T : class
     {
         /// <summary>
         /// domain object which is the target of the command.

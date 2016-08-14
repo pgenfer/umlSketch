@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Yuml;
 using Yuml.Command;
+using Yuml.Notification;
 
 namespace YumlFrontEnd.editor
 {
@@ -60,14 +61,11 @@ namespace YumlFrontEnd.editor
             integer.CreateProperty("Size", integer);
             integer.CreateProperty("TypeName", @string);
 
-            // setup services
-            var classifierNotificationService = new ClassifierNotificationService();
-
             var classifierListCommands = new ClassifierListCommandContext(
                 classifierDictionary,
-                new ValidationServices(
-                    new ClassifierValidationService(classifierDictionary)), 
-                classifierNotificationService);
+                  new NotificationServices(
+                    new ClassifierNotificationService(),
+                    new PropertyNotificationService()));
             
             _container.Instance<IListCommandContext<Classifier>>(classifierListCommands);
         }

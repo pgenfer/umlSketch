@@ -23,7 +23,7 @@
                Margin="5"
                Grid.Column="0"
                Foreground="Red"
-               Visibility="{Binding HasNameError,Converter={StaticResource _booleanToVisibility}}"
+               Visibility="{Binding HasNameError,Converter={StaticResource BooleanToVisibility}}"
                HorizontalAlignment="Left">
       <TextBlock.ToolTip>
         <TextBlock Text="{Binding NameErrorMessage}"/>
@@ -39,7 +39,7 @@
     <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
              MinWidth="25"
              Grid.Column="1"
-             Visibility="{Binding IsEditable,Converter={StaticResource _booleanToVisibility}}"
+             Visibility="{Binding IsEditable,Converter={StaticResource BooleanToVisibility}}"
              caliburn:Message.Attach="[Event PreviewKeyDown] = [Action StopEditing($confirmation)]"
              HorizontalAlignment="Left"/>    
   </Grid>

@@ -95,6 +95,8 @@ namespace YumlFrontEnd.editor
             get { return _name.Name; }
             set
             {
+                if (_name.Name == value)
+                    return;
                 _name.Name = value;
                 ValidateName();
                 // event must be fired, because
