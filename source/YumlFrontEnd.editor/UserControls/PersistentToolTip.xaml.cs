@@ -16,13 +16,22 @@ using System.Windows.Shapes;
 namespace YumlFrontEnd.editor
 {
     /// <summary>
-    /// Interaction logic for EditableTextBlock.xaml
+    /// Interaction logic for PersistentToolTip.xaml
     /// </summary>
-    public partial class EditableTextBlock
+    public partial class PersistentToolTip
     {
-        public EditableTextBlock()
+        public PersistentToolTip()
         {
             InitializeComponent();
+        }
+
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+            "Text", typeof(string), typeof(PersistentToolTip), new PropertyMetadata(default(string)));
+
+        public string Text
+        {
+            get { return (string) GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
         }
     }
 }

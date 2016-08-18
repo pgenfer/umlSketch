@@ -9,8 +9,7 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
   <UserControl.Resources>
-    <Style BasedOn="{StaticResource TextBlock-Sketch}"
-           TargetType="TextBlock" />
+   
   </UserControl.Resources>
   <Grid>
     <Grid.ColumnDefinitions>
@@ -34,6 +33,7 @@
                           Grid.Column="0" />
     <!-- caption -->
     <TextBlock Text="{x:Static yuml:Strings.Properties}"
+               Style="{StaticResource TextBlock-Sketch}"
                Grid.Column="1"
                Grid.Row="0"
                FontWeight="Bold"

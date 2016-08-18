@@ -27,14 +27,15 @@
 	<!--<FontFamily x:Key="FontFamily-Sketch">./Fonts/#Buxton Sketch</FontFamily>-->
     <FontFamily x:Key="FontFamily-Sketch">./Fonts/#Rufscript</FontFamily>
 	<sys:Double x:Key="SizeDouble-Sketch">19</sys:Double>
-	<FontWeight x:Key="FontWeight-Sketch">Normal</FontWeight>
+  <sys:Double x:Key="SizeNormal-Sketch">16</sys:Double>
+  <FontWeight x:Key="FontWeight-Sketch">Normal</FontWeight>
 
 	<!-- Basic Sketch TextBlock -->
 	<Style x:Key="BasicTextBlock-Sketch" TargetType="{x:Type TextBlock}" d:StyleDefaultContent="Basic Text">
 		<Setter Property="TextWrapping" Value="NoWrap"/>
 		<Setter Property="TextTrimming" Value="None"/>
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
-		<Setter Property="FontSize" Value="16"/>
+		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
 		<Setter Property="Foreground" Value="{DynamicResource BaseForeground-Sketch}"/>
 	</Style>
 
@@ -1369,5 +1370,22 @@
 		<Setter Property="HorizontalAlignment" Value="Right"/>
 		<Setter Property="TextAlignment" Value="Right"/>
 	</Style>
+
+  <!-- ToolTip -->
+  <Style x:Key="Tooltip-Sketch" TargetType="{x:Type ToolTip}">
+    <Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
+    <Setter Property="FontWeight" Value="{DynamicResource FontWeight-Sketch}"/>
+    <Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
+  </Style>
+
+  <!-- Text Block in Tooltip Popup -->
+  <Style x:Key="TooltipTextBlock-Sketch"
+         TargetType="{x:Type TextBlock}">
+    <Setter Property="FontFamily"
+            Value="{DynamicResource FontFamily-Sketch}"/>
+    <Setter Property="FontWeight"
+            Value="{DynamicResource FontWeight-Sketch}"/>
+    <Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
+  </Style>
 
 </ResourceDictionary>

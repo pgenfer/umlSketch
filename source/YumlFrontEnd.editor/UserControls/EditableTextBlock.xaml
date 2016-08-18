@@ -6,13 +6,15 @@
              xmlns:local="clr-namespace:YumlFrontEnd.editor"
              mc:Ignorable="d"
              xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
-             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
              d:DataContext="{d:DesignInstance local:EditableNameMixin}">
   <UserControl.Resources>
     <Style BasedOn="{StaticResource TextBlock-Sketch}"
            TargetType="TextBlock" />
     <Style BasedOn="{StaticResource TextBox-Sketch}"
-            TargetType="TextBox" />
+           TargetType="TextBox" />
   </UserControl.Resources>
   <Grid>
     <Grid.ColumnDefinitions>
@@ -24,23 +26,28 @@
                Grid.Column="0"
                Foreground="Red"
                Visibility="{Binding HasNameError,Converter={StaticResource BooleanToVisibility}}"
-               HorizontalAlignment="Left">
-      <TextBlock.ToolTip>
-        <TextBlock Text="{Binding NameErrorMessage}"/>
-      </TextBlock.ToolTip>
-    </TextBlock>
-               
+               HorizontalAlignment="Left"
+               ToolTip="{Binding NameErrorMessage}"/>
     <TextBlock Name="Name"
                Margin="0,5"
                Grid.Column="1"
                caliburn:Message.Attach="[Event MouseLeftButtonDown] = [Action StartEditing]"
                Visibility="{Binding IsEditable,Converter={local:BooleanToCollapseConverter}}"
-               HorizontalAlignment="Left"/>
-    <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
-             MinWidth="25"
-             Grid.Column="1"
-             Visibility="{Binding IsEditable,Converter={StaticResource BooleanToVisibility}}"
-             caliburn:Message.Attach="[Event PreviewKeyDown] = [Action StopEditing($confirmation)]"
-             HorizontalAlignment="Left"/>    
+               HorizontalAlignment="Left"
+               ToolTip="{x:Static local:Tooltips.ClickToStartEditing}"/>
+    <TextBox
+      Name="EditNameTextBox"
+      Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
+      MinWidth="25"
+      Grid.Column="1"
+      Visibility="{Binding IsEditable,Converter={StaticResource BooleanToVisibility}}"
+      caliburn:Message.Attach="[Event PreviewKeyDown] = [Action StopEditing($confirmation)]"
+      HorizontalAlignment="Left">
+    </TextBox>
+    <local:PersistentToolTip
+      Grid.Column="1"
+      PlacementTarget="{Binding ElementName=EditNameTextBox}"
+      IsOpen="{Binding IsKeyboardFocused, ElementName=EditNameTextBox, Mode=OneWay}"
+      Text="{x:Static local:Tooltips.EnterOrEscape}"/>
   </Grid>
 </UserControl>

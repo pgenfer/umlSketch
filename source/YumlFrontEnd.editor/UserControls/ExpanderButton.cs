@@ -19,7 +19,7 @@ namespace YumlFrontEnd.editor
     /// </summary>
     public class ExpanderButton : Button
     {
-        private TextBlock _textBlock = new TextBlock();
+        private readonly TextBlock _textBlock = new TextBlock();
 
         public ExpanderButton()
         {
@@ -32,12 +32,14 @@ namespace YumlFrontEnd.editor
         {
             _textBlock.LayoutTransform = new RotateTransform(-90);
             _textBlock.Margin = new Thickness(-5, 0, 0, 0);
+            ToolTip = Tooltips.ClickToCollapse;
         }
 
         private void SetCollapsed()
         {
             _textBlock.LayoutTransform = new RotateTransform(90);
             _textBlock.Margin = new Thickness(-7, 0, 0, 0);
+            ToolTip = Tooltips.ClickToExpand;
         }
 
         public bool IsExpanded
