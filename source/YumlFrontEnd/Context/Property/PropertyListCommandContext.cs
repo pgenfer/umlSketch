@@ -10,7 +10,7 @@ namespace Yuml.Command
     /// <summary>
     /// all commands that can be executed on a list of properties
     /// </summary>
-    public class PropertyListCommandContext : ListCommandContextBase<Property>
+    internal class PropertyListCommandContext : ListCommandContextBase<Property>
     {
         private readonly IValidateNameService _propertyValidationNameService;
         private readonly PropertyNotificationService _notificationService;

@@ -12,7 +12,7 @@ namespace Yuml
     /// property represents a property of a class or an interface.
     /// Properties will be rendered as attributes in UML.
     /// </summary>
-    public class Property : IVisible
+    public class Property : IVisible, INamed
     {
         private readonly IVisible _visible = new VisibleMixin();
         private readonly NameMixin _name = new NameMixin();

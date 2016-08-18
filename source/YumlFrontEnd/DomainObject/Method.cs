@@ -10,7 +10,7 @@ namespace Yuml
     /// <summary>
     /// method of a type.
     /// </summary>
-    public class Method : IVisible
+    public class Method : IVisible, INamed
     {
         private readonly IVisible _visible = new VisibleMixin();
         private readonly NameMixin _name = new NameMixin();

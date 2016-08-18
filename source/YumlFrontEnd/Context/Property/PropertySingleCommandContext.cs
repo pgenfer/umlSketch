@@ -14,7 +14,7 @@ namespace Yuml.Command
             IValidateNameService propertyValidationNameService,
             PropertyNotificationService propertyNotifcationService)
         {
-            Rename = new RenamePropertyCommand(
+            Rename = new RenameMemberCommand(
                 property,
                 propertyValidationNameService,
                 propertyNotifcationService);

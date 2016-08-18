@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Yuml.Notification
 {
-    public class PropertyNotificationService : INameChangedNotificationService
+    public class MethodNotificationService : INameChangedNotificationService
     {
         private readonly NameChangedNotificationMixin _nameChanged = new NameChangedNotificationMixin();
-        private readonly NewItemNotificationMixin _newItemAdded = new NewItemNotificationMixin();
 
         public void FireNameChange(string oldName, string newName) => _nameChanged.FireNameChange(oldName, newName);
 
@@ -17,14 +16,6 @@ namespace Yuml.Notification
         {
             add { _nameChanged.NameChanged += value; }
             remove { _nameChanged.NameChanged -= value; }
-        }
-
-        public void FireNewItemCreated() => _newItemAdded.FireNewItemCreated();
-
-        public event Action NewItemCreated
-        {
-            add { _newItemAdded.NewItemCreated += value; }
-            remove { _newItemAdded.NewItemCreated -= value; }
         }
     }
 }

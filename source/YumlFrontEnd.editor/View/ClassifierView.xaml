@@ -7,6 +7,7 @@
              xmlns:SketchControls="clr-namespace:Microsoft.Expression.Prototyping.SketchControls;assembly=Microsoft.Expression.Prototyping.SketchControls"
              xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance local:ClassifierViewModel}"
              d:DesignHeight="300"
              d:DesignWidth="300"
              Focusable="False">
@@ -18,54 +19,34 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
-    <local:ExpanderButton x:Name="ExpandOrCollapse"
-                          Margin="5"
-                          IsExpanded="{Binding IsExpanded}"
-                          Style="{StaticResource ExpanderButtonStyle}"
-                          Grid.Column="0" />
-    <StackPanel Orientation="Horizontal"
-                Grid.Column="1">
+    <local:ExpanderButton
+      Grid.Column="0"
+      Grid.Row="0"
+      x:Name="ExpandOrCollapse"
+      Margin="5"
+      IsExpanded="{Binding IsExpanded}"
+      Style="{StaticResource ExpanderButtonStyle}"/>
+    <StackPanel 
+      Orientation="Horizontal"
+      Grid.Column="1"
+      Grid.Row="0">
       <local:EditableTextBlock Margin="5"
                                Width="200"
                                caliburn:Bind.Model="{Binding}"/>
-<!--
-      <Button Content="+"
-                   Width="20"
-                   Height="20">
-        <Button.Style>
-          <Style
-            BasedOn="{StaticResource CircleButton-Sketch}"
-            TargetType="{x:Type Button}">
-            <Style.Setters>
-              <Setter Property="BorderBrush" Value="LightGreen"/>
-              <Setter Property="Foreground" Value="LightGreen"/>
-            </Style.Setters>
-
-          </Style>
-        </Button.Style>
-      </Button>
-      <Button Content="-"
-              Width="20"
-              Height="20">
-        <Button.Style>
-          <Style
-            BasedOn="{StaticResource CircleButton-Sketch}"
-            TargetType="{x:Type Button}">
-            <Style.Setters>
-              <Setter Property="BorderBrush" Value="Red"/>
-              <Setter Property="Foreground" Value="Red"/>
-            </Style.Setters>
-
-          </Style>
-        </Button.Style>
-      </Button>
--->
     </StackPanel>
+    <!-- Properties -->
     <ContentControl
         Grid.Row="1"
         Grid.Column="1"
         caliburn:View.Model="{Binding Properties}"
         Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}"/>
+    <!-- Methods -->
+    <ContentControl
+      Grid.Row="2"
+      Grid.Column="1"
+      caliburn:View.Model="{Binding Methods}"
+      Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}"/>
   </Grid>
 </UserControl>

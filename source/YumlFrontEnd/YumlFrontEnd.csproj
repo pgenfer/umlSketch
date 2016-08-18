@@ -93,12 +93,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\General\Single\RenameMemberCommand.cs" />
+    <Compile Include="Command\Method\RenameMethodCommand.cs" />
     <Compile Include="Command\Property\NewPropertyCommand.cs" />
-    <Compile Include="Command\Property\RenamePropertyCommand.cs" />
     <Compile Include="Context\Classifier\ClassifierListCommandContext.cs" />
     <Compile Include="Context\Classifier\ClassifierSingleCommandContext.cs" />
     <Compile Include="Context\General\ListCommandContextBase.cs" />
     <Compile Include="Context\General\SingleCommandContextBase.cs" />
+    <Compile Include="Context\Method\MethodListCommandContext.cs" />
+    <Compile Include="Context\Method\MethodSingleCommandContext.cs" />
     <Compile Include="Context\Property\ISinglePropertyCommands.cs" />
     <Compile Include="Context\General\IListCommandContext.cs" />
     <Compile Include="Context\General\ISingleCommandContext.cs" />
@@ -119,6 +122,8 @@
     <Compile Include="DomainObject\Parameter.cs" />
     <Compile Include="DomainObject\ParameterList.cs" />
     <Compile Include="Notification\ClassifierNotificationService.cs" />
+    <Compile Include="Notification\INameChangedNotificationService.cs" />
+    <Compile Include="Notification\MethodNotificationService.cs" />
     <Compile Include="Notification\NameChangedNotification.cs" />
     <Compile Include="Notification\NewItemNotificationMixin.cs" />
     <Compile Include="Notification\NotificationServices.cs" />
@@ -158,7 +163,9 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Validation\Error.cs" />
+    <Compile Include="Validation\IMethodNameValidationService.cs" />
     <Compile Include="Validation\IValidateNameService.cs" />
+    <Compile Include="Validation\MethodValidationService.cs" />
     <Compile Include="Validation\PropertyValidationService.cs" />
     <Compile Include="Validation\Success.cs" />
     <Compile Include="Validation\ValidateNameBase.cs" />
@@ -186,10 +193,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Command\Method\" />
     <Folder Include="Command\Parameter\" />
     <Folder Include="Command\Relation\" />
-    <Folder Include="Context\Method\" />
     <Folder Include="Context\Parameter\" />
     <Folder Include="Context\Relation\" />
   </ItemGroup>

@@ -25,9 +25,14 @@ namespace Yuml.Command
                 classifier,
                 classifierDictionary,
                 new PropertyValidationService(classifier.Properties), 
-                notificationServices.Property); 
+                notificationServices.Property);
+            CommandsForMethods = new MethodListCommandContext(
+                classifier,
+                new MethodValidationService(classifier.Methods),
+                notificationServices.Method);
         }
 
         public IListCommandContext<Property> CommandsForProperties { get; }
+        public IListCommandContext<Method> CommandsForMethods { get; }
     }
 }

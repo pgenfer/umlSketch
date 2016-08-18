@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -51,21 +52,28 @@ namespace YumlFrontEnd.editor
             _container.PerRequest<MainViewModel, MainViewModel>();
         }
 
-        private void ConfigureDomainModel()
+        private void CreateDummyData(ClassifierDictionary classifierDictionary)
         {
-            var classifierDictionary = new ClassifierDictionary();
             // just for debug
             var @string = classifierDictionary.CreateNewClass("String");
-            classifierDictionary.CreateNewClass("CodeProvider");
             var integer = classifierDictionary.CreateNewClass("Integer");
             integer.CreateProperty("Size", integer);
             integer.CreateProperty("TypeName", @string);
+            var codeProvider = classifierDictionary.CreateNewClass("CodeProvider");
+            codeProvider.CreateMethod("DoSomething", integer);
+        }
+
+        private void ConfigureDomainModel()
+        {
+            var classifierDictionary = new ClassifierDictionary();
+            CreateDummyData(classifierDictionary);
 
             var classifierListCommands = new ClassifierListCommandContext(
                 classifierDictionary,
                   new NotificationServices(
                     new ClassifierNotificationService(),
-                    new PropertyNotificationService()));
+                    new PropertyNotificationService(),
+                    new MethodNotificationService()));
             
             _container.Instance<IListCommandContext<Classifier>>(classifierListCommands);
         }

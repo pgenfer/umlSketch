@@ -128,10 +128,15 @@
     </Compile>
     <Compile Include="UserControls\Confirmation.cs" />
     <Compile Include="UserControls\ConfirmEditAction.cs" />
+    <Compile Include="UserControls\HeaderControl.xaml.cs">
+      <DependentUpon>HeaderControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\PersistentToolTip.xaml.cs">
       <DependentUpon>PersistentToolTip.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ListViewModelBase.cs" />
+    <Compile Include="ViewModel\MethodListViewModel.cs" />
+    <Compile Include="ViewModel\MethodViewModel.cs" />
     <Compile Include="ViewModel\Mixin\BindableCollectionMixin.cs" />
     <Compile Include="ViewModel\Mixin\EditableNameMixin.cs" />
     <Compile Include="ViewModel\Mixin\ExpandableMixin.cs" />
@@ -142,13 +147,23 @@
     <Compile Include="ViewModel\AutoPropertyChange.cs" />
     <Compile Include="ViewModel\SingleItemViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelConverter.cs" />
+    <Compile Include="View\MethodListView.xaml.cs">
+      <DependentUpon>MethodListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PropertyListView.xaml.cs">
       <DependentUpon>PropertyListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MethodView.xaml.cs">
+      <DependentUpon>MethodView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PropertyView.xaml.cs">
       <DependentUpon>PropertyView.xaml</DependentUpon>
     </Compile>
     <Page Include="UserControls\EditableTextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HeaderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,9 +207,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\MethodListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\PropertyListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MethodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\PropertyView.xaml">
       <SubType>Designer</SubType>

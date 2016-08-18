@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="INamed.cs" />
     <Compile Include="IVisible.cs" />
     <Compile Include="NameMixin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

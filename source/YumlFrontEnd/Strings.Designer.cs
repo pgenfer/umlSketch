@@ -61,6 +61,15 @@ namespace Yuml {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Methods.
+        /// </summary>
+        public static string Methods {
+            get {
+                return ResourceManager.GetString("Methods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This name is already in use..
         /// </summary>
         public static string NameAlreadyExists {

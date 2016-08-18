@@ -25,17 +25,15 @@ namespace YumlFrontEnd.editor
             ISingleClassifierCommands commands):base(commands)
         {
             Properties = new PropertyListViewModel(commands.CommandsForProperties);
+            Methods = new MethodListViewModel(commands.CommandsForMethods);
                 
             _expanded.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
         }
 
         public PropertyListViewModel Properties { get; private set; }
+        public MethodListViewModel Methods { get; private set; }
 
-        public bool IsExpanded
-        {
-            get { return _expanded.IsExpanded; }
-            set { _expanded.IsExpanded = value; }
-        }
+        public bool IsExpanded => _expanded.IsExpanded;
         public void ExpandOrCollapse() => _expanded.ExpandOrCollapse();
     }
 }

@@ -16,16 +16,13 @@ namespace YumlFrontEnd.editor
     {
         private readonly ExpandableMixin _expandable = new ExpandableMixin();
 
-        public bool IsExpanded
-        {
-            get { return _expandable.IsExpanded; }
-            set { _expandable.IsExpanded = value; }
-        }
+        public bool IsExpanded => _expandable.IsExpanded;
 
         public void ExpandOrCollapse() => _expandable.ExpandOrCollapse();
 
         public PropertyListViewModel(IListCommandContext<Property> listCommands):base(listCommands)
         {
+            _expandable.PropertyChanged += (_, e) => NotifyOfPropertyChange(e.PropertyName);
         }
     }
 }

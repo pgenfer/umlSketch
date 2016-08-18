@@ -15,7 +15,7 @@ namespace Yuml
     /// See documentation here:
     /// https://www.ibm.com/developerworks/rational/library/content/RationalEdge/sep04/bell/
     /// </summary>
-    public class Classifier : IVisible
+    public class Classifier : IVisible, INamed
     {
         private readonly NameMixin _name = new NameMixin();
         private readonly IVisible _visible = new VisibleMixin();
@@ -36,7 +36,7 @@ namespace Yuml
         public string Name
         {
             get { return _name.Name; }
-            internal set { _name.Name = value; }
+            set { _name.Name = value; }
         }
 
         /// <summary>

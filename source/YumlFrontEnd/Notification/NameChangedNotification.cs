@@ -11,7 +11,7 @@ namespace Yuml
     /// mixin that contains code that is used to propagate 
     /// changes of a name
     /// </summary>
-    internal class NameChangedNotificationMixin
+    internal class NameChangedNotificationMixin : INameChangedNotificationService
     {
         /// <summary>
         /// fired when the name of a classifier changed
@@ -26,8 +26,6 @@ namespace Yuml
         /// <param name="newName">new name of the classifier</param>
         public virtual void FireNameChange(string oldName, string newName)
         {
-            Requires(oldName != newName);
-
             NameChanged?.Invoke(oldName, newName);
         }
     }
