@@ -8,7 +8,7 @@
     /// </summary>
     public class PropertyWriter
     {
-        private DiagramContentMixin _content;
+        private readonly DiagramContentMixin _content;
 
         public PropertyWriter WithType(string type)
         {

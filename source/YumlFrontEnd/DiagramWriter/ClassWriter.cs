@@ -5,8 +5,8 @@
     /// </summary>
     public class ClassWriter
     {
-        private bool _hasProperties = false;
-        private DiagramContentMixin _content;
+        private readonly bool _hasProperties = false;
+        private readonly DiagramContentMixin _content;
 
         public ClassWriter(bool hasProperties, DiagramContentMixin content = null)
         {

@@ -117,10 +117,17 @@
     <Compile Include="Context\Classifier\ISingleClassifierCommands.cs" />
     <Compile Include="Context\Property\PropertyListCommandContext.cs" />
     <Compile Include="Context\Property\PropertySingleCommandContext.cs" />
+    <Compile Include="DiagramWriter\EndNodeWriter.cs" />
+    <Compile Include="DiagramWriter\RelationEndWriter.cs" />
+    <Compile Include="DiagramWriter\RelationWriter.cs" />
+    <Compile Include="DiagramWriter\StartNodeWriter.cs" />
     <Compile Include="DomainObject\BaseList.cs" />
+    <Compile Include="DomainObject\EndNode.cs" />
     <Compile Include="DomainObject\MethodList.cs" />
     <Compile Include="DomainObject\Parameter.cs" />
     <Compile Include="DomainObject\ParameterList.cs" />
+    <Compile Include="DomainObject\Relation.cs" />
+    <Compile Include="DomainObject\StartNode.cs" />
     <Compile Include="Notification\ClassifierNotificationService.cs" />
     <Compile Include="Notification\INameChangedNotificationService.cs" />
     <Compile Include="Notification\MethodNotificationService.cs" />
@@ -130,7 +137,7 @@
     <Compile Include="Notification\PropertyNotificationService.cs" />
     <Compile Include="Serializer\Dto\DiagramDataDto.cs" />
     <Compile Include="Serializer\Dto\Multiplicity.cs" />
-    <Compile Include="Serializer\Dto\Relation.cs" />
+    <Compile Include="DomainObject\RelationType.cs" />
     <Compile Include="Serializer\Dto\RelationDto.cs" />
     <Compile Include="Serializer\JsonApplicationSettingSerializer.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />

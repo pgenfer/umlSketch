@@ -31,6 +31,18 @@ namespace Yuml.Test
         /// a classifier that has a method
         /// </summary>
         protected readonly Classifier Service = new Classifier("Service");
+        /// <summary>
+        /// representation of a car
+        /// </summary>
+        protected readonly Classifier Car = new Classifier("Car");
+        /// <summary>
+        /// representation of a car's wheel
+        /// </summary>
+        protected readonly Classifier Wheel = new Classifier("Wheel");
+        /// <summary>
+        /// Vehicle is the base class of a Car
+        /// </summary>
+        protected readonly Classifier Vehicle = new Classifier("Vehicle");
 
         // some default data types
         internal readonly ClassifierDto StringDto = new ClassifierDto{Name = "string"};
@@ -104,7 +116,7 @@ namespace Yuml.Test
             // a car would only have a limited number of tires, but we assume there can be unlimited tires
             CarHasTiresDto.EndMultiplicity = Multiplicity.ZeroToMany;
             // the tires exist after the car was destroyed (might depend on the use case)
-            CarHasTiresDto.Relation = Relation.Aggregation;
+            CarHasTiresDto.RelationType = RelationType.Aggregation;
             CarHasTiresDto.Name = "has";
         }
 
@@ -133,5 +145,10 @@ namespace Yuml.Test
                 Enumerable.Repeat(Alphabet, RandomStringLength)
                 .Select(s => s[new Random(seed ?? (int)DateTime.Now.Ticks).Next(s.Length)])
                 .ToArray());
+
+        protected virtual void Init() { /* default implementation does not have initialization */}
+
+        [SetUp]
+        public void Setup() => Init();
     }
 }

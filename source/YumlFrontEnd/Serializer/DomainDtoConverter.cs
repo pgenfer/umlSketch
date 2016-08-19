@@ -74,6 +74,7 @@ namespace Yuml.Serializer.Dto
                             d.AddExistingMember(_mapper.Map<Parameter>(parameter));
                     });
             });
+            // TODO: add mapping for relations
 
             _mapper = _mapperConfiguration.CreateMapper();
         }

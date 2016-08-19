@@ -35,7 +35,7 @@
         /// <summary>
         /// the type of the relation
         /// </summary>
-        public Relation Relation { get; set; }
+        public RelationType RelationType { get; set; }
         /// <summary>
         /// a relation can be visible or hidden
         /// </summary>

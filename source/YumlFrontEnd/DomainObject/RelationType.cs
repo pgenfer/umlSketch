@@ -1,11 +1,15 @@
-﻿namespace Yuml.Serializer.Dto
+﻿namespace Yuml
 {
 
     /// <summary>
     /// defines the type a relation can have.
     /// </summary>
-    public enum Relation
+    public enum RelationType
     {
+        /// <summary>
+        /// type of relation is not specified directly
+        /// </summary>
+        NotSpecified,
         /// <summary>
         /// a simple association between 
         /// two classifiers. The association

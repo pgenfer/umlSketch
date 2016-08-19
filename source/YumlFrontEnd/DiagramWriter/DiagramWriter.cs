@@ -15,13 +15,15 @@
     /// </summary>
     public class DiagramWriter
     {
-        private DiagramContentMixin _content;
+        private readonly DiagramContentMixin _content;
 
         public ClassWriter StartClass()
         {
             _content.AppendToken("[");
             return new ClassWriter(false, _content);
         }
+
+        public RelationWriter StartRelation() => new RelationWriter(_content);
 
         public override string ToString() => _content.ToString();
         public DiagramWriter(DiagramContentMixin content = null)
