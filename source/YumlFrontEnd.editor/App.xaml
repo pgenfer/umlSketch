@@ -20,6 +20,9 @@
               <Setter Property="Height" Value="22" />
             </Style.Setters>
           </Style>
+          <!-- combo box -->
+          <Style BasedOn="{StaticResource ComboBox-Sketch}"
+                 TargetType="ComboBox"/>
           <!-- text box -->
           <Style BasedOn="{StaticResource TextBox-Sketch}"
                  TargetType="TextBox" />

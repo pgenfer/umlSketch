@@ -34,7 +34,7 @@ namespace Yuml
         /// </summary>
         /// <param name="className"></param>
         /// <returns>The classifier or null if no classifier was found</returns>
-        public Classifier FindByName(string className)
+        public virtual Classifier FindByName(string className)
         {
             Requires(!string.IsNullOrEmpty(className));
             Classifier result;

@@ -12,7 +12,10 @@ namespace YumlFrontEnd.editor
     {
         private readonly ExpandableMixin _expandable = new ExpandableMixin();
 
-        public MethodListViewModel(IListCommandContext<Method> commands) : base(commands)
+        public MethodListViewModel(
+            IListCommandContext<Method> commands,
+            ClassifierSelectionItemsSource classifierItemsSource) : 
+            base(commands, classifierItemsSource)
         {
             _expandable.PropertyChanged += (_, e) => NotifyOfPropertyChange(e.PropertyName);
         }

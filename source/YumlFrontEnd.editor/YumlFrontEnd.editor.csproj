@@ -121,6 +121,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converter\BooleanToCollapseConverter.cs" />
+    <Compile Include="Classifier\ClassifierItemViewModel.cs" />
+    <Compile Include="Classifier\ClassifierSelectionItemsSource.cs" />
+    <Compile Include="Extension\ListExtension.cs" />
     <Compile Include="Tooltips.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -135,28 +138,32 @@
       <DependentUpon>PersistentToolTip.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ListViewModelBase.cs" />
-    <Compile Include="ViewModel\MethodListViewModel.cs" />
-    <Compile Include="ViewModel\MethodViewModel.cs" />
-    <Compile Include="ViewModel\Mixin\BindableCollectionMixin.cs" />
-    <Compile Include="ViewModel\Mixin\EditableNameMixin.cs" />
-    <Compile Include="ViewModel\Mixin\ExpandableMixin.cs" />
+    <Compile Include="Method\MethodListViewModel.cs" />
+    <Compile Include="Method\MethodViewModel.cs" />
+    <Compile Include="Mixin\BindableCollectionMixin.cs" />
+    <Compile Include="Mixin\EditableNameMixin.cs" />
+    <Compile Include="Mixin\ExpandableMixin.cs" />
     <Compile Include="UserControls\EditableTextBlock.xaml.cs">
       <DependentUpon>EditableTextBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ExpanderButton.cs" />
     <Compile Include="ViewModel\AutoPropertyChange.cs" />
+    <Compile Include="Mixin\SelectClassifierMixin.cs" />
     <Compile Include="ViewModel\SingleItemViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelConverter.cs" />
-    <Compile Include="View\MethodListView.xaml.cs">
+    <Compile Include="Classifier\ClassifierItemView.xaml.cs">
+      <DependentUpon>ClassifierItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Method\MethodListView.xaml.cs">
       <DependentUpon>MethodListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PropertyListView.xaml.cs">
+    <Compile Include="Property\PropertyListView.xaml.cs">
       <DependentUpon>PropertyListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MethodView.xaml.cs">
+    <Compile Include="Method\MethodView.xaml.cs">
       <DependentUpon>MethodView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PropertyView.xaml.cs">
+    <Compile Include="Property\PropertyView.xaml.cs">
       <DependentUpon>PropertyView.xaml</DependentUpon>
     </Compile>
     <Page Include="UserControls\EditableTextBlock.xaml">
@@ -171,15 +178,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ClassifierListView.xaml">
+    <Page Include="Classifier\ClassifierItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ClassifierView.xaml">
+    <Page Include="Classifier\ClassifierListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainView.xaml">
+    <Page Include="Classifier\ClassifierView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -188,18 +199,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="ViewModel\PropertyListViewModel.cs" />
-    <Compile Include="ViewModel\PropertyViewModel.cs" />
-    <Compile Include="View\ClassifierListView.xaml.cs">
+    <Compile Include="Property\PropertyListViewModel.cs" />
+    <Compile Include="Property\PropertyViewModel.cs" />
+    <Compile Include="Classifier\ClassifierListView.xaml.cs">
       <DependentUpon>ClassifierListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\ClassifierListViewModel.cs" />
-    <Compile Include="View\ClassifierView.xaml.cs">
+    <Compile Include="Classifier\ClassifierListViewModel.cs" />
+    <Compile Include="Classifier\ClassifierView.xaml.cs">
       <DependentUpon>ClassifierView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\ClassifierViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="View\MainView.xaml.cs">
+    <Compile Include="Classifier\ClassifierViewModel.cs" />
+    <Compile Include="Main\MainViewModel.cs" />
+    <Compile Include="Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -207,19 +218,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\MethodListView.xaml">
+    <Page Include="Method\MethodListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\PropertyListView.xaml">
+    <Page Include="Property\PropertyListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MethodView.xaml">
+    <Page Include="Method\MethodView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\PropertyView.xaml">
+    <Page Include="Property\PropertyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

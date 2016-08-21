@@ -333,7 +333,18 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ToggleButton}">
 					<Grid>
-						<SketchControls:SketchRectangleUC x:Name="SketchRectangleUC" HorizontalAlignment="Stretch" BorderBrush="{TemplateBinding BorderBrush}" ExtensionLength="0" ExtensionVariance="0" SegmentLength="8" SegmentOffset="0.12" Background="{TemplateBinding Background}" StrokeWidth="2" SegmentVariance="0.1" Foreground="{TemplateBinding Foreground}"/>
+						<SketchControls:SketchRectangleUC 
+              x:Name="SketchRectangleUC" 
+              HorizontalAlignment="Stretch" 
+              BorderBrush="{TemplateBinding BorderBrush}" 
+              ExtensionLength="0" 
+              ExtensionVariance="0" 
+              SegmentLength="8" 
+              SegmentOffset="0.12" 
+              Background="{TemplateBinding Background}" 
+              StrokeWidth="2" 
+              SegmentVariance="0.1" 
+              Foreground="{TemplateBinding Foreground}"/>
 					</Grid>
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsFocused" Value="True">
@@ -343,6 +354,9 @@
 							<Setter Property="BorderBrush" TargetName="SketchRectangleUC" Value="{DynamicResource FocusedBorder-Sketch}"/>
 						</Trigger>
 						<Trigger Property="IsEnabled" Value="false"/>
+            <Trigger Property="IsMouseOver" Value="false">
+              <Setter Property="BorderBrush" TargetName="SketchRectangleUC" Value="Transparent"/>
+            </Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>
 			</Setter.Value>
@@ -413,7 +427,9 @@
 				</Border>
 			</Popup>
 			<TextBox x:Name="PART_EditableTextBox" Margin="{TemplateBinding Padding}" Style="{StaticResource ComboBoxEditableTextBox-Sketch}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" IsReadOnly="{Binding Path=IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"/>
-			<ToggleButton Style="{StaticResource ComboBoxToggleButton-Sketch}" Grid.Column="1" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+			<ToggleButton 
+        x:Name="ComboBoxToggleButton"
+        Style="{StaticResource ComboBoxToggleButton-Sketch}" Grid.Column="1" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
 		</Grid>
 		<ControlTemplate.Triggers>
 			<Trigger Property="IsKeyboardFocusWithin" Value="true">
@@ -429,7 +445,7 @@
 			<Trigger Property="IsGrouping" Value="true">
 				<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
 			</Trigger>
-		</ControlTemplate.Triggers>
+    </ControlTemplate.Triggers>
 	</ControlTemplate>
 
 	<!-- Sketch ComboBox -->
@@ -458,8 +474,12 @@
 								</ScrollViewer>
 							</Grid>
 						</Popup>
-						<ToggleButton Style="{StaticResource ComboBoxReadonlyToggleButton-Sketch}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Grid.ColumnSpan="2" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{TemplateBinding Foreground}"/>
-						<Path Fill="{x:Null}" Stretch="Fill" Stroke="{TemplateBinding BorderBrush}" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeThickness="2" HorizontalAlignment="Center" Width="13" Height="7" Data="M229.75,20.5 L236.08108,25.5 241.93919,20.5" Grid.Column="2" IsHitTestVisible="False"/>
+						<ToggleButton 
+              x:Name="ComboboxToggleButton"
+              Style="{StaticResource ComboBoxReadonlyToggleButton-Sketch}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Grid.ColumnSpan="2" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{TemplateBinding Foreground}"/>
+						<Path 
+              x:Name="ToggleButtonArrow"
+              Fill="{x:Null}" Stretch="Fill" Stroke="{TemplateBinding BorderBrush}" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeThickness="2" HorizontalAlignment="Center" Width="13" Height="7" Data="M229.75,20.5 L236.08108,25.5 241.93919,20.5" Grid.Column="2" IsHitTestVisible="False"/>
 						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsHitTestVisible="false" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"/>
 					</Grid>
 					<ControlTemplate.Triggers>
@@ -472,6 +492,10 @@
 						<Trigger Property="IsGrouping" Value="true">
 							<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
 						</Trigger>
+            <Trigger Property="IsMouseOver" Value="false">
+              <Setter TargetName="ToggleButtonArrow" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            
 					</ControlTemplate.Triggers>
 				</ControlTemplate>
 			</Setter.Value>
@@ -829,7 +853,9 @@
 						</Grid.RowDefinitions>
 
 						<Grid>
-							<RepeatButton x:Name="DecreaseRepeat" Style="{StaticResource RepeatButton-Sketch}" Foreground="{TemplateBinding Foreground}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" Command="ScrollBar.LineUpCommand" FocusVisualStyle="{DynamicResource FocusControl-Sketch}"/>
+							<RepeatButton x:Name="DecreaseRepeat" 
+                            Style="{StaticResource RepeatButton-Sketch}" Foreground="{TemplateBinding Foreground}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" Command="ScrollBar.LineUpCommand" FocusVisualStyle="{DynamicResource FocusControl-Sketch}"/>
 							<!-- a little triangle -->
 						</Grid>
 

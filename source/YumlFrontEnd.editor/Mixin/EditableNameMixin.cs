@@ -74,7 +74,7 @@ namespace YumlFrontEnd.editor
                     if (string.IsNullOrEmpty(Name))
                         return;
                     // only fire change event if name did really change
-                    if (_originalName != Name)
+                    if (_originalName != Name && !HasNameError)
                         Rename(Name);
                     _originalName = Name;
                     IsEditable = false;

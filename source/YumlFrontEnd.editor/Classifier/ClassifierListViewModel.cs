@@ -17,7 +17,9 @@ namespace YumlFrontEnd.editor
     /// </summary>
     internal class ClassifierListViewModel : ListViewModelBase<Classifier>
     {
-        public ClassifierListViewModel(IListCommandContext<Classifier> commands) : base(commands)
+        public ClassifierListViewModel(
+            IListCommandContext<Classifier> commands,
+            ClassifierSelectionItemsSource classifierItemsSource) : base(commands,classifierItemsSource)
         {
         }
     }

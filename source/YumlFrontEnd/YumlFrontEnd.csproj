@@ -93,6 +93,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\Property\ChangeTypeOfPropertyCommand.cs" />
+    <Compile Include="Command\General\Single\IChangeTypeCommand.cs" />
     <Compile Include="Command\General\Single\RenameMemberCommand.cs" />
     <Compile Include="Command\Method\RenameMethodCommand.cs" />
     <Compile Include="Command\Property\NewPropertyCommand.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="Notification\NewItemNotificationMixin.cs" />
     <Compile Include="Notification\NotificationServices.cs" />
     <Compile Include="Notification\PropertyNotificationService.cs" />
+    <Compile Include="Notification\TypeChangeNotificationMixin.cs" />
     <Compile Include="Serializer\Dto\DiagramDataDto.cs" />
     <Compile Include="Serializer\Dto\Multiplicity.cs" />
     <Compile Include="DomainObject\RelationType.cs" />

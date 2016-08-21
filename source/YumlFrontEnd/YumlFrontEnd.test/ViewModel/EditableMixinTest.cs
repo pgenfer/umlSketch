@@ -20,8 +20,7 @@ namespace Yuml.Test
         private IRenameCommand _renameCommand;
         
 
-        [SetUp]
-        public void Init()
+        protected override void Init()
         {
             _renameCommand = For<IRenameCommand>();
             _editableNameMixin = new EditableNameMixin(_renameCommand);

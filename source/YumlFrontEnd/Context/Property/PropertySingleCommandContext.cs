@@ -10,6 +10,7 @@ namespace Yuml.Command
     public class PropertySingleCommandContext : SingleCommandContextBase, ISinglePropertyCommands
     {
         public PropertySingleCommandContext(
+            ClassifierDictionary availableClassifiers,
             Property property,
             IValidateNameService propertyValidationNameService,
             PropertyNotificationService propertyNotifcationService)
@@ -18,7 +19,12 @@ namespace Yuml.Command
                 property,
                 propertyValidationNameService,
                 propertyNotifcationService);
-            // TODO: implement change property type command
+            ChangeTypeOfProperty = new ChangeTypeOfPropertyCommand(
+                availableClassifiers,
+                property,
+                propertyNotifcationService);
         }
+
+        public IChangeTypeCommand ChangeTypeOfProperty { get; }
     }
 }

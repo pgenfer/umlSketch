@@ -37,7 +37,8 @@ namespace YumlFrontEnd.editor
                 x.CreateMap<Classifier, ClassifierViewModel>()
                     .ForMember( d => d.Properties, c => c.Ignore())
                     .ForMember( d => d.Methods, c => c.Ignore());
-                x.CreateMap<Property, PropertyViewModel>();
+                x.CreateMap<Property, PropertyViewModel>()
+                    .ForMember(d => d.InitialPropertyType, c => c.MapFrom(s => s.Type.Name));
                 x.CreateMap<Method, MethodViewModel>();
             });
 

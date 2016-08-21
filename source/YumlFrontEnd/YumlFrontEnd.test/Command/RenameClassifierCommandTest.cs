@@ -14,9 +14,8 @@ namespace Yuml.Test
         private Classifier _classifier;
         private string _newName;
 
-
-        [SetUp]
-        public void Init()
+        
+        protected override void Init()
         {
             _notificationService = For<ClassifierNotificationService>();
             _validationService = For<IValidateNameService>();

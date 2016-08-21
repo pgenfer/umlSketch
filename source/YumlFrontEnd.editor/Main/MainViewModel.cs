@@ -11,9 +11,11 @@ namespace YumlFrontEnd.editor
 {
     internal class MainViewModel : Screen
     {
-        public MainViewModel(IListCommandContext<Classifier> classifierCommands)
+        public MainViewModel(
+            IListCommandContext<Classifier> classifierCommands,
+            ClassifierSelectionItemsSource classifierItemSource)
         {
-            ClassifierList = new ClassifierListViewModel(classifierCommands);
+            ClassifierList = new ClassifierListViewModel(classifierCommands,classifierItemSource);
         }
 
         public ClassifierListViewModel ClassifierList { get; private set; }

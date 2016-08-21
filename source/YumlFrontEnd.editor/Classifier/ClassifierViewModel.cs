@@ -17,23 +17,27 @@ namespace YumlFrontEnd.editor
     /// <summary>
     /// view model for interaction with a single classifier object
     /// </summary>
-    internal class ClassifierViewModel : SingleItemViewModelBase<Classifier>
+    internal class ClassifierViewModel : SingleItemViewModelBase<Classifier,ISingleClassifierCommands>
     {
         private readonly ExpandableMixin _expanded = new ExpandableMixin();
        
         public ClassifierViewModel(
-            ISingleClassifierCommands commands):base(commands)
-        {
-            Properties = new PropertyListViewModel(commands.CommandsForProperties);
-            Methods = new MethodListViewModel(commands.CommandsForMethods);
-                
-            _expanded.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
-        }
+            ISingleClassifierCommands commands):base(commands){}
 
         public PropertyListViewModel Properties { get; private set; }
         public MethodListViewModel Methods { get; private set; }
 
         public bool IsExpanded => _expanded.IsExpanded;
         public void ExpandOrCollapse() => _expanded.ExpandOrCollapse();
+
+        protected override void CustomInit(
+            ISingleClassifierCommands commandContext, 
+            ClassifierSelectionItemsSource classifierItemSource)
+        {
+            Properties = new PropertyListViewModel(commandContext.CommandsForProperties, classifierItemSource);
+            Methods = new MethodListViewModel(commandContext.CommandsForMethods, classifierItemSource);
+
+            _expanded.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
+        }
     }
 }

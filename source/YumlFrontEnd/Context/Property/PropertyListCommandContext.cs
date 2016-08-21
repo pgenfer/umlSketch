@@ -12,6 +12,7 @@ namespace Yuml.Command
     /// </summary>
     internal class PropertyListCommandContext : ListCommandContextBase<Property>
     {
+        private readonly ClassifierDictionary _classifiers;
         private readonly IValidateNameService _propertyValidationNameService;
         private readonly PropertyNotificationService _notificationService;
 
@@ -21,6 +22,7 @@ namespace Yuml.Command
             IValidateNameService propertyValidationNameService,
             PropertyNotificationService notificationService)
         {
+            _classifiers = classifiers;
             _propertyValidationNameService = propertyValidationNameService;
             _notificationService = notificationService;
             All = new Query<Property>(() => classifier.Properties);
@@ -36,6 +38,7 @@ namespace Yuml.Command
         public override ISingleCommandContext GetCommandsForSingleItem(Property domainObject)
         {
             return new PropertySingleCommandContext(
+                _classifiers,
                 domainObject,
                 _propertyValidationNameService,
                 _notificationService);

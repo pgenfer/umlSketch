@@ -16,8 +16,15 @@ namespace YumlFrontEnd.editor
     /// <typeparam name="TDomain">Type of domain objects within the list</typeparam>
     internal class ListViewModelBase<TDomain> : AutoPropertyChange
     {
+        /// <summary>
+        /// sub items in this list
+        /// </summary>
         private readonly BindableCollectionMixin<SingleItemViewModelBase<TDomain>> _items =
            new BindableCollectionMixin<SingleItemViewModelBase<TDomain>>();
+        /// <summary>
+        /// source object to retrieve the available classifiers in the system
+        /// </summary>
+        private readonly ClassifierSelectionItemsSource _classifierItemsSource;
 
         protected readonly IListCommandContext<TDomain> _commands;
 
@@ -74,6 +81,10 @@ namespace YumlFrontEnd.editor
             UpdateItemList();
         }
 
+        /// <summary>
+        /// updates the list of available items by calling the query which is part of the
+        /// command context
+        /// </summary>
         protected void UpdateItemList()
         {
             Items.Clear();
@@ -87,13 +98,16 @@ namespace YumlFrontEnd.editor
                 var singleCommandContextInstance = _commands.GetCommandsForSingleItem(domainObject);
                 // use constructor to create the item and cast it to the correct type
                 var singleViewModel = _singleItemViewFactory(singleCommandContextInstance);
-                singleViewModel.Init(domainObject);
+                singleViewModel.Init(domainObject, _classifierItemsSource);
                 Items.Add(singleViewModel);
             }
         }
 
-        protected ListViewModelBase(IListCommandContext<TDomain> commands)
+        protected ListViewModelBase(
+            IListCommandContext<TDomain> commands,
+            ClassifierSelectionItemsSource classifierItemsSource)
         {
+            _classifierItemsSource = classifierItemsSource;
             _commands = commands;
             InitPerReflection();
         }

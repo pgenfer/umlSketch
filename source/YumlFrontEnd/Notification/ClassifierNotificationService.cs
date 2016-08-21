@@ -24,9 +24,9 @@ namespace Yuml
             remove { _nameChanged.NameChanged -= value; }
         }
 
-        public void FireNewItemCreated() => _newItemAdded.FireNewItemCreated();
+        public void FireNewItemCreated(string name) => _newItemAdded.FireNewItemCreated(name);
 
-        public event Action NewItemCreated
+        public event Action<string> NewItemCreated
         {
             add { _newItemAdded.NewItemCreated += value; }
             remove { _newItemAdded.NewItemCreated -= value; }

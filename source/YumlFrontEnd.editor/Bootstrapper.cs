@@ -68,14 +68,20 @@ namespace YumlFrontEnd.editor
             var classifierDictionary = new ClassifierDictionary();
             CreateDummyData(classifierDictionary);
 
+            var classifierNotificationSerivce = new ClassifierNotificationService();
+            var classifierItemSource = new ClassifierSelectionItemsSource(
+                classifierDictionary,classifierNotificationSerivce);
+
             var classifierListCommands = new ClassifierListCommandContext(
                 classifierDictionary,
                   new NotificationServices(
-                    new ClassifierNotificationService(),
+                    classifierNotificationSerivce,
                     new PropertyNotificationService(),
                     new MethodNotificationService()));
             
             _container.Instance<IListCommandContext<Classifier>>(classifierListCommands);
+            // item source with classifiers is used by all view models
+            _container.Instance(classifierItemSource);
         }
 
         protected override object GetInstance(Type service, string key) => _container.GetInstance(service, key);

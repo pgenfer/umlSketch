@@ -22,6 +22,11 @@ namespace Yuml
         private PropertyList _properties = new PropertyList();
         private MethodList _methods = new MethodList();
 
+        /// <summary>
+        /// only for testing, don't use in production
+        /// </summary>
+        public Classifier() { }
+
         public Classifier(string name)
         {
             Name = name;

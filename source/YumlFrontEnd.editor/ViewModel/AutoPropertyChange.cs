@@ -13,7 +13,7 @@ namespace YumlFrontEnd.editor
     /// by automatically setting the property name 
     /// by using caller attribute
     /// </summary>
-    internal class AutoPropertyChange : PropertyChangedBase
+    public class AutoPropertyChange : PropertyChangedBase
     {
         protected void RaisePropertyChanged([CallerMemberName] string memberName = "")
             => NotifyOfPropertyChange(memberName);

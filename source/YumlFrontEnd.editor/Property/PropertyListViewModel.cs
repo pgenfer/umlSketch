@@ -15,12 +15,14 @@ namespace YumlFrontEnd.editor
     internal class PropertyListViewModel : ListViewModelBase<Property>
     {
         private readonly ExpandableMixin _expandable = new ExpandableMixin();
-
-        public bool IsExpanded => _expandable.IsExpanded;
+         public bool IsExpanded => _expandable.IsExpanded;
 
         public void ExpandOrCollapse() => _expandable.ExpandOrCollapse();
 
-        public PropertyListViewModel(IListCommandContext<Property> listCommands):base(listCommands)
+        public PropertyListViewModel(
+            IListCommandContext<Property> listCommands,
+            ClassifierSelectionItemsSource classifierItemsSource) : 
+            base(listCommands, classifierItemsSource)
         {
             _expandable.PropertyChanged += (_, e) => NotifyOfPropertyChange(e.PropertyName);
         }

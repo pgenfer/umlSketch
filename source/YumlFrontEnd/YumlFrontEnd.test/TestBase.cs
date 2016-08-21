@@ -68,7 +68,7 @@ namespace Yuml.Test
         /// <summary>
         /// method can be overridden to provide test initialisation code
         /// </summary>
-        protected virtual void Init() { }
+        protected override void Init() { }
         
         
         /// <summary>

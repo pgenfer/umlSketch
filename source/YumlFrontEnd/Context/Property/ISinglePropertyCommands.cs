@@ -11,6 +11,6 @@ namespace Yuml.Command
     /// </summary>
     public interface ISinglePropertyCommands : ISingleCommandContext
     {
-        // TODO: add command to change type
+        IChangeTypeCommand ChangeTypeOfProperty { get; }
     }
 }

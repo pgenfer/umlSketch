@@ -44,8 +44,8 @@ namespace Yuml.Command
 
         public void CreateNew()
         {
-            _classifier.CreateNewPropertyWithBestInitialValues(_availableClassifiers);
-            _notificationService.FireNewItemCreated();
+            var property = _classifier.CreateNewPropertyWithBestInitialValues(_availableClassifiers);
+            _notificationService.FireNewItemCreated(property.Name);
         }
     }
 }

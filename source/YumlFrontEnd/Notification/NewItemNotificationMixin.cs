@@ -15,7 +15,7 @@ namespace Yuml
     /// </summary>
     internal class NewItemNotificationMixin
     {
-        public event Action NewItemCreated;
-        public void FireNewItemCreated() => NewItemCreated?.Invoke();
+        public event Action<string> NewItemCreated;
+        public void FireNewItemCreated(string nameOfNewItem) => NewItemCreated?.Invoke(nameOfNewItem);
     }
 }
