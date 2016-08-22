@@ -42,5 +42,14 @@ namespace YumlFrontEnd.editor
             get { return (bool) GetValue(IsExpandedProperty); }
             set { SetValue(IsExpandedProperty, value); }
         }
+
+        public static readonly DependencyProperty HasExpandButtonProperty = DependencyProperty.Register(
+            "HasExpandButton", typeof(bool), typeof(HeaderControl), new PropertyMetadata(default(bool)));
+
+        public bool HasExpandButton
+        {
+            get { return (bool) GetValue(HasExpandButtonProperty); }
+            set { SetValue(HasExpandButtonProperty, value); }
+        }
     }
 }

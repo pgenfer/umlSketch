@@ -17,6 +17,13 @@ namespace YumlFrontEnd.editor
     internal class ListViewModelBase<TDomain> : AutoPropertyChange
     {
         /// <summary>
+        /// every list view model has an expandable button for
+        /// the child items. An additional flag controls
+        /// whether this button should be visible or not
+        /// </summary>
+        private readonly ExpandableMixin _expandable = new ExpandableMixin();
+        
+        /// <summary>
         /// sub items in this list
         /// </summary>
         private readonly BindableCollectionMixin<SingleItemViewModelBase<TDomain>> _items =
@@ -101,6 +108,9 @@ namespace YumlFrontEnd.editor
                 singleViewModel.Init(domainObject, _classifierItemsSource);
                 Items.Add(singleViewModel);
             }
+
+            // update the expand flag every time the list changes
+            NotifyOfPropertyChange(nameof(CanExpand));
         }
 
         protected ListViewModelBase(
@@ -110,6 +120,14 @@ namespace YumlFrontEnd.editor
             _classifierItemsSource = classifierItemsSource;
             _commands = commands;
             InitPerReflection();
+            _expandable.PropertyChanged += (_, e) => NotifyOfPropertyChange(e.PropertyName);
         }
+
+        public bool IsExpanded => _expandable.IsExpanded;
+        public void ExpandOrCollapse() => _expandable.ExpandOrCollapse();
+        /// <summary>
+        /// controls whether the expand button is visible
+        /// </summary>
+        public virtual bool CanExpand => Items.Any();
     }
 }

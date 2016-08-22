@@ -22,5 +22,11 @@ namespace YumlFrontEnd.editor
             ClassifierSelectionItemsSource classifierItemsSource) : base(commands,classifierItemsSource)
         {
         }
+
+        /// <summary>
+        /// always hide the expand button in the class list
+        /// TODO: later when we have relations, we could let the user expand/collapse the class list
+        /// </summary>
+        public override bool CanExpand => false;
     }
 }

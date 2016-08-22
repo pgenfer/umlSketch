@@ -10,18 +10,11 @@ namespace YumlFrontEnd.editor
 {
     internal class MethodListViewModel : ListViewModelBase<Method>
     {
-        private readonly ExpandableMixin _expandable = new ExpandableMixin();
-
         public MethodListViewModel(
             IListCommandContext<Method> commands,
             ClassifierSelectionItemsSource classifierItemsSource) : 
             base(commands, classifierItemsSource)
         {
-            _expandable.PropertyChanged += (_, e) => NotifyOfPropertyChange(e.PropertyName);
         }
-
-        public bool IsExpanded => _expandable.IsExpanded;
-
-        public void ExpandOrCollapse() => _expandable.ExpandOrCollapse();
     }
 }

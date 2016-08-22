@@ -73,6 +73,7 @@ namespace Yuml
         }
 
         public Method CreateMethod(string name, Classifier type) => _methods.CreateMethod(name, type);
-        public Property CreateNewPropertyWithBestInitialValues(ClassifierDictionary systemClassifiers) => _properties.CreateNewPropertyWithBestInitialValues(systemClassifiers);
+        public Property CreateNewPropertyWithBestInitialValues(ClassifierDictionary systemClassifiers) => 
+            _properties.CreateNewPropertyWithBestInitialValues(systemClassifiers);
     }
 }

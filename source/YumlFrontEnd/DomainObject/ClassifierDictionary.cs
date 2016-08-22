@@ -146,6 +146,6 @@ namespace Yuml
         /// <summary>
         /// TODO: add special handling for system types here
         /// </summary>
-        public virtual Classifier String => FindByName("string") ?? CreateNewClass("string");
+        public virtual Classifier String => FindByName("String") ?? CreateNewClass("String");
     }
 }

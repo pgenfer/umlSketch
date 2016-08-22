@@ -22,6 +22,8 @@
     <!-- expander -->
     <local:ExpanderButton x:Name="ExpandOrCollapse"
                           IsExpanded="{Binding ElementName=MainControl,Path=IsExpanded}"
+                          Visibility="{Binding ElementName=MainControl,Path=HasExpandButton,
+                          Converter={local:FalseToHideConverter}}"
                           Style="{StaticResource ExpanderButtonStyle}"
                           Grid.Column="0" />
     <!-- caption -->

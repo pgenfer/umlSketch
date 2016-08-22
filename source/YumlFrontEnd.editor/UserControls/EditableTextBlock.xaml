@@ -32,7 +32,7 @@
                Margin="0,5"
                Grid.Column="1"
                caliburn:Message.Attach="[Event MouseLeftButtonDown] = [Action StartEditing]"
-               Visibility="{Binding IsEditable,Converter={local:BooleanToCollapseConverter}}"
+               Visibility="{Binding IsEditable,Converter={local:TrueToCollapseConverter}}"
                HorizontalAlignment="Left"
                ToolTip="{x:Static local:Tooltips.ClickToStartEditing}"/>
     <TextBox

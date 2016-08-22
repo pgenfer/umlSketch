@@ -26,6 +26,7 @@
     <!-- header control -->
     <local:HeaderControl
       IsExpanded="{Binding IsExpanded}"
+      HasExpandButton="{Binding CanExpand}"
       Title="{x:Static yuml:Strings.Properties}"
       caliburn:Bind.Model="{Binding}"/>
     <!-- list content -->
