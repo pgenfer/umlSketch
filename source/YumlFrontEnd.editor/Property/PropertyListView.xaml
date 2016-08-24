@@ -3,37 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:local="clr-namespace:YumlFrontEnd.editor"
              xmlns:yuml="clr-namespace:Yuml;assembly=YumlFrontEnd"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance local:PropertyListViewModel}"
-             d:DesignHeight="300" d:DesignWidth="300">
-  <UserControl.Resources>
-
-  </UserControl.Resources>
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <!-- the expander -->
-      <ColumnDefinition Width="Auto" />
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <!-- header -->
-      <RowDefinition Height="Auto" />
-      <!-- list content -->
-      <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
-    <!-- header control -->
-    <local:HeaderControl
-      IsExpanded="{Binding IsExpanded}"
-      HasExpandButton="{Binding CanExpand}"
-      Title="{x:Static yuml:Strings.Properties}"
-      caliburn:Bind.Model="{Binding}"/>
-    <!-- list content -->
-    <ItemsControl 
-      Name="Items"
-      Style="{StaticResource MemberItemsControl}"
-      Grid.Row="1">
-    </ItemsControl>
-  </Grid>
+             d:DataContext="{d:DesignInstance local:PropertyListViewModel}">
+  <local:MemberListControl
+    Title="{x:Static yuml:Strings.Properties}"
+    MemberItemStyle="{StaticResource MemberItemsControl}"/>
 </UserControl>

@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="YumlFrontEnd.editor.MemberListControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:editor="clr-namespace:YumlFrontEnd.editor"
+             xmlns:yuml="clr-namespace:Yuml;assembly=YumlFrontEnd"
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d"
+             x:Name="MainControl"
+             cal:Bind.Model="{Binding}">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <!-- header -->
+      <RowDefinition Height="Auto" />
+      <!-- list content -->
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <!-- header control -->
+    <editor:HeaderControl
+      IsExpanded="{Binding IsExpanded}"
+      HasExpandButton="{Binding CanExpand}"
+      Title="{Binding ElementName=MainControl,Path=Title}"
+      cal:Bind.Model="{Binding}"/>
+    <!-- list content -->
+    <ItemsControl
+      Name="Items"
+      Style="{Binding ElementName=MainControl,Path=MemberItemStyle}"
+      Grid.Row="1">
+    </ItemsControl>
+  </Grid>
+</UserControl>

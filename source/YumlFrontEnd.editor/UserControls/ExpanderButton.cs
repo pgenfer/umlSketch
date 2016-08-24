@@ -17,7 +17,7 @@ namespace YumlFrontEnd.editor
     /// Solution would be to completly rewrite the content template of the button in the style's trigger,
     /// which is too much effort. So instead the content of the button will be set here in code behind.
     /// </summary>
-    public class ExpanderButton : Button
+    public class ExpanderButton : ActionButton
     {
         private readonly TextBlock _textBlock = new TextBlock();
 

@@ -14,8 +14,7 @@
   </UserControl.Resources>
   <Grid>
     <Grid.ColumnDefinitions>
-      <!-- the expander -->
-      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
       <!-- header -->

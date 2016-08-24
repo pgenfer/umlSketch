@@ -11,13 +11,50 @@
         <ResourceDictionary>
           <local:Bootstrapper x:Key="Bootstrapper" />
           <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+         
+          <!-- colors -->
+          <SolidColorBrush x:Key="NewActionMouseOver" Color="#7FAC3E"/>
+          <SolidColorBrush x:Key="NewActionMouseDown" Color="#508700"/>
+
+          <!-- action button -->
+          <Style
+            x:Key="ActionButtonStyle"
+            BasedOn="{StaticResource CircleButton-Sketch}"
+            TargetType="local:ActionButton">
+            <Style.Setters>
+              <Setter Property="Foreground" Value="{StaticResource MouseOverBackground-Sketch}"/>
+              <Setter Property="BorderBrush" Value="{StaticResource MouseOverBackground-Sketch}"/>
+            </Style.Setters>
+            <Style.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter
+                  Property="Foreground"
+                  Value="{Binding RelativeSource={RelativeSource Self},Path=MouseOverBrush}"/>
+                <Setter
+                  Property="BorderBrush"
+                  Value="{Binding RelativeSource={RelativeSource Self},Path=MouseOverBrush}"/>
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter
+                  Property="Foreground"
+                  Value="{Binding RelativeSource={RelativeSource Self},Path=MouseDownBrush}"/>
+                <Setter
+                  Property="BorderBrush"
+                  Value="{Binding RelativeSource={RelativeSource Self},Path=MouseDownBrush}"/>
+              </Trigger>
+            </Style.Triggers>
+          </Style>
+
+
           <!-- expander button -->
           <Style x:Key="ExpanderButtonStyle"
                  TargetType="{x:Type local:ExpanderButton}"
-                 BasedOn="{StaticResource CircleButton-Sketch}">
+                 BasedOn="{StaticResource ActionButtonStyle}">
             <Style.Setters>
               <Setter Property="Width" Value="22" />
               <Setter Property="Height" Value="22" />
+              <Setter Property="MouseDownBrush" Value="{StaticResource PressedForeground-Sketch}"/>
+              <Setter Property="MouseOverBrush" Value="{StaticResource DisabledForeground-Sketch}"/>
             </Style.Setters>
           </Style>
           <!-- combo box -->

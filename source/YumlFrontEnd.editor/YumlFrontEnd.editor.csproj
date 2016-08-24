@@ -130,10 +130,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Tooltips.resx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ActionButton.cs" />
     <Compile Include="UserControls\Confirmation.cs" />
     <Compile Include="UserControls\ConfirmEditAction.cs" />
     <Compile Include="UserControls\HeaderControl.xaml.cs">
       <DependentUpon>HeaderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MemberListControl.xaml.cs">
+      <DependentUpon>MemberListControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\PersistentToolTip.xaml.cs">
       <DependentUpon>PersistentToolTip.xaml</DependentUpon>
@@ -172,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\HeaderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MemberListControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
