@@ -35,6 +35,10 @@ namespace YumlFrontEnd.editor
             {
                 // classifier mapping
                 x.CreateMap<Classifier, ClassifierViewModel>()
+                    // map base class of classifier to base class name or empty string if no base class available
+                    .ForMember(
+                        d => d.InitialBaseClass, 
+                        c => c.MapFrom(s => s.BaseClass != null ? s.BaseClass.Name : string.Empty))
                     .ForMember( d => d.Properties, c => c.Ignore())
                     .ForMember( d => d.Methods, c => c.Ignore());
                 x.CreateMap<Property, PropertyViewModel>()

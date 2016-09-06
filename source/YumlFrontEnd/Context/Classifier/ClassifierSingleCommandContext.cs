@@ -30,9 +30,13 @@ namespace Yuml.Command
                 classifier,
                 new MethodValidationService(classifier.Methods),
                 notificationServices.Method);
+            ChangeBaseClass = new ChangeBaseClassCommand(
+                classifier,
+                classifierDictionary, notificationServices.Relation);
         }
 
         public IListCommandContext<Property> CommandsForProperties { get; }
         public IListCommandContext<Method> CommandsForMethods { get; }
+        public IChangeTypeToNullCommand ChangeBaseClass { get; }
     }
 }

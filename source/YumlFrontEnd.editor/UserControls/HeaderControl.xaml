@@ -37,7 +37,6 @@
       TextAlignment="Left"
       Text="{Binding ElementName=MainControl,Path=Title}"
       Style="{StaticResource TextBlock-Sketch}"
-      FontWeight="Bold"
       Margin="5"/>
   </DockPanel>
 </UserControl>

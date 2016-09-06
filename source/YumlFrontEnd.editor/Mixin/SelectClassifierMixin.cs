@@ -12,7 +12,7 @@ namespace YumlFrontEnd.editor
     /// mixin handles the interaction logic when selecting
     /// a classifier from a list of available classifiers
     /// </summary>
-    internal class SelectClassifierMixin : AutoPropertyChange
+    public class SelectClassifierMixin : AutoPropertyChange
     {
         /// <summary>
         /// itemsource that contains the list of classifiers
@@ -23,10 +23,11 @@ namespace YumlFrontEnd.editor
         /// chooses a new classifier
         /// </summary>
         private readonly IChangeTypeCommand _command;
+
         /// <summary>
         /// the currently selected classifier
         /// </summary>
-        private ClassifierItemViewModel _selectedClassifier;
+        protected ClassifierItemViewModel _selectedClassifier;
 
         public SelectClassifierMixin(
             ClassifierSelectionItemsSource itemsSource,
@@ -36,11 +37,17 @@ namespace YumlFrontEnd.editor
             _command = command;
         }
 
-        public void SelectClassifierByName(string classifierName) => SelectedClassifier = _itemsSource.ByName(classifierName);
+        public virtual void SelectClassifierByName(string classifierName)
+        {
+            // check that classifier name can only be empty if flag is set
+            //Requires(!string.IsNullOrEmpty(classifierName));
+
+            SelectedClassifier = _itemsSource.ByName(classifierName);
+        }
 
         public IEnumerable<ClassifierItemViewModel> Classifiers => _itemsSource;
 
-        public ClassifierItemViewModel SelectedClassifier
+        public virtual ClassifierItemViewModel SelectedClassifier
         {
             get { return _selectedClassifier; }
             set

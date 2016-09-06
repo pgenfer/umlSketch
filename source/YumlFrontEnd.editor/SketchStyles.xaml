@@ -37,7 +37,8 @@
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
 		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
 		<Setter Property="Foreground" Value="{DynamicResource BaseForeground-Sketch}"/>
-	</Style>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+ 	</Style>
 
 	<!-- Sketch TextBlock -->
 	<Style x:Key="TextBlock-Sketch" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BasicTextBlock-Sketch}"/>

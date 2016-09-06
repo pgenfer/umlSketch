@@ -1,3 +1,4 @@
+using System.Diagnostics.Tracing;
 using Common;
 
 namespace YumlFrontEnd.editor
@@ -22,5 +23,11 @@ namespace YumlFrontEnd.editor
         }
 
         public override string ToString() => _name.ToString();
+
+        /// <summary>
+        /// implementation of the NullObject pattern. This 
+        /// instance should be used instead of a null reference
+        /// </summary>
+        public static readonly ClassifierItemViewModel None = new ClassifierItemViewModel(EditorStrings.None);
     }
 }

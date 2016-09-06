@@ -19,8 +19,6 @@ namespace Yuml
     {
         private readonly NameMixin _name = new NameMixin();
         private readonly IVisible _visible = new VisibleMixin();
-        private PropertyList _properties = new PropertyList();
-        private MethodList _methods = new MethodList();
 
         /// <summary>
         /// only for testing, don't use in production
@@ -47,11 +45,12 @@ namespace Yuml
         /// <summary>
         /// internal setter is only used by serialization, should not be used by other production code
         /// </summary>
-        public PropertyList Properties { get { return _properties; } internal set { _properties = value; } }
+        public PropertyList Properties { get; internal set; } = new PropertyList();
+
         /// <summary>
         /// internal setter only used by serialization, should not be used by other production code
         /// </summary>
-        public MethodList Methods { get { return _methods; } internal set { _methods = value; } }
+        public MethodList Methods { get; internal set; } = new MethodList();
 
         public override string ToString() => _name.ToString();
 
@@ -59,9 +58,9 @@ namespace Yuml
         /// true if the class is an interface, otherwise false
         /// </summary>
         public bool IsInterface { get; internal set; }
-        public void ShowOrHideAllProperties(bool showOrHide) => _properties.ShowOrHideAllProperties(showOrHide);
-        public Property CreateProperty(string name, Classifier type) => _properties.CreateProperty(name, type);
-        public IEnumerator<Property> GetEnumerator() => _properties.GetEnumerator();
+        public void ShowOrHideAllProperties(bool showOrHide) => Properties.ShowOrHideAllProperties(showOrHide);
+        public Property CreateProperty(string name, Classifier type) => Properties.CreateProperty(name, type);
+        public IEnumerator<Property> GetEnumerator() => Properties.GetEnumerator();
 
         public ClassWriter WriteTo(ClassWriter classWriter)
         {
@@ -72,8 +71,13 @@ namespace Yuml
             return classWriter;
         }
 
-        public Method CreateMethod(string name, Classifier type) => _methods.CreateMethod(name, type);
+        public Method CreateMethod(string name, Classifier type) => Methods.CreateMethod(name, type);
         public Property CreateNewPropertyWithBestInitialValues(ClassifierDictionary systemClassifiers) => 
-            _properties.CreateNewPropertyWithBestInitialValues(systemClassifiers);
+            Properties.CreateNewPropertyWithBestInitialValues(systemClassifiers);
+
+        /// <summary>
+        /// optional base class of this classifier
+        /// </summary>
+        public Classifier BaseClass { get; set; }
     }
 }

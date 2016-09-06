@@ -120,11 +120,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classifier\ClassifierSelectionSourceWithExcludedItem.cs" />
     <Compile Include="Converter\TrueToCollapseConverter.cs" />
     <Compile Include="Classifier\ClassifierItemViewModel.cs" />
     <Compile Include="Classifier\ClassifierSelectionItemsSource.cs" />
     <Compile Include="Converter\FalseToHideConverter.cs" />
+    <Compile Include="EditorStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditorStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Extension\ListExtension.cs" />
+    <Compile Include="Mixin\SelectClassifierWithNullItemMixin.cs" />
     <Compile Include="Tooltips.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -258,6 +265,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="EditorStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditorStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

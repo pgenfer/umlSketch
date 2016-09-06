@@ -61,6 +61,7 @@ namespace YumlFrontEnd.editor
             integer.CreateProperty("TypeName", @string);
             var codeProvider = classifierDictionary.CreateNewClass("CodeProvider");
             codeProvider.CreateMethod("DoSomething", integer);
+            codeProvider.BaseClass = @string;
         }
 
         private void ConfigureDomainModel()
