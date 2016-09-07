@@ -178,6 +178,7 @@
     <Compile Include="Property\PropertyView.xaml.cs">
       <DependentUpon>PropertyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ViewModelFactory.cs" />
     <Page Include="UserControls\EditableTextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

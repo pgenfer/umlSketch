@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Yuml;
 using Yuml.Command;
+using YumlFrontEnd.editor.ViewModel;
 
 namespace YumlFrontEnd.editor
 {
@@ -13,9 +14,11 @@ namespace YumlFrontEnd.editor
     {
         public MainViewModel(
             IListCommandContext<Classifier> classifierCommands,
-            ClassifierSelectionItemsSource classifierItemSource)
+            ViewModelFactory viewModelFactory)
         {
-            ClassifierList = new ClassifierListViewModel(classifierCommands,classifierItemSource);
+            ClassifierList = viewModelFactory
+                .WithCommand(classifierCommands)
+                .CreateViewModelForList<ClassifierListViewModel>();
         }
 
         public ClassifierListViewModel ClassifierList { get; private set; }

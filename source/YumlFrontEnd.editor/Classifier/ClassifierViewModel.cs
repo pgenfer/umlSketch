@@ -38,22 +38,20 @@ namespace YumlFrontEnd.editor
         public bool IsExpanded => _expanded.IsExpanded;
         public void ExpandOrCollapse() => _expanded.ExpandOrCollapse();
 
-        protected override void CustomInit(
-            ISingleClassifierCommands commandContext, 
-            ClassifierSelectionItemsSource classifierItemSource)
+        protected override void CustomInit()
         {
-            Properties = new PropertyListViewModel(
-                commandContext.CommandsForProperties, 
-                classifierItemSource);
-            Methods = new MethodListViewModel(
-                commandContext.CommandsForMethods, 
-                classifierItemSource);
-
+            Properties = 
+                WithCommand(_commands.CommandsForProperties)
+                .CreateViewModelForList<PropertyListViewModel>();
+            Methods =
+                WithCommand(_commands.CommandsForMethods)
+                .CreateViewModelForList<MethodListViewModel>();
+            
             // list of base classifiers can  have a null item and should not
             // have the class item itself
             _selectBaseClass = new SelectClassifierWithNullItemMixin(
-                classifierItemSource.Exclude(Name),
-                commandContext.ChangeBaseClass);
+                ClassifiersToSelect.Exclude(Name),
+                _commands.ChangeBaseClass);
 
             _selectBaseClass.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
             _expanded.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);

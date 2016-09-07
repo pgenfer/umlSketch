@@ -1,5 +1,6 @@
 ﻿using Yuml;
 using Yuml.Command;
+using YumlFrontEnd.editor.ViewModel;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace YumlFrontEnd.editor
@@ -16,6 +17,10 @@ namespace YumlFrontEnd.editor
         where TSingleCommandContext : ISingleCommandContext
     {
         protected readonly TSingleCommandContext _commands;
+        /// <summary>
+        /// factory can be used to create other view models
+        /// </summary>
+        private ViewModelFactory _viewModelFactory;
 
         protected SingleItemViewModelBase(TSingleCommandContext commands) :base(commands)
         {
@@ -28,22 +33,27 @@ namespace YumlFrontEnd.editor
         /// Custom initialization code should be implemented in CustomInit
         /// </summary>
         /// <param name="domain"></param>
-        /// <param name="classifierItemsSource"></param>
-        public override void Init(TDomain domain, ClassifierSelectionItemsSource classifierItemsSource)
+        /// <param name="viewModelFactory"></param>
+        public override void Init(TDomain domain,ViewModelFactory viewModelFactory)
         {
+            _viewModelFactory = viewModelFactory;
             _toViewModel.InitViewModel(domain, this);
-            CustomInit(_commands, classifierItemsSource);
+            CustomInit();
         }
 
         /// <summary>
         /// custom initialization code can be implemented here.
         /// If no custom code is required, leave the implementation empty.
         /// </summary>
-        /// <param name="commandContext"></param>
-        /// <param name="classifierItemSource"></param>
-        protected abstract void CustomInit(
-            TSingleCommandContext commandContext,
-            ClassifierSelectionItemsSource classifierItemSource);
+        protected abstract void CustomInit();
+        public ClassifierSelectionItemsSource ClassifiersToSelect => _viewModelFactory.ClassifiersToSelect;
+        /// <summary>
+        /// factory method to create other view models
+        /// </summary>
+        /// <param name="commands"></param>
+        /// <returns></returns>
+        public ViewModelFactory<TOtherDomain> WithCommand<TOtherDomain>(IListCommandContext<TOtherDomain> commands) => 
+            _viewModelFactory.WithCommand(commands);
     }
 
     /// <summary>
@@ -75,9 +85,9 @@ namespace YumlFrontEnd.editor
         /// by setting all required properties.
         /// Custom initialization code should be implemented in CustomInit
         /// </summary>
-        /// <param name="domain"></param>
-        /// <param name="classifierItemsSource"></param>
-        public abstract void Init(TDomain domain, ClassifierSelectionItemsSource classifierItemsSource);
+        /// <param name="domain">domain object represented by this view model</param>
+        /// <param name="viewModelFactory">factory which can be used to create sub view models</param>
+        public abstract void Init(TDomain domain, ViewModelFactory viewModelFactory);
 
         public string Name
         {

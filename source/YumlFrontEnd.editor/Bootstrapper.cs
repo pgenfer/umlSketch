@@ -9,6 +9,7 @@ using System.Windows;
 using Yuml;
 using Yuml.Command;
 using Yuml.Notification;
+using YumlFrontEnd.editor.ViewModel;
 
 namespace YumlFrontEnd.editor
 {
@@ -83,6 +84,9 @@ namespace YumlFrontEnd.editor
             _container.Instance<IListCommandContext<Classifier>>(classifierListCommands);
             // item source with classifiers is used by all view models
             _container.Instance(classifierItemSource);
+            // register factory for creating view models
+            // other view models can use it to create sub view models
+            _container.Singleton<ViewModelFactory>();
         }
 
         protected override object GetInstance(Type service, string key) => _container.GetInstance(service, key);

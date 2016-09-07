@@ -14,9 +14,7 @@ namespace YumlFrontEnd.editor
         {
         }
 
-        protected override void CustomInit(
-            ISingleCommandContext commandContext, 
-            ClassifierSelectionItemsSource classifierItemSource)
+        protected override void CustomInit()
         {
             // TODO: add custom implementation
         }

@@ -14,10 +14,7 @@ namespace YumlFrontEnd.editor
     /// </summary>
     internal class PropertyListViewModel : ListViewModelBase<Property>
     {
-        public PropertyListViewModel(
-            IListCommandContext<Property> listCommands,
-            ClassifierSelectionItemsSource classifierItemsSource) : 
-            base(listCommands, classifierItemsSource)
+        public PropertyListViewModel(IListCommandContext<Property> listCommands) : base(listCommands)
         {
         }
     }

@@ -22,13 +22,11 @@ namespace YumlFrontEnd.editor
 
         public PropertyViewModel(ISinglePropertyCommands commands):base(commands){}
 
-        protected override void CustomInit(
-            ISinglePropertyCommands commandContext, 
-            ClassifierSelectionItemsSource classifierItemSource)
+        protected override void CustomInit()
         {
             _selectClassifier = new SelectClassifierMixin(
-                classifierItemSource,
-                commandContext.ChangeTypeOfProperty);
+                ClassifiersToSelect,
+                _commands.ChangeTypeOfProperty);
             _selectClassifier.PropertyChanged += (_, e) => NotifyOfPropertyChange(e.PropertyName);
             SelectClassifierByName(InitialPropertyType);
         }

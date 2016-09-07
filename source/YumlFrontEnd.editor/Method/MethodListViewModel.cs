@@ -10,10 +10,7 @@ namespace YumlFrontEnd.editor
 {
     internal class MethodListViewModel : ListViewModelBase<Method>
     {
-        public MethodListViewModel(
-            IListCommandContext<Method> commands,
-            ClassifierSelectionItemsSource classifierItemsSource) : 
-            base(commands, classifierItemsSource)
+        public MethodListViewModel(IListCommandContext<Method> commands) : base(commands)
         {
         }
     }
