@@ -121,6 +121,7 @@
     <Compile Include="Context\Property\PropertyListCommandContext.cs" />
     <Compile Include="Context\Property\PropertySingleCommandContext.cs" />
     <Compile Include="DiagramWriter\EndNodeWriter.cs" />
+    <Compile Include="DiagramWriter\MethodWriter.cs" />
     <Compile Include="DiagramWriter\RelationEndWriter.cs" />
     <Compile Include="DiagramWriter\RelationWriter.cs" />
     <Compile Include="DiagramWriter\StartNodeWriter.cs" />

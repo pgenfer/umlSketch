@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
 {
@@ -48,5 +49,14 @@ namespace Yuml
         }
         public IEnumerator<Parameter> GetEnumerator() => _parameters.GetEnumerator();
         public Parameter CreateParameter(Classifier type, string name) => _parameters.CreateParameter(type, name);
+
+        public MethodWriter WriteTo(MethodWriter methodWriter)
+        {
+            Requires(methodWriter != null);
+
+            return methodWriter
+                .WithReturnType(ReturnType.Name)
+                .WithName(Name);
+        }
     }
 }

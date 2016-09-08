@@ -37,6 +37,26 @@ namespace Yuml.Test
             Assert.AreEqual(expectedResult, umlText);
         }
 
+        [TestDescription("Write a class with a method")]
+        public void DiagramWriter_CreateClassWithMethods()
+        {
+            var umlText = _diagram
+                .StartClass()
+                    .WithName("DiagramWriter")
+                    .WithNewMethod()
+                        .WithReturnType("void")
+                        .WithName("Write")
+                    .WithNewMethod()
+                        .WithReturnType("int")
+                        .WithName("CountEntries")
+                    .Finish()
+                .Finish()
+                .ToString();
+
+            const string expectedResult = "[DiagramWriter|void Write();int CountEntries();]";
+            Assert.AreEqual(expectedResult, umlText);
+        }
+
         [TestDescription("Create the uml text for the diagram from a given class without any members")]
         public void DiagramWriter_CreateEmptyClass()
         {

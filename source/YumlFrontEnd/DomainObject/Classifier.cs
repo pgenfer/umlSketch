@@ -68,6 +68,7 @@ namespace Yuml
 
             classWriter.WithName(Name);
             Properties.WriteTo(classWriter);
+            Methods.WriteTo(classWriter);
             return classWriter;
         }
 

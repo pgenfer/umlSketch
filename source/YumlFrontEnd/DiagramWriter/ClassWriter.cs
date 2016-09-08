@@ -5,12 +5,12 @@
     /// </summary>
     public class ClassWriter
     {
-        private readonly bool _hasProperties = false;
+        private readonly bool _hasMembers = false;
         private readonly DiagramContentMixin _content;
 
-        public ClassWriter(bool hasProperties, DiagramContentMixin content = null)
+        public ClassWriter(bool hasMembers, DiagramContentMixin content = null)
         {
-            _hasProperties = hasProperties;
+            _hasMembers = hasMembers;
             _content = content;
         }
         public DiagramWriter Finish()
@@ -28,9 +28,18 @@
         {
             // first property that was added,
             // so add a separator before
-            if (!_hasProperties)
+            if (!_hasMembers)
                 AppendToken("|");
             return new PropertyWriter(_content);
+        }
+
+        public MethodWriter WithNewMethod()
+        {
+            // first method was added,
+            // so add a separator before
+            if (!_hasMembers)
+                AppendToken("|");
+            return new MethodWriter(_content);
         }
         protected void AppendIdentifier(string identifier) => _content.AppendIdentifier(identifier);
         protected void AppendToken(string token) => _content.AppendToken(token);

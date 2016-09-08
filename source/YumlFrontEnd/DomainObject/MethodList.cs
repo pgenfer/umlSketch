@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
@@ -21,6 +22,18 @@ namespace Yuml
             Ensures(_list.Count == OldValue(_list.Count) + 1);
 
             return AddNewMember(new Method(name, type));
+        }
+
+        public void WriteTo(ClassWriter classWriter)
+        {
+            Requires(classWriter != null);
+
+            foreach (var method in this.Where(x => x.IsVisible))
+            {
+                var methodWriter = classWriter.WithNewMethod();
+                methodWriter = method.WriteTo(methodWriter);
+                classWriter = methodWriter.Finish();
+            }
         }
     }
 }
