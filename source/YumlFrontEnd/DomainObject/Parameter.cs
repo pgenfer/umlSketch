@@ -10,7 +10,7 @@ namespace Yuml
     /// <summary>
     /// a parameter of a method
     /// </summary>
-    public class Parameter : IVisible
+    public class Parameter : IVisible, INamed
     {
         private readonly IVisible _visible = new VisibleMixin();
         private readonly NameMixin _name = new NameMixin();

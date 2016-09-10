@@ -18,11 +18,13 @@ namespace YumlFrontEnd.editor
         public ClassifierSelectionSourceWithExcludedItem(
             ClassifierDictionary classifiers, 
             ClassifierNotificationService notification,
+            MessageSystem messageSystem,
             string classifierNameToExclude) : 
                 base(classifiers, 
                     notification,
                     // return all classifiers but ignore the one with the given name
-                    () => classifiers.OrderBy(x => x.Name).Where(x => x.Name != classifierNameToExclude))
+                    () => classifiers.OrderBy(x => x.Name).Where(x => x.Name != classifierNameToExclude),
+                    messageSystem)
         {
             _excludedName = classifierNameToExclude;
         }

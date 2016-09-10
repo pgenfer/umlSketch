@@ -138,6 +138,9 @@
       <DependentUpon>Tooltips.resx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ActionButton.cs" />
+    <Compile Include="UserControls\ButtonBar.xaml.cs">
+      <DependentUpon>ButtonBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Confirmation.cs" />
     <Compile Include="UserControls\ConfirmEditAction.cs" />
     <Compile Include="UserControls\HeaderControl.xaml.cs">
@@ -179,6 +182,10 @@
       <DependentUpon>PropertyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ViewModelFactory.cs" />
+    <Page Include="UserControls\ButtonBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\EditableTextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

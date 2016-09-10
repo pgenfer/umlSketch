@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
@@ -13,7 +14,7 @@ namespace Yuml
     /// handle classifier members or parameters
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class BaseList<T> : IEnumerable<T>
+    public abstract class BaseList<T> : IEnumerable<T> where T: INamed
     {
         protected readonly List<T> _list = new List<T>();
 
@@ -34,5 +35,42 @@ namespace Yuml
 
         public IEnumerator<T> GetEnumerator() => _list.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _list.GetEnumerator();
+
+        protected SubSet Filter(Func<T,bool> filter ) => new SubSet(this,_list.Where(filter));
+
+        /// <summary>
+        /// represents a subset of an existing property list.
+        /// The subset contains selected elements of the original list
+        /// </summary>
+        public class SubSet
+        {
+            private readonly BaseList<T> _parent;
+            private readonly IEnumerable<T> _chosenSelection;
+
+            internal SubSet(BaseList<T> parent, IEnumerable<T> chosenSelection)
+            {
+                _parent = parent;
+                // keep a copy of the selection because
+                // the original list will be changed during deletion
+                _chosenSelection = new List<T>(chosenSelection);
+            }
+
+            /// <summary>
+            /// removes all items in this subset from their parent list.
+            /// </summary>
+            /// <param name="messageSystem">If provided, an event will 
+            /// be fired for every removed item</param>
+            public void DeleteSelection(MessageSystem messageSystem = null)
+            {
+                foreach (var selected in _chosenSelection)
+                {
+                    _parent._list.Remove(selected);
+                    messageSystem?.Publish(selected,new DomainObjectDeletedEvent<T>(selected));
+                    // remove the event source from the message system 
+                    // so no event handler can react on it
+                    messageSystem?.RemoveSource(selected);
+                }
+            }
+        }
     }
 }

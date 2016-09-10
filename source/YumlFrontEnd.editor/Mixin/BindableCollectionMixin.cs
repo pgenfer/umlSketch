@@ -19,5 +19,6 @@ namespace YumlFrontEnd.editor
         }
 
         public BindableCollection<T> Items { get; }
+        public void RemoveItem(T item) => Items.Remove(item);
     }
 }

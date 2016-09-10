@@ -20,7 +20,7 @@ namespace YumlFrontEnd.editor
     internal class ClassifierViewModel : SingleItemViewModelBase<Classifier,ISingleClassifierCommands>
     {
         private readonly ExpandableMixin _expanded = new ExpandableMixin();
-        private SelectClassifierMixin _selectBaseClass;
+        private SelectClassifierWithNullItemMixin _selectBaseClass;
 
         /// <summary>
         /// name of the base class which is intially set when reading
@@ -67,5 +67,13 @@ namespace YumlFrontEnd.editor
         }
         private void SelectClassifierByName(string classifierName) => 
             _selectBaseClass.SelectClassifierByName(classifierName);
+        public void ClearClassifierWithoutCommand() => _selectBaseClass.ClearClassifierWithoutCommand();
+
+        /// <summary>
+        /// Reacts on the event that is raised when the base class of this
+        /// classifier was set to null
+        /// </summary>
+        /// <param name="domainEvent"></param>
+        public void OnBaseClassCleared(ClearBaseClassEvent domainEvent) => ClearClassifierWithoutCommand();
     }
 }

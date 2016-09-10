@@ -5,6 +5,6 @@
     /// </summary>
     public interface IDeleteCommand
     {
-        void Delete();
+        void DeleteItem();
     }
 }

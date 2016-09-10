@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yuml;
 using Yuml.Command;
 
 namespace YumlFrontEnd.editor.ViewModel
@@ -30,6 +31,7 @@ namespace YumlFrontEnd.editor.ViewModel
         /// list of classifiers that will be injected in all other view models
         /// </summary>
         public ClassifierSelectionItemsSource ClassifiersToSelect { get; }
+        public MessageSystem MessageSystem { get; }
 
         /// <summary>
         /// first step of view model creation. The caller has to provide the commands
@@ -39,11 +41,14 @@ namespace YumlFrontEnd.editor.ViewModel
         /// <param name="commands"></param>
         /// <returns>A factory that can be used to create the view model.</returns>
         public ViewModelFactory<TDomain> WithCommand<TDomain>(IListCommandContext<TDomain> commands) =>
-            new ViewModelFactory<TDomain>(ClassifiersToSelect, commands);
+            new ViewModelFactory<TDomain>(ClassifiersToSelect, commands,MessageSystem);
         
 
-        public ViewModelFactory(ClassifierSelectionItemsSource classifiersToSelect)
+        public ViewModelFactory(
+            ClassifierSelectionItemsSource classifiersToSelect,
+            MessageSystem messageSystem)
         {
+            MessageSystem = messageSystem;
             ClassifiersToSelect = classifiersToSelect;
         }
     }
@@ -67,7 +72,8 @@ namespace YumlFrontEnd.editor.ViewModel
 
         public ViewModelFactory(
             ClassifierSelectionItemsSource classifiersToSelect,
-            IListCommandContext<TDomain> commands):base(classifiersToSelect)
+            IListCommandContext<TDomain> commands,
+            MessageSystem messageSystem):base(classifiersToSelect,messageSystem)
         {
             _commands = commands;
             CreateFactoryFunctionForSingleViewModel();

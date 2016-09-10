@@ -12,26 +12,7 @@
   <UserControl.Resources>
    
   </UserControl.Resources>
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <!-- header -->
-      <RowDefinition Height="Auto" />
-      <!-- list content -->
-      <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
-    <!-- header control -->
-    <local:HeaderControl 
-      IsExpanded="{Binding IsExpanded}"
-      HasExpandButton="{Binding CanExpand}"
-      Title="{x:Static yuml:Strings.Methods}"
-      caliburn:Bind.Model="{Binding}"/>
-    <!-- list content -->
-    <ItemsControl Name="Items"
-                  Grid.Row="1"
-                  Style="{StaticResource MemberItemsControl}">
-    </ItemsControl>
-  </Grid>
+  <local:MemberListControl
+    Title="{x:Static yuml:Strings.Methods}"
+    MemberItemStyle="{StaticResource MemberItemsControl}"/>
 </UserControl>

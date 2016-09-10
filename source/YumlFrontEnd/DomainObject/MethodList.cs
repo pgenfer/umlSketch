@@ -35,5 +35,7 @@ namespace Yuml
                 classWriter = methodWriter.Finish();
             }
         }
+
+        public SubSet FindMethodsThatDependOnClassifier(Classifier classifier) => Filter(x => x.ReturnType == classifier);
     }
 }

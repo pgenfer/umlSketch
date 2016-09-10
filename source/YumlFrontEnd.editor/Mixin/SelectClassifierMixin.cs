@@ -52,7 +52,16 @@ namespace YumlFrontEnd.editor
             get { return _selectedClassifier; }
             set
             {
-                Requires(value != null);
+                // Problem:
+                // 1. Classifier deleted
+                // 2. All dependent properties / methods (and their view models) deleted
+                // 3. ItemsSource receives event, removes classifier from list
+                // 4. Classifier list is updated, ViewModel also gets update (although it is already removed from its parent)
+                // 5. ViewModel sets classifier to null (if it was selected)
+                // 6. Selected classifier would be null now.
+                // 7. TODO: ensure that viewmodel does not receive any events after it was already disposed
+                if (value == null)
+                    return;
 
                 var oldClassifier = _selectedClassifier;
                 _selectedClassifier = value;

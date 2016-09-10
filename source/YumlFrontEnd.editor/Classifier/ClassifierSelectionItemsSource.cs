@@ -15,6 +15,7 @@ namespace YumlFrontEnd.editor
     /// </summary>
     public class ClassifierSelectionItemsSource : BindableCollection<ClassifierItemViewModel>
     {
+        private readonly MessageSystem _messageSystem;
         private readonly ClassifierDictionary _classifiers;
         private readonly ClassifierNotificationService _notification;
 
@@ -26,7 +27,7 @@ namespace YumlFrontEnd.editor
             _classifiers = new ClassifierDictionary();
             _notification = new ClassifierNotificationService();
         }
-        
+
 
         /// <summary>
         /// internal constructor allows user to define
@@ -38,15 +39,22 @@ namespace YumlFrontEnd.editor
         /// when the classifiers change</param>
         /// <param name="queryForAvailableClassifiers">
         /// query that is used to retrieve the classifiers from the classifier dictionary</param>
+        /// <param name="messageSystem"></param>
         protected ClassifierSelectionItemsSource(
             ClassifierDictionary classifiers,
             ClassifierNotificationService notification,
-            Func<IEnumerable<Classifier>> queryForAvailableClassifiers)
+            Func<IEnumerable<Classifier>> queryForAvailableClassifiers,
+            MessageSystem messageSystem)
         {
+            _messageSystem = messageSystem;
             _classifiers = classifiers;
             _notification = notification;
             foreach (var classifier in queryForAvailableClassifiers())
+            {
                 Add(new ClassifierItemViewModel(classifier.Name));
+                messageSystem.Subscribe<DomainObjectDeletedEvent<Classifier>>(
+                    classifier,OnClassiferDeleted);
+            }
 
             // react on renaming of item
             notification.NameChanged += OnNameChanged;
@@ -57,6 +65,16 @@ namespace YumlFrontEnd.editor
                 var newIndex = FindNewItemPosition(newItem);
                 Insert(newIndex, newItem);
             };
+        }
+
+        /// <summary>
+        /// event handler which is called when a classifier is removed
+        /// </summary>
+        /// <param name="classifierDeletedEvent"></param>
+        private void OnClassiferDeleted(DomainObjectDeletedEvent<Classifier> classifierDeletedEvent)
+        {
+            var viewModel = ByName(classifierDeletedEvent.DomainObject.Name);
+            Remove(viewModel);
         }
 
         /// <summary>
@@ -82,8 +100,9 @@ namespace YumlFrontEnd.editor
 
         public ClassifierSelectionItemsSource(
             ClassifierDictionary classifiers,
-            ClassifierNotificationService notification)
-            :this(classifiers,notification,() => classifiers.OrderBy(x => x.Name))
+            ClassifierNotificationService notification,
+            MessageSystem messageSystem)
+            :this(classifiers,notification,() => classifiers.OrderBy(x => x.Name),messageSystem)
         {
         }
 
@@ -129,7 +148,11 @@ namespace YumlFrontEnd.editor
         /// <returns></returns>
         public ClassifierSelectionItemsSource Exclude(string classifierName, bool withNullItem = true)
         {
-            var newSource = new ClassifierSelectionSourceWithExcludedItem(_classifiers, _notification,classifierName);
+            var newSource = new ClassifierSelectionSourceWithExcludedItem(
+                _classifiers, 
+                _notification,
+                _messageSystem,
+                classifierName);
             if(withNullItem)
                 newSource.Insert(0, ClassifierItemViewModel.None);
             return newSource;

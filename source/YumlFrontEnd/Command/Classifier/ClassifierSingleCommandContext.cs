@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Yuml.Command;
 using Yuml;
+using Yuml.Service;
 
 namespace Yuml.Command
 {
@@ -13,14 +14,14 @@ namespace Yuml.Command
         public ClassifierSingleCommandContext(
             Classifier classifier,
             ClassifierDictionary classifierDictionary,
-            NotificationServices notificationServices)
+            NotificationServices notificationServices,
+            DeletionService deletionService)
         {
             Rename = new RenameClassifierCommand(
                 classifier,
                 classifierDictionary,
                 new ClassifierValidationService(classifierDictionary), 
                 notificationServices.Classifier);
-            // TO DO: implement other commands
             CommandsForProperties = new PropertyListCommandContext(
                 classifier,
                 classifierDictionary,
@@ -33,6 +34,8 @@ namespace Yuml.Command
             ChangeBaseClass = new ChangeBaseClassCommand(
                 classifier,
                 classifierDictionary, notificationServices.Relation);
+            Delete = new DeleteClassifierCommand(classifier, deletionService);
+            // TODO: implement other commands from base class
         }
 
         public IListCommandContext<Property> CommandsForProperties { get; }

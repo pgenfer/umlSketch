@@ -58,7 +58,7 @@ namespace YumlFrontEnd.editor
                 var singleCommandContextInstance = _commands.GetCommandsForSingleItem(domainObject);
                 // use constructor to create the item and cast it to the correct type
                 var singleViewModel = _viewModelFactory.CreateViewModelForSingleItem(singleCommandContextInstance);
-                singleViewModel.Init(domainObject, _viewModelFactory);
+                singleViewModel.Init(domainObject, _viewModelFactory,this);
                 Items.Add(singleViewModel);
             }
 
@@ -90,5 +90,6 @@ namespace YumlFrontEnd.editor
         /// controls whether the expand button is visible
         /// </summary>
         public virtual bool CanExpand => Items.Any();
+        public void RemoveItem(SingleItemViewModelBase<TDomain> item) => _items.RemoveItem(item);
     }
 }

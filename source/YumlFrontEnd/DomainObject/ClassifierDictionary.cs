@@ -42,6 +42,14 @@ namespace Yuml
             return result;
         }
 
+        /// <summary>
+        /// returns all classifiers that use the given type as base type
+        /// </summary>
+        /// <param name="baseClass"></param>
+        /// <returns></returns>
+        public virtual IEnumerable<Classifier> FindAllDerivedClassifiers(Classifier baseClass) =>
+            _dictionary.Values.Where(x => x.BaseClass == baseClass);
+
         [Pure]
         public int Count => _dictionary.Count;
         

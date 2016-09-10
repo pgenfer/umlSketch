@@ -82,6 +82,9 @@ namespace Yuml
         }
 
         public override string ToString() => 
-            string.Join(Environment.NewLine, _list.Select(x => x.ToString()));      
+            string.Join(Environment.NewLine, _list.Select(x => x.ToString()));
+
+        public SubSet FindPropertiesThatDependOnClassifier(Classifier classifier) => Filter(x => x.Type == classifier);
+
     }
 }

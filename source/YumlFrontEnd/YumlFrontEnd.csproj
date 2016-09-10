@@ -99,15 +99,15 @@
     <Compile Include="Command\General\Single\RenameMemberCommand.cs" />
     <Compile Include="Command\Method\RenameMethodCommand.cs" />
     <Compile Include="Command\Property\NewPropertyCommand.cs" />
-    <Compile Include="Context\Classifier\ClassifierListCommandContext.cs" />
-    <Compile Include="Context\Classifier\ClassifierSingleCommandContext.cs" />
-    <Compile Include="Context\General\ListCommandContextBase.cs" />
-    <Compile Include="Context\General\SingleCommandContextBase.cs" />
-    <Compile Include="Context\Method\MethodListCommandContext.cs" />
-    <Compile Include="Context\Method\MethodSingleCommandContext.cs" />
-    <Compile Include="Context\Property\ISinglePropertyCommands.cs" />
-    <Compile Include="Context\General\IListCommandContext.cs" />
-    <Compile Include="Context\General\ISingleCommandContext.cs" />
+    <Compile Include="Command\Classifier\ClassifierListCommandContext.cs" />
+    <Compile Include="Command\Classifier\ClassifierSingleCommandContext.cs" />
+    <Compile Include="Command\General\List\ListCommandContextBase.cs" />
+    <Compile Include="Command\General\Single\SingleCommandContextBase.cs" />
+    <Compile Include="Command\Method\MethodListCommandContext.cs" />
+    <Compile Include="Command\Method\MethodSingleCommandContext.cs" />
+    <Compile Include="Command\Property\ISinglePropertyCommands.cs" />
+    <Compile Include="Command\General\List\IListCommandContext.cs" />
+    <Compile Include="Command\General\Single\ISingleCommandContext.cs" />
     <Compile Include="Command\General\Single\DomainObjectBaseCommand.cs" />
     <Compile Include="Command\General\Single\IDeleteCommand.cs" />
     <Compile Include="Command\General\List\INewCommand.cs" />
@@ -117,9 +117,9 @@
     <Compile Include="Command\General\Single\IRenameCommand.cs" />
     <Compile Include="Command\Classifier\RenameClassifierCommand.cs" />
     <Compile Include="Command\General\List\Query.cs" />
-    <Compile Include="Context\Classifier\ISingleClassifierCommands.cs" />
-    <Compile Include="Context\Property\PropertyListCommandContext.cs" />
-    <Compile Include="Context\Property\PropertySingleCommandContext.cs" />
+    <Compile Include="Command\Classifier\ISingleClassifierCommands.cs" />
+    <Compile Include="Command\Property\PropertyListCommandContext.cs" />
+    <Compile Include="Command\Property\PropertySingleCommandContext.cs" />
     <Compile Include="DiagramWriter\EndNodeWriter.cs" />
     <Compile Include="DiagramWriter\MethodWriter.cs" />
     <Compile Include="DiagramWriter\RelationEndWriter.cs" />
@@ -132,8 +132,13 @@
     <Compile Include="DomainObject\ParameterList.cs" />
     <Compile Include="DomainObject\Relation.cs" />
     <Compile Include="DomainObject\StartNode.cs" />
+    <Compile Include="Event\ClearBaseClassEvent.cs" />
+    <Compile Include="Event\DomainObjectDeletedEvent.cs" />
     <Compile Include="Notification\ClassifierNotificationService.cs" />
+    <Compile Include="Event\IDomainEvent.cs" />
     <Compile Include="Notification\INameChangedNotificationService.cs" />
+    <Compile Include="Notification\ItemDeletedNotificationMixin.cs" />
+    <Compile Include="Event\MessageSystem.cs" />
     <Compile Include="Notification\MethodNotificationService.cs" />
     <Compile Include="Notification\NameChangedNotification.cs" />
     <Compile Include="Notification\NewItemNotificationMixin.cs" />
@@ -146,6 +151,7 @@
     <Compile Include="DomainObject\RelationType.cs" />
     <Compile Include="Serializer\Dto\RelationDto.cs" />
     <Compile Include="Serializer\JsonApplicationSettingSerializer.cs" />
+    <Compile Include="Service\DeletionService.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="ClassDiagram.cs" />
     <Compile Include="Settings\DiagramDirection.cs" />
@@ -208,8 +214,6 @@
   <ItemGroup>
     <Folder Include="Command\Parameter\" />
     <Folder Include="Command\Relation\" />
-    <Folder Include="Context\Parameter\" />
-    <Folder Include="Context\Relation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -25,6 +25,18 @@ namespace YumlFrontEnd.editor
                 base.SelectClassifierByName(classifierName);
         }
 
+        /// <summary>
+        /// call to clear the classifier in the combox box
+        /// without executing the command. (e.g. if the base class of a class
+        /// is deleted). 
+        /// </summary>
+        public void ClearClassifierWithoutCommand()
+        {
+            _selectedClassifier = ClassifierItemViewModel.None;
+            // ReSharper disable once ExplicitCallerInfoArgument
+            RaisePropertyChanged(nameof(SelectedClassifier));
+        }
+
         public override ClassifierItemViewModel SelectedClassifier
         {
             get { return base.SelectedClassifier; }

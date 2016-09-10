@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:YumlFrontEnd.editor"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d"
              x:Name="MainControl">
   <DockPanel
@@ -16,21 +17,10 @@
       Visibility="{Binding ElementName=MainControl,Path=HasExpandButton,
       Converter={local:FalseToHideConverter}}"
       Style="{StaticResource ExpanderButtonStyle}"/>
-    <!-- TODO: add button menu here -->
-    <StackPanel 
-      Orientation="Horizontal"
-      DockPanel.Dock="Right">
-      <local:ActionButton
-        HorizontalAlignment="Right"
-        Style="{StaticResource ActionButtonStyle}"
-        x:Name="New"
-        Margin="10,0"
-        Content="+"
-        Width="20"
-        Height="20"
-        MouseDownBrush="{StaticResource NewActionMouseDown}"
-        MouseOverBrush="{StaticResource NewActionMouseOver}"/>
-    </StackPanel>
+    <local:ButtonBar
+      DockPanel.Dock="Right"
+      HasDeleteButton="False"
+      cal:Bind.Model="{Binding}"/>
     <!-- caption -->
     <TextBlock
       DockPanel.Dock="Left"

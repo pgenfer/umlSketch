@@ -9,6 +9,7 @@ using System.Windows;
 using Yuml;
 using Yuml.Command;
 using Yuml.Notification;
+using Yuml.Service;
 using YumlFrontEnd.editor.ViewModel;
 
 namespace YumlFrontEnd.editor
@@ -69,23 +70,20 @@ namespace YumlFrontEnd.editor
         {
             var classifierDictionary = new ClassifierDictionary();
             CreateDummyData(classifierDictionary);
+            // register classifier dictionary
+            _container.Instance(classifierDictionary);
 
-            var classifierNotificationSerivce = new ClassifierNotificationService();
-            var classifierItemSource = new ClassifierSelectionItemsSource(
-                classifierDictionary,classifierNotificationSerivce);
+            _container.Singleton<ClassifierNotificationService>();
+            _container.Singleton<PropertyNotificationService>();
+            _container.Singleton<MethodNotificationService>();
+            _container.Singleton<NotificationServices>();
 
-            var classifierListCommands = new ClassifierListCommandContext(
-                classifierDictionary,
-                  new NotificationServices(
-                    classifierNotificationSerivce,
-                    new PropertyNotificationService(),
-                    new MethodNotificationService()));
-            
-            _container.Instance<IListCommandContext<Classifier>>(classifierListCommands);
-            // item source with classifiers is used by all view models
-            _container.Instance(classifierItemSource);
-            // register factory for creating view models
-            // other view models can use it to create sub view models
+            _container.Singleton<ClassifierSelectionItemsSource>();
+
+            _container.PerRequest<ClassifierListCommandContext>();
+          
+            _container.Singleton<DeletionService>();
+            _container.Singleton<MessageSystem>();
             _container.Singleton<ViewModelFactory>();
         }
 

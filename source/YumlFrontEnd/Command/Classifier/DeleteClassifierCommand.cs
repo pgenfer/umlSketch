@@ -2,24 +2,24 @@
 using System.Text;
 using System.Threading.Tasks;
 using Yuml;
+using Yuml.Service;
 
 namespace Yuml.Command
 {
-    public class DeleteClassifierBaseCommand : DomainObjectBaseCommand<Classifier>
+    public class DeleteClassifierCommand : DomainObjectBaseCommand<Classifier>, IDeleteCommand
     {
-        private readonly ClassifierDictionary _classifierDictionary;
+        private readonly DeletionService _deletionService;
 
-        public DeleteClassifierBaseCommand(
+        public DeleteClassifierCommand(
             Classifier classifier,
-            ClassifierDictionary classifierDictionary) : base(classifier)
+            DeletionService deletionService) : base(classifier)
         {
-            _classifierDictionary = classifierDictionary;
+            _deletionService = deletionService;
         }
 
-        public void Do()
+        public void DeleteItem()
         {
-            _classifierDictionary.RemoveClassifier(_domainObject);
-            // TODO: do notification here by using a service
+            _deletionService.DeleteClassifier(_domainObject);
         }
     }
 }
