@@ -4,27 +4,28 @@ namespace Yuml
 {
     /// <summary>
     /// User specific settings that are used by the application.
-    /// The settings are defined as value type because
-    /// when using the settings we will never need object identiy,
-    /// only the current values of the settings will be important.
     /// </summary>
-    public struct ApplicationSettings
+    public class ApplicationSettings
     {
         /// <summary>
         /// default path where the Yuml.me service should be located.
         /// </summary>
-        private const string DefaultUrl = @"http://yuml.me/diagram/scruffy/class/";
+        private const string BaseUri = @"http://yuml.me/";
+
+        private const string DiagramRequestUri = @"diagram/scruffy/class/";
 
         public ApplicationSettings(
             string filePath = null,
             bool askBeforeDelete = true,
-            string yumlUrl = DefaultUrl,
+            string baseUri = BaseUri,
+            string diagramRequestUri = DiagramRequestUri,
             DiagramSize size = DiagramSize.Big,
             DiagramDirection direction = DiagramDirection.TopDown)
         {
             FilePath = filePath ?? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             AskBeforeDelete = askBeforeDelete;
-            YumlUrl = yumlUrl;
+            YumlBaseUrl = baseUri;
+            YumlDiagramRequestUri = diagramRequestUri;
             DiagramSize = size;
             DiagramDirection = direction;
         }
@@ -41,9 +42,13 @@ namespace Yuml
         /// </summary>
         public bool AskBeforeDelete { get; set; }
         /// <summary>
-        /// the url where the Yuml.me web service is located
+        /// the base address used to access all Yumle services.
         /// </summary>
-        public string YumlUrl { get; set; }
+        public string YumlBaseUrl { get; set; }
+        /// <summary>
+        /// Url used to access the diagram drawing service
+        /// </summary>
+        public string YumlDiagramRequestUri { get; set; }
         /// <summary>
         /// predefined size of the diagram
         /// </summary>

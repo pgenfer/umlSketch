@@ -15,7 +15,7 @@
         }
         public DiagramWriter Finish()
         {
-            AppendToken("]");
+            AppendToken("],");
             return new DiagramWriter(_content);
         }
         public ClassWriter WithName(string name)

@@ -18,5 +18,8 @@
         <GridSplitter 
             Grid.Column="0" 
             Width="5"/>
+        <ContentControl
+          x:Name="Renderer"
+          Grid.Column="1"/>
     </Grid>
 </Window>

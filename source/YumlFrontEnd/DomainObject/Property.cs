@@ -22,10 +22,11 @@ namespace Yuml
         /// </summary>
         public Property() { }
 
-        public Property(string name, Classifier type)
+        public Property(string name, Classifier type,bool isVisible=true)
         {
             Type = type;
             Name = name;
+            IsVisible = isVisible;
         }
         
         /// <summary>

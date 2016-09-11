@@ -28,6 +28,7 @@ namespace Yuml
         public Classifier(string name)
         {
             Name = name;
+            IsVisible = true;
         }
        
         public bool IsVisible
@@ -59,7 +60,8 @@ namespace Yuml
         /// </summary>
         public bool IsInterface { get; internal set; }
         public void ShowOrHideAllProperties(bool showOrHide) => Properties.ShowOrHideAllProperties(showOrHide);
-        public Property CreateProperty(string name, Classifier type) => Properties.CreateProperty(name, type);
+        public Property CreateProperty(string name, Classifier type,bool isVisible = true) => 
+            Properties.CreateProperty(name, type,isVisible);
         public IEnumerator<Property> GetEnumerator() => Properties.GetEnumerator();
 
         public ClassWriter WriteTo(ClassWriter classWriter)
@@ -72,7 +74,8 @@ namespace Yuml
             return classWriter;
         }
 
-        public Method CreateMethod(string name, Classifier type) => Methods.CreateMethod(name, type);
+        public Method CreateMethod(string name, Classifier type,bool isVisible = true) => 
+            Methods.CreateMethod(name, type,isVisible);
         public Property CreateNewPropertyWithBestInitialValues(ClassifierDictionary systemClassifiers) => 
             Properties.CreateNewPropertyWithBestInitialValues(systemClassifiers);
 

@@ -54,7 +54,9 @@ namespace YumlFrontEnd.editor
             _container.PerRequest<MainViewModel, MainViewModel>();
         }
 
-        private void CreateDummyData(ClassifierDictionary classifierDictionary)
+        private void CreateDummyData(
+            ClassifierDictionary classifierDictionary,
+            RelationList relations)
         {
             // just for debug
             var @string = classifierDictionary.CreateNewClass("String");
@@ -64,14 +66,33 @@ namespace YumlFrontEnd.editor
             var codeProvider = classifierDictionary.CreateNewClass("CodeProvider");
             codeProvider.CreateMethod("DoSomething", integer);
             codeProvider.BaseClass = @string;
+
+            var baseClassRelation = new Relation
+            {
+                Start = new StartNode {Classifier = codeProvider},
+                End = new EndNode {Classifier = @string},
+                Type = RelationType.Inheritance
+            };
+
+            var hasLength = new Relation
+            {
+                Start = new StartNode { Classifier = @string},
+                End = new EndNode { Classifier = integer, IsNavigatable = true, Name = "length" },
+                Type = RelationType.Aggregation
+            };
+
+            relations.AddRelation(baseClassRelation);
+            relations.AddRelation(hasLength);
         }
 
         private void ConfigureDomainModel()
         {
             var classifierDictionary = new ClassifierDictionary();
-            CreateDummyData(classifierDictionary);
+            var relations = new RelationList();
+            CreateDummyData(classifierDictionary,relations);
             // register classifier dictionary
             _container.Instance(classifierDictionary);
+            _container.Instance(relations);
 
             _container.Singleton<ClassifierNotificationService>();
             _container.Singleton<PropertyNotificationService>();

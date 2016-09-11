@@ -14,13 +14,21 @@ namespace YumlFrontEnd.editor
     {
         public MainViewModel(
             ClassifierListCommandContext classifierCommands,
-            ViewModelFactory viewModelFactory)
+            RelationList relations,
+            ViewModelFactory viewModelFactory,
+            ClassifierDictionary classifiers)
         {
             ClassifierList = viewModelFactory
                 .WithCommand(classifierCommands)
                 .CreateViewModelForList<ClassifierListViewModel>();
+            Renderer = new RendererViewModel(
+                classifiers, 
+                relations,
+                new ApplicationSettings(),
+                viewModelFactory.MessageSystem);
         }
 
         public ClassifierListViewModel ClassifierList { get; private set; }
+        public RendererViewModel Renderer { get; private set; }
     }
 }

@@ -21,6 +21,10 @@ namespace Yuml
         }
 
         public StartNodeWriter WithStartNode(string classifier) => new StartNodeWriter(classifier,_content);
-        public DiagramWriter Finish() => new DiagramWriter(_content);
+        public DiagramWriter Finish()
+        {
+            _content.AppendToken(",");
+            return new DiagramWriter(_content);
+        }
     }
 }

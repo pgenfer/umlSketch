@@ -95,7 +95,8 @@ namespace YumlFrontEnd.editor
             var newIndex = FindNewItemPosition(tmp);
             // rename the item and move it to the new position
             item.Name = newName;
-            Move(oldIndex, newIndex);
+            if(oldIndex != newIndex)
+               Move(oldIndex, newIndex);
         }
 
         public ClassifierSelectionItemsSource(

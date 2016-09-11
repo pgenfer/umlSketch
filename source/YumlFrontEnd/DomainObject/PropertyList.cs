@@ -26,14 +26,15 @@ namespace Yuml
         /// </summary>
         /// <param name="name">name of property</param>
         /// <param name="type">classifier of the property</param>
+        /// <param name="isVisible"></param>
         /// <returns>the newly added property</returns>
-        public Property CreateProperty(string name, Classifier type)
+        public Property CreateProperty(string name, Classifier type,bool isVisible = true)
         {
             Requires(!string.IsNullOrEmpty(name));
             Requires(type != null);
             Ensures(_list.Count == OldValue(_list.Count) + 1);
 
-            return AddNewMember(new Property(name, type));
+            return AddNewMember(new Property(name, type,isVisible));
         }
 
         public void WriteTo(ClassWriter classWriter)

@@ -1,4 +1,5 @@
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using DomainEventHandlers = System.Collections.Generic.List<Yuml.DomainEventHandler>;
@@ -34,6 +35,12 @@ namespace Yuml
     public class MessageSystem
     {
         /// <summary>
+        /// event is fired whenever a domain object
+        /// publishes an domain event.
+        /// </summary>
+        public event Action<IDomainEvent> DomainModelChanged;
+        
+        /// <summary>
         /// The message system is organized in the following way:
         /// A dictionary contains all senders and for every sender
         /// the domain events that are fired by the sender. For
@@ -57,6 +64,8 @@ namespace Yuml
                     tmp.ForEach(x => x.EventHandler(domainEvent));
                 }
             }
+            // notify observers that the domain model was changed.
+            DomainModelChanged?.Invoke(domainEvent);
         }
 
         /// <summary>

@@ -42,10 +42,11 @@ namespace Yuml
         // TODO: return type can be changed by user
         public Classifier ReturnType { get;}
 
-        public Method(string name, Classifier returnType)
+        public Method(string name, Classifier returnType, bool isVisible = true)
         {
             Name = name;
             ReturnType = returnType;
+            IsVisible = isVisible;
         }
         public IEnumerator<Parameter> GetEnumerator() => _parameters.GetEnumerator();
         public Parameter CreateParameter(Classifier type, string name) => _parameters.CreateParameter(type, name);

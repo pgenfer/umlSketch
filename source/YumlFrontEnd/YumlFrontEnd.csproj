@@ -131,6 +131,7 @@
     <Compile Include="DomainObject\Parameter.cs" />
     <Compile Include="DomainObject\ParameterList.cs" />
     <Compile Include="DomainObject\Relation.cs" />
+    <Compile Include="DomainObject\RelationList.cs" />
     <Compile Include="DomainObject\StartNode.cs" />
     <Compile Include="Event\ClearBaseClassEvent.cs" />
     <Compile Include="Event\DomainObjectDeletedEvent.cs" />

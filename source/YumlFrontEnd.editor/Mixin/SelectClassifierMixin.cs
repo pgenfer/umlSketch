@@ -39,9 +39,6 @@ namespace YumlFrontEnd.editor
 
         public virtual void SelectClassifierByName(string classifierName)
         {
-            // check that classifier name can only be empty if flag is set
-            //Requires(!string.IsNullOrEmpty(classifierName));
-
             SelectedClassifier = _itemsSource.ByName(classifierName);
         }
 
