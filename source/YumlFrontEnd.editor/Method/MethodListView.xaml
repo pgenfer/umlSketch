@@ -13,6 +13,6 @@
    
   </UserControl.Resources>
   <local:MemberListControl
-    Title="{x:Static yuml:Strings.Methods}"
+    Title="{x:Static local:EditorStrings.Methods}"
     MemberItemStyle="{StaticResource MemberItemsControl}"/>
 </UserControl>

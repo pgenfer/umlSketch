@@ -15,6 +15,10 @@ namespace Yuml.Command
         /// </summary>
         IListCommandContext<Method> CommandsForMethods { get; }
         /// <summary>
+        /// commands that are available for the associations of a class
+        /// </summary>
+        IListCommandContext<Relation> CommandsForAssociations { get; set; }
+        /// <summary>
         /// command for changing the base class of this classifier
         /// </summary>
         IChangeTypeToNullCommand ChangeBaseClass { get; }

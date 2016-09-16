@@ -23,7 +23,8 @@ namespace Yuml.Serializer.Test
             var json = serializer.Save(settings);
             var newSettings = serializer.Load(json);
 
-            Assert.AreEqual(settings, newSettings);
+            Assert.AreEqual(settings.DiagramSize, newSettings.DiagramSize);
+            Assert.AreEqual(settings.DiagramDirection, newSettings.DiagramDirection);
         }
     }
 }

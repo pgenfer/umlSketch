@@ -8,8 +8,6 @@
              xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:PropertyViewModel}">
- 
-  
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="150"/>

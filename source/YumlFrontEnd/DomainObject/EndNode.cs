@@ -13,5 +13,10 @@ namespace Yuml
                 writer = writer.WithNavigation();
             return writer.ToClassifier(Classifier.Name);
         }
+
+        public EndNode(Classifier classifier, string name = "", bool isNavigable = false) : 
+            base(classifier, name, isNavigable)
+        {
+        }
     }
 }

@@ -48,8 +48,7 @@ namespace Yuml.Service
             }
 
             _classifiers.RemoveClassifier(classifier);
-            _messageSystem.Publish(classifier,new DomainObjectDeletedEvent<Classifier>(classifier));
-            _messageSystem.RemoveSource(classifier);
+            _messageSystem.PublisDeleted(classifier);
         }
     }
 }

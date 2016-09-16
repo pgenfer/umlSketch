@@ -39,11 +39,17 @@ namespace YumlFrontEnd.editor
                     .ForMember(
                         d => d.InitialBaseClass, 
                         c => c.MapFrom(s => s.BaseClass != null ? s.BaseClass.Name : string.Empty))
+                    // other view models will be created explicitly and not via mapping
                     .ForMember( d => d.Properties, c => c.Ignore())
-                    .ForMember( d => d.Methods, c => c.Ignore());
+                    .ForMember( d => d.Methods, c => c.Ignore())
+                    .ForMember(d => d.Associations, c => c.Ignore());
                 x.CreateMap<Property, PropertyViewModel>()
                     .ForMember(d => d.InitialPropertyType, c => c.MapFrom(s => s.Type.Name));
                 x.CreateMap<Method, MethodViewModel>();
+                x.CreateMap<Relation, AssociationViewModel>()
+                    .ForMember(d => d.Name, c => c.MapFrom(s => s.Start.Name))
+                    .ForMember(d => d.InitialAssociationType, c => c.MapFrom(s => s.Type))
+                    .ForMember(d => d.InitialTargetClassiferName, c => c.MapFrom(s => s.End.Classifier.Name));
             });
 
             _mapper = _mapperConfiguration.CreateMapper();

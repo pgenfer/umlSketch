@@ -65,10 +65,7 @@ namespace Yuml
                 foreach (var selected in _chosenSelection)
                 {
                     _parent._list.Remove(selected);
-                    messageSystem?.Publish(selected,new DomainObjectDeletedEvent<T>(selected));
-                    // remove the event source from the message system 
-                    // so no event handler can react on it
-                    messageSystem?.RemoveSource(selected);
+                    messageSystem?.PublisDeleted(selected);
                 }
             }
         }

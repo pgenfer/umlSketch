@@ -50,7 +50,7 @@ namespace Yuml
         private readonly Dictionary<object, Dictionary<Type, DomainEventHandlers>> _eventHandlers =
             new Dictionary<object, Dictionary<Type, DomainEventHandlers>>();
 
-        public void Publish<T>(object sender, T domainEvent) where T : IDomainEvent
+        public virtual void Publish<T>(object sender, T domainEvent) where T : IDomainEvent
         {
             Dictionary<Type, DomainEventHandlers> handlersForSource;
             if (_eventHandlers.TryGetValue(sender, out handlersForSource))
@@ -131,7 +131,7 @@ namespace Yuml
         /// object. Should be called after the source object was deleted.
         /// </summary>
         /// <param name="source"></param>
-        public void RemoveSource(object source) => _eventHandlers.Remove(source);
+        protected void RemoveSource(object source) => _eventHandlers.Remove(source);
 
         /// <summary>
         /// uses reflection to read all event handlers from the subscriber
@@ -159,6 +159,28 @@ namespace Yuml
                 var eventType = subscriptionMethodInfo.GetParameters().Single().ParameterType;
                 Subscribe(source, eventType, subscription, subscriber);
             }
+        }
+
+        /// <summary>
+        /// helper method for publishing create events
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="createdDomainObject"></param>
+        public void PublishCreated<T>(object source, T createdDomainObject) 
+            => Publish(source, new DomainObjectCreatedEvent<T>(createdDomainObject));
+
+        /// <summary>
+        /// helper method for publishing delete events
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="deletedDomainObject"></param>
+        public void PublisDeleted<T>(T deletedDomainObject)
+        {
+            Publish(deletedDomainObject, new DomainObjectDeletedEvent<T>(deletedDomainObject));
+            // since the object does not exist any more, we
+            // will also remove it as a source for messages
+            RemoveSource(deletedDomainObject);
         }
     }
 }

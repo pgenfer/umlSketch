@@ -23,7 +23,7 @@ namespace Yuml.Test
         [TestDescription("Create a diagram from classifiers without properties")]
         public void Classifiers_WriteTo()
         {
-            _result = "[string][int]";
+            _result = "[string],[int]";
 
             _classifiers = new ClassifierDictionary(String, Integer);
             String.IsVisible = true;

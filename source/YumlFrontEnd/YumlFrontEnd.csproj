@@ -93,6 +93,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\Association\AssociationSingleCommandContext.cs" />
+    <Compile Include="Command\Association\AssociationListCommandContext.cs" />
+    <Compile Include="Command\Association\ChangeAssociationCommand.cs" />
+    <Compile Include="Command\Association\ChangeAssociationTargetCommand.cs" />
+    <Compile Include="Command\Association\ISingleAssociationCommandContext.cs" />
+    <Compile Include="Command\Association\NewAssociationCommand.cs" />
+    <Compile Include="Command\Association\RenameAssociationCommand.cs" />
     <Compile Include="Command\Classifier\ChangeBaseClassCommand.cs" />
     <Compile Include="Command\Property\ChangeTypeOfPropertyCommand.cs" />
     <Compile Include="Command\General\Single\IChangeTypeCommand.cs" />
@@ -126,14 +133,19 @@
     <Compile Include="DiagramWriter\RelationWriter.cs" />
     <Compile Include="DiagramWriter\StartNodeWriter.cs" />
     <Compile Include="DomainObject\BaseList.cs" />
+    <Compile Include="DomainObject\ClassifierAssociationList.cs" />
     <Compile Include="DomainObject\EndNode.cs" />
     <Compile Include="DomainObject\MethodList.cs" />
     <Compile Include="DomainObject\Parameter.cs" />
     <Compile Include="DomainObject\ParameterList.cs" />
     <Compile Include="DomainObject\Relation.cs" />
     <Compile Include="DomainObject\RelationList.cs" />
+    <Compile Include="DomainObject\RelationNode.cs" />
     <Compile Include="DomainObject\StartNode.cs" />
+    <Compile Include="Event\ChangeAssocationTypeEvent.cs" />
+    <Compile Include="Event\ChangeAssociationTargetEvent.cs" />
     <Compile Include="Event\ClearBaseClassEvent.cs" />
+    <Compile Include="Event\DomainObjectCreated.cs" />
     <Compile Include="Event\DomainObjectDeletedEvent.cs" />
     <Compile Include="Notification\ClassifierNotificationService.cs" />
     <Compile Include="Event\IDomainEvent.cs" />

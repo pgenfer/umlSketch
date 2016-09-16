@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="YumlFrontEnd.editor.AssociationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:YumlFrontEnd.editor"
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance local:AssociationViewModel}">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="100"/>
+      <ColumnDefinition Width="100"/>
+    </Grid.ColumnDefinitions>
+    <!-- name is not used at the moment 
+    <local:EditableTextBlock
+      Watermark="name of assocation"
+      Grid.Column="0"
+      cal:Bind.Model="{Binding}"
+      Margin="5"/>      
+    <TextBlock
+      Grid.Column="1"
+      Text=":"
+      Margin="2,5"/>
+      -->
+    <ComboBox
+      Grid.Column="0"
+      x:Name="Associations"
+      Margin="5"/>
+    <ComboBox
+      Grid.Column="1"
+      x:Name="Classifiers"
+      Margin="5"/>
+  </Grid>
+</UserControl>

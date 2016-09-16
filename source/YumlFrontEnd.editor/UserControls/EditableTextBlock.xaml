@@ -9,7 +9,8 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="300"
              d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance local:EditableNameMixin}">
+             d:DataContext="{d:DesignInstance local:EditableNameMixin}"
+             x:Name="EditableTextBlockControl">
   <UserControl.Resources>
     <Style BasedOn="{StaticResource TextBlock-Sketch}"
            TargetType="TextBlock" />
@@ -38,12 +39,33 @@
     <TextBox
       Name="EditNameTextBox"
       Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
-      MinWidth="25"
+      MinWidth="150"
       Grid.Column="1"
       Visibility="{Binding IsEditable,Converter={StaticResource BooleanToVisibility}}"
       caliburn:Message.Attach="[Event PreviewKeyDown] = [Action StopEditing($confirmation)]"
       HorizontalAlignment="Left">
     </TextBox>
+    <!-- this is the watermark of the text box -->
+    <TextBlock 
+      Grid.Column="1"
+      IsHitTestVisible="False" 
+      Text="{Binding ElementName=EditableTextBlockControl,Path=Watermark}" 
+      VerticalAlignment="Center" 
+      HorizontalAlignment="Left" 
+      Foreground="DarkGray">
+      <TextBlock.Style>
+        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlock-Sketch}">
+          <Setter Property="Visibility" Value="Collapsed"/>
+          <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=EditableTextBlockControl,Path=ShowWatermark}" 
+                         Value="True">
+              <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+          </Style.Triggers>
+        </Style>
+      </TextBlock.Style>
+    </TextBlock>
+    
     <local:PersistentToolTip
       Grid.Column="1"
       PlacementTarget="{Binding ElementName=EditNameTextBox}"

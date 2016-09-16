@@ -59,40 +59,40 @@ namespace YumlFrontEnd.editor
             RelationList relations)
         {
             // just for debug
-            var @string = classifierDictionary.CreateNewClass("String");
-            var integer = classifierDictionary.CreateNewClass("Integer");
-            integer.CreateProperty("Size", integer);
-            integer.CreateProperty("TypeName", @string);
-            var codeProvider = classifierDictionary.CreateNewClass("CodeProvider");
-            codeProvider.CreateMethod("DoSomething", integer);
-            codeProvider.BaseClass = @string;
+            var car = classifierDictionary.CreateNewClass("Car");
+            var airplane = classifierDictionary.CreateNewClass("Airplane");
+            var vehicle = classifierDictionary.CreateNewClass("Vehicle");
+            var color = classifierDictionary.CreateNewClass("color");
+            var @string = classifierDictionary.CreateNewClass("string");
+            var integer = classifierDictionary.CreateNewClass("int");
+            var @void = classifierDictionary.CreateNewClass("void");
 
-            var baseClassRelation = new Relation
-            {
-                Start = new StartNode {Classifier = codeProvider},
-                End = new EndNode {Classifier = @string},
-                Type = RelationType.Inheritance
-            };
+            car.CreateProperty("Color", color);
+            airplane.CreateProperty("Length", integer);
 
-            var hasLength = new Relation
-            {
-                Start = new StartNode { Classifier = @string},
-                End = new EndNode { Classifier = integer, IsNavigatable = true, Name = "length" },
-                Type = RelationType.Aggregation
-            };
+            car.CreateMethod("Drive", @void);
+            airplane.CreateMethod("Fly", @void);
 
-            relations.AddRelation(baseClassRelation);
-            relations.AddRelation(hasLength);
+            car.BaseClass = vehicle;
+            var relation = car.AddNewRelation(color,RelationType.Aggregation);
+            relations.AddRelation(relation);
         }
 
         private void ConfigureDomainModel()
         {
             var classifierDictionary = new ClassifierDictionary();
             var relations = new RelationList();
+            var messageSystem = new MessageSystem();
             CreateDummyData(classifierDictionary,relations);
             // register classifier dictionary
             _container.Instance(classifierDictionary);
             _container.Instance(relations);
+            _container.Instance(messageSystem);
+
+            // TODO: this should be put somewhere else later
+            foreach (var classifier in classifierDictionary)
+                messageSystem.Subscribe<DomainObjectCreatedEvent<Relation>>(
+                    classifier, x => relations.AddRelation(x.DomainObject));
 
             _container.Singleton<ClassifierNotificationService>();
             _container.Singleton<PropertyNotificationService>();
@@ -104,8 +104,10 @@ namespace YumlFrontEnd.editor
             _container.PerRequest<ClassifierListCommandContext>();
           
             _container.Singleton<DeletionService>();
-            _container.Singleton<MessageSystem>();
+            
             _container.Singleton<ViewModelFactory>();
+
+
         }
 
         protected override object GetInstance(Type service, string key) => _container.GetInstance(service, key);

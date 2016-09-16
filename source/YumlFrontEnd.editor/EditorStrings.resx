@@ -117,10 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AggregateAssociation" xml:space="preserve">
+    <value>has</value>
+    <comment>Aggregate association</comment>
+  </data>
+  <data name="Associations" xml:space="preserve">
+    <value>Associations</value>
+  </data>
   <data name="BaseClass" xml:space="preserve">
     <value>Base class</value>
   </data>
+  <data name="CompositeAssociation" xml:space="preserve">
+    <value>owns</value>
+    <comment>Composite association</comment>
+  </data>
+  <data name="Methods" xml:space="preserve">
+    <value>Methods</value>
+  </data>
   <data name="None" xml:space="preserve">
     <value>(none)</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="SimpleAssociation" xml:space="preserve">
+    <value>not specified</value>
+    <comment>Simple association between two classes</comment>
+  </data>
+  <data name="UsesAssociation" xml:space="preserve">
+    <value>uses</value>
+    <comment>Uses association</comment>
   </data>
 </root>

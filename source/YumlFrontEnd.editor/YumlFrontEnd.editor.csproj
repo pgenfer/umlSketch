@@ -140,6 +140,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Association\AssociationItemView.xaml.cs">
+      <DependentUpon>AssociationItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Association\AssociationItemViewModel.cs" />
+    <Compile Include="Association\AssociationListView.xaml.cs">
+      <DependentUpon>AssociationListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Association\AssociationListViewModel.cs" />
+    <Compile Include="Association\AssociationView.xaml.cs">
+      <DependentUpon>AssociationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Association\AssociationViewModel.cs" />
     <Compile Include="Classifier\ClassifierSelectionSourceWithExcludedItem.cs" />
     <Compile Include="Converter\TrueToCollapseConverter.cs" />
     <Compile Include="Classifier\ClassifierItemViewModel.cs" />
@@ -206,6 +218,18 @@
       <DependentUpon>PropertyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ViewModelFactory.cs" />
+    <Page Include="Association\AssociationItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Association\AssociationListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Association\AssociationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Renderer\RendererView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

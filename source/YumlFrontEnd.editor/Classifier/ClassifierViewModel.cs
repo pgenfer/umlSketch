@@ -34,6 +34,7 @@ namespace YumlFrontEnd.editor
 
         public PropertyListViewModel Properties { get; private set; }
         public MethodListViewModel Methods { get; private set; }
+        public AssociationListViewModel Associations { get; private set; }
 
         public bool IsExpanded => _expanded.IsExpanded;
         public void ExpandOrCollapse() => _expanded.ExpandOrCollapse();
@@ -46,6 +47,9 @@ namespace YumlFrontEnd.editor
             Methods =
                 WithCommand(_commands.CommandsForMethods)
                 .CreateViewModelForList<MethodListViewModel>();
+            Associations =
+                WithCommand(_commands.CommandsForAssociations)
+                .CreateViewModelForList<AssociationListViewModel>();
             
             // list of base classifiers can  have a null item and should not
             // have the class item itself

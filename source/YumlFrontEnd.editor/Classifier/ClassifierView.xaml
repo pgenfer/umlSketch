@@ -22,6 +22,7 @@
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
     <local:ExpanderButton
       Grid.Column="0"
@@ -49,7 +50,8 @@
       Margin="25,0,0,0" 
       Grid.Column="1"
       Grid.ColumnSpan="2"
-      Grid.Row="1">
+      Grid.Row="1"
+      Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}">
       <TextBlock Style="{StaticResource TextBlock-Sketch}"
                  Text="{x:Static local:EditorStrings.BaseClass}"
                  DockPanel.Dock="Left"/>
@@ -71,5 +73,12 @@
       Grid.ColumnSpan="2"
       caliburn:View.Model="{Binding Methods}"
       Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}"/>
+    <!-- Association -->
+    <ContentControl
+     Grid.Row="4"
+     Grid.Column="1"
+     Grid.ColumnSpan="2"
+     caliburn:View.Model="{Binding Associations}"
+     Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}"/>
   </Grid>
 </UserControl>

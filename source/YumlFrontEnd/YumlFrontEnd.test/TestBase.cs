@@ -77,9 +77,9 @@ namespace Yuml.Test
         private void InitClassifiers()
         {
             // string has a length property
-            String.CreateProperty("Length", Integer);
+            String.CreateProperty("Length", Integer,false);
             // integer has a property for its type name
-            Integer.CreateProperty("TypeName", String);
+            Integer.CreateProperty("TypeName", String,false);
 
             Service.CreateMethod("DoSomething", Void)
                 .CreateParameter(String, "firstParameter");

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yuml.DomainObject;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
@@ -19,13 +20,17 @@ namespace Yuml
     {
         private readonly NameMixin _name = new NameMixin();
         private readonly IVisible _visible = new VisibleMixin();
+        private readonly ClassifierAssociationList _associations;
 
         /// <summary>
         /// only for testing, don't use in production
         /// </summary>
-        public Classifier() { }
+        public Classifier()
+        {
+            _associations = new ClassifierAssociationList(this);
+        }
 
-        public Classifier(string name)
+        public Classifier(string name) :this()
         {
             Name = name;
             IsVisible = true;
@@ -83,5 +88,15 @@ namespace Yuml
         /// optional base class of this classifier
         /// </summary>
         public Classifier BaseClass { get; set; }
+        public void DeleteRelation(Relation relation) => _associations.DeleteRelation(relation);
+        public Relation AddNewRelation(
+            Classifier target,
+            RelationType associationType,
+            string startName="", 
+            string endName="") => 
+            _associations.AddNewRelation(target, associationType, startName, endName);
+        public IEnumerable<Relation> Associations => _associations;
+        public Relation CreateNewAssociationWithBestInitialValues(ClassifierDictionary classifiers) => 
+            _associations.CreateNewAssociationWithBestInitialValues(classifiers);
     }
 }

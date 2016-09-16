@@ -61,6 +61,24 @@ namespace YumlFrontEnd.editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to has.
+        /// </summary>
+        public static string AggregateAssociation {
+            get {
+                return ResourceManager.GetString("AggregateAssociation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Associations.
+        /// </summary>
+        public static string Associations {
+            get {
+                return ResourceManager.GetString("Associations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Base class.
         /// </summary>
         public static string BaseClass {
@@ -70,11 +88,56 @@ namespace YumlFrontEnd.editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to owns.
+        /// </summary>
+        public static string CompositeAssociation {
+            get {
+                return ResourceManager.GetString("CompositeAssociation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Methods.
+        /// </summary>
+        public static string Methods {
+            get {
+                return ResourceManager.GetString("Methods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (none).
         /// </summary>
         public static string None {
             get {
                 return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Properties.
+        /// </summary>
+        public static string Properties {
+            get {
+                return ResourceManager.GetString("Properties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to not specified.
+        /// </summary>
+        public static string SimpleAssociation {
+            get {
+                return ResourceManager.GetString("SimpleAssociation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to uses.
+        /// </summary>
+        public static string UsesAssociation {
+            get {
+                return ResourceManager.GetString("UsesAssociation", resourceCulture);
             }
         }
     }

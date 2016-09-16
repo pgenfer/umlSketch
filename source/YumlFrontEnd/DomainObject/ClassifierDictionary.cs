@@ -130,12 +130,12 @@ namespace Yuml
         {
             Requires(writer != null);
 
-            foreach(var classifier in _dictionary.Values.Where(x => x.IsVisible))
+            var index = 0;
+            foreach (var classifier in _dictionary.Values.Where(x => x.IsVisible))
             {
                 var classWriter = writer.StartClass();
                 classWriter = classifier.WriteTo(classWriter);
-                classWriter.Finish();
-
+                classWriter.Finish(++index == _dictionary.Count);
             }
         }
 

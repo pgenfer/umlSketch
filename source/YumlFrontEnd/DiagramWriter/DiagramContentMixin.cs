@@ -29,6 +29,7 @@ namespace Yuml
             _lastItemWasIdentifier = false;
         }
 
+        public bool IsEmpty => _string.Length == 0;
         public override string ToString() => _string.ToString();
     }
 }

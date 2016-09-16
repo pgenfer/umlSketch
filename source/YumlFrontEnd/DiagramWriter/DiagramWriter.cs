@@ -23,7 +23,7 @@
             return new ClassWriter(false, _content);
         }
 
-        public RelationWriter StartRelation() => new RelationWriter(_content);
+        public RelationWriter StartRelation() => new RelationWriter(_content, true);
 
         public override string ToString() => _content.ToString();
         public DiagramWriter(DiagramContentMixin content = null)

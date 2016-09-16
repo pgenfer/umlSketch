@@ -13,9 +13,11 @@
             _hasMembers = hasMembers;
             _content = content;
         }
-        public DiagramWriter Finish()
+        public DiagramWriter Finish(bool lastEntry = true)
         {
-            AppendToken("],");
+            AppendToken("]");
+            if (!lastEntry)
+                AppendToken(",");
             return new DiagramWriter(_content);
         }
         public ClassWriter WithName(string name)

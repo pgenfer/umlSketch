@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,40 @@ using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
 {
+    /// <summary>
+    /// class that handles the relation between
+    /// two classifiers. A relation has a start node
+    /// and an end node.
+    /// </summary>
     public class Relation : IVisible
     {
         private readonly IVisible _visible = new VisibleMixin();
+
+        /// <summary>
+        /// should only be used for testing
+        /// </summary>
+        public Relation(){}
+        
+        /// <summary>
+        /// creates a new relation between two nodes
+        /// </summary>
+        /// <param name="start">classifier where the relation starts</param>
+        /// <param name="end">classifier where the relation ends</param>
+        /// <param name="startName">optional name of the start node of the relation</param>
+        /// <param name="endName">optional name of the end node of the relation</param>
+        /// <param name="relation">type of the relation</param>
+        public Relation(
+            Classifier start,
+            Classifier end,
+            RelationType relation = RelationType.Association,
+            string startName = "",
+            string endName = "")
+        {
+            Start = new StartNode(start,startName);
+            End = new EndNode(end, endName);
+            Type = relation;
+            IsVisible = true;
+        }
 
         public bool IsVisible
         {
@@ -68,21 +100,6 @@ namespace Yuml
             }
             return relationEnd.Finish();
         }
-    }
-
-    public class RelationNode : INamed
-    {
-        private readonly INamed _named = new NameMixin();
-
-        public Classifier Classifier { get; set; }
-
-        public string Name
-        {
-            get { return _named.Name; }
-            set { _named.Name = value; }
-        }
-
-        public bool IsNavigatable { get; set; }
     }
 }
 

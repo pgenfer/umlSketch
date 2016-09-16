@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Yuml
     /// <summary>
     /// stores all relations of the UML Model.
     /// </summary>
-    public class RelationList
+    public class RelationList : IEnumerable<Relation>
     {
         private readonly List<Relation> _relations = new List<Relation>();
 
@@ -33,5 +34,8 @@ namespace Yuml
                 relationWriter.Finish();
             }
         }
+
+        public IEnumerator<Relation> GetEnumerator() => _relations.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => _relations.GetEnumerator();
     }
 }
