@@ -148,6 +148,10 @@ namespace Yuml.Test
 
         protected virtual void Init() { /* default implementation does not have initialization */}
 
+        protected ClassifierDictionary CreateDictionaryWithoutSystemTypes()
+         => NSubstitute.Substitute.For<ClassifierDictionary>(false);
+
+
         [SetUp]
         public void Setup() => Init();
     }

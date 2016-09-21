@@ -97,7 +97,13 @@ namespace Yuml.Serializer.Dto
         /// <returns></returns>
         public ClassifierDictionary ToDomain(IEnumerable<ClassifierDto> classifierDtos)
         {
-            return new ClassifierDictionary(_mapper.Map<IEnumerable<Classifier>>(classifierDtos));
+            var dictionary = new ClassifierDictionary(false);
+            var classifiers = _mapper.Map<IEnumerable<Classifier>>(classifierDtos);
+            foreach (var classifier in classifiers.Where(x => !x.IsSystemType))
+                dictionary.AddNewClassifier(classifier);
+            // at the end, add all missing system types
+            dictionary.AddMissingSystemTypes();
+            return dictionary;
         }
     }
 }

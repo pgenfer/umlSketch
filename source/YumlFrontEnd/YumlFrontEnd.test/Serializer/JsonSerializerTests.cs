@@ -24,9 +24,7 @@ namespace Yuml.Test
             var toClassifiers = serializer.Load(json);
 
             // Ensure that both have the same classifiers
-            Assert.AreEqual(1, toClassifiers.Count);
-            Assert.AreEqual(String.Name, toClassifiers.ElementAt(0).Name);
-            Assert.AreEqual(1, toClassifiers.ElementAt(0).Properties.Count());
+            Assert.IsTrue(toClassifiers.Count(x => x.Name == String.Name) == 1);
         }
 
         [TestDescription("Checks that method Dtos are stored correctly")]

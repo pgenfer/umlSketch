@@ -16,7 +16,7 @@ namespace Yuml.Test
 
         protected override void Init()
         {
-            _classifiers = For<ClassifierDictionary>();
+            _classifiers = CreateDictionaryWithoutSystemTypes();
             _classifiers.String.Returns(String);
         }
 

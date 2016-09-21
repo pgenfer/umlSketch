@@ -23,7 +23,7 @@ namespace Yuml.Test.Command
         protected override void Init()
         {
             _property = For<Property>();
-            _classifiers = For<ClassifierDictionary>();
+            _classifiers = CreateDictionaryWithoutSystemTypes();
             _notification = For<PropertyNotificationService>();
             _oldType = new Classifier(Old);
             _newType = new Classifier(New);

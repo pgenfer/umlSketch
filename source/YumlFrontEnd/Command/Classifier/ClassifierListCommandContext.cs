@@ -27,7 +27,7 @@ namespace Yuml.Command
             _messageSystem = messageSystem;
 
             // setup commands
-            All = new Query<Classifier>(() => classifiers);
+            All = new Query<Classifier>(() => classifiers.NoSystemTypes);
         }
 
         public override ISingleCommandContext GetCommandsForSingleItem(Classifier domainObject) =>

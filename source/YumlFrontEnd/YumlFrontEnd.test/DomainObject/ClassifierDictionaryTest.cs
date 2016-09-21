@@ -24,5 +24,19 @@ namespace Yuml.Test
             Assert.IsTrue(dictionary.IsClassNameFree(oldName));
             Assert.IsNotNull(dictionary.FindByName(newName));
         }
+
+        [TestDescription("Creates classifier list without system types")]
+        public void ClassifierDictionary_NoSystemTypes()
+        {
+            var classifiers = new ClassifierDictionary(false);
+            Assert.IsEmpty(classifiers);
+        }
+
+        [TestDescription("Creates classifier list with system types")]
+        public void ClassifierDictionary_WithSystemTypes()
+        {
+            var classifiers = new ClassifierDictionary();
+            Assert.IsNotEmpty(classifiers);
+        }
     }
 }

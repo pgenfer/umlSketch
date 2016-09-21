@@ -81,7 +81,8 @@ namespace Yuml
             Requires(!string.IsNullOrEmpty(classifier.Name));
             Requires(IsClassNameFree(classifier.Name));
 
-            _dictionary.Add(classifier.Name,classifier);
+            // check if the classifier must also be added to system types
+            _dictionary.Add(classifier.Name, classifier);
         }
 
         public IEnumerator<Classifier> GetEnumerator()  => _dictionary.Values.GetEnumerator();
@@ -90,15 +91,22 @@ namespace Yuml
         /// <summary>
         /// creates an empty dictionary with classifiers
         /// </summary>
-        public ClassifierDictionary()
+        public ClassifierDictionary(bool hasSystemTypes = true)
         {
+            if (!hasSystemTypes)
+                return;
+
+            // make system types available
+            foreach (var systemType in new SystemTypes())
+                AddNewClassifier(systemType);
         }
 
         /// <summary>
         /// used to initialize a dictionary with the given list of classifiers.
+        /// Used only in test cases and does not load system types
         /// </summary>
         /// <param name="classifiers"></param>
-        internal ClassifierDictionary(params Classifier[] classifiers)
+        internal ClassifierDictionary(params Classifier[] classifiers):this(false)
         {
             Requires(classifiers != null);
 
@@ -131,7 +139,7 @@ namespace Yuml
             Requires(writer != null);
 
             var index = 0;
-            foreach (var classifier in _dictionary.Values.Where(x => x.IsVisible))
+            foreach (var classifier in NoSystemTypes.Where(x => x.IsVisible))
             {
                 var classWriter = writer.StartClass();
                 classWriter = classifier.WriteTo(classWriter);
@@ -152,8 +160,22 @@ namespace Yuml
         }
 
         /// <summary>
-        /// TODO: add special handling for system types here
+        /// returns string system type
         /// </summary>
-        public virtual Classifier String => FindByName("String") ?? CreateNewClass("String");
+        internal virtual Classifier String => FindByName("string");
+        internal virtual Classifier Void => FindByName("void");
+
+        /// <summary>
+        /// adds all system types to the dictionary which were not already added before
+        /// // (used during serialization when reading classifiers from a storage)
+        /// </summary>
+        internal virtual void AddMissingSystemTypes()
+        {
+            foreach (var systemType in new SystemTypes())
+                if(IsClassNameFree(systemType.Name))
+                   AddNewClassifier(systemType);
+        }
+
+        internal IEnumerable<Classifier> NoSystemTypes => this.Where(x => !x.IsSystemType);
     }
 }

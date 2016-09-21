@@ -23,6 +23,13 @@ namespace Yuml
         private readonly ClassifierAssociationList _associations;
 
         /// <summary>
+        /// Specifies whether this classifier is a system type.
+        /// A system type can not be edited in the classifier view
+        /// but can be assigned to properties and method return values.
+        /// </summary>
+        public bool IsSystemType { get; }
+
+        /// <summary>
         /// only for testing, don't use in production
         /// </summary>
         public Classifier()
@@ -30,10 +37,11 @@ namespace Yuml
             _associations = new ClassifierAssociationList(this);
         }
 
-        public Classifier(string name) :this()
+        public Classifier(string name, bool isSystemType=false) :this()
         {
             Name = name;
             IsVisible = true;
+            IsSystemType = isSystemType;
         }
        
         public bool IsVisible

@@ -142,6 +142,7 @@
     <Compile Include="DomainObject\RelationList.cs" />
     <Compile Include="DomainObject\RelationNode.cs" />
     <Compile Include="DomainObject\StartNode.cs" />
+    <Compile Include="DomainObject\SystemTypes.cs" />
     <Compile Include="Event\ChangeAssocationTypeEvent.cs" />
     <Compile Include="Event\ChangeAssociationTargetEvent.cs" />
     <Compile Include="Event\ClearBaseClassEvent.cs" />

@@ -20,7 +20,7 @@ namespace Yuml.Test
             _notificationService = For<ClassifierNotificationService>();
             _validationService = For<IValidateNameService>();
 
-            _classifierDictionary = For<ClassifierDictionary>();
+            _classifierDictionary = CreateDictionaryWithoutSystemTypes();
             _classifier = new Classifier("Integer");
 
             _renameCommand = new RenameClassifierCommand(

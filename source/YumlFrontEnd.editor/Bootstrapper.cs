@@ -54,7 +54,7 @@ namespace YumlFrontEnd.editor
             _container.PerRequest<MainViewModel, MainViewModel>();
         }
 
-        private void CreateDummyData(
+        private static void CreateDummyData(
             ClassifierDictionary classifierDictionary,
             RelationList relations)
         {
@@ -63,15 +63,13 @@ namespace YumlFrontEnd.editor
             var airplane = classifierDictionary.CreateNewClass("Airplane");
             var vehicle = classifierDictionary.CreateNewClass("Vehicle");
             var color = classifierDictionary.CreateNewClass("color");
-            var @string = classifierDictionary.CreateNewClass("string");
-            var integer = classifierDictionary.CreateNewClass("int");
-            var @void = classifierDictionary.CreateNewClass("void");
+           
 
             car.CreateProperty("Color", color);
-            airplane.CreateProperty("Length", integer);
+            airplane.CreateProperty("Length", classifierDictionary.FindByName("int"));
 
-            car.CreateMethod("Drive", @void);
-            airplane.CreateMethod("Fly", @void);
+            car.CreateMethod("Drive", classifierDictionary.FindByName("void"));
+            airplane.CreateMethod("Fly", classifierDictionary.FindByName("void"));
 
             car.BaseClass = vehicle;
             var relation = car.AddNewRelation(color,RelationType.Aggregation);

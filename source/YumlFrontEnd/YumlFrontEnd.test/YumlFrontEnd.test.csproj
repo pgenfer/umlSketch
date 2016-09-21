@@ -106,6 +106,7 @@
     <Compile Include="DomainObject\ClassifierDictionaryTest.cs" />
     <Compile Include="DomainObject\PropertyListTest.cs" />
     <Compile Include="DomainObject\RelationTest.cs" />
+    <Compile Include="DomainObject\SystemTypesTest.cs" />
     <Compile Include="Domain\ClassifierDictionaryTests.cs" />
     <Compile Include="DiagramWriter\DiagramWriterTest.cs" />
     <Compile Include="Domain\ClassifierTest.cs" />

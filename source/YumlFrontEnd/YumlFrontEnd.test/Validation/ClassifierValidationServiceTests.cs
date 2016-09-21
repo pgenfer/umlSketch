@@ -9,16 +9,15 @@ using NSubstitute;
 
 namespace Yuml.Test
 {
-    [TestFixture]
-    public class ClassifierValidationServiceTest
+    public class ClassifierValidationServiceTest : SimpleTestBase
     {
         private ClassifierDictionary _classifiers;
         private ClassifierValidationService _validationService;
+        private const string NewName = "newName";
 
-        [SetUp]
-        public void Init()
+        protected override void Init()
         {
-            _classifiers = Substitute.For<ClassifierDictionary>();
+            _classifiers = CreateDictionaryWithoutSystemTypes();
             _validationService = new ClassifierValidationService(_classifiers);
         }
 
@@ -34,10 +33,9 @@ namespace Yuml.Test
         [TestDescription("Classifiers cannot have duplicate names")]
         public void ValidationClassifier_NameExists_Error()
         {
-            var newName = "newName";
-            _classifiers.IsClassNameFree(newName).Returns(false);
+            _classifiers.IsClassNameFree(NewName).Returns(false);
 
-            var validation = _validationService.ValidateNameChange("oldName", newName);
+            var validation = _validationService.ValidateNameChange("oldName", NewName);
 
             Assert.IsTrue(validation.HasError);
             Assert.AreEqual(Strings.NameAlreadyExists, validation.Message);
@@ -46,28 +44,23 @@ namespace Yuml.Test
         [TestDescription("Classifier name was not changed")]
         public void ValidationClassifier_NameNotChanged_NoError()
         {
-            var newName = "newName";
-            var validation = _validationService.ValidateNameChange(newName, newName);
-
+            var validation = _validationService.ValidateNameChange(NewName, NewName);
             Assert.IsFalse(validation.HasError);
         }
 
         [TestDescription("Classifier name can be changed when called initially")]
         public void ValidationClassifier_Initially_NoError()
         {
-            var newName = "newName";
-            var validation = _validationService.ValidateNameChange(string.Empty, newName);
-
+            var validation = _validationService.ValidateNameChange(string.Empty, NewName);
             Assert.IsFalse(validation.HasError);
         }
 
         [TestDescription("Classifier name does not exist and can be changed")]
         public void ValidationClassifier_NameNotExists_NoError()
         {
-            var newName = "newName";
-            _classifiers.IsClassNameFree(newName).Returns(true);
+            _classifiers.IsClassNameFree(NewName).Returns(true);
 
-            var validation = _validationService.ValidateNameChange("oldName", newName);
+            var validation = _validationService.ValidateNameChange("oldName", NewName);
 
             Assert.IsFalse(validation.HasError);
         }

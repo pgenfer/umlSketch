@@ -55,5 +55,15 @@ namespace Yuml.Test
 
             Assert.AreEqual(dtos[0].BaseClass,dtos[1]);
         }
+
+        [TestDescription("Missing system types should be added after hydrating")]
+        public void ClassifierWithSystemTypes_ConvertFromDto_MissingSystemTypesAreAdded()
+        {
+            // act: convert dtos to classifier types
+            _converter = new DomainDtoConverter();
+            var dictionary = _converter.ToDomain(new ClassifierDto[] {});
+
+            Assert.AreEqual(new SystemTypes().Count(),dictionary.Count);
+        }
     }
 }
