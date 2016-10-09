@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Common;
 using static System.Diagnostics.Contracts.Contract;
@@ -73,10 +74,36 @@ namespace Yuml
 
         public bool IsVisible
         {
-            get { return VisibleObjects.All(x => x.IsVisible); }
+            // if the list is empty or at least one item is visible
+            // mark the list as visible
+            get { return !VisibleObjects.Any() ||  VisibleObjects.Any(x => x.IsVisible); }
             set{foreach (var visibleObject in VisibleObjects) visibleObject.IsVisible = value;}
         }
 
         public IEnumerable<IVisible> VisibleObjects => _list.Cast<IVisible>();
+
+        private readonly Regex _findLastNumber = new Regex(@"(\d+)(?!.*\d)", RegexOptions.Compiled);
+
+        /// <summary>
+        /// creates a property with a useful name (e.g. New Property 1, New Property 2 etc...)
+        /// and a useful data type (e.g. the data type that was not used before)
+        /// </summary>
+        /// <returns></returns>
+        protected string FindBestName(string defaultName )
+        {
+            var defaulMemberNames = _list
+                .Where(x => x.Name.StartsWith(defaultName))
+                .Select(x => x.Name);
+            var highestNumber = 0;
+            foreach (var name in defaulMemberNames)
+            {
+                var match = _findLastNumber.Match(name);
+                if (match.Success)
+                    highestNumber = int.Parse(match.Groups[1].ToString());
+            }
+            var newName = $"{defaultName} {++highestNumber}";
+
+            return newName;
+        }
     }
 }

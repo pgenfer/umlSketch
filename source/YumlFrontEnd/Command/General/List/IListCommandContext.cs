@@ -7,7 +7,7 @@ namespace Yuml.Command
     public interface IListCommandContext<TDomain>
     {
         INewCommand New { get; }
-        IShowOrHideCommand Visibility { get; }
+        ShowOrHideAllObjectsInListCommand Visibility { get; }
         IQuery<TDomain> All { get; }
         /// <summary>
         /// returns the commands that are available for a single item

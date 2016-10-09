@@ -31,6 +31,7 @@ namespace Yuml.Command
                 messageSystem);
             CommandsForMethods = new MethodListCommandContext(
                 classifier,
+                classifierDictionary,
                 new MethodValidationService(classifier.Methods),
                 notificationServices.Method,
                 messageSystem);

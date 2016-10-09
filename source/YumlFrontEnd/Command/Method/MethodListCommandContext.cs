@@ -15,6 +15,7 @@ namespace Yuml.Command
 
         public MethodListCommandContext(
             Classifier classifier,
+            ClassifierDictionary availableClassifiers,
             IMethodNameValidationService nameValidation,
             MethodNotificationService notificationService,
             MessageSystem messageSystem)
@@ -22,8 +23,10 @@ namespace Yuml.Command
             _nameValidation = nameValidation;
             _notificationService = notificationService;
             _messageSystem = messageSystem;
+
             All = new Query<Method>(() => classifier.Methods);
-            Visibility = new ShowOrHideSingleObjectCommand(classifier.Methods, messageSystem);
+            Visibility = new ShowOrHideAllObjectsInListCommand(classifier.Methods, messageSystem);
+            New = new NewMethodCommand(classifier, availableClassifiers, messageSystem);
         }
 
         public override ISingleCommandContext GetCommandsForSingleItem(Method domainObject) =>

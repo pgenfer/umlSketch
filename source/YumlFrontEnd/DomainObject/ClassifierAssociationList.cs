@@ -16,7 +16,7 @@ namespace Yuml.DomainObject
     /// are not stored in this as this list only handles
     /// assocations
     /// </summary>
-    public class ClassifierAssociationList : IEnumerable<Relation>, IVisible
+    public class ClassifierAssociationList : IVisibleObjectList, IEnumerable<Relation>
     {
         /// <summary>
         /// the classifier that is the owner of this association list
@@ -51,7 +51,7 @@ namespace Yuml.DomainObject
         {
             // try to find a classifier that is suitable for this relation.
             // we take the first one which is not used already and which is not the
-            // source itslef
+            // source itself
             var usedClassifiers = _relations.Select(x => x.End.Classifier).Concat(new[] {_start});
             var firstUnusedClassifier = classifiers
                 .Except(usedClassifiers)
@@ -91,5 +91,7 @@ namespace Yuml.DomainObject
             get { return _relations.All(x => x.IsVisible); }
             set { _relations.ForEach(x => x.IsVisible = value);}
         }
+
+        public IEnumerable<IVisible> VisibleObjects => _relations;
     }
 }

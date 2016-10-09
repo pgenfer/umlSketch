@@ -15,7 +15,7 @@ namespace Yuml
     /// storage for classifiers. A classifier is always identified
     /// by its name, so the name must be unique.
     /// </summary>
-    public class ClassifierDictionary : IEnumerable<Classifier>, IVisible
+    public class ClassifierDictionary : IEnumerable<Classifier>, IVisibleObjectList
     {
         private readonly Dictionary<string, Classifier> _dictionary = 
             new Dictionary<string, Classifier>();
@@ -184,5 +184,7 @@ namespace Yuml
             get { return this.All(x => x.IsVisible); }
             set{foreach (var classifier in this) classifier.IsVisible = value;}
         }
+
+        public IEnumerable<IVisible> VisibleObjects => this;
     }
 }

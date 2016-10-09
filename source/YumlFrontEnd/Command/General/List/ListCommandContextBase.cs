@@ -15,7 +15,7 @@ namespace Yuml.Command
     public abstract class ListCommandContextBase<TDomain> : IListCommandContext<TDomain>
     {
         public INewCommand New { get; protected set; }
-        public IShowOrHideCommand Visibility { get; protected set; }
+        public ShowOrHideAllObjectsInListCommand Visibility { get; protected set; }
         public IQuery<TDomain> All { get; protected set; }
         public abstract ISingleCommandContext GetCommandsForSingleItem(TDomain domainObject);
     }

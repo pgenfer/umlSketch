@@ -7,7 +7,7 @@ using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
 {
-    public class MethodList : BaseList<Method>, IVisible
+    public class MethodList : BaseList<Method>
     {
         /// <summary>
         /// adds a new property to the property list.
@@ -40,10 +40,17 @@ namespace Yuml
 
         public SubSet FindMethodsThatDependOnClassifier(Classifier classifier) => Filter(x => x.ReturnType == classifier);
 
-        public bool IsVisible
+        /// <summary>
+        /// creates a property with a useful name (e.g. New Property 1, New Property 2 etc...)
+        /// and a useful data type (e.g. the data type that was not used before)
+        /// </summary>
+        /// <returns></returns>
+        public Method CreateNewMethodWithBestInitialValues(ClassifierDictionary systemClassifiers)
         {
-            get { return _list.All(x => x.IsVisible); }
-            set { _list.ForEach(x => x.IsVisible = value);}
+            var bestDefaultName = FindBestName("New Method");
+            var newMethod = CreateMethod(bestDefaultName, systemClassifiers.Void);
+
+            return newMethod;
         }
     }
 }

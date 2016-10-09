@@ -15,9 +15,9 @@
         {
             _classifiers = classifiers;
             _messageSystem = messageSystem;
-            New = new NewAssociationCommand(classifiers, classifier, messageSystem);
+            New = new NewAssociationCommand(classifier, classifiers,messageSystem);
             All = new Query<Relation>(() => classifier.Associations);
-            Visibility = new ShowOrHideSingleObjectCommand(classifier.Associations,messageSystem);
+            Visibility = new ShowOrHideAllObjectsInListCommand(classifier.Associations,messageSystem);
 
         }
 

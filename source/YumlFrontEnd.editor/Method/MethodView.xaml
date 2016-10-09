@@ -16,6 +16,7 @@
       cal:Bind.Model="{Binding}"/>
     <local:EditableTextBlock
       DockPanel.Dock="Left"
+      ForegroundTextBrush="{Binding IsVisible,Converter={StaticResource IsVisibleToColor}}"
       cal:Bind.Model="{Binding}"
       Margin="5"/>
   </DockPanel>

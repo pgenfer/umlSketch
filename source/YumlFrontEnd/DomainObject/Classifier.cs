@@ -20,7 +20,6 @@ namespace Yuml
     {
         private readonly NameMixin _name = new NameMixin();
         private readonly IVisible _visible = new VisibleMixin();
-        private readonly ClassifierAssociationList _associations;
 
         /// <summary>
         /// Specifies whether this classifier is a system type.
@@ -34,7 +33,7 @@ namespace Yuml
         /// </summary>
         public Classifier()
         {
-            _associations = new ClassifierAssociationList(this);
+            Associations = new ClassifierAssociationList(this);
         }
 
         public Classifier(string name, bool isSystemType=false) :this()
@@ -95,15 +94,20 @@ namespace Yuml
         /// optional base class of this classifier
         /// </summary>
         public Classifier BaseClass { get; set; }
-        public void DeleteRelation(Relation relation) => _associations.DeleteRelation(relation);
+        public void DeleteRelation(Relation relation) => Associations.DeleteRelation(relation);
         public Relation AddNewRelation(
             Classifier target,
             RelationType associationType,
             string startName="", 
             string endName="") => 
-            _associations.AddNewRelation(target, associationType, startName, endName);
-        public ClassifierAssociationList Associations => _associations;
+            Associations.AddNewRelation(target, associationType, startName, endName);
+
+        public ClassifierAssociationList Associations { get; }
+
         public Relation CreateNewAssociationWithBestInitialValues(ClassifierDictionary classifiers) => 
-            _associations.CreateNewAssociationWithBestInitialValues(classifiers);
+            Associations.CreateNewAssociationWithBestInitialValues(classifiers);
+
+        public Method CreateNewMethodWithBestInitialValues(ClassifierDictionary classifiers) =>
+            Methods.CreateNewMethodWithBestInitialValues(classifiers);
     }
 }

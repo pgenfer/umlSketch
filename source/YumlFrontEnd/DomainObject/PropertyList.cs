@@ -44,8 +44,6 @@ namespace Yuml
             }                
         }
 
-        private readonly Regex _findLastNumber = new Regex(@"(\d+)(?!.*\d)",RegexOptions.Compiled);
-
         /// <summary>
         /// creates a property with a useful name (e.g. New Property 1, New Property 2 etc...)
         /// and a useful data type (e.g. the data type that was not used before)
@@ -53,18 +51,7 @@ namespace Yuml
         /// <returns></returns>
         public Property CreateNewPropertyWithBestInitialValues(ClassifierDictionary systemClassifiers)
         {
-            const string defaultName = "New Property";
-            var defaultPropertyNames = _list
-                .Where(x => x.Name.StartsWith(defaultName))
-                .Select(x => x.Name);
-            var highestNumber = 0;
-            foreach (var name in defaultPropertyNames)
-            {
-                var match = _findLastNumber.Match(name);
-                if (match.Success)
-                    highestNumber = int.Parse(match.Groups[1].ToString());
-            }
-            var newName = $"{defaultName} {++highestNumber}";
+            var bestDefaultName = FindBestName("New Property");
 
             var bestType = _list
                 .GroupBy(x => x.Type)
@@ -72,7 +59,7 @@ namespace Yuml
                 .OrderByDescending(x => x.Value)
                 .FirstOrDefault().Key;
 
-            var newProperty = CreateProperty(newName, bestType ?? systemClassifiers.String);
+            var newProperty = CreateProperty(bestDefaultName, bestType ?? systemClassifiers.String);
 
             return newProperty;
         }
@@ -81,11 +68,5 @@ namespace Yuml
             string.Join(Environment.NewLine, _list.Select(x => x.ToString()));
 
         public SubSet FindPropertiesThatDependOnClassifier(Classifier classifier) => Filter(x => x.Type == classifier);
-
-        public bool IsVisible
-        {
-            get { return _list.All(x => x.IsVisible); }
-            set { _list.ForEach(x => x.IsVisible = value);}
-        }
     }
 }
