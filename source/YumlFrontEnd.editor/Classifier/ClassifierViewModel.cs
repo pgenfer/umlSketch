@@ -17,7 +17,7 @@ namespace YumlFrontEnd.editor
     /// <summary>
     /// view model for interaction with a single classifier object
     /// </summary>
-    internal class ClassifierViewModel : SingleItemViewModelBase<Classifier,ISingleClassifierCommands>
+    internal class ClassifierViewModel : SingleItemViewModel<Classifier,ISingleClassifierCommands>
     {
         private readonly ExpandableMixin _expanded = new ExpandableMixin();
         private SelectClassifierWithNullItemMixin _selectBaseClass;

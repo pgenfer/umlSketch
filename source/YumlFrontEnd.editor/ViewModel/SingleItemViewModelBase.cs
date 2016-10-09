@@ -1,32 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics.Contracts;
 using Yuml;
 using Yuml.Command;
 using YumlFrontEnd.editor.ViewModel;
-using static System.Diagnostics.Contracts.Contract;
 
 namespace YumlFrontEnd.editor
 {
-    /// <summary>
-    /// Base class for view models that represent a single domain object.
-    /// The type information of the available commands is a generic parameter,
-    /// in that way the CustomInit method can always use the correct type of command parameters
-    /// </summary>
-    /// <typeparam name="TDomain">type of the domain entitiy</typeparam>
-    /// <typeparam name="TSingleCommandContext">type of command context which is
-    /// available for this single domain object</typeparam>
-    internal abstract class SingleItemViewModelBase<TDomain,TSingleCommandContext> : SingleItemViewModelBase<TDomain> 
-        where TSingleCommandContext : ISingleCommandContext
-    {
-        protected readonly TSingleCommandContext _commands;
-     
-        protected SingleItemViewModelBase(TSingleCommandContext commands) :base(commands)
-        {
-            _commands = commands;
-        }
-    }
-
     /// <summary>
     /// single generic base type for view models.
     /// Used in listview models when concrete type information of the command context
@@ -61,15 +39,19 @@ namespace YumlFrontEnd.editor
         /// </summary>
         protected readonly ViewModelConverter _toViewModel = new ViewModelConverter();
         private readonly EditableNameMixin _name;
+        private readonly ChangeVisibilityMixin _changeVisibility;
 
         protected SingleItemViewModelBase(ISingleCommandContext commands)
         {
-            _commands = commands;
-            Requires(commands != null);
+            Contract.Requires(commands != null);
 
+            _commands = commands;
+            // setup mixins
             _name = new EditableNameMixin(commands.Rename);
-            // delegate events
+            _changeVisibility = new ChangeVisibilityMixin(commands.Visibility);
+            // forward mixin events
             _name.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
+            _changeVisibility.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
         }
 
         /// <summary>
@@ -88,6 +70,8 @@ namespace YumlFrontEnd.editor
             _viewModelFactory = viewModelFactory;
             _toViewModel.InitViewModel(domain, this);
             _parentViewModel = parentViewModel;
+            // all event handlers in this view model will automatically be
+            // registered at the message system
             viewModelFactory.MessageSystem.Subscribe(domain, this);
             CustomInit();
         }
@@ -121,10 +105,16 @@ namespace YumlFrontEnd.editor
         {
             _parentViewModel.RemoveItem(this);
             _viewModelFactory.MessageSystem.Unsubscribe(this);
-            _isRemoved = true;
         }
 
-        private bool _isRemoved = false;
+        /// <summary>
+        /// reacts on changes of the visibility of the domain object.
+        /// </summary>
+        /// <param name="domainEvent"></param>
+        public void OnVisibilityChanged(VisibilityChangedEvent domainEvent)
+        {
+            NotifyOfPropertyChange(nameof(IsVisible));
+        }
 
         public string Name
         {
@@ -152,6 +142,15 @@ namespace YumlFrontEnd.editor
         {
             get { return _name.NameErrorMessage; }
             set { _name.NameErrorMessage = value; }
+        }
+
+        public bool IsVisible => _changeVisibility.IsVisible;
+        public void ShowOrHide()
+        {
+            _changeVisibility.ShowOrHide();   
+            // since one of the child element has changed,
+            // also update the visible state of the parent view model
+            _parentViewModel.NotifyOfPropertyChange(nameof(IsVisible));
         }
     }
 }

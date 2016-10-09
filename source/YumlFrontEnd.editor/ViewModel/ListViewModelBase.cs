@@ -24,6 +24,8 @@ namespace YumlFrontEnd.editor
         /// whether this button should be visible or not
         /// </summary>
         private readonly ExpandableMixin _expandable = new ExpandableMixin();
+
+        private readonly ChangeVisibilityMixin _visibility;
         
         /// <summary>
         /// sub items in this list
@@ -69,6 +71,7 @@ namespace YumlFrontEnd.editor
         protected ListViewModelBase(IListCommandContext<TDomain> commands)
         {
             _commands = commands;
+            _visibility = new ChangeVisibilityMixin(commands.Visibility);
         }
 
         /// <summary>
@@ -91,5 +94,13 @@ namespace YumlFrontEnd.editor
         /// </summary>
         public virtual bool CanExpand => Items.Any();
         public void RemoveItem(SingleItemViewModelBase<TDomain> item) => _items.RemoveItem(item);
+
+        public bool IsVisible => _visibility.IsVisible;
+
+        public void ShowOrHide()
+        {
+            _visibility.ShowOrHide();
+            NotifyOfPropertyChange(nameof(IsVisible));
+        } 
     }
 }

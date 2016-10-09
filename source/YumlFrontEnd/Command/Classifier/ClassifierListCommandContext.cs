@@ -25,9 +25,10 @@ namespace Yuml.Command
             _notificationService = notificationServices;
             _deletionService = deletionService;
             _messageSystem = messageSystem;
-
+            
             // setup commands
             All = new Query<Classifier>(() => classifiers.NoSystemTypes);
+            Visibility = new ShowOrHideSingleObjectCommand(classifiers, messageSystem);
         }
 
         public override ISingleCommandContext GetCommandsForSingleItem(Classifier domainObject) =>

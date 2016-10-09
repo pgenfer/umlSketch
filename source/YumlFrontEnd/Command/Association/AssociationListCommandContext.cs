@@ -15,9 +15,10 @@
         {
             _classifiers = classifiers;
             _messageSystem = messageSystem;
-            // TODO: implement visible
             New = new NewAssociationCommand(classifiers, classifier, messageSystem);
             All = new Query<Relation>(() => classifier.Associations);
+            Visibility = new ShowOrHideSingleObjectCommand(classifier.Associations,messageSystem);
+
         }
 
         public override ISingleCommandContext GetCommandsForSingleItem(Relation domainObject)

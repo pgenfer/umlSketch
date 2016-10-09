@@ -153,6 +153,8 @@
     </Compile>
     <Compile Include="Association\AssociationViewModel.cs" />
     <Compile Include="Classifier\ClassifierSelectionSourceWithExcludedItem.cs" />
+    <Compile Include="Converter\IsVisibleToColorConverter.cs" />
+    <Compile Include="Converter\TestConverter.cs" />
     <Compile Include="Converter\TrueToCollapseConverter.cs" />
     <Compile Include="Classifier\ClassifierItemViewModel.cs" />
     <Compile Include="Classifier\ClassifierSelectionItemsSource.cs" />
@@ -163,6 +165,7 @@
       <DependentUpon>EditorStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Extension\ListExtension.cs" />
+    <Compile Include="Mixin\ChangeVisibilityMixin.cs" />
     <Compile Include="Mixin\SelectClassifierWithNullItemMixin.cs" />
     <Compile Include="Renderer\RendererView.xaml.cs">
       <DependentUpon>RendererView.xaml</DependentUpon>
@@ -200,6 +203,7 @@
     <Compile Include="UserControls\ExpanderButton.cs" />
     <Compile Include="ViewModel\AutoPropertyChange.cs" />
     <Compile Include="Mixin\SelectClassifierMixin.cs" />
+    <Compile Include="ViewModel\SingleItemViewModel.cs" />
     <Compile Include="ViewModel\SingleItemViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelConverter.cs" />
     <Compile Include="Classifier\ClassifierItemView.xaml.cs">
@@ -231,6 +235,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Renderer\RendererView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ButtonStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ColorStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ControlStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -361,6 +381,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ViewModel-Model-Connection.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\eye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\eye_gray.png" />
+    <Resource Include="Resources\Images\eye_gray_strike_through.png" />
+    <Resource Include="Resources\Images\eye_strike_through.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

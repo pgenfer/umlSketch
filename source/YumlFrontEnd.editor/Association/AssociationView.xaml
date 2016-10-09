@@ -7,29 +7,20 @@
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:AssociationViewModel}">
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="100"/>
-      <ColumnDefinition Width="100"/>
-    </Grid.ColumnDefinitions>
-    <!-- name is not used at the moment 
-    <local:EditableTextBlock
-      Watermark="name of assocation"
-      Grid.Column="0"
-      cal:Bind.Model="{Binding}"
-      Margin="5"/>      
-    <TextBlock
-      Grid.Column="1"
-      Text=":"
-      Margin="2,5"/>
-      -->
+  <DockPanel
+    HorizontalAlignment="Stretch">
     <ComboBox
-      Grid.Column="0"
+      DockPanel.Dock="Left"
       x:Name="Associations"
       Margin="5"/>
+    <local:ButtonBar
+      DockPanel.Dock="Right"
+      HasDeleteButton="True"
+      HasNewButton="False"
+      cal:Bind.Model="{Binding}"/>
     <ComboBox
-      Grid.Column="1"
+      DockPanel.Dock="Left"
       x:Name="Classifiers"
       Margin="5"/>
-  </Grid>
+  </DockPanel>
 </UserControl>

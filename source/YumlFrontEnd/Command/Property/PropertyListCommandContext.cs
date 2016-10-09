@@ -15,18 +15,22 @@ namespace Yuml.Command
         private readonly ClassifierDictionary _classifiers;
         private readonly IValidateNameService _propertyValidationNameService;
         private readonly PropertyNotificationService _notificationService;
+        private readonly MessageSystem _messageSystem;
 
         public PropertyListCommandContext(
             Classifier classifier,
             ClassifierDictionary classifiers,
             IValidateNameService propertyValidationNameService,
-            PropertyNotificationService notificationService)
+            PropertyNotificationService notificationService,
+            MessageSystem messageSystem)
         {
             _classifiers = classifiers;
             _propertyValidationNameService = propertyValidationNameService;
             _notificationService = notificationService;
+            _messageSystem = messageSystem;
             All = new Query<Property>(() => classifier.Properties);
             New = new NewPropertyCommand(classifiers,classifier,notificationService);
+            Visibility = new ShowOrHideAllObjectsInListCommand(classifier.Properties, messageSystem);
         }
 
         /// <summary>
@@ -41,7 +45,7 @@ namespace Yuml.Command
                 _classifiers,
                 domainObject,
                 _propertyValidationNameService,
-                _notificationService);
+                _notificationService,_messageSystem);
         }
     }
 }

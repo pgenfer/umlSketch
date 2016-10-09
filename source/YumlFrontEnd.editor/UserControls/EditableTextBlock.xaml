@@ -7,6 +7,7 @@
              mc:Ignorable="d"
              xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:converter="clr-namespace:YumlFrontEnd.editor.Converter"
              d:DesignHeight="300"
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance local:EditableNameMixin}"
@@ -15,7 +16,7 @@
     <Style BasedOn="{StaticResource TextBlock-Sketch}"
            TargetType="TextBlock" />
     <Style BasedOn="{StaticResource TextBox-Sketch}"
-           TargetType="TextBox" />
+           TargetType="TextBox"/>
   </UserControl.Resources>
   <Grid>
     <Grid.ColumnDefinitions>
@@ -35,7 +36,8 @@
                caliburn:Message.Attach="[Event MouseLeftButtonDown] = [Action StartEditing]"
                Visibility="{Binding IsEditable,Converter={local:TrueToCollapseConverter}}"
                HorizontalAlignment="Left"
-               ToolTip="{x:Static local:Tooltips.ClickToStartEditing}"/>
+               ToolTip="{x:Static local:Tooltips.ClickToStartEditing}"
+               Foreground="{Binding ElementName=EditableTextBlockControl,Path=ForegroundTextBrush}"/>
     <TextBox
       Name="EditNameTextBox"
       Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
@@ -65,7 +67,6 @@
         </Style>
       </TextBlock.Style>
     </TextBlock>
-    
     <local:PersistentToolTip
       Grid.Column="1"
       PlacementTarget="{Binding ElementName=EditNameTextBox}"

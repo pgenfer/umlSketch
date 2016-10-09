@@ -72,7 +72,6 @@ namespace Yuml
         /// true if the class is an interface, otherwise false
         /// </summary>
         public bool IsInterface { get; internal set; }
-        public void ShowOrHideAllProperties(bool showOrHide) => Properties.ShowOrHideAllProperties(showOrHide);
         public Property CreateProperty(string name, Classifier type,bool isVisible = true) => 
             Properties.CreateProperty(name, type,isVisible);
         public IEnumerator<Property> GetEnumerator() => Properties.GetEnumerator();
@@ -103,7 +102,7 @@ namespace Yuml
             string startName="", 
             string endName="") => 
             _associations.AddNewRelation(target, associationType, startName, endName);
-        public IEnumerable<Relation> Associations => _associations;
+        public ClassifierAssociationList Associations => _associations;
         public Relation CreateNewAssociationWithBestInitialValues(ClassifierDictionary classifiers) => 
             _associations.CreateNewAssociationWithBestInitialValues(classifiers);
     }

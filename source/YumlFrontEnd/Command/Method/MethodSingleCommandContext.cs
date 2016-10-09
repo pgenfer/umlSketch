@@ -12,12 +12,14 @@ namespace Yuml.Command
         public MethodSingleCommandContext(
             Method method,
             IMethodNameValidationService validateName,
-            MethodNotificationService notificationService)
+            MethodNotificationService notificationService,
+            MessageSystem messageSystem)
         {
             Rename = new RenameMethodCommand(
                 method,
                 validateName,
                 notificationService);
+            Visibility = new ShowOrHideSingleObjectCommand(method, messageSystem);
         }
     }
 }

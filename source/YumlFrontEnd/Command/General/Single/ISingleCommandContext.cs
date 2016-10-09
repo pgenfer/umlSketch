@@ -7,6 +7,6 @@ namespace Yuml.Command
     {
         IRenameCommand Rename { get; }
         IDeleteCommand Delete { get; }
-        IShowOrHideCommand Visibility { get; }
+        ShowOrHideSingleObjectCommand Visibility { get; }
     }
 }

@@ -8,7 +8,7 @@ using Yuml.Command;
 
 namespace YumlFrontEnd.editor
 {
-    internal class AssociationViewModel : SingleItemViewModelBase<Relation,ISingleAssociationCommands>
+    internal class AssociationViewModel : SingleItemViewModel<Relation,ISingleAssociationCommands>
     {
         /// <summary>
         /// viewmodel that holds the current association

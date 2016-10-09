@@ -4,13 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:YumlFrontEnd.editor"
-             xmlns:SketchControls="clr-namespace:Microsoft.Expression.Prototyping.SketchControls;assembly=Microsoft.Expression.Prototyping.SketchControls"
              xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:ClassifierViewModel}"
              d:DesignHeight="300"
              d:DesignWidth="300"
              Focusable="False">
+  <UserControl.Resources>
+    <ResourceDictionary Source="../Styles/ControlStyles.xaml"/>
+  </UserControl.Resources>
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="Auto" />
@@ -34,6 +36,7 @@
     <!-- class name -->
     <local:EditableTextBlock 
       HorizontalAlignment="Left"
+      ForegroundTextBrush="{Binding IsVisible,Converter={StaticResource IsVisibleToColor}}"
       FontWeight="Bold"
       Grid.Column="1"
       Grid.Row="0"

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Common;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
@@ -14,12 +15,6 @@ namespace Yuml
     /// </summary>
     public class PropertyList : BaseList<Property>
     {
-        /// <summary>
-        /// sets visible flag to all properties of the list
-        /// </summary>
-        /// <param name="showOrHide"></param>
-        public void ShowOrHideAllProperties(bool showOrHide) => _list.ForEach(x => x.IsVisible = showOrHide);
-
         /// <summary>
         /// adds a new property to the property list.
         /// Currently there is no restriction about duplicate properties
@@ -87,5 +82,10 @@ namespace Yuml
 
         public SubSet FindPropertiesThatDependOnClassifier(Classifier classifier) => Filter(x => x.Type == classifier);
 
+        public bool IsVisible
+        {
+            get { return _list.All(x => x.IsVisible); }
+            set { _list.ForEach(x => x.IsVisible = value);}
+        }
     }
 }

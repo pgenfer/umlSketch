@@ -14,7 +14,7 @@ namespace Yuml
     /// handle classifier members or parameters
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class BaseList<T> : IEnumerable<T> where T: INamed
+    public abstract class BaseList<T> : IEnumerable<T>, IVisibleObjectList where T: INamed, IVisible
     {
         protected readonly List<T> _list = new List<T>();
 
@@ -69,5 +69,14 @@ namespace Yuml
                 }
             }
         }
+
+
+        public bool IsVisible
+        {
+            get { return VisibleObjects.All(x => x.IsVisible); }
+            set{foreach (var visibleObject in VisibleObjects) visibleObject.IsVisible = value;}
+        }
+
+        public IEnumerable<IVisible> VisibleObjects => _list.Cast<IVisible>();
     }
 }

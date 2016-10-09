@@ -14,6 +14,7 @@ namespace Yuml.Command
                 ChangeAssociationTargetCommand(association,classifiers,messageSystem);
             ChangeAssociationTypeCommand = new 
                 ChangeAssociationCommand(association,messageSystem);
+            Visibility = new ShowOrHideSingleObjectCommand(association, messageSystem);
         }
 
         public IChangeTypeCommand ChangeAssociationTargetCommand { get; }

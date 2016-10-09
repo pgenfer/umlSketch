@@ -11,8 +11,6 @@ namespace Yuml.Command
 {
     public class ClassifierSingleCommandContext : SingleCommandContextBase, ISingleClassifierCommands
     {
-        private readonly MessageSystem _messageSystem;
-
         public ClassifierSingleCommandContext(
             Classifier classifier,
             ClassifierDictionary classifierDictionary,
@@ -20,7 +18,6 @@ namespace Yuml.Command
             DeletionService deletionService,
             MessageSystem messageSystem)
         {
-            _messageSystem = messageSystem;
             Rename = new RenameClassifierCommand(
                 classifier,
                 classifierDictionary,
@@ -30,11 +27,13 @@ namespace Yuml.Command
                 classifier,
                 classifierDictionary,
                 new PropertyValidationService(classifier.Properties), 
-                notificationServices.Property);
+                notificationServices.Property,
+                messageSystem);
             CommandsForMethods = new MethodListCommandContext(
                 classifier,
                 new MethodValidationService(classifier.Methods),
-                notificationServices.Method);
+                notificationServices.Method,
+                messageSystem);
             CommandsForAssociations = new AssociationListCommandContext(
                 classifier,
                 classifierDictionary,
@@ -44,7 +43,7 @@ namespace Yuml.Command
                 classifierDictionary, 
                 notificationServices.Relation);
             Delete = new DeleteClassifierCommand(classifier, deletionService);
-            // TODO: implement other commands from base class
+            Visibility = new ShowOrHideSingleObjectCommand(classifier, messageSystem);
         }
 
         public IListCommandContext<Property> CommandsForProperties { get; }

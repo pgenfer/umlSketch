@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml.DomainObject
@@ -15,7 +16,7 @@ namespace Yuml.DomainObject
     /// are not stored in this as this list only handles
     /// assocations
     /// </summary>
-    public class ClassifierAssociationList : IEnumerable<Relation>
+    public class ClassifierAssociationList : IEnumerable<Relation>, IVisible
     {
         /// <summary>
         /// the classifier that is the owner of this association list
@@ -85,5 +86,10 @@ namespace Yuml.DomainObject
         public IEnumerator<Relation> GetEnumerator() => _relations.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _relations.GetEnumerator();
 
+        public bool IsVisible
+        {
+            get { return _relations.All(x => x.IsVisible); }
+            set { _relations.ForEach(x => x.IsVisible = value);}
+        }
     }
 }

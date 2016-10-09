@@ -10,7 +10,7 @@ using Yuml.Command;
 
 namespace YumlFrontEnd.editor
 {
-    internal class PropertyViewModel : SingleItemViewModelBase<Property,ISinglePropertyCommands>
+    internal class PropertyViewModel : SingleItemViewModel<Property,ISinglePropertyCommands>
     {
         private SelectClassifierMixin _selectClassifier;
 

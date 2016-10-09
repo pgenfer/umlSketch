@@ -13,7 +13,8 @@ namespace Yuml.Command
             ClassifierDictionary availableClassifiers,
             Property property,
             IValidateNameService propertyValidationNameService,
-            PropertyNotificationService propertyNotifcationService)
+            PropertyNotificationService propertyNotifcationService,
+            MessageSystem messageSystem)
         {
             Rename = new RenameMemberCommand(
                 property,
@@ -23,6 +24,7 @@ namespace Yuml.Command
                 availableClassifiers,
                 property,
                 propertyNotifcationService);
+            Visibility = new ShowOrHideSingleObjectCommand(property, messageSystem);
         }
 
         public IChangeTypeCommand ChangeTypeOfProperty { get; }

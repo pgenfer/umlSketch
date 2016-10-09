@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using Common;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
 {
-    public class MethodList : BaseList<Method>
+    public class MethodList : BaseList<Method>, IVisible
     {
         /// <summary>
         /// adds a new property to the property list.
@@ -38,5 +39,11 @@ namespace Yuml
         }
 
         public SubSet FindMethodsThatDependOnClassifier(Classifier classifier) => Filter(x => x.ReturnType == classifier);
+
+        public bool IsVisible
+        {
+            get { return _list.All(x => x.IsVisible); }
+            set { _list.ForEach(x => x.IsVisible = value);}
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
@@ -14,7 +15,7 @@ namespace Yuml
     /// storage for classifiers. A classifier is always identified
     /// by its name, so the name must be unique.
     /// </summary>
-    public class ClassifierDictionary : IEnumerable<Classifier>
+    public class ClassifierDictionary : IEnumerable<Classifier>, IVisible
     {
         private readonly Dictionary<string, Classifier> _dictionary = 
             new Dictionary<string, Classifier>();
@@ -177,5 +178,11 @@ namespace Yuml
         }
 
         internal IEnumerable<Classifier> NoSystemTypes => this.Where(x => !x.IsSystemType);
+
+        public bool IsVisible
+        {
+            get { return this.All(x => x.IsVisible); }
+            set{foreach (var classifier in this) classifier.IsVisible = value;}
+        }
     }
 }

@@ -57,5 +57,17 @@ namespace YumlFrontEnd.editor
             get { return (bool) GetValue(ShowWatermarkProperty); }
             set { SetValue(ShowWatermarkProperty, value); }
         }
+
+        public static readonly DependencyProperty ForegroundTextBrushProperty = DependencyProperty.Register(
+            "ForegroundTextBrush", typeof(Brush), typeof(EditableTextBlock), 
+            new PropertyMetadata(Brushes.Black));
+
+        public Brush ForegroundTextBrush
+        {
+            get { return (Brush) GetValue(ForegroundTextBrushProperty); }
+            set { SetValue(ForegroundTextBrushProperty, value); }
+        }
+
+        
     }
 }

@@ -8,7 +8,7 @@ using Yuml.Command;
 
 namespace YumlFrontEnd.editor
 {
-    internal class MethodViewModel : SingleItemViewModelBase<Method,ISingleCommandContext>
+    internal class MethodViewModel : SingleItemViewModel<Method,ISingleCommandContext>
     {
         public MethodViewModel(ISingleCommandContext commands) : base(commands)
         {

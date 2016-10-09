@@ -101,6 +101,9 @@
     <Compile Include="Command\Association\NewAssociationCommand.cs" />
     <Compile Include="Command\Association\RenameAssociationCommand.cs" />
     <Compile Include="Command\Classifier\ChangeBaseClassCommand.cs" />
+    <Compile Include="Command\General\IShowOrHideCommand.cs" />
+    <Compile Include="Command\General\List\ShowOrHideAllObjectsInListCommand.cs" />
+    <Compile Include="Event\VisibilityChangedEvent.cs" />
     <Compile Include="Command\Property\ChangeTypeOfPropertyCommand.cs" />
     <Compile Include="Command\General\Single\IChangeTypeCommand.cs" />
     <Compile Include="Command\General\Single\RenameMemberCommand.cs" />
@@ -119,7 +122,7 @@
     <Compile Include="Command\General\Single\IDeleteCommand.cs" />
     <Compile Include="Command\General\List\INewCommand.cs" />
     <Compile Include="Command\General\List\IQuery.cs" />
-    <Compile Include="Command\General\Single\IShowOrHideCommand.cs" />
+    <Compile Include="Command\General\Single\ShowOrHideSingleObjectCommand.cs" />
     <Compile Include="Command\Classifier\DeleteClassifierCommand.cs" />
     <Compile Include="Command\General\Single\IRenameCommand.cs" />
     <Compile Include="Command\Classifier\RenameClassifierCommand.cs" />

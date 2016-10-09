@@ -1,10 +1,10 @@
 ﻿<UserControl x:Class="YumlFrontEnd.editor.ButtonBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:editor="clr-namespace:YumlFrontEnd.editor"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              x:Name="ButtonBarControl">
   <StackPanel
@@ -23,17 +23,25 @@
       MouseOverBrush="{StaticResource DeleteActionMouseOver}"
       Visibility="{Binding ElementName=ButtonBarControl,
       Path=HasDeleteButton,Converter={editor:FalseToHideConverter}}"/>
-     <editor:ActionButton
-      HorizontalAlignment="Right"
-      Style="{StaticResource ActionButtonStyle}"
-      x:Name="New"
-      Margin="2,0"
-      Content="+"
-      Width="20"
-      Height="20"
-      MouseDownBrush="{StaticResource NewActionMouseDown}"
-      MouseOverBrush="{StaticResource NewActionMouseOver}"
-      Visibility="{Binding ElementName=ButtonBarControl,
+    <editor:ActionButton
+     HorizontalAlignment="Right"
+     Style="{StaticResource ActionButtonStyle}"
+     x:Name="New"
+     Margin="2,0"
+     Content="+"
+     Width="20"
+     Height="20"
+     MouseDownBrush="{StaticResource NewActionMouseDown}"
+     MouseOverBrush="{StaticResource NewActionMouseOver}"
+     Visibility="{Binding ElementName=ButtonBarControl,
       Path=HasNewButton,Converter={editor:FalseToHideConverter}}"/>
+    <Button
+        HorizontalAlignment="Right"
+        Style="{StaticResource VisibilityButtonStyle}"
+        x:Name="ShowOrHide"
+        Margin="2,0"
+        Width="20"
+        Height="20">
+    </Button>
   </StackPanel>
 </UserControl>

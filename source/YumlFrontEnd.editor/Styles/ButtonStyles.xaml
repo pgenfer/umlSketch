@@ -1,0 +1,137 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:YumlFrontEnd.editor.Styles"
+                    xmlns:editor="clr-namespace:YumlFrontEnd.editor">
+  <!-- action button -->
+  <Style
+    x:Key="ActionButtonStyle"
+    BasedOn="{StaticResource CircleButton-Sketch}"
+    TargetType="editor:ActionButton">
+    <Style.Setters>
+      <Setter Property="Foreground" Value="{StaticResource MouseOverBackground-Sketch}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource MouseOverBackground-Sketch}"/>
+    </Style.Setters>
+    <Style.Triggers>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter
+          Property="Foreground"
+          Value="{Binding RelativeSource={RelativeSource Self},Path=MouseOverBrush}"/>
+        <Setter
+          Property="BorderBrush"
+          Value="{Binding RelativeSource={RelativeSource Self},Path=MouseOverBrush}"/>
+      </Trigger>
+      <Trigger Property="IsPressed" Value="True">
+        <Setter
+          Property="Foreground"
+          Value="{Binding RelativeSource={RelativeSource Self},Path=MouseDownBrush}"/>
+        <Setter
+          Property="BorderBrush"
+          Value="{Binding RelativeSource={RelativeSource Self},Path=MouseDownBrush}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <!-- visible button 
+            four states:
+            1. visible and mouse over/down
+            2. visible and no mouse over
+            3. invisible and mouse over /down
+            4. invisible and no mouse over
+            The button always represents the current state
+            if the object is invisible, the eye is strike through
+            if the object is visible, the eye is normal
+          -->
+  <Style
+    x:Key="VisibilityButtonStyle"
+    TargetType="{x:Type Button}">
+    <Style.Setters>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate>
+            <Image x:Name="ButtonImage">
+              <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                  <Style.Triggers>
+                    <!-- visible - w/o highlight -->
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsVisible}" Value="True"/>
+                        <Condition Binding="{Binding ElementName=ButtonImage, Path=IsMouseOver}" Value="True"/>
+                      </MultiDataTrigger.Conditions>
+                      <MultiDataTrigger.Setters>
+                        <Setter Property="Source" Value="{StaticResource VisibleMouseDownImage}"/>
+                      </MultiDataTrigger.Setters>
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsVisible}" Value="True"/>
+                        <Condition Binding="{Binding ElementName=ButtonImage, Path=IsMouseOver}" Value="False"/>
+                      </MultiDataTrigger.Conditions>
+                      <MultiDataTrigger.Setters>
+                        <Setter Property="Source" Value="{StaticResource VisibleNotMouseDownImage}"/>
+                      </MultiDataTrigger.Setters>
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsVisible}" Value="True"/>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType=Button},Path=IsPressed}"
+                                   Value="True"/>
+                      </MultiDataTrigger.Conditions>
+                      <MultiDataTrigger.Setters>
+                        <Setter Property="Source" Value="{StaticResource VisibleMouseDownImage}"/>
+                      </MultiDataTrigger.Setters>
+                    </MultiDataTrigger>
+                    <!-- invisible w/o highlight -->
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsVisible}" Value="False"/>
+                        <Condition Binding="{Binding ElementName=ButtonImage, Path=IsMouseOver}" Value="True"/>
+                      </MultiDataTrigger.Conditions>
+                      <MultiDataTrigger.Setters>
+                        <Setter Property="Source" Value="{StaticResource NotVisibleMouseDownImage}"/>
+                      </MultiDataTrigger.Setters>
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsVisible}" Value="False"/>
+                        <Condition Binding="{Binding ElementName=ButtonImage, Path=IsMouseOver}" Value="False"/>
+                      </MultiDataTrigger.Conditions>
+                      <MultiDataTrigger.Setters>
+                        <Setter Property="Source" Value="{StaticResource NotVisibleNotMouseDownImage}"/>
+                      </MultiDataTrigger.Setters>
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsVisible}" Value="False"/>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType=Button},Path=IsPressed}"
+                                   Value="True"/>
+                      </MultiDataTrigger.Conditions>
+                      <MultiDataTrigger.Setters>
+                        <Setter Property="Source" Value="{StaticResource NotVisibleMouseDownImage}"/>
+                      </MultiDataTrigger.Setters>
+                    </MultiDataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </Image.Style>
+            </Image>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style.Setters>
+  </Style>
+
+  <!-- expander button -->
+  <Style x:Key="ExpanderButtonStyle"
+         TargetType="{x:Type editor:ExpanderButton}"
+         BasedOn="{StaticResource ActionButtonStyle}">
+    <Style.Setters>
+      <Setter Property="Width" Value="22" />
+      <Setter Property="Height" Value="22" />
+      <Setter Property="MouseDownBrush" Value="{StaticResource PressedForeground-Sketch}"/>
+      <Setter Property="MouseOverBrush" Value="{StaticResource DisabledForeground-Sketch}"/>
+    </Style.Setters>
+  </Style>
+
+
+
+</ResourceDictionary>
