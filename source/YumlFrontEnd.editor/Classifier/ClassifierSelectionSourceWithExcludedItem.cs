@@ -16,12 +16,10 @@ namespace YumlFrontEnd.editor
         private string _excludedName;
 
         public ClassifierSelectionSourceWithExcludedItem(
-            ClassifierDictionary classifiers, 
-            ClassifierNotificationService notification,
+            ClassifierDictionary classifiers,
             MessageSystem messageSystem,
             string classifierNameToExclude) : 
-                base(classifiers, 
-                    notification,
+                base(classifiers,
                     // return all classifiers but ignore the one with the given name
                     () => classifiers.OrderBy(x => x.Name).Where(x => x.Name != classifierNameToExclude),
                     messageSystem)
@@ -29,16 +27,16 @@ namespace YumlFrontEnd.editor
             _excludedName = classifierNameToExclude;
         }
 
-        protected override void OnNameChanged(string oldName, string newName)
+        protected override void OnNameChanged(NameChangedEvent nameChangedEvent)
         {
             // the item which is excluded did change, so remember the new name
-            if (oldName == _excludedName)
+            if (nameChangedEvent.OldName == _excludedName)
             {
-                _excludedName = newName;
+                _excludedName = nameChangedEvent.NewName;
                 return;
             }
 
-            base.OnNameChanged(oldName, newName);
+            base.OnNameChanged(nameChangedEvent);
         }
     }
 }

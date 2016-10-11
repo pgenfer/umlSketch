@@ -10,18 +10,14 @@ namespace Yuml.Command
     class ChangeAssociationTargetCommand : DomainObjectBaseCommand<Relation>, IChangeTypeCommand
     {
         private readonly ClassifierDictionary _classifiers;
-        private readonly MessageSystem _messageSystem;
-
+        
         public ChangeAssociationTargetCommand(
             Relation domainObject,
             ClassifierDictionary classifiers,
-            MessageSystem messageSystem) : base(domainObject)
+            MessageSystem messageSystem) : base(domainObject,messageSystem)
         {
             Requires(classifiers != null);
-            Requires(messageSystem != null);
-
             _classifiers = classifiers;
-            _messageSystem = messageSystem;
         }
 
         public void ChangeType(string nameOfOldType, string nameOfNewType)

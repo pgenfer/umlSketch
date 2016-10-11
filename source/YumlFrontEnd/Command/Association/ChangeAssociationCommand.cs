@@ -15,18 +15,10 @@ namespace Yuml.Command
     /// </summary>
     public class ChangeAssociationCommand : DomainObjectBaseCommand<Relation> 
     {
-        /// <summary>
-        /// message system used to propagate the domain event
-        /// </summary>
-        private readonly MessageSystem _messageSystem;
-
         public ChangeAssociationCommand(
             Relation domainObject,
-            MessageSystem messageSystem) : base(domainObject)
+            MessageSystem messageSystem) : base(domainObject,messageSystem)
         {
-            Requires(messageSystem != null);
-
-            _messageSystem = messageSystem;
         }
 
         public void ChangeAssociation(RelationType newRelationType)

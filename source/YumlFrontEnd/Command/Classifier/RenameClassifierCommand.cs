@@ -9,7 +9,6 @@ namespace Yuml.Command
     /// </summary>
     public class RenameClassifierCommand : DomainObjectBaseCommand<Classifier>, IRenameCommand
     {
-        private readonly ClassifierNotificationService _notificationService;
         private readonly ClassifierDictionary _classifierDictionary;
         private readonly IValidateNameService _validateNameService;
 
@@ -17,14 +16,13 @@ namespace Yuml.Command
             Classifier classifier,
             ClassifierDictionary classifierDictionary,
             IValidateNameService validateNameService,
-            ClassifierNotificationService notificationService) : base(classifier)
+            MessageSystem messageSystem) : base(classifier,messageSystem)
         {
-            Requires(notificationService != null);
+            Requires(messageSystem != null);
             Requires(classifier != null);
             Requires(classifierDictionary != null);
             Requires(validateNameService != null);
 
-            _notificationService = notificationService;
             _classifierDictionary = classifierDictionary;
             _validateNameService = validateNameService;
         }
@@ -37,7 +35,7 @@ namespace Yuml.Command
                 return;
 
             _classifierDictionary.RenameClassifier(_domainObject, newName);
-            _notificationService.FireNameChange(oldName, newName);
+            _messageSystem.Publish(_domainObject, new NameChangedEvent(oldName, newName));
         }
 
         public ValidationResult CanRenameWith(string newName) => 

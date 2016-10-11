@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using static System.Diagnostics.Contracts.Contract;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,7 @@ namespace Yuml.Command
     /// command interface is used when an assigned classifier 
     /// is changed (e.g. the return type of a method, the type of a property etc...)
     /// </summary>
+    [ContractClass(typeof(ChangeTypeCommandContract))]
     public interface IChangeTypeCommand
     {
         /// <summary>
@@ -24,6 +27,7 @@ namespace Yuml.Command
     /// extension of the change type command.
     /// The existing type can also be set to null (e.g. when changing base class of a class)
     /// </summary>
+    [ContractClass(typeof(ChangeTypeToNullCommandContract))]
     public interface IChangeTypeToNullCommand : IChangeTypeCommand
     {
         /// <summary>
@@ -38,5 +42,24 @@ namespace Yuml.Command
         /// </summary>
         /// <param name="nameOfNewType"></param>
         void SetNewType(string nameOfNewType);
+    }
+
+    [ContractClassFor(typeof(IChangeTypeCommand))]
+    internal abstract class ChangeTypeCommandContract : IChangeTypeCommand
+    {
+        void IChangeTypeCommand.ChangeType(string nameOfOldType, string nameOfNewType) =>
+            Requires(nameOfOldType != nameOfNewType);
+    }
+
+    [ContractClassFor(typeof(IChangeTypeToNullCommand))]
+    internal abstract class ChangeTypeToNullCommandContract : IChangeTypeToNullCommand
+    {
+        public abstract void ChangeType(string nameOfOldType, string nameOfNewType);
+
+        void IChangeTypeToNullCommand.ClearType(string nameOfOldType) =>
+            Requires(!string.IsNullOrEmpty(nameOfOldType));
+
+        void IChangeTypeToNullCommand.SetNewType(string nameOfNewType) =>
+            Requires(!string.IsNullOrEmpty(nameOfNewType));
     }
 }

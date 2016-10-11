@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml.Notification;
-using static System.Diagnostics.Contracts.Contract;
+﻿using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml.Command
 {
@@ -20,32 +14,26 @@ namespace Yuml.Command
         /// </summary>
         private readonly Classifier _classifier;
 
-        private readonly PropertyNotificationService _notificationService;
+        private readonly MessageSystem _messageSystem;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="availableClassifiers"></param>
-        /// <param name="classifier"></param>
-        /// <param name="notificationService"></param>
         public NewPropertyCommand(
             ClassifierDictionary availableClassifiers,
             Classifier classifier,
-            PropertyNotificationService notificationService)
+            MessageSystem messageSystem)
         {
             Requires(classifier != null);
-            Requires(notificationService != null);
+            Requires(messageSystem != null);
             Requires(availableClassifiers != null);
 
             _availableClassifiers = availableClassifiers;
             _classifier = classifier;
-            _notificationService = notificationService;
+            _messageSystem = messageSystem;
         }
 
         public void CreateNew()
         {
             var property = _classifier.CreateNewPropertyWithBestInitialValues(_availableClassifiers);
-            _notificationService.FireNewItemCreated(property.Name);
+            _messageSystem.PublishCreated(_classifier, property);
         }
     }
 }

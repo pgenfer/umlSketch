@@ -1,14 +1,9 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Yuml;
 using Yuml.Command;
-using Yuml.Notification;
 using Yuml.Service;
 using YumlFrontEnd.editor.ViewModel;
 
@@ -92,20 +87,10 @@ namespace YumlFrontEnd.editor
                 messageSystem.Subscribe<DomainObjectCreatedEvent<Relation>>(
                     classifier, x => relations.AddRelation(x.DomainObject));
 
-            _container.Singleton<ClassifierNotificationService>();
-            _container.Singleton<PropertyNotificationService>();
-            _container.Singleton<MethodNotificationService>();
-            _container.Singleton<NotificationServices>();
-
             _container.Singleton<ClassifierSelectionItemsSource>();
-
             _container.PerRequest<ClassifierListCommandContext>();
-          
             _container.Singleton<DeletionService>();
-            
             _container.Singleton<ViewModelFactory>();
-
-
         }
 
         protected override object GetInstance(Type service, string key) => _container.GetInstance(service, key);

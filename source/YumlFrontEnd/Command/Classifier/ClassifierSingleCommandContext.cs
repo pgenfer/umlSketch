@@ -14,26 +14,23 @@ namespace Yuml.Command
         public ClassifierSingleCommandContext(
             Classifier classifier,
             ClassifierDictionary classifierDictionary,
-            NotificationServices notificationServices,
             DeletionService deletionService,
             MessageSystem messageSystem)
         {
             Rename = new RenameClassifierCommand(
                 classifier,
                 classifierDictionary,
-                new ClassifierValidationService(classifierDictionary), 
-                notificationServices.Classifier);
+                new ClassifierValidationService(classifierDictionary),
+                messageSystem);
             CommandsForProperties = new PropertyListCommandContext(
                 classifier,
                 classifierDictionary,
                 new PropertyValidationService(classifier.Properties), 
-                notificationServices.Property,
                 messageSystem);
             CommandsForMethods = new MethodListCommandContext(
                 classifier,
                 classifierDictionary,
                 new MethodValidationService(classifier.Methods),
-                notificationServices.Method,
                 messageSystem);
             CommandsForAssociations = new AssociationListCommandContext(
                 classifier,
@@ -41,8 +38,8 @@ namespace Yuml.Command
                 messageSystem);
             ChangeBaseClass = new ChangeBaseClassCommand(
                 classifier,
-                classifierDictionary, 
-                notificationServices.Relation);
+                classifierDictionary,
+                messageSystem);
             Delete = new DeleteClassifierCommand(classifier, deletionService);
             Visibility = new ShowOrHideSingleObjectCommand(classifier, messageSystem);
         }

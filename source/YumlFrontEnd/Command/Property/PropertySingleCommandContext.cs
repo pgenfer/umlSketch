@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml.Notification;
-
-namespace Yuml.Command
+﻿namespace Yuml.Command
 {
     public class PropertySingleCommandContext : SingleCommandContextBase, ISinglePropertyCommands
     {
@@ -13,17 +6,16 @@ namespace Yuml.Command
             ClassifierDictionary availableClassifiers,
             Property property,
             IValidateNameService propertyValidationNameService,
-            PropertyNotificationService propertyNotifcationService,
             MessageSystem messageSystem)
         {
             Rename = new RenameMemberCommand(
                 property,
                 propertyValidationNameService,
-                propertyNotifcationService);
+                messageSystem);
             ChangeTypeOfProperty = new ChangeTypeOfPropertyCommand(
                 availableClassifiers,
                 property,
-                propertyNotifcationService);
+                messageSystem);
             Visibility = new ShowOrHideSingleObjectCommand(property, messageSystem);
         }
 

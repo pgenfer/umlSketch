@@ -12,7 +12,7 @@ namespace Yuml.Command
 
         public DeleteClassifierCommand(
             Classifier classifier,
-            DeletionService deletionService) : base(classifier)
+            DeletionService deletionService) : base(classifier) // message handling is done by service
         {
             _deletionService = deletionService;
         }

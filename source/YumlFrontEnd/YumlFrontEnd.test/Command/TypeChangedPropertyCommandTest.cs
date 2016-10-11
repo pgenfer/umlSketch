@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using Yuml.Command;
-using Yuml.Notification;
 using static NSubstitute.Substitute;
 
 namespace Yuml.Test.Command
@@ -15,7 +9,7 @@ namespace Yuml.Test.Command
     {
         private Property _property;
         private ClassifierDictionary _classifiers;
-        private PropertyNotificationService _notification;
+        private MessageSystem _messageSystem;
         private Classifier _oldType, _newType;
         private const string Old = "Old";
         private const string New = "New";
@@ -24,7 +18,7 @@ namespace Yuml.Test.Command
         {
             _property = For<Property>();
             _classifiers = CreateDictionaryWithoutSystemTypes();
-            _notification = For<PropertyNotificationService>();
+            _messageSystem = For<MessageSystem>();
             _oldType = new Classifier(Old);
             _newType = new Classifier(New);
             _classifiers.FindByName(Old).Returns(_oldType);
@@ -37,7 +31,7 @@ namespace Yuml.Test.Command
             var changeType = new ChangeTypeOfPropertyCommand(
                 _classifiers, 
                 _property, 
-                _notification);
+                _messageSystem);
 
             changeType.ChangeType(Old, New);
 
@@ -52,11 +46,14 @@ namespace Yuml.Test.Command
             var changeType = new ChangeTypeOfPropertyCommand(
                 _classifiers,
                 _property,
-                _notification);
+                _messageSystem);
 
             changeType.ChangeType(Old, New);
 
-            _notification.Received().FireTypeChanged(Old,New);
+            _messageSystem.Received().Publish(
+                _property,
+                Arg.Is<PropertyTypeChangedEvent>(
+                    x => x.NameOfOldType == Old && x.NameOfNewType == New));
         }
     }
 }

@@ -7,18 +7,18 @@ namespace Yuml.Test
 {
     public class RenameClassifierCommandTest : SimpleTestBase
     {
-        private ClassifierNotificationService _notificationService;
         private IValidateNameService _validationService;
         private ClassifierDictionary _classifierDictionary;
         private IRenameCommand _renameCommand;
         private Classifier _classifier;
+        private MessageSystem _messageSystem;
         private string _newName;
 
         
         protected override void Init()
         {
-            _notificationService = For<ClassifierNotificationService>();
             _validationService = For<IValidateNameService>();
+            _messageSystem = For<MessageSystem>();
 
             _classifierDictionary = CreateDictionaryWithoutSystemTypes();
             _classifier = new Classifier("Integer");
@@ -27,7 +27,7 @@ namespace Yuml.Test
                 _classifier, 
                 _classifierDictionary,
                 _validationService,
-                _notificationService);
+                _messageSystem);
 
             _newName = RandomString();
         }
@@ -44,7 +44,9 @@ namespace Yuml.Test
         {
             var oldName = _classifier.Name;
             _renameCommand.Rename(_newName);
-            _notificationService.Received().FireNameChange(oldName, _newName);
+            _messageSystem.Received().Publish(
+                _classifier,
+                Arg.Is<NameChangedEvent>(x => x.OldName == oldName && x.NewName == _newName));
         }
     }
 }

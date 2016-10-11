@@ -1,6 +1,6 @@
 using Common;
 
-namespace Yuml.Command
+namespace Yuml
 {
     /// <summary>
     /// event that is fired when a domain object changes its visibility

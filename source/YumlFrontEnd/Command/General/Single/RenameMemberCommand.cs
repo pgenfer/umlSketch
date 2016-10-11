@@ -17,27 +17,27 @@ namespace Yuml.Command
     public class RenameMemberCommand : IRenameCommand
     {
         private readonly IValidateNameService _validateNameService;
-        private readonly INameChangedNotificationService _notificationService;
         private readonly INamed _namedObject;
+        private readonly MessageSystem _messageSystem;
 
         public RenameMemberCommand(
             INamed namedObject,
             IValidateNameService validateNameService,
-            INameChangedNotificationService notificationService)
+            MessageSystem messageSystem)
         {
             _namedObject = namedObject;
             Requires(validateNameService != null);
-            Requires(notificationService != null);
+            Requires(messageSystem != null);
 
             _validateNameService = validateNameService;
-            _notificationService = notificationService;
+            _messageSystem = messageSystem;
         }
 
         public void Rename(string newName)
         {
             var oldName = _namedObject.Name;
             _namedObject.Name = newName;
-            _notificationService.FireNameChange(oldName, newName);
+            _messageSystem.Publish(_namedObject,new NameChangedEvent(oldName,newName));
         }
 
         public ValidationResult CanRenameWith(string newName) =>

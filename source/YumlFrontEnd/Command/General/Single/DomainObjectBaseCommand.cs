@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml.Command
 {
@@ -18,8 +19,18 @@ namespace Yuml.Command
         /// </summary>
         protected readonly T _domainObject;
 
+        protected readonly MessageSystem _messageSystem;
+
+        protected DomainObjectBaseCommand(T domainObject,MessageSystem messageSystem)
+            :this(domainObject)
+        {   
+            Requires(messageSystem != null);
+            _messageSystem = messageSystem;
+        }
+
         protected DomainObjectBaseCommand(T domainObject)
         {
+            Requires(domainObject != null);
             _domainObject = domainObject;
         }
     }

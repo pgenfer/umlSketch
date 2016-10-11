@@ -17,7 +17,6 @@ namespace YumlFrontEnd.editor
     {
         private readonly MessageSystem _messageSystem;
         private readonly ClassifierDictionary _classifiers;
-        private readonly ClassifierNotificationService _notification;
 
         /// <summary>
         /// only for test, should not be used in production code
@@ -25,7 +24,6 @@ namespace YumlFrontEnd.editor
         public ClassifierSelectionItemsSource()
         {
             _classifiers = new ClassifierDictionary();
-            _notification = new ClassifierNotificationService();
         }
 
 
@@ -42,29 +40,23 @@ namespace YumlFrontEnd.editor
         /// <param name="messageSystem"></param>
         protected ClassifierSelectionItemsSource(
             ClassifierDictionary classifiers,
-            ClassifierNotificationService notification,
             Func<IEnumerable<Classifier>> queryForAvailableClassifiers,
             MessageSystem messageSystem)
         {
             _messageSystem = messageSystem;
             _classifiers = classifiers;
-            _notification = notification;
             foreach (var classifier in queryForAvailableClassifiers())
             {
                 Add(new ClassifierItemViewModel(classifier.Name));
+                // register for changes of this classifier
                 messageSystem.Subscribe<DomainObjectDeletedEvent<Classifier>>(
                     classifier,OnClassiferDeleted);
+                messageSystem.Subscribe<NameChangedEvent>(
+                    classifier,OnNameChanged);
             }
-
-            // react on renaming of item
-            notification.NameChanged += OnNameChanged;
-            // add new item to list
-            notification.NewItemCreated += x =>
-            {
-                var newItem = new ClassifierItemViewModel(x);
-                var newIndex = FindNewItemPosition(newItem);
-                Insert(newIndex, newItem);
-            };
+            // register for creation event of a new classifier
+            messageSystem.Subscribe<DomainObjectCreatedEvent<Classifier>>(
+                classifiers, OnNewClassifierCreated);
         }
 
         /// <summary>
@@ -77,33 +69,38 @@ namespace YumlFrontEnd.editor
             Remove(viewModel);
         }
 
+        private void OnNewClassifierCreated(DomainObjectCreatedEvent<Classifier> newClassifierEvent)
+        {
+            var newClassifier = newClassifierEvent.DomainObject;
+            var newItem = new ClassifierItemViewModel(newClassifier.Name);
+            var newIndex = FindNewItemPosition(newItem);
+            Insert(newIndex, newItem);
+        }
+
         /// <summary>
         /// method that handles the name changes of an item.
         /// Can be overridden by derived class (e.g. when the name is exlcuded from the list)
         /// </summary>
-        /// <param name="oldName"></param>
-        /// <param name="newName"></param>
-        protected virtual void OnNameChanged(string oldName, string newName)
+        protected virtual void OnNameChanged(NameChangedEvent nameChangedEvent)
         {
-            var item = ByName(oldName);
+            var item = ByName(nameChangedEvent.OldName);
             // create a temporary item so that we get the new index
-            var tmp = new ClassifierItemViewModel(newName);
+            var tmp = new ClassifierItemViewModel(nameChangedEvent.NewName);
             var oldIndex = IndexOf(item);
             // since all item names must be unique, the
             // new item can never be in the list
             // so the index we get is always the index where the item should be added
             var newIndex = FindNewItemPosition(tmp);
             // rename the item and move it to the new position
-            item.Name = newName;
+            item.Name = nameChangedEvent.NewName;
             if(oldIndex != newIndex)
                Move(oldIndex, newIndex);
         }
 
         public ClassifierSelectionItemsSource(
             ClassifierDictionary classifiers,
-            ClassifierNotificationService notification,
             MessageSystem messageSystem)
-            :this(classifiers,notification,() => classifiers.OrderBy(x => x.Name),messageSystem)
+            :this(classifiers,() => classifiers.OrderBy(x => x.Name),messageSystem)
         {
         }
 
@@ -150,8 +147,7 @@ namespace YumlFrontEnd.editor
         public ClassifierSelectionItemsSource Exclude(string classifierName, bool withNullItem = true)
         {
             var newSource = new ClassifierSelectionSourceWithExcludedItem(
-                _classifiers, 
-                _notification,
+                _classifiers,
                 _messageSystem,
                 classifierName);
             if(withNullItem)

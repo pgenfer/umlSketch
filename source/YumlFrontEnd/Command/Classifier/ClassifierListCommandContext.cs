@@ -11,18 +11,15 @@ namespace Yuml.Command
     public class ClassifierListCommandContext : ListCommandContextBase<Classifier>
     {
         private readonly ClassifierDictionary _classifiers;
-        private readonly NotificationServices _notificationService;
         private readonly DeletionService _deletionService;
         private readonly MessageSystem _messageSystem;
 
         public ClassifierListCommandContext(
             ClassifierDictionary classifiers,
-            NotificationServices notificationServices,
             DeletionService deletionService,
             MessageSystem messageSystem)
         {
             _classifiers = classifiers;
-            _notificationService = notificationServices;
             _deletionService = deletionService;
             _messageSystem = messageSystem;
             
@@ -35,7 +32,6 @@ namespace Yuml.Command
             new ClassifierSingleCommandContext(
                 domainObject, 
                 _classifiers,
-                _notificationService,
                 _deletionService,
                 _messageSystem);
     }

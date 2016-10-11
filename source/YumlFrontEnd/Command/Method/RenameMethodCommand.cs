@@ -10,30 +10,27 @@ namespace Yuml.Command
     public class RenameMethodCommand : DomainObjectBaseCommand<Method> , IRenameCommand
     {
         private readonly IMethodNameValidationService _nameValidation;
-        private readonly INameChangedNotificationService _notification;
+        
 
         public RenameMethodCommand(
             Method domainObject,
             IMethodNameValidationService nameValidation,
-            INameChangedNotificationService notification) : base(domainObject)
+            MessageSystem messageSystem) : base(domainObject,messageSystem)
         {
             Requires(nameValidation != null);
-            Requires(notification != null);
+            Requires(messageSystem != null);
 
             _nameValidation = nameValidation;
-            _notification = notification;
         }
 
         public void Rename(string newName)
         {
             var oldName = _domainObject.Name;
             _domainObject.Name = newName;
-            _notification.FireNameChange(oldName, newName);
+            _messageSystem.Publish(_domainObject, new NameChangedEvent(oldName, newName));
         }
 
-        public ValidationResult CanRenameWith(string newName)
-        {
-            return _nameValidation.ValidateNameChange(_domainObject, newName);
-        }
+        public ValidationResult CanRenameWith(string newName) =>
+            _nameValidation.ValidateNameChange(_domainObject, newName);
     }
 }
