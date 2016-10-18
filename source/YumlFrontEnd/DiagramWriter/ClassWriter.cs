@@ -1,4 +1,6 @@
-﻿namespace Yuml
+﻿using AutoMapper.Execution;
+
+namespace Yuml
 {
     /// <summary>
     /// used to write the content of a class
@@ -23,6 +25,13 @@
         public ClassWriter WithName(string name)
         {
             AppendIdentifier(name);
+            return this;
+        }
+
+        public ClassWriter WithColor(string color)
+        {
+            if(!string.IsNullOrEmpty(color))
+               AppendIdentifier($"{{bg:{color}}}");
             return this;
         }
 

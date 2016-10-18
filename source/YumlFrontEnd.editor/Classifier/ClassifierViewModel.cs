@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Yuml;
 using Yuml.Command;
 using static System.Diagnostics.Contracts.Contract;
@@ -21,6 +22,7 @@ namespace YumlFrontEnd.editor
     {
         private readonly ExpandableMixin _expanded = new ExpandableMixin();
         private SelectClassifierWithNullItemMixin _selectBaseClass;
+        private Color _backgroundColor;
 
         /// <summary>
         /// name of the base class which is intially set when reading
@@ -79,5 +81,29 @@ namespace YumlFrontEnd.editor
         /// </summary>
         /// <param name="domainEvent"></param>
         public void OnBaseClassCleared(ClearBaseClassEvent domainEvent) => ClearClassifierWithoutCommand();
+
+        /// <summary>
+        /// background color used for this classifier
+        /// </summary>
+        public Color BackgroundColor
+        {
+            get { return _backgroundColor; }
+            set
+            {
+                _backgroundColor = value;
+                _commands.ChangeColor.ChangeColor(value.ToFriendlyName());
+                RaisePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// only used for initialization, will be used set initially during model => viewmodel mapping.
+        /// If mapping would set Backgroundcolor directly, the command would be executed.
+        /// </summary>
+        public Color InitialColor
+        {
+            get { return _backgroundColor; }
+            set { _backgroundColor = value; } 
+        }
     }
 }

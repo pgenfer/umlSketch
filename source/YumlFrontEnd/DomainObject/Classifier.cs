@@ -22,6 +22,13 @@ namespace Yuml
         private readonly IVisible _visible = new VisibleMixin();
 
         /// <summary>
+        /// color is stored in hex format as AARRGGBB.
+        /// The classifier stores the color only for serializing / deserializing
+        /// and is not used in the domain object.
+        /// </summary>
+        public string Color { get; set; }
+
+        /// <summary>
         /// Specifies whether this classifier is a system type.
         /// A system type can not be edited in the classifier view
         /// but can be assigned to properties and method return values.
@@ -82,6 +89,7 @@ namespace Yuml
             classWriter.WithName(Name);
             Properties.WriteTo(classWriter);
             Methods.WriteTo(classWriter);
+            classWriter.WithColor(Color);
             return classWriter;
         }
 

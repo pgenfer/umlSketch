@@ -22,5 +22,9 @@ namespace Yuml.Command
         /// command for changing the base class of this classifier
         /// </summary>
         IChangeTypeToNullCommand ChangeBaseClass { get; }
+        /// <summary>
+        /// changes the color of the classifier
+        /// </summary>
+        ChangeColorCommand ChangeColor { get; }
     }
 }

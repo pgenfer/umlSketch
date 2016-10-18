@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace YumlFrontEnd.editor.Converter
+namespace YumlFrontEnd.editor
 {
     public class IsVisibleToColorConverter : DependencyObject, IValueConverter
     {

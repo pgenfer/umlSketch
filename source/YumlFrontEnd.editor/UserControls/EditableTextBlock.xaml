@@ -6,8 +6,6 @@
              xmlns:local="clr-namespace:YumlFrontEnd.editor"
              mc:Ignorable="d"
              xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:converter="clr-namespace:YumlFrontEnd.editor.Converter"
              d:DesignHeight="300"
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance local:EditableNameMixin}"

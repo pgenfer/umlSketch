@@ -58,7 +58,6 @@ namespace YumlFrontEnd.editor
             var airplane = classifierDictionary.CreateNewClass("Airplane");
             var vehicle = classifierDictionary.CreateNewClass("Vehicle");
             var color = classifierDictionary.CreateNewClass("color");
-           
 
             car.CreateProperty("Color", color);
             airplane.CreateProperty("Length", classifierDictionary.FindByName("int"));

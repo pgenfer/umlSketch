@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using AutoMapper;
 using Yuml;
 
@@ -39,6 +40,7 @@ namespace YumlFrontEnd.editor
                     .ForMember(
                         d => d.InitialBaseClass, 
                         c => c.MapFrom(s => s.BaseClass != null ? s.BaseClass.Name : string.Empty))
+                    .ForMember(d => d.InitialColor,c => c.MapFrom(s => s.Color.ToColorFromFriendlyName()))
                     // other view models will be created explicitly and not via mapping
                     .ForMember( d => d.Properties, c => c.Ignore())
                     .ForMember( d => d.Methods, c => c.Ignore())

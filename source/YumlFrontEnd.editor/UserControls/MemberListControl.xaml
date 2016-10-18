@@ -29,7 +29,6 @@
     <ItemsControl
       Name="Items"
       Style="{Binding ElementName=MainControl,Path=MemberItemStyle}"
-      Grid.Row="1">
-    </ItemsControl>
+      Grid.Row="1"/>
   </Grid>
 </UserControl>

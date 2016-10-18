@@ -101,6 +101,7 @@
     <Compile Include="Command\Association\NewAssociationCommand.cs" />
     <Compile Include="Command\Association\RenameAssociationCommand.cs" />
     <Compile Include="Command\Classifier\ChangeBaseClassCommand.cs" />
+    <Compile Include="Command\Classifier\ChangeColorCommand.cs" />
     <Compile Include="Command\General\IShowOrHideCommand.cs" />
     <Compile Include="Command\General\List\NewCommandBase.cs" />
     <Compile Include="Command\General\List\ShowOrHideAllObjectsInListCommand.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Event\BaseClassChangedEvent.cs" />
     <Compile Include="Event\BaseClassRemovedEvent.cs" />
     <Compile Include="Event\BaseClassSetEvent.cs" />
+    <Compile Include="Event\ChangeClassifierColorEvent.cs" />
     <Compile Include="Event\NameChangedEvent.cs" />
     <Compile Include="Event\PropertyTypeChangedEvent.cs" />
     <Compile Include="Event\TypeChangedEventBase.cs" />

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:YumlFrontEnd.editor"
              xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+             xmlns:userControls="clr-namespace:YumlFrontEnd.editor.UserControls"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:ClassifierViewModel}"
              d:DesignHeight="300"
@@ -17,6 +18,7 @@
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="Auto" />
       <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="Auto" />
       <ColumnDefinition Width="Auto" />
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
@@ -35,24 +37,28 @@
       Style="{StaticResource ExpanderButtonStyle}"/>
     <!-- class name -->
     <local:EditableTextBlock 
-      HorizontalAlignment="Left"
+      HorizontalAlignment="Stretch"
       ForegroundTextBrush="{Binding IsVisible,Converter={StaticResource IsVisibleToColor}}"
       FontWeight="Bold"
       Grid.Column="1"
       Grid.Row="0"
       Margin="0,5"
-      Width="200"
-      caliburn:Bind.Model="{Binding}"/>
+      caliburn:Bind.Model="{Binding}"
+      Background="{Binding BackgroundColor, Converter={StaticResource ColorToGradientBrush}}"/>
+    <userControls:ColorPicker 
+      Grid.Row="0"
+      Grid.Column="2"
+      Color="{Binding BackgroundColor,Mode=TwoWay}"/>
     <local:ButtonBar
       HorizontalAlignment="Right"
       Grid.Row="0"
-      Grid.Column="2"
+      Grid.Column="3"
       HasNewButton="False"
       caliburn:Bind.Model="{Binding}"/>
     <DockPanel 
       Margin="25,0,0,0" 
       Grid.Column="1"
-      Grid.ColumnSpan="2"
+      Grid.ColumnSpan="3"
       Grid.Row="1"
       Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}">
       <TextBlock Style="{StaticResource TextBlock-Sketch}"
@@ -66,21 +72,21 @@
     <ContentControl
         Grid.Row="2"
         Grid.Column="1"
-        Grid.ColumnSpan="2"
+        Grid.ColumnSpan="3"
         caliburn:View.Model="{Binding Properties}"
         Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}"/>
     <!-- Methods -->
     <ContentControl
       Grid.Row="3"
       Grid.Column="1"
-      Grid.ColumnSpan="2"
+      Grid.ColumnSpan="3"
       caliburn:View.Model="{Binding Methods}"
       Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}"/>
     <!-- Association -->
     <ContentControl
      Grid.Row="4"
      Grid.Column="1"
-     Grid.ColumnSpan="2"
+     Grid.ColumnSpan="3"
      caliburn:View.Model="{Binding Associations}"
      Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}"/>
   </Grid>

@@ -105,21 +105,33 @@
 			</Trigger>
 		</Style.Triggers>
 	</Style>
+
+  <!-- disable the highlight effect on mouse over/ down -->
+  <Style x:Key="ButtonNoHighlight-Sketch" TargetType="{x:Type Button}" BasedOn="{StaticResource Button-Sketch}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <!-- We use Grid as a root because it is easy to add more elements to customize the button -->
+          <Grid x:Name="Grid">
+            <!-- Content Presenter is where the text content etc is placed by the control -->
+            <SketchControls:SketchRectangleUC x:Name="SketchRectangleUC" BorderBrush="{TemplateBinding BorderBrush}" ExtensionLength="0" ExtensionVariance="0" StrokeWidth="2" SegmentLength="8" Background="{TemplateBinding Background}" SegmentVariance="0.1" SegmentOffset="0.12" FocusVisualStyle="{DynamicResource FocusControl-Sketch}"/>
+            <ContentPresenter HorizontalAlignment="Center"  VerticalAlignment="Center" Content="{TemplateBinding Content}" Margin="8,0,8,0"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Foreground" Value="{DynamicResource DisabledForeground-Sketch}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorder-Sketch}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
     
     <!-- Sketch Circle Button -->
     <Style x:Key="CircleButton-Sketch"
            TargetType="{x:Type Button}"
-           BasedOn="{x:Null}">
-        <Setter Property="FontFamily"
-                Value="{DynamicResource FontFamily-Sketch}" />
-        <Setter Property="FontSize"
-                Value="{DynamicResource SizeDouble-Sketch}" />
-        <Setter Property="Foreground"
-                Value="{DynamicResource BaseForeground-Sketch}" />
-        <Setter Property="BorderBrush"
-                Value="{DynamicResource BaseBorder-Sketch}" />
-        <Setter Property="Background"
-                Value="{DynamicResource BaseBackground-Sketch}" />
+           BasedOn="{StaticResource ButtonNoHighlight-Sketch}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -141,36 +153,9 @@
                                           Content="{TemplateBinding Content}"
                                           Margin="5,0" />
                     </Grid>
-                    <!--ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver"
-                                 Value="true">
-                            <Setter Property="Background"
-                                    TargetName="SketchCircleUC"
-                                    Value="{DynamicResource MouseOverBackground-Sketch}" />
-                        </Trigger>
-                        <Trigger Property="IsPressed"
-                                 Value="True">
-                            <Setter Property="Background"
-                                    TargetName="SketchCircleUC"
-                                    Value="{DynamicResource PressedBackground-Sketch}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers-->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="FontWeight"
-                Value="{DynamicResource FontWeight-Sketch}" />
-        <Setter Property="FocusVisualStyle"
-                Value="{DynamicResource FocusControl-Sketch}" />
-        <Style.Triggers>
-            <Trigger Property="IsEnabled"
-                     Value="False">
-                <Setter Property="Foreground"
-                        Value="{DynamicResource DisabledForeground-Sketch}" />
-                <Setter Property="BorderBrush"
-                        Value="{DynamicResource DisabledBorder-Sketch}" />
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <!-- Sketch CheckBox -->
@@ -181,7 +166,7 @@
 		<Setter Property="Background" Value="{StaticResource BaseBackground-Sketch}"/>
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
 		<Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
-		<Setter Property="Foreground" Value="{StaticResource BaseBorder-Sketch}"/>
+
 
 		<Setter Property="Template">
 			<Setter.Value>

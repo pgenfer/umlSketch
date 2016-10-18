@@ -102,6 +102,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Reactive.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\YumlFrontEnd\packages\System.Reactive.Core.3.0.0\lib\net46\System.Reactive.Core.dll</HintPath>
       <Private>True</Private>
@@ -153,6 +154,7 @@
     </Compile>
     <Compile Include="Association\AssociationViewModel.cs" />
     <Compile Include="Classifier\ClassifierSelectionSourceWithExcludedItem.cs" />
+    <Compile Include="Converter\ColorToGradientBrushConverter.cs" />
     <Compile Include="Converter\IsVisibleToColorConverter.cs" />
     <Compile Include="Converter\TestConverter.cs" />
     <Compile Include="Converter\TrueToCollapseConverter.cs" />
@@ -164,7 +166,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EditorStrings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Extension\ListExtension.cs" />
+    <Compile Include="Extension\ColorExtension.cs" />
     <Compile Include="Mixin\ChangeVisibilityMixin.cs" />
     <Compile Include="Mixin\SelectClassifierWithNullItemMixin.cs" />
     <Compile Include="Renderer\RendererView.xaml.cs">
@@ -179,6 +181,9 @@
     <Compile Include="UserControls\ActionButton.cs" />
     <Compile Include="UserControls\ButtonBar.xaml.cs">
       <DependentUpon>ButtonBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ColorPicker.xaml.cs">
+      <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Confirmation.cs" />
     <Compile Include="UserControls\ConfirmEditAction.cs" />
@@ -246,7 +251,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles\ColorStyles.xaml">
+    <Page Include="Resources\Color.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,6 +260,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ButtonBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
