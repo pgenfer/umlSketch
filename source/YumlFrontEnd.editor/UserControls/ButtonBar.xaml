@@ -25,14 +25,8 @@
       Path=HasDeleteButton,Converter={editor:FalseToHideConverter}}"/>
     <editor:ActionButton
      HorizontalAlignment="Right"
-     Style="{StaticResource ActionButtonStyle}"
+     Style="{StaticResource NewButtonStyle}"
      x:Name="New"
-     Margin="2,0"
-     Content="+"
-     Width="20"
-     Height="20"
-     MouseDownBrush="{StaticResource NewActionMouseDown}"
-     MouseOverBrush="{StaticResource NewActionMouseOver}"
      Visibility="{Binding ElementName=ButtonBarControl,
       Path=HasNewButton,Converter={editor:FalseToHideConverter}}"/>
     <Button

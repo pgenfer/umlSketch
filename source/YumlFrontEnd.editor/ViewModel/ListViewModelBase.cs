@@ -49,7 +49,7 @@ namespace YumlFrontEnd.editor
         /// updates the list of available items by calling the query which is part of the
         /// command context
         /// </summary>
-        protected void UpdateItemList()
+        protected virtual void UpdateItemList()
         {
             Items.Clear();
            

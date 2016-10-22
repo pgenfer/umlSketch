@@ -47,7 +47,7 @@ namespace Yuml
         /// <returns></returns>
         public Method CreateNewMethodWithBestInitialValues(ClassifierDictionary systemClassifiers)
         {
-            var bestDefaultName = FindBestName("New Method");
+            var bestDefaultName = FindBestName(Strings.NewMethod);
             var newMethod = CreateMethod(bestDefaultName, systemClassifiers.Void);
 
             return newMethod;

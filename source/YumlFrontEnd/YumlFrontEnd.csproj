@@ -102,6 +102,7 @@
     <Compile Include="Command\Association\RenameAssociationCommand.cs" />
     <Compile Include="Command\Classifier\ChangeBaseClassCommand.cs" />
     <Compile Include="Command\Classifier\ChangeColorCommand.cs" />
+    <Compile Include="Command\Classifier\NewClassifierCommand.cs" />
     <Compile Include="Command\General\IShowOrHideCommand.cs" />
     <Compile Include="Command\General\List\NewCommandBase.cs" />
     <Compile Include="Command\General\List\ShowOrHideAllObjectsInListCommand.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Event\DomainObjectDeletedEvent.cs" />
     <Compile Include="Event\IDomainEvent.cs" />
     <Compile Include="Event\MessageSystem.cs" />
+    <Compile Include="Mixin\FindBestNameMixin.cs" />
     <Compile Include="Serializer\Dto\DiagramDataDto.cs" />
     <Compile Include="Serializer\Dto\Multiplicity.cs" />
     <Compile Include="DomainObject\RelationType.cs" />

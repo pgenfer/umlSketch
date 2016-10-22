@@ -132,6 +132,17 @@
     </Style.Setters>
   </Style>
 
-
-
+  <!-- new button -->
+  <Style x:Key="NewButtonStyle"
+         TargetType="{x:Type editor:ActionButton}"
+         BasedOn="{StaticResource ActionButtonStyle}">
+    <Style.Setters>
+      <Setter Property="Margin" Value="2,0"/>
+      <Setter Property="Content" Value="+"/>
+      <Setter Property="Width" Value="20"/>
+      <Setter Property="Height" Value="20"/>
+      <Setter Property="MouseDownBrush" Value="{StaticResource NewActionMouseDown}"/>
+      <Setter Property="MouseOverBrush" Value="{StaticResource NewActionMouseOver}"/>
+    </Style.Setters>
+  </Style>
 </ResourceDictionary>

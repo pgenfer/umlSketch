@@ -26,6 +26,7 @@ namespace Yuml.Command
             // setup commands
             All = new Query<Classifier>(() => classifiers.NoSystemTypes);
             Visibility = new ShowOrHideAllObjectsInListCommand(classifiers, messageSystem);
+            New = new NewClassifierCommand(classifiers, messageSystem);
         }
 
         public override ISingleCommandContext GetCommandsForSingleItem(Classifier domainObject) =>

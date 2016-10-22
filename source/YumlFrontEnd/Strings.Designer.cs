@@ -77,5 +77,50 @@ namespace Yuml {
                 return ResourceManager.GetString("NameMustNotBeEmpty", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Classifier.
+        /// </summary>
+        public static string NewClassifier {
+            get {
+                return ResourceManager.GetString("NewClassifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Method.
+        /// </summary>
+        public static string NewMethod {
+            get {
+                return ResourceManager.GetString("NewMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Property.
+        /// </summary>
+        public static string NewProperty {
+            get {
+                return ResourceManager.GetString("NewProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to string.
+        /// </summary>
+        public static string String {
+            get {
+                return ResourceManager.GetString("String", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to void.
+        /// </summary>
+        public static string Void {
+            get {
+                return ResourceManager.GetString("Void", resourceCulture);
+            }
+        }
     }
 }

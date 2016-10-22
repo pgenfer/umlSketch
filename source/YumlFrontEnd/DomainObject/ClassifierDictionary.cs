@@ -19,6 +19,7 @@ namespace Yuml
     {
         private readonly Dictionary<string, Classifier> _dictionary = 
             new Dictionary<string, Classifier>();
+        private readonly FindBestNameMixin _findBestName;
 
         /// <summary>
         /// returns true if the given class name can be used
@@ -71,6 +72,8 @@ namespace Yuml
             return newClass;
         }
 
+        public Classifier CreateNewClassWithBestName() => CreateNewClass(FindBestName(Strings.NewClassifier));
+
         /// <summary>
         /// method is used by serializer to store newly
         /// created classifiers in the dictionary, should
@@ -100,6 +103,8 @@ namespace Yuml
             // make system types available
             foreach (var systemType in new SystemTypes())
                 AddNewClassifier(systemType);
+
+            _findBestName = new FindBestNameMixin(_dictionary.Values);
         }
 
         /// <summary>
@@ -163,8 +168,8 @@ namespace Yuml
         /// <summary>
         /// returns string system type
         /// </summary>
-        internal virtual Classifier String => FindByName("string");
-        internal virtual Classifier Void => FindByName("void");
+        internal virtual Classifier String => FindByName(Strings.String);
+        internal virtual Classifier Void => FindByName(Strings.Void);
 
         /// <summary>
         /// adds all system types to the dictionary which were not already added before
@@ -186,5 +191,6 @@ namespace Yuml
         }
 
         public IEnumerable<IVisible> VisibleObjects => this;
+        private string FindBestName(string defaultName) => _findBestName.FindBestName(defaultName);
     }
 }
