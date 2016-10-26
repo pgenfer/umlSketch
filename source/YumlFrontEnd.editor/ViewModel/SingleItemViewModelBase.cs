@@ -1,4 +1,5 @@
 using System.Diagnostics.Contracts;
+using Caliburn.Micro;
 using Yuml;
 using Yuml.Command;
 using YumlFrontEnd.editor.ViewModel;
@@ -11,7 +12,7 @@ namespace YumlFrontEnd.editor
     /// is not necessary.
     /// </summary>
     /// <typeparam name="TDomain"></typeparam>
-    internal abstract class SingleItemViewModelBase<TDomain> : AutoPropertyChange 
+    internal abstract class SingleItemViewModelBase<TDomain> : PropertyChangedBase
     {
         /// <summary>
         /// commands are stored in base class. Derived class of command is

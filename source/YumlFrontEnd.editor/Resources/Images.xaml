@@ -15,4 +15,10 @@
   <BitmapImage UriSource="Images/eye_gray.png" x:Key="VisibleNotMouseDownImage"/>
   <BitmapImage UriSource="Images/eye_strike_through.png" x:Key="NotVisibleMouseDownImage"/>
   <BitmapImage UriSource="Images/eye_gray_strike_through.png" x:Key="NotVisibleNotMouseDownImage"/>
+  <BitmapImage UriSource="Images/open.png" x:Key="OpenHighlightImage"/>
+  <BitmapImage UriSource="Images/save.png" x:Key="SaveHighlightImage"/>
+  <BitmapImage UriSource="Images/open_gray.png" x:Key="OpenImage"/>
+  <BitmapImage UriSource="Images/save_gray.png" x:Key="SaveImage"/>
+  <BitmapImage UriSource="Images/new.png" x:Key="NewHighlightImage"/>
+  <BitmapImage UriSource="Images/new_gray.png" x:Key="NewImage"/>
 </ResourceDictionary>

@@ -12,14 +12,12 @@ namespace Yuml.Serializer
     /// </summary>
     public class JsonContent
     {
-        private readonly string _content;
-
         public JsonContent(string content)
         {
-            _content = content;
+            Value = content;
         }
 
-        public string Value => _content;
+        public string Value { get; }
 
         public override string ToString() => Value;
     }

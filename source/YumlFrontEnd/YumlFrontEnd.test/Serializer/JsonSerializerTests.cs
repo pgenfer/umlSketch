@@ -15,13 +15,14 @@ namespace Yuml.Test
         public void SaveLoad_Test()
         {
             var fromClassifiers = new ClassifierDictionary(String);
+            var toClassifiers = new ClassifierDictionary();
            
             var serializer = new JsonSerializer();
 
             // store the classifiers as json
             var json = serializer.Save(fromClassifiers);
             // read them from json to another dictionary
-            var toClassifiers = serializer.Load(json);
+            serializer.Load(json, toClassifiers);
 
             // Ensure that both have the same classifiers
             Assert.IsTrue(toClassifiers.Count(x => x.Name == String.Name) == 1);

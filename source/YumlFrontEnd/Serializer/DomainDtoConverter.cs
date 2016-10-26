@@ -93,17 +93,21 @@ namespace Yuml.Serializer.Dto
         /// <summary>
         /// converts the list of classifier DTOs back to a classifier dictionary
         /// </summary>
-        /// <param name="classifierDtos"></param>
+        /// <param name="classifierDtos">DTOs which were loaded from persistant storage</param>
+        /// <param name="classifierDictionary">dictionary where the domain objects hydrated from the DTOs should be stored</param>
         /// <returns></returns>
-        public ClassifierDictionary ToDomain(IEnumerable<ClassifierDto> classifierDtos)
+        public void ToDomain(
+            IEnumerable<ClassifierDto> classifierDtos,
+            ClassifierDictionary classifierDictionary)
         {
-            var dictionary = new ClassifierDictionary(false);
+            // remove all existing classifiers before adding new ones
+            classifierDictionary.Clear();
+
             var classifiers = _mapper.Map<IEnumerable<Classifier>>(classifierDtos);
-            foreach (var classifier in classifiers.Where(x => !x.IsSystemType))
-                dictionary.AddNewClassifier(classifier);
+            foreach (var classifier in classifiers)
+                classifierDictionary.AddNewClassifier(classifier);
             // at the end, add all missing system types
-            dictionary.AddMissingSystemTypes();
-            return dictionary;
+            classifierDictionary.AddMissingSystemTypes();
         }
     }
 }

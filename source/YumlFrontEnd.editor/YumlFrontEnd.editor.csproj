@@ -169,6 +169,8 @@
     <Compile Include="Extension\ColorExtension.cs" />
     <Compile Include="Mixin\ChangeVisibilityMixin.cs" />
     <Compile Include="Mixin\SelectClassifierWithNullItemMixin.cs" />
+    <Compile Include="Mixin\SerializationMixin.cs" />
+    <Compile Include="Renderer\BrowserBehavior.cs" />
     <Compile Include="Renderer\RendererView.xaml.cs">
       <DependentUpon>RendererView.xaml</DependentUpon>
     </Compile>
@@ -190,6 +192,7 @@
     <Compile Include="UserControls\HeaderControl.xaml.cs">
       <DependentUpon>HeaderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ImageButton.cs" />
     <Compile Include="UserControls\MemberListControl.xaml.cs">
       <DependentUpon>MemberListControl.xaml</DependentUpon>
     </Compile>
@@ -206,7 +209,6 @@
       <DependentUpon>EditableTextBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ExpanderButton.cs" />
-    <Compile Include="ViewModel\AutoPropertyChange.cs" />
     <Compile Include="Mixin\SelectClassifierMixin.cs" />
     <Compile Include="ViewModel\SingleItemViewModel.cs" />
     <Compile Include="ViewModel\SingleItemViewModelBase.cs" />
@@ -357,6 +359,7 @@
     <EmbeddedResource Include="EditorStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EditorStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -398,6 +401,18 @@
     <Resource Include="Resources\Images\eye_gray.png" />
     <Resource Include="Resources\Images\eye_gray_strike_through.png" />
     <Resource Include="Resources\Images\eye_strike_through.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\open.png" />
+    <Resource Include="Resources\Images\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\open_gray.png" />
+    <Resource Include="Resources\Images\save_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\new.png" />
+    <Resource Include="Resources\Images\new_gray.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

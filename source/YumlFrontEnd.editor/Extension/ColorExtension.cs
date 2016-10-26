@@ -33,7 +33,7 @@ namespace YumlFrontEnd.editor
             if (string.IsNullOrEmpty(colorString))
                 return Colors.Transparent;
             Color resultColor;
-            _ColorsByFriendlyName.TryGetValue(colorString, out resultColor);
+            _ColorsByFriendlyName.TryGetValue(colorString.ToLower(), out resultColor);
             return resultColor;
         }
 

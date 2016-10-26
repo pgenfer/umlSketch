@@ -45,9 +45,9 @@ namespace Yuml.Test
         protected readonly Classifier Vehicle = new Classifier("Vehicle");
 
         // some default data types
-        internal readonly ClassifierDto StringDto = new ClassifierDto{Name = "string"};
-        internal readonly ClassifierDto IntegerDto = new ClassifierDto { Name = "int" };
-        internal readonly ClassifierDto VoidDto = new ClassifierDto { Name = "void" };
+        internal readonly ClassifierDto StringDto = new ClassifierDto{Name = "string",IsSystemType = true};
+        internal readonly ClassifierDto IntegerDto = new ClassifierDto { Name = "int", IsSystemType = true };
+        internal readonly ClassifierDto VoidDto = new ClassifierDto { Name = "void", IsSystemType = true };
         // some classifiers used for relations
         internal readonly ClassifierDto CarDto = new ClassifierDto { Name = "Car" };
         internal readonly ClassifierDto TireDto = new ClassifierDto { Name = "Tyre" };

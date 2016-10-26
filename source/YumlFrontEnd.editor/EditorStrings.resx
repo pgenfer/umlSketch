@@ -137,12 +137,29 @@
   <data name="None" xml:space="preserve">
     <value>(none)</value>
   </data>
+  <data name="Open" xml:space="preserve">
+    <value>Opening new uml diagram</value>
+  </data>
+  <data name="OpenFileError" xml:space="preserve">
+    <value>File could not be opened due to the following error:
+{0}</value>
+  </data>
   <data name="Properties" xml:space="preserve">
     <value>Properties</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Saving current uml diagram</value>
+  </data>
+  <data name="SaveFileError" xml:space="preserve">
+    <value>File could not be saved due to the following error:
+{0}</value>
   </data>
   <data name="SimpleAssociation" xml:space="preserve">
     <value>not specified</value>
     <comment>Simple association between two classes</comment>
+  </data>
+  <data name="UmlJsonFileFilter" xml:space="preserve">
+    <value>UML json file (*.json)|*.json</value>
   </data>
   <data name="UsesAssociation" xml:space="preserve">
     <value>uses</value>

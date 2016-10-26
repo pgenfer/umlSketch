@@ -97,7 +97,7 @@ namespace YumlFrontEnd.editor
             {
                 _backgroundColor = value;
                 _commands.ChangeColor.ChangeColor(value.ToFriendlyName());
-                RaisePropertyChanged();
+                NotifyOfPropertyChange();
             }
         }
 

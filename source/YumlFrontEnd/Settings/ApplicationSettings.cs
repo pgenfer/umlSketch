@@ -1,4 +1,6 @@
 ﻿using System;
+using Yuml.Serializer;
+using static System.Environment;
 
 namespace Yuml
 {
@@ -7,55 +9,90 @@ namespace Yuml
     /// </summary>
     public class ApplicationSettings
     {
-        /// <summary>
-        /// default path where the Yuml.me service should be located.
-        /// </summary>
-        private const string BaseUri = @"http://yuml.me/";
+        private FileName _settingFilePath;
+        private ApplicationSettingsDataMixin _data;
 
-        private const string DiagramRequestUri = @"diagram/scruffy/class/";
-
-        public ApplicationSettings(
-            string filePath = null,
-            bool askBeforeDelete = true,
-            string baseUri = BaseUri,
-            string diagramRequestUri = DiagramRequestUri,
-            DiagramSize size = DiagramSize.Big,
-            DiagramDirection direction = DiagramDirection.TopDown)
+        public ApplicationSettings()
         {
-            FilePath = filePath ?? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            AskBeforeDelete = askBeforeDelete;
-            YumlBaseUrl = baseUri;
-            YumlDiagramRequestUri = diagramRequestUri;
-            DiagramSize = size;
-            DiagramDirection = direction;
+            _data = new ApplicationSettingsDataMixin();
+        }
+        
+        public void Save()
+        {
+            var serializer = new JsonApplicationSettingSerializer();
+            var content = serializer.Save(_data);
+            try
+            {
+                System.IO.File.WriteAllText(_settingFilePath.Value, content.Value);
+            }
+            catch (Exception)
+            {
+                // if settings cannot be saved, we cannot do anything but reset the settings
+                _data = new ApplicationSettingsDataMixin();
+            }
+        }
+
+        public void Load(string applicationSettingsPath)
+        {
+            var settingsFile = new FileName(applicationSettingsPath);
+            _settingFilePath = settingsFile;
+            // return default settings in case
+            // file could not be loaded
+            if (!settingsFile.IsValid)
+                return;
+            try
+            {
+                var content = System.IO.File.ReadAllText(settingsFile.Value);
+                var settings = new JsonApplicationSettingSerializer().Load(new JsonContent(content));
+                // reset the newly loaded settings
+                _data = settings;
+            }
+            catch (Exception)
+            {
+                // we could not load the settings, so return
+                // default settings
+                _data = new ApplicationSettingsDataMixin(_settingFilePath.Value);
+            }
+        }
+
+        public bool AskBeforeDelete
+        {
+            get { return _data.AskBeforeDelete; }
+            set { _data.AskBeforeDelete = value; }
+        }
+
+        public string YumlBaseUrl
+        {
+            get { return _data.YumlBaseUrl; }
+            set { _data.YumlBaseUrl = value; }
+        }
+
+        public string YumlDiagramRequestUri
+        {
+            get { return _data.YumlDiagramRequestUri; }
+            set { _data.YumlDiagramRequestUri = value; }
+        }
+
+        public DiagramSize DiagramSize
+        {
+            get { return _data.DiagramSize; }
+            set { _data.DiagramSize = value; }
+        }
+
+        public DiagramDirection DiagramDirection
+        {
+            get { return _data.DiagramDirection; }
+            set { _data.DiagramDirection = value; }
         }
 
         /// <summary>
-        /// the path where the application stores
-        /// its project files
+        /// last file that was loaded by the application
         /// </summary>
-        public string FilePath { get; set; }
-        /// <summary>
-        /// if flag is set, the application will always
-        /// ask before any domain entities (like classes, properties etc...)
-        /// will be deleted
-        /// </summary>
-        public bool AskBeforeDelete { get; set; }
-        /// <summary>
-        /// the base address used to access all Yumle services.
-        /// </summary>
-        public string YumlBaseUrl { get; set; }
-        /// <summary>
-        /// Url used to access the diagram drawing service
-        /// </summary>
-        public string YumlDiagramRequestUri { get; set; }
-        /// <summary>
-        /// predefined size of the diagram
-        /// </summary>
-        public DiagramSize DiagramSize { get; set; }
-        /// <summary>
-        /// predefined direction of the diagram
-        /// </summary>
-        public DiagramDirection DiagramDirection { get; set; }
+        public FileName LastFile
+        {
+            get { return new FileName(_data.LastFile); }
+            set { _data.LastFile = value?.Value; }
+        }
+
     }
 }

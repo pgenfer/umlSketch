@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows;
 using Yuml;
 using Yuml.Command;
+using Yuml.Serializer;
 using Yuml.Service;
 using YumlFrontEnd.editor.ViewModel;
 
@@ -75,7 +76,7 @@ namespace YumlFrontEnd.editor
             var classifierDictionary = new ClassifierDictionary();
             var relations = new RelationList();
             var messageSystem = new MessageSystem();
-            CreateDummyData(classifierDictionary,relations);
+            //CreateDummyData(classifierDictionary,relations);
             // register classifier dictionary
             _container.Instance(classifierDictionary);
             _container.Instance(relations);
@@ -90,6 +91,14 @@ namespace YumlFrontEnd.editor
             _container.PerRequest<ClassifierListCommandContext>();
             _container.Singleton<DeletionService>();
             _container.Singleton<ViewModelFactory>();
+
+            // load application settings
+            var applicationSettings = new ApplicationSettings();
+            var settingsFilePath = System.IO.Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "umlsketch.settings");
+            applicationSettings.Load(settingsFilePath);
+            _container.Instance(applicationSettings);
         }
 
         protected override object GetInstance(Type service, string key) => _container.GetInstance(service, key);

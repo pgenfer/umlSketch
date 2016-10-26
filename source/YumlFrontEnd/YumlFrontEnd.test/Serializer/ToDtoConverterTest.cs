@@ -11,6 +11,7 @@ namespace Yuml.Test
     public class ToDtoConverterTest : TestBase
     {
         private DomainDtoConverter _converter;
+        private ClassifierDictionary _classifiers;
 
         protected override void Init()
         {
@@ -21,10 +22,10 @@ namespace Yuml.Test
         public void Classifiers_ConvertToDto_KeepReferences()
         {
             // Arrange
-            var classifiers = new ClassifierDictionary(Integer, String);
+            _classifiers = new ClassifierDictionary(Integer, String);
           
             // Act
-            var dtos = _converter.ToDto(classifiers).ToArray();
+            var dtos = _converter.ToDto(_classifiers).ToArray();
 
             // ensure that integer classifier is the same reference
             // for the dto and the type of the string's property
@@ -36,10 +37,10 @@ namespace Yuml.Test
         public void ClassifierWithMethod_ConvertToDto_KeepReferences()
         {
             // Arrange
-            var classifiers = new ClassifierDictionary(Void, String, Service);
+            _classifiers = new ClassifierDictionary(Void, String, Service);
           
             // Act
-            var dtos = _converter.ToDto(classifiers).ToArray();
+            var dtos = _converter.ToDto(_classifiers).ToArray();
 
             // Assert
             Assert.AreEqual(dtos[0], dtos[2].Methods[0].ReturnType);
@@ -59,11 +60,12 @@ namespace Yuml.Test
         [TestDescription("Missing system types should be added after hydrating")]
         public void ClassifierWithSystemTypes_ConvertFromDto_MissingSystemTypesAreAdded()
         {
+            _classifiers = new ClassifierDictionary();
             // act: convert dtos to classifier types
             _converter = new DomainDtoConverter();
-            var dictionary = _converter.ToDomain(new ClassifierDto[] {});
+            _converter.ToDomain(new ClassifierDto[] {},_classifiers);
 
-            Assert.AreEqual(new SystemTypes().Count(),dictionary.Count);
+            Assert.AreEqual(new SystemTypes().Count(), _classifiers.Count);
         }
     }
 }

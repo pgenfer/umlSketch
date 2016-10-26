@@ -15,7 +15,7 @@ namespace Yuml.Serializer.Test
         [TestDescription("Save and load application settings")]
         public void SaveAndLoadApplicationSettings()
         {
-            var settings = new ApplicationSettings(
+            var settings = new ApplicationSettingsDataMixin(
                 size: DiagramSize.Huge,
                 direction: DiagramDirection.LefToRight);
 

@@ -192,5 +192,14 @@ namespace Yuml
 
         public IEnumerable<IVisible> VisibleObjects => this;
         private string FindBestName(string defaultName) => _findBestName.FindBestName(defaultName);
+
+        /// <summary>
+        /// removes all classifiers from this dictionary
+        /// </summary>
+        public void Clear()
+        {
+            if(_dictionary.Count > 0)
+               _dictionary.Clear();
+        }
     }
 }

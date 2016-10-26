@@ -37,14 +37,19 @@ namespace Yuml.Serializer
             return new JsonContent(jsonString);
         }
 
-        public ClassifierDictionary Load(JsonContent jsonContent)
+        /// <summary>
+        /// loads the given data in json format and stores it in the given classifier dictionary
+        /// </summary>
+        /// <param name="jsonContent">content to load</param>
+        /// <param name="classifierDictionary">classifier dictionary where the loaded classifiers should be stored</param>
+        public void Load(JsonContent jsonContent,ClassifierDictionary classifierDictionary)
         {
             var toDomainConverter = new DomainDtoConverter();
 
             var diagramDto = LoadDto(jsonContent);
             // TODO: currently only the classifiers are handled
             // but we also have to handle relations here
-            return toDomainConverter.ToDomain(diagramDto.Classifiers);            
+            toDomainConverter.ToDomain(diagramDto.Classifiers,classifierDictionary);            
         }
 
         internal DiagramDataDto LoadDto(JsonContent jsonContent)
