@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yuml.DomainObject;
 
 namespace Yuml.Serializer.Dto
 {
@@ -54,7 +55,6 @@ namespace Yuml.Serializer.Dto
                     .PreserveReferences()
                     .ReverseMap()
                     .PreserveReferences();
-
                 x.CreateMap<List<MethodDto>, MethodList>().PreserveReferences()
                     .AfterMap((s, d) =>
                     {
@@ -66,15 +66,50 @@ namespace Yuml.Serializer.Dto
                     .PreserveReferences()
                     .ReverseMap()
                     .PreserveReferences();
-
                 x.CreateMap<List<ParameterDto>, ParameterList>().PreserveReferences()
                     .AfterMap((s, d) =>
                     {
                         foreach (var parameter in s)
                             d.AddExistingMember(_mapper.Map<Parameter>(parameter));
                     });
+                // mapping from relation => DTO
+                x.CreateMap<Relation, RelationDto>()
+                    .PreserveReferences()
+                    .ForMember(d => d.Start, c =>
+                    {
+                        c.MapFrom(s => _mapper.Map<ClassifierDto>(s.Start.Classifier));
+                    })
+                    .ForMember(d => d.End, c =>
+                    {
+                        c.MapFrom(s => _mapper.Map<ClassifierDto>(s.End.Classifier));
+                    })
+                    .ForMember(d => d.RelationType, c => c.MapFrom(s => s.Type));
+                // mapping from DTO => relation
+                x.CreateMap<RelationDto,Relation>()
+                    .PreserveReferences()
+                    .ForMember(d => d.Start, c =>
+                    {
+                        c.MapFrom(s => new StartNode(
+                            _mapper.Map<Classifier>(s.Start),
+                            string.Empty,
+                            s.BiDirectional));
+                    })
+                    .ForMember(d => d.End, c =>
+                    {
+                        c.MapFrom(s => new EndNode(
+                            _mapper.Map<Classifier>(s.End),
+                            string.Empty,
+                            true));
+                    })
+                    .ForMember(d => d.Type,c => c.MapFrom(s => s.RelationType));
+
+                x.CreateMap<List<RelationDto>, ClassifierAssociationList>().PreserveReferences()
+                    .AfterMap((s, d) =>
+                    {
+                        foreach (var relation in s)
+                            d.AddExistingRelation(_mapper.Map<Relation>(relation));
+                    });
             });
-            // TODO: add mapping for relations
 
             _mapper = _mapperConfiguration.CreateMapper();
         }

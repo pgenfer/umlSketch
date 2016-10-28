@@ -17,7 +17,6 @@ namespace YumlFrontEnd.editor
     internal class MainViewModel : Screen
     {
         private readonly ClassifierListCommandContext _classifierCommands;
-        private readonly RelationList _relations;
         private readonly ViewModelFactory _viewModelFactory;
         private readonly ClassifierDictionary _classifiers;
         private readonly ApplicationSettings _applicationSettings;
@@ -25,7 +24,6 @@ namespace YumlFrontEnd.editor
 
         public MainViewModel(
             ClassifierListCommandContext classifierCommands,
-            RelationList relations,
             ViewModelFactory viewModelFactory,
             ClassifierDictionary classifiers,
             ApplicationSettings applicationSettings)
@@ -33,7 +31,6 @@ namespace YumlFrontEnd.editor
             var messageSystem = viewModelFactory.MessageSystem;
 
             _classifierCommands = classifierCommands;
-            _relations = relations;
             _viewModelFactory = viewModelFactory;
             _classifiers = classifiers;
             _applicationSettings = applicationSettings;
@@ -54,7 +51,6 @@ namespace YumlFrontEnd.editor
                 .CreateViewModelForList<ClassifierListViewModel>();
             Renderer = new RendererViewModel(
                 _classifiers,
-                _relations,
                 _applicationSettings,
                 _viewModelFactory.MessageSystem);
         }

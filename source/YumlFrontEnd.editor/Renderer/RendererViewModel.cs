@@ -21,7 +21,6 @@ namespace YumlFrontEnd.editor
     public class RendererViewModel : PropertyChangedBase
     {
         private readonly ClassifierDictionary _classifiers;
-        private readonly RelationList _relations;
         private readonly ApplicationSettings _settings;
         private readonly HttpClient _yumleHttpConnection = new HttpClient();
         private string _uriToDiagram;
@@ -29,12 +28,10 @@ namespace YumlFrontEnd.editor
 
         public RendererViewModel(
             ClassifierDictionary classifiers,
-            RelationList relations,
             ApplicationSettings settings,
             MessageSystem messageSystem)
         {
             _classifiers = classifiers;
-            _relations = relations;
             _settings = settings;
             _yumleHttpConnection.BaseAddress = new Uri(settings.YumlBaseUrl);
             _yumleHttpConnection.DefaultRequestHeaders.Add("Accept-Language", "en-GB,en-US,de-DE,de-AT;q=0.8,en;q=0.6,ru;q=0.4");
@@ -73,7 +70,6 @@ namespace YumlFrontEnd.editor
             // write classifiers and relations to diagram
             var diagramWriter = new DiagramWriter();
             _classifiers.WriteTo(diagramWriter);
-            _relations.WriteTo(diagramWriter);
             var diagramText = diagramWriter.ToString();
 
             // skip if diagram did not change

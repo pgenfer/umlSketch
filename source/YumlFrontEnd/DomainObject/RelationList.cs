@@ -15,6 +15,14 @@ namespace Yuml
     {
         private readonly List<Relation> _relations = new List<Relation>();
 
+        public RelationList(IEnumerable<Relation> relations = null)
+        {
+            if(relations != null)
+               _relations.AddRange(relations);
+        }
+
+        public void AddRelations(IEnumerable<Relation> relations) => _relations.AddRange(relations);
+
         // TODO: this is just a stub, creation should be done better
         public void AddRelation(Relation relation) => _relations.Add(relation);
         

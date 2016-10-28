@@ -59,7 +59,6 @@ namespace Yuml.Test
             var diagramDto = new DiagramDataDto
             {
                 Classifiers = new List<ClassifierDto> { CarDto, TireDto },
-                Relations = new List<RelationDto> { CarHasTiresDto }
             };
 
             var serializer = new JsonSerializer();
@@ -68,7 +67,7 @@ namespace Yuml.Test
             var newDiagramDto = serializer.LoadDto(json);
             var loadedCar = newDiagramDto.Classifiers[0];
             var loadedTire = newDiagramDto.Classifiers[1];
-            var relation = newDiagramDto.Relations.Single();
+            var relation = loadedCar.Associations.Single();
 
             Assert.AreSame(loadedCar, relation.Start);
             Assert.AreSame(loadedTire, relation.End);

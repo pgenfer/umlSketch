@@ -48,7 +48,6 @@ namespace Yuml.Serializer
 
             var diagramDto = LoadDto(jsonContent);
             // TODO: currently only the classifiers are handled
-            // but we also have to handle relations here
             toDomainConverter.ToDomain(diagramDto.Classifiers,classifierDictionary);            
         }
 

@@ -107,6 +107,7 @@ namespace Yuml.Test
                     }
                 }
             };
+            CarDto.Associations = new List<RelationDto> {CarHasTiresDto};
         }
 
         private void InitRelationDtos()

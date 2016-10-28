@@ -21,11 +21,21 @@ namespace Yuml.DomainObject
         /// <summary>
         /// the classifier that is the owner of this association list
         /// </summary>
-        private readonly Classifier _start;
+        private Classifier _start;
 
         public ClassifierAssociationList(Classifier start)
         {
             _start = start;
+        }
+
+        /// <summary>
+        /// empty constructor is only used for serialization,
+        /// should not be used in production. Start classifier
+        /// will be set when first existing relation is added to the list
+        /// </summary>
+        internal ClassifierAssociationList()
+        {
+            
         }
 
         /// <summary>
@@ -81,6 +91,22 @@ namespace Yuml.DomainObject
             _relations.Add(relation);
 
             return relation;
+        }
+
+        public void AddExistingRelation(Relation relation)
+        {
+            // implementation or derivation are not stored
+            // in the classes relation list
+            Requires(relation != null);
+            Requires(relation.Type != RelationType.Implementation);
+            Requires(relation.Type != RelationType.Inheritance);
+            Ensures(_start == relation.Start.Classifier);
+            // ensure that if start was already set it did not change or 
+            // if it was not set it now points to the start of this relation
+            Ensures(OldValue(_start) != null ? _start == OldValue(_start) : _start == relation.Start.Classifier);
+
+            _relations.Add(relation);
+            _start = relation.Start.Classifier;
         }
 
         public IEnumerator<Relation> GetEnumerator() => _relations.GetEnumerator();

@@ -110,12 +110,30 @@ namespace Yuml
             string endName="") => 
             Associations.AddNewRelation(target, associationType, startName, endName);
 
-        public ClassifierAssociationList Associations { get; }
+        public ClassifierAssociationList Associations { get; internal set; }
 
         public Relation CreateNewAssociationWithBestInitialValues(ClassifierDictionary classifiers) => 
             Associations.CreateNewAssociationWithBestInitialValues(classifiers);
 
         public Method CreateNewMethodWithBestInitialValues(ClassifierDictionary classifiers) =>
             Methods.CreateNewMethodWithBestInitialValues(classifiers);
+
+        /// <summary>
+        /// collects all relations from this classifier to adjacent classifiers.
+        /// These can either be associations or implementations/derivation
+        /// </summary>
+        /// <returns>
+        /// list of relations to other classifiers 
+        /// starting from this classifier.
+        /// Empty list if no relations are available for this type.
+        /// </returns>
+        public RelationList FindAllRelationStartingFromClass()
+        {
+            var relationList = new RelationList(Associations);
+            if (BaseClass != null)
+                relationList.AddRelation(new Relation(this, BaseClass, RelationType.Inheritance));
+            // TODO: collect interfaces here
+            return relationList;
+        }
     }
 }

@@ -145,12 +145,16 @@ namespace Yuml
             Requires(writer != null);
 
             var index = 0;
+            var relations = new RelationList();
             foreach (var classifier in NoSystemTypes.Where(x => x.IsVisible))
             {
                 var classWriter = writer.StartClass();
                 classWriter = classifier.WriteTo(classWriter);
                 classWriter.Finish(++index == _dictionary.Count);
+
+                relations.AddRelations(classifier.FindAllRelationStartingFromClass());
             }
+            relations.WriteTo(writer);
         }
 
         public virtual void RenameClassifier(Classifier classifier,string newName)
