@@ -1,4 +1,5 @@
 using System.Diagnostics.Tracing;
+using Caliburn.Micro;
 using Common;
 
 namespace YumlFrontEnd.editor
@@ -7,7 +8,7 @@ namespace YumlFrontEnd.editor
     /// a single classifier item in the list of
     /// selected classifiers
     /// </summary>
-    public class ClassifierItemViewModel : AutoPropertyChange, INamed
+    public class ClassifierItemViewModel : PropertyChangedBase, INamed
     {
         private readonly NameMixin _name = new NameMixin();
 
@@ -19,7 +20,7 @@ namespace YumlFrontEnd.editor
         public string Name
         {
             get { return _name.Name; }
-            set { _name.Name = value;RaisePropertyChanged(); }
+            set { _name.Name = value;NotifyOfPropertyChange(); }
         }
 
         public override string ToString() => _name.ToString();

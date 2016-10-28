@@ -10,9 +10,9 @@ namespace Yuml.Serializer
     /// <summary>
     /// loads and saves the application settings into json format.
     /// </summary>
-    public class JsonApplicationSettingSerializer
+    internal class JsonApplicationSettingSerializer
     {
-        public JsonContent Save(ApplicationSettings applicationSettings)
+        public JsonContent Save(ApplicationSettingsDataMixin applicationSettings)
         {
             var jsonString = JsonConvert.SerializeObject(
                applicationSettings,
@@ -24,9 +24,9 @@ namespace Yuml.Serializer
             return new JsonContent(jsonString);
         }
 
-        public ApplicationSettings Load(JsonContent jsonContent)
+        public ApplicationSettingsDataMixin Load(JsonContent jsonContent)
         {
-            var settings = JsonConvert.DeserializeObject<ApplicationSettings>(jsonContent.Value);
+            var settings = JsonConvert.DeserializeObject<ApplicationSettingsDataMixin>(jsonContent.Value);
             return settings;
         }
     }

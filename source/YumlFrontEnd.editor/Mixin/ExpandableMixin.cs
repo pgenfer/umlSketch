@@ -19,7 +19,7 @@ namespace YumlFrontEnd.editor
         public bool IsExpanded
         {
             get { return _isExpanded; }
-            private set { _isExpanded = value; NotifyOfPropertyChange(nameof(IsExpanded)); }
+            set { _isExpanded = value; NotifyOfPropertyChange(nameof(IsExpanded)); }
         }
         public void ExpandOrCollapse() =>  IsExpanded = !IsExpanded;
     }

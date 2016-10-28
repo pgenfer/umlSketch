@@ -51,7 +51,7 @@ namespace Yuml
         /// <returns></returns>
         public Property CreateNewPropertyWithBestInitialValues(ClassifierDictionary systemClassifiers)
         {
-            var bestDefaultName = FindBestName("New Property");
+            var bestDefaultName = FindBestName(Strings.NewProperty);
 
             var bestType = _list
                 .GroupBy(x => x.Type)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Caliburn.Micro;
 using Yuml.Command;
 using static System.Diagnostics.Contracts.Contract;
 
@@ -12,7 +13,7 @@ namespace YumlFrontEnd.editor
     /// mixin handles the interaction logic when selecting
     /// a classifier from a list of available classifiers
     /// </summary>
-    public class SelectClassifierMixin : AutoPropertyChange
+    public class SelectClassifierMixin : PropertyChangedBase
     {
         /// <summary>
         /// itemsource that contains the list of classifiers
@@ -65,7 +66,7 @@ namespace YumlFrontEnd.editor
                 // execute the command only if selected item was not set initially
                 if(oldClassifier != null)
                     _command.ChangeType(oldClassifier.Name, value.Name);
-                RaisePropertyChanged();
+                NotifyOfPropertyChange();
             }
         }
     }

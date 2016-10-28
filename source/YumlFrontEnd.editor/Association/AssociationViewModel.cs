@@ -48,7 +48,7 @@ namespace YumlFrontEnd.editor
             {
                 _association = value;
                 _commands.ChangeAssociationTypeCommand.ChangeAssociation(_association.AssociationType);
-                RaisePropertyChanged();
+                NotifyOfPropertyChange();
             }
         }
 

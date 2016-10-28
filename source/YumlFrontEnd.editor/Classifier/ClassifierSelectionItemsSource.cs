@@ -17,6 +17,7 @@ namespace YumlFrontEnd.editor
     {
         private readonly MessageSystem _messageSystem;
         private readonly ClassifierDictionary _classifiers;
+        private readonly Func<IEnumerable<Classifier>> _queryForAvailableClassifiers;
 
         /// <summary>
         /// only for test, should not be used in production code
@@ -33,8 +34,6 @@ namespace YumlFrontEnd.editor
         /// In that way, classifiers can be filtered for interfaces, for a specific name etc...
         /// </summary>
         /// <param name="classifiers">dictionary where all classifiers are stored</param>
-        /// <param name="notification">notification service that fires an update
-        /// when the classifiers change</param>
         /// <param name="queryForAvailableClassifiers">
         /// query that is used to retrieve the classifiers from the classifier dictionary</param>
         /// <param name="messageSystem"></param>
@@ -43,20 +42,33 @@ namespace YumlFrontEnd.editor
             Func<IEnumerable<Classifier>> queryForAvailableClassifiers,
             MessageSystem messageSystem)
         {
+            _queryForAvailableClassifiers = queryForAvailableClassifiers;
             _messageSystem = messageSystem;
             _classifiers = classifiers;
-            foreach (var classifier in queryForAvailableClassifiers())
+            
+            UpdateClassifierList();
+            
+            // register events fired by the whole classifier list
+            messageSystem.Subscribe<DomainObjectCreatedEvent<Classifier>>(
+                classifiers, OnNewClassifierCreated);
+            messageSystem.Subscribe<ClassifiersResetEvent>(classifiers,OnClassifiersReset);
+        }
+
+        /// <summary>
+        /// should be called whenever the complete list of classifier should be regenerated.
+        /// Can happen if a new diagram is loaded from persistant storage or during initialization.
+        /// </summary>
+        private void UpdateClassifierList()
+        {
+            foreach (var classifier in _queryForAvailableClassifiers())
             {
                 Add(new ClassifierItemViewModel(classifier.Name));
                 // register for changes of this classifier
-                messageSystem.Subscribe<DomainObjectDeletedEvent<Classifier>>(
-                    classifier,OnClassiferDeleted);
-                messageSystem.Subscribe<NameChangedEvent>(
-                    classifier,OnNameChanged);
+                _messageSystem.Subscribe<DomainObjectDeletedEvent<Classifier>>(
+                    classifier, OnClassiferDeleted);
+                _messageSystem.Subscribe<NameChangedEvent>(
+                    classifier, OnNameChanged);
             }
-            // register for creation event of a new classifier
-            messageSystem.Subscribe<DomainObjectCreatedEvent<Classifier>>(
-                classifiers, OnNewClassifierCreated);
         }
 
         /// <summary>
@@ -67,6 +79,12 @@ namespace YumlFrontEnd.editor
         {
             var viewModel = ByName(classifierDeletedEvent.DomainObject.Name);
             Remove(viewModel);
+        }
+
+        private void OnClassifiersReset(ClassifiersResetEvent classifiersResetEvent)
+        {
+            Clear();
+            UpdateClassifierList();
         }
 
         private void OnNewClassifierCreated(DomainObjectCreatedEvent<Classifier> newClassifierEvent)

@@ -18,7 +18,7 @@ namespace YumlFrontEnd.editor
     /// Has a depenency to the validation service to check whether
     /// the new name of the entity is valid
     /// </summary>
-    internal class EditableNameMixin : AutoPropertyChange
+    internal class EditableNameMixin : PropertyChangedBase
     {
         /// <summary>
         /// mixin to handle the name interaction
@@ -103,7 +103,7 @@ namespace YumlFrontEnd.editor
                 // Name can be changed back to original if
                 // user aborts editing, in that case
                 // view does not know about the correct name
-                RaisePropertyChanged();
+                NotifyOfPropertyChange();
             }
         }
 
@@ -117,7 +117,7 @@ namespace YumlFrontEnd.editor
         public bool IsEditable
         {
             get { return _editable; }
-            set { _editable = value; RaisePropertyChanged(); }
+            set { _editable = value; NotifyOfPropertyChange(); }
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace YumlFrontEnd.editor
         public bool HasNameError
         {
             get { return _hasNameError; }
-            set { _hasNameError = value; RaisePropertyChanged(); }
+            set { _hasNameError = value; NotifyOfPropertyChange(); }
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace YumlFrontEnd.editor
         public string NameErrorMessage
         {
             get { return _nameErrorMessage; }
-            set { _nameErrorMessage = value; RaisePropertyChanged(); }
+            set { _nameErrorMessage = value; NotifyOfPropertyChange(); }
         }
 
         public override string ToString() => _name.ToString();

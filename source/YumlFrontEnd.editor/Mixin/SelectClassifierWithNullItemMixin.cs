@@ -34,7 +34,7 @@ namespace YumlFrontEnd.editor
         {
             _selectedClassifier = ClassifierItemViewModel.None;
             // ReSharper disable once ExplicitCallerInfoArgument
-            RaisePropertyChanged(nameof(SelectedClassifier));
+            NotifyOfPropertyChange(nameof(SelectedClassifier));
         }
 
         public override ClassifierItemViewModel SelectedClassifier
@@ -42,9 +42,14 @@ namespace YumlFrontEnd.editor
             get { return base.SelectedClassifier; }
             set
             {
+                // if classifiers are reset, 
+                // SelectedClassifer can be called with null
+                if (value == null)
+                    value = ClassifierItemViewModel.None;
+
                 var oldClassifier = SelectedClassifier;
                 _selectedClassifier = value;
-                if (oldClassifier != null)
+                if (oldClassifier != null && oldClassifier != value)
                 {
                     // type was changed from null -> new type
                     if (oldClassifier == ClassifierItemViewModel.None &&
@@ -59,7 +64,7 @@ namespace YumlFrontEnd.editor
                         _command.ChangeType(oldClassifier.Name, value.Name);
                 }
                 
-                RaisePropertyChanged();
+                NotifyOfPropertyChange();
             }
         }
     }

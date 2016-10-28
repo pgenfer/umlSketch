@@ -18,6 +18,12 @@ namespace Yuml
     public abstract class BaseList<T> : IEnumerable<T>, IVisibleObjectList where T: INamed, IVisible
     {
         protected readonly List<T> _list = new List<T>();
+        private readonly FindBestNameMixin _findBestName;
+
+        protected BaseList()
+        {
+            _findBestName = new FindBestNameMixin(_list.OfType<INamed>());
+        }
 
         internal void AddExistingMember(T newMember)
         {
@@ -81,29 +87,6 @@ namespace Yuml
         }
 
         public IEnumerable<IVisible> VisibleObjects => _list.Cast<IVisible>();
-
-        private readonly Regex _findLastNumber = new Regex(@"(\d+)(?!.*\d)", RegexOptions.Compiled);
-
-        /// <summary>
-        /// creates a property with a useful name (e.g. New Property 1, New Property 2 etc...)
-        /// and a useful data type (e.g. the data type that was not used before)
-        /// </summary>
-        /// <returns></returns>
-        protected string FindBestName(string defaultName )
-        {
-            var defaulMemberNames = _list
-                .Where(x => x.Name.StartsWith(defaultName))
-                .Select(x => x.Name);
-            var highestNumber = 0;
-            foreach (var name in defaulMemberNames)
-            {
-                var match = _findLastNumber.Match(name);
-                if (match.Success)
-                    highestNumber = int.Parse(match.Groups[1].ToString());
-            }
-            var newName = $"{defaultName} {++highestNumber}";
-
-            return newName;
-        }
+        protected string FindBestName(string defaultName) => _findBestName.FindBestName(defaultName);
     }
 }

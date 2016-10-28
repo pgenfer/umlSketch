@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.IO.File;
+using static System.IO.Path;
+
 
 namespace Yuml.Serializer
 {
@@ -11,15 +14,14 @@ namespace Yuml.Serializer
     /// </summary>
     public class FileName
     {
-        private readonly string _fileName;
-
         public FileName(string fileName)
         {
-            _fileName = fileName;
+            Value = fileName;
         }
 
-        public string Value => _fileName;
-
+        public bool IsValid => Exists(Value);
+        public string Path => !string.IsNullOrEmpty(Value) ? GetDirectoryName(Value) : null;
+        public string Value { get; }
         public override string ToString() => Value;
     }
 }

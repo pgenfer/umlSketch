@@ -26,5 +26,23 @@ namespace YumlFrontEnd.editor
         /// TODO: later when we have relations, we could let the user expand/collapse the class list
         /// </summary>
         public override bool CanExpand => false;
+
+        protected override void UpdateItemList()
+        {
+            // we store the expand positions of the existing classifiers
+            // and restore them after the update.
+            // Unfortunately we must cast the single items to the correct type here
+            var expandStatesOfClassifiers = Items.ToDictionary(x => x.Name, y => ((ClassifierViewModel) y).IsExpanded);
+            base.UpdateItemList();
+            foreach (var classifier in Items.OfType<ClassifierViewModel>())
+            {
+                bool isExpanded;
+                // items that were not in the list will be expanded by default, otherwise
+                // use the expand state the item had before
+                classifier.IsExpanded = 
+                    !expandStatesOfClassifiers.TryGetValue(classifier.Name, out isExpanded) || 
+                    isExpanded;
+            }
+        }
     }
 }

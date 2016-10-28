@@ -7,19 +7,50 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800"
         WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.382*"/>
-            <ColumnDefinition Width="0.618*"/>
-        </Grid.ColumnDefinitions>
-        <ContentControl
-            x:Name="ClassifierList"
-            Grid.Column="0"/>
-        <GridSplitter 
-            Grid.Column="0" 
-            Width="5"/>
-        <ContentControl
-          x:Name="Renderer"
-          Grid.Column="1"/>
-    </Grid>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="0.382*"/>
+      <ColumnDefinition Width="0.618*"/>
+    </Grid.ColumnDefinitions>
+    <StackPanel
+      Margin="10"
+      Grid.Row="0"
+      Grid.ColumnSpan="2"
+      Orientation="Horizontal">
+      <local:ImageButton
+       Margin="5,0"
+       x:Name="New"
+       Style="{StaticResource ImageButtonStyle}"
+       DefaultImage="{StaticResource NewImage}"
+       MouseOverImage="{StaticResource NewHighlightImage}"/>
+      <local:ImageButton
+        Margin="5,0"
+        x:Name="Save"
+        Style="{StaticResource ImageButtonStyle}"
+        DefaultImage="{StaticResource SaveImage}"
+        MouseOverImage="{StaticResource SaveHighlightImage}"/>
+      <local:ImageButton
+        x:Name="Open"
+        Style="{StaticResource ImageButtonStyle}"
+        Margin="5,0"
+        DefaultImage="{StaticResource OpenImage}"
+        MouseOverImage="{StaticResource OpenHighlightImage}"/>
+    </StackPanel>
+    <ContentControl
+          x:Name="ClassifierList"
+          Grid.Column="0"
+          Grid.Row="1"/>
+    <GridSplitter
+        Grid.Column="0"
+        Grid.Row="1"
+        Width="5"/>
+    <ContentControl
+      x:Name="Renderer"
+      Grid.Column="1"
+      Grid.Row="1"/>
+  </Grid>
 </Window>

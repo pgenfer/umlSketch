@@ -33,7 +33,7 @@ namespace Yuml
         /// A system type can not be edited in the classifier view
         /// but can be assigned to properties and method return values.
         /// </summary>
-        public bool IsSystemType { get; }
+        public bool IsSystemType { get; internal set; }
 
         /// <summary>
         /// only for testing, don't use in production

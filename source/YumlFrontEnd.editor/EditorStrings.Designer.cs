@@ -115,6 +115,25 @@ namespace YumlFrontEnd.editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Opening new uml diagram.
+        /// </summary>
+        public static string Open {
+            get {
+                return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File could not be opened due to the following error:
+        ///{0}.
+        /// </summary>
+        public static string OpenFileError {
+            get {
+                return ResourceManager.GetString("OpenFileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Properties.
         /// </summary>
         public static string Properties {
@@ -124,11 +143,39 @@ namespace YumlFrontEnd.editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saving current uml diagram.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File could not be saved due to the following error:
+        ///{0}.
+        /// </summary>
+        public static string SaveFileError {
+            get {
+                return ResourceManager.GetString("SaveFileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to not specified.
         /// </summary>
         public static string SimpleAssociation {
             get {
                 return ResourceManager.GetString("SimpleAssociation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UML json file (*.json)|*.json.
+        /// </summary>
+        public static string UmlJsonFileFilter {
+            get {
+                return ResourceManager.GetString("UmlJsonFileFilter", resourceCulture);
             }
         }
         

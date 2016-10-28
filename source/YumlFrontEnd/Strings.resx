@@ -123,4 +123,19 @@
   <data name="NameMustNotBeEmpty" xml:space="preserve">
     <value>The name may not be empty.</value>
   </data>
+  <data name="NewClassifier" xml:space="preserve">
+    <value>New Classifier</value>
+  </data>
+  <data name="NewMethod" xml:space="preserve">
+    <value>New Method</value>
+  </data>
+  <data name="NewProperty" xml:space="preserve">
+    <value>New Property</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>string</value>
+  </data>
+  <data name="Void" xml:space="preserve">
+    <value>void</value>
+  </data>
 </root>

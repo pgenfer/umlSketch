@@ -22,10 +22,16 @@ namespace Yuml.Command
             _classifiers = classifiers;
             _deletionService = deletionService;
             _messageSystem = messageSystem;
-            
+
+            Update();
+        }
+
+        private void Update()
+        {
             // setup commands
-            All = new Query<Classifier>(() => classifiers.NoSystemTypes);
-            Visibility = new ShowOrHideAllObjectsInListCommand(classifiers, messageSystem);
+            All = new Query<Classifier>(() => _classifiers.NoSystemTypes);
+            Visibility = new ShowOrHideAllObjectsInListCommand(_classifiers, _messageSystem);
+            New = new NewClassifierCommand(_classifiers, _messageSystem);
         }
 
         public override ISingleCommandContext GetCommandsForSingleItem(Classifier domainObject) =>

@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Caliburn.Micro;
 using Yuml.Command;
 using static System.Diagnostics.Contracts.Contract;
 
@@ -13,7 +14,7 @@ namespace YumlFrontEnd.editor
     /// interaction logic with the change visibility singleObjectCommand.
     /// Mixin can be used to map the singleObjectCommand with the UI.
     /// </summary>
-    public class ChangeVisibilityMixin : AutoPropertyChange
+    public class ChangeVisibilityMixin : PropertyChangedBase
     {
         private readonly IShowOrHideCommand _showOrHideCommand;
        

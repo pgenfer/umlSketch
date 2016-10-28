@@ -15,7 +15,7 @@ namespace YumlFrontEnd.editor
     /// base class for view models that represent a list of items.
     /// </summary>
     /// <typeparam name="TDomain">Type of domain objects within the list</typeparam>
-    internal class ListViewModelBase<TDomain> : AutoPropertyChange
+    internal class ListViewModelBase<TDomain> : PropertyChangedBase
     {
         private ViewModelFactory<TDomain> _viewModelFactory;
         /// <summary>
@@ -49,7 +49,7 @@ namespace YumlFrontEnd.editor
         /// updates the list of available items by calling the query which is part of the
         /// command context
         /// </summary>
-        protected void UpdateItemList()
+        protected virtual void UpdateItemList()
         {
             Items.Clear();
            

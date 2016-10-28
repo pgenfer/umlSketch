@@ -38,7 +38,12 @@ namespace YumlFrontEnd.editor
         public MethodListViewModel Methods { get; private set; }
         public AssociationListViewModel Associations { get; private set; }
 
-        public bool IsExpanded => _expanded.IsExpanded;
+        public bool IsExpanded
+        {
+            get { return _expanded.IsExpanded; }
+            set { _expanded.IsExpanded = value; }
+        }
+
         public void ExpandOrCollapse() => _expanded.ExpandOrCollapse();
 
         protected override void CustomInit()
@@ -92,7 +97,7 @@ namespace YumlFrontEnd.editor
             {
                 _backgroundColor = value;
                 _commands.ChangeColor.ChangeColor(value.ToFriendlyName());
-                RaisePropertyChanged();
+                NotifyOfPropertyChange();
             }
         }
 
