@@ -31,7 +31,7 @@ namespace Yuml
         public ClassWriter WithColor(string color)
         {
             if(!string.IsNullOrEmpty(color))
-               AppendIdentifier($"{{bg:{color}}}");
+               AppendToken($"{{bg:{color}}}");
             return this;
         }
 

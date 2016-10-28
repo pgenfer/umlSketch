@@ -36,6 +36,7 @@ namespace YumlFrontEnd.editor
             _relations = relations;
             _settings = settings;
             _yumleHttpConnection.BaseAddress = new Uri(settings.YumlBaseUrl);
+            _yumleHttpConnection.DefaultRequestHeaders.Add("Accept-Language", "en-GB,en-US,de-DE,de-AT;q=0.8,en;q=0.6,ru;q=0.4");
 
             RegisterForDomainChanges(messageSystem);
             // update the diagram the first time
@@ -91,9 +92,16 @@ namespace YumlFrontEnd.editor
                 new FormUrlEncodedContent(content));
             // the result is the file name of the cached png,
             // we remove the extension to access the resource
-            var result = await response.Content.ReadAsStringAsync();
-            var uri = $"{_settings.YumlBaseUrl}{GetFileNameWithoutExtension(result)}";
-            UriToDiagram = uri;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+                var uri = $"{_settings.YumlBaseUrl}{GetFileNameWithoutExtension(result)}";
+                UriToDiagram = uri;
+            }
+            else
+            {
+                // TODO: show some error message here
+            }
         }
 
         public string UriToDiagram
