@@ -33,13 +33,17 @@ namespace Yuml.Service
                 _classifiers.Select(x => x.Properties.FindPropertiesThatDependOnClassifier(classifier));
             var dependentMethods =
                 _classifiers.Select(x => x.Methods.FindMethodsThatDependOnClassifier(classifier));
+            var dependentAssociations =
+                _classifiers.Select(x => x.Associations.FindAssociationsThatDependOnClassifier(classifier));
             // TODO: handle parameters here
-            // TODO: handle relations here
-
+            // TODO: handle interfaces here
+         
             foreach (var properties in dependentProperties)
                 properties.DeleteSelection(_messageSystem);
             foreach (var methods in dependentMethods)
                 methods.DeleteSelection(_messageSystem);
+            foreach(var associations in dependentAssociations)
+                associations.DeleteSelection(_messageSystem);
             
             foreach (var derivedClass in derivedClasses)
             {

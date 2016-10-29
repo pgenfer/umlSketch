@@ -18,7 +18,7 @@ namespace YumlFrontEnd.editor
         /// <summary>
         /// itemsource that contains the list of classifiers
         /// </summary>
-        private readonly ClassifierSelectionItemsSource _itemsSource;
+        private readonly IClassifierSelectionItemsSource _itemsSource;
         /// <summary>
         /// command that will execute the domain logic when the user
         /// chooses a new classifier
@@ -31,7 +31,7 @@ namespace YumlFrontEnd.editor
         protected ClassifierItemViewModel _selectedClassifier;
 
         public SelectClassifierMixin(
-            ClassifierSelectionItemsSource itemsSource,
+            IClassifierSelectionItemsSource itemsSource,
             IChangeTypeCommand command)
         {
             _itemsSource = itemsSource;

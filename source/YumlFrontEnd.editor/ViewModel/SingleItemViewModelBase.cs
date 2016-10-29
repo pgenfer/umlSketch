@@ -90,7 +90,7 @@ namespace YumlFrontEnd.editor
         /// If no custom code is required, leave the implementation empty.
         /// </summary>
         protected abstract void CustomInit();
-        public ClassifierSelectionItemsSource ClassifiersToSelect => _viewModelFactory.ClassifiersToSelect;
+        public IClassifierSelectionItemsSource ClassifiersToSelect => _viewModelFactory.ClassifiersToSelect;
 
         public void Delete()
         {

@@ -13,7 +13,7 @@ namespace Yuml
     /// <summary>
     /// handles the interaction with a list of properties
     /// </summary>
-    public class PropertyList : BaseList<Property>
+    public class PropertyList : NamedBaseList<Property>
     {
         /// <summary>
         /// adds a new property to the property list.

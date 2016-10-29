@@ -39,6 +39,9 @@ namespace Yuml
         public virtual Classifier FindByName(string className)
         {
             Requires(!string.IsNullOrEmpty(className));
+            // check that we never search for non existing classifiers
+            Ensures(Result<Classifier>() != null);
+
             Classifier result;
             _dictionary.TryGetValue(className, out result);
             return result;

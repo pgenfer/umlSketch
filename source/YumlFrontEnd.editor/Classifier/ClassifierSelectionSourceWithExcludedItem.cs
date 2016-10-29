@@ -27,7 +27,7 @@ namespace YumlFrontEnd.editor
             _excludedName = classifierNameToExclude;
         }
 
-        protected override void OnNameChanged(NameChangedEvent nameChangedEvent)
+        public override void OnNameChanged(NameChangedEvent nameChangedEvent)
         {
             // the item which is excluded did change, so remember the new name
             if (nameChangedEvent.OldName == _excludedName)

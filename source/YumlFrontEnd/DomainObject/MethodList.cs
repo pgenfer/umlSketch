@@ -7,7 +7,7 @@ using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
 {
-    public class MethodList : BaseList<Method>
+    public class MethodList : NamedBaseList<Method>
     {
         /// <summary>
         /// adds a new property to the property list.

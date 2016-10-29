@@ -16,21 +16,8 @@ namespace Yuml.DomainObject
     /// are not stored in this as this list only handles
     /// assocations
     /// </summary>
-    public class ClassifierAssociationList : IVisibleObjectList, IEnumerable<Relation>
+    public class ClassifierAssociationList : BaseList<Relation>
     {
-        /// <summary>
-        /// internal list that stores the relations
-        /// </summary>
-        private readonly List<Relation> _relations = new List<Relation>();
-
-        public void DeleteRelation(Relation relation)
-        {
-            Requires(relation != null);
-            Requires(this.Contains(relation));
-
-            _relations.Add(relation);
-        }
-
         /// <summary>
         /// creates a new association with default values, adds it to the assocation
         /// list and returns the newly created assocication.
@@ -46,7 +33,7 @@ namespace Yuml.DomainObject
             // try to find a classifier that is suitable for this relation.
             // we take the first one which is not used already and which is not the
             // source itself
-            var usedClassifiers = _relations.Select(x => x.End.Classifier).Concat(new[] { start });
+            var usedClassifiers = _list.Select(x => x.End.Classifier).Concat(new[] { start });
             var firstUnusedClassifier = classifiers
                 .Except(usedClassifiers)
                 .FirstOrDefault();
@@ -55,7 +42,7 @@ namespace Yuml.DomainObject
             firstUnusedClassifier = firstUnusedClassifier ?? classifiers.First();
 
             var newRelation = new Relation(start, firstUnusedClassifier);
-            _relations.Add(newRelation);
+            AddNewMember(newRelation);
 
             return newRelation;
         }
@@ -74,7 +61,7 @@ namespace Yuml.DomainObject
             Requires(start != null);
 
             var relation = new Relation(start, target, associationType, startName, endName );
-            _relations.Add(relation);
+            AddNewMember(relation);
 
             return relation;
         }
@@ -86,19 +73,11 @@ namespace Yuml.DomainObject
             Requires(relation != null);
             Requires(relation.Type != RelationType.Implementation);
             Requires(relation.Type != RelationType.Inheritance);
-         
-            _relations.Add(relation);
+
+            AddExistingMember(relation);
         }
 
-        public IEnumerator<Relation> GetEnumerator() => _relations.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => _relations.GetEnumerator();
-
-        public bool IsVisible
-        {
-            get { return _relations.All(x => x.IsVisible); }
-            set { _relations.ForEach(x => x.IsVisible = value);}
-        }
-
-        public IEnumerable<IVisible> VisibleObjects => _relations;
+        public SubSet FindAssociationsThatDependOnClassifier(Classifier classifier) => 
+            Filter(x => x.End.Classifier == classifier);
     }
 }

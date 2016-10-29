@@ -11,7 +11,8 @@ namespace YumlFrontEnd.editor
         private readonly IChangeTypeToNullCommand _command;
 
         public SelectClassifierWithNullItemMixin(
-            ClassifierSelectionItemsSource itemsSource,IChangeTypeToNullCommand command):
+            IClassifierSelectionItemsSource itemsSource,
+            IChangeTypeToNullCommand command):
                 base(itemsSource,command)
         {
             _command = command;

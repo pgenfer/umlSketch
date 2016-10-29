@@ -1,4 +1,5 @@
 ﻿using Common;
+using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
 {
@@ -8,11 +9,20 @@ namespace Yuml
     public class RelationNode : INamed
     {
         private readonly INamed _named = new NameMixin();
+        private Classifier _classifier;
 
         /// <summary>
         /// the classifier that is represented by this node
         /// </summary>
-        public Classifier Classifier { get; set; }
+        public Classifier Classifier
+        {
+            get { return _classifier; }
+            set
+            {
+                Requires(value != null);
+                _classifier = value;
+            }
+        }
 
         /// <summary>
         /// optional name of the relation's start node.

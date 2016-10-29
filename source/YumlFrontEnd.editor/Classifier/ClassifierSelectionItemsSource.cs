@@ -12,8 +12,12 @@ namespace YumlFrontEnd.editor
     /// list of available classifiers.
     /// All list controls will have the same list
     /// of classifiers available.
+    /// Methods here are public because unit testing, production code
+    /// should access class only via interface to know which methods are available
     /// </summary>
-    public class ClassifierSelectionItemsSource : BindableCollection<ClassifierItemViewModel>
+    public class ClassifierSelectionItemsSource : 
+        BindableCollection<ClassifierItemViewModel>, 
+        IClassifierSelectionItemsSource
     {
         private readonly MessageSystem _messageSystem;
         private readonly ClassifierDictionary _classifiers;
@@ -87,19 +91,22 @@ namespace YumlFrontEnd.editor
             UpdateClassifierList();
         }
 
-        private void OnNewClassifierCreated(DomainObjectCreatedEvent<Classifier> newClassifierEvent)
+        public void OnNewClassifierCreated(DomainObjectCreatedEvent<Classifier> newClassifierEvent)
         {
             var newClassifier = newClassifierEvent.DomainObject;
             var newItem = new ClassifierItemViewModel(newClassifier.Name);
             var newIndex = FindNewItemPosition(newItem);
-            Insert(newIndex, newItem);
+            if (newIndex == -1) // list was empty before
+                Add(newItem);
+            else
+                Insert(newIndex, newItem);
         }
 
         /// <summary>
         /// method that handles the name changes of an item.
         /// Can be overridden by derived class (e.g. when the name is exlcuded from the list)
         /// </summary>
-        protected virtual void OnNameChanged(NameChangedEvent nameChangedEvent)
+        public virtual void OnNameChanged(NameChangedEvent nameChangedEvent)
         {
             var item = ByName(nameChangedEvent.OldName);
             // create a temporary item so that we get the new index
@@ -152,7 +159,7 @@ namespace YumlFrontEnd.editor
                 if (result > 0)
                     min = mid + 1;
             }
-            return max;
+            return max > -1 ? max : 0;
         }
 
         /// <summary>
@@ -162,7 +169,7 @@ namespace YumlFrontEnd.editor
         /// <param name="classifierName"></param>
         /// <param name="withNullItem">if true, the list will also contain a "null" entry</param>
         /// <returns></returns>
-        public ClassifierSelectionItemsSource Exclude(string classifierName, bool withNullItem = true)
+        public IClassifierSelectionItemsSource Exclude(string classifierName, bool withNullItem = true)
         {
             var newSource = new ClassifierSelectionSourceWithExcludedItem(
                 _classifiers,

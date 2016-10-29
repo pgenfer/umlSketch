@@ -35,6 +35,11 @@ namespace Yuml
         /// </summary>
         public bool IsSystemType { get; internal set; }
 
+        /// <summary>
+        /// only used for test stubs, do not delete and do not use in production code
+        /// </summary>
+        public Classifier() { }
+
         public Classifier(string name, bool isSystemType=false)
         {
             Name = name;
@@ -94,7 +99,6 @@ namespace Yuml
         /// optional base class of this classifier
         /// </summary>
         public Classifier BaseClass { get; set; }
-        public void DeleteRelation(Relation relation) => Associations.DeleteRelation(relation);
         public Relation AddNewRelation(
             Classifier target,
             RelationType associationType,

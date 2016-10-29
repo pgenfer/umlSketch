@@ -15,16 +15,10 @@ namespace Yuml
     /// handle classifier members or parameters
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class BaseList<T> : IEnumerable<T>, IVisibleObjectList where T: INamed, IVisible
+    public abstract class BaseList<T> : IEnumerable<T>, IVisibleObjectList where T: IVisible
     {
         protected readonly List<T> _list = new List<T>();
-        private readonly FindBestNameMixin _findBestName;
-
-        protected BaseList()
-        {
-            _findBestName = new FindBestNameMixin(_list.OfType<INamed>());
-        }
-
+   
         internal void AddExistingMember(T newMember)
         {
             Requires(newMember != null);
@@ -87,6 +81,6 @@ namespace Yuml
         }
 
         public IEnumerable<IVisible> VisibleObjects => _list.Cast<IVisible>();
-        protected string FindBestName(string defaultName) => _findBestName.FindBestName(defaultName);
+       
     }
 }

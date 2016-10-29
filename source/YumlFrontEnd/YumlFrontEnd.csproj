@@ -108,6 +108,7 @@
     <Compile Include="Command\General\List\ShowOrHideAllObjectsInListCommand.cs" />
     <Compile Include="Command\Method\NewMethodCommand.cs" />
     <Compile Include="Command\Method\RenameMethodCommand.cs" />
+    <Compile Include="DomainObject\NamedBaseList.cs" />
     <Compile Include="Event\BaseClassChangedEvent.cs" />
     <Compile Include="Event\BaseClassRemovedEvent.cs" />
     <Compile Include="Event\BaseClassSetEvent.cs" />

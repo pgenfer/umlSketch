@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Yuml;
 using Yuml.Command;
+using static System.Diagnostics.Contracts.Contract;
 
 namespace YumlFrontEnd.editor.ViewModel
 {
@@ -30,7 +31,7 @@ namespace YumlFrontEnd.editor.ViewModel
         /// <summary>
         /// list of classifiers that will be injected in all other view models
         /// </summary>
-        public ClassifierSelectionItemsSource ClassifiersToSelect { get; }
+        public IClassifierSelectionItemsSource ClassifiersToSelect { get; }
         public MessageSystem MessageSystem { get; }
 
         /// <summary>
@@ -45,9 +46,12 @@ namespace YumlFrontEnd.editor.ViewModel
         
 
         public ViewModelFactory(
-            ClassifierSelectionItemsSource classifiersToSelect,
+            IClassifierSelectionItemsSource classifiersToSelect,
             MessageSystem messageSystem)
         {
+            Requires(classifiersToSelect != null);
+            Requires(messageSystem != null);
+
             MessageSystem = messageSystem;
             ClassifiersToSelect = classifiersToSelect;
         }
@@ -71,7 +75,7 @@ namespace YumlFrontEnd.editor.ViewModel
         private Func<ISingleCommandContext, SingleItemViewModelBase<TDomain>>  _singleItemViewModelFactoryFunction;
 
         public ViewModelFactory(
-            ClassifierSelectionItemsSource classifiersToSelect,
+            IClassifierSelectionItemsSource classifiersToSelect,
             IListCommandContext<TDomain> commands,
             MessageSystem messageSystem):base(classifiersToSelect,messageSystem)
         {

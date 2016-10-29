@@ -87,7 +87,7 @@ namespace YumlFrontEnd.editor
                 messageSystem.Subscribe<DomainObjectCreatedEvent<Relation>>(
                     classifier, x => relations.AddRelation(x.DomainObject));
 
-            _container.Singleton<ClassifierSelectionItemsSource>();
+            _container.Singleton<IClassifierSelectionItemsSource,ClassifierSelectionItemsSource>();
             _container.PerRequest<ClassifierListCommandContext>();
             _container.Singleton<DeletionService>();
             _container.Singleton<ViewModelFactory>();

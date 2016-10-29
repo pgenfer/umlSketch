@@ -11,6 +11,7 @@ using Yuml.Command;
 using Yuml.Serializer;
 using YumlFrontEnd.editor.ViewModel;
 using static System.Environment;
+using static System.Diagnostics.Contracts.Contract;
 
 namespace YumlFrontEnd.editor
 {
@@ -28,6 +29,11 @@ namespace YumlFrontEnd.editor
             ClassifierDictionary classifiers,
             ApplicationSettings applicationSettings)
         {
+            Requires(classifierCommands != null);
+            Requires(viewModelFactory != null);
+            Requires(classifiers != null);
+            Requires(applicationSettings != null);
+
             var messageSystem = viewModelFactory.MessageSystem;
 
             _classifierCommands = classifierCommands;

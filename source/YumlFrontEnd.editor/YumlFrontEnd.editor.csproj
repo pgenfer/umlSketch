@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="Association\AssociationViewModel.cs" />
     <Compile Include="Classifier\ClassifierSelectionSourceWithExcludedItem.cs" />
+    <Compile Include="Classifier\IClassifierSelectionItemsSource.cs" />
     <Compile Include="Converter\ColorToGradientBrushConverter.cs" />
     <Compile Include="Converter\IsVisibleToColorConverter.cs" />
     <Compile Include="Converter\TestConverter.cs" />
