@@ -35,15 +35,7 @@ namespace Yuml
         /// </summary>
         public bool IsSystemType { get; internal set; }
 
-        /// <summary>
-        /// only for testing, don't use in production
-        /// </summary>
-        public Classifier()
-        {
-            Associations = new ClassifierAssociationList(this);
-        }
-
-        public Classifier(string name, bool isSystemType=false) :this()
+        public Classifier(string name, bool isSystemType=false)
         {
             Name = name;
             IsVisible = true;
@@ -108,12 +100,15 @@ namespace Yuml
             RelationType associationType,
             string startName="", 
             string endName="") => 
-            Associations.AddNewRelation(target, associationType, startName, endName);
+            Associations.AddNewRelation(this,target, associationType, startName, endName);
 
-        public ClassifierAssociationList Associations { get; internal set; }
+        /// <summary>
+        /// property must have setter, otherwise we cannot set it via AutoMapper
+        /// </summary>
+        public ClassifierAssociationList Associations { get; internal set; } = new ClassifierAssociationList();
 
         public Relation CreateNewAssociationWithBestInitialValues(ClassifierDictionary classifiers) => 
-            Associations.CreateNewAssociationWithBestInitialValues(classifiers);
+            Associations.CreateNewAssociationWithBestInitialValues(this,classifiers);
 
         public Method CreateNewMethodWithBestInitialValues(ClassifierDictionary classifiers) =>
             Methods.CreateNewMethodWithBestInitialValues(classifiers);

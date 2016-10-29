@@ -38,6 +38,9 @@ namespace Yuml
             string startName = "",
             string endName = "")
         {
+            Requires(start != null);
+            Requires(end != null);
+
             Start = new StartNode(start,startName);
             End = new EndNode(end, endName);
             Type = relation;
@@ -91,6 +94,12 @@ namespace Yuml
                         relationEnd = startNode
                             .AsSimpleAssociation()
                             .AsBaseClass(End.Classifier.Name);
+                        break;
+                    case RelationType.Uses:
+                        relationEnd = End.WriteTo(
+                            startNode
+                                .AsUsesRelation()
+                                .WithNavigation()); // dependencies are often drawn as navigatable, so we reflect this here also
                         break;
                     case RelationType.Association:
                     default: // default case is a normal association

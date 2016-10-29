@@ -34,6 +34,12 @@
             return new RelationEndWriter(_content);
         }
 
+        public RelationEndWriter AsUsesRelation()
+        {
+            AppendToken("-.-");
+            return new RelationEndWriter(_content);
+        }
+
         public RelationEndWriter AsCompositeOwner()
         {
             AppendToken("++-");

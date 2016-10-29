@@ -19,26 +19,6 @@ namespace Yuml.DomainObject
     public class ClassifierAssociationList : IVisibleObjectList, IEnumerable<Relation>
     {
         /// <summary>
-        /// the classifier that is the owner of this association list
-        /// </summary>
-        private Classifier _start;
-
-        public ClassifierAssociationList(Classifier start)
-        {
-            _start = start;
-        }
-
-        /// <summary>
-        /// empty constructor is only used for serialization,
-        /// should not be used in production. Start classifier
-        /// will be set when first existing relation is added to the list
-        /// </summary>
-        internal ClassifierAssociationList()
-        {
-            
-        }
-
-        /// <summary>
         /// internal list that stores the relations
         /// </summary>
         private readonly List<Relation> _relations = new List<Relation>();
@@ -55,14 +35,18 @@ namespace Yuml.DomainObject
         /// creates a new association with default values, adds it to the assocation
         /// list and returns the newly created assocication.
         /// </summary>
+        /// <param name="start"></param>
         /// <param name="classifiers"></param>
         /// <returns></returns>
-        public Relation CreateNewAssociationWithBestInitialValues(ClassifierDictionary classifiers)
+        public Relation CreateNewAssociationWithBestInitialValues(Classifier start,ClassifierDictionary classifiers)
         {
+            Requires(start != null);
+            Requires(classifiers.Count > 0);
+
             // try to find a classifier that is suitable for this relation.
             // we take the first one which is not used already and which is not the
             // source itself
-            var usedClassifiers = _relations.Select(x => x.End.Classifier).Concat(new[] {_start});
+            var usedClassifiers = _relations.Select(x => x.End.Classifier).Concat(new[] { start });
             var firstUnusedClassifier = classifiers
                 .Except(usedClassifiers)
                 .FirstOrDefault();
@@ -70,13 +54,14 @@ namespace Yuml.DomainObject
             // there must always be one, at least the source itself
             firstUnusedClassifier = firstUnusedClassifier ?? classifiers.First();
 
-            var newRelation = new Relation(_start, firstUnusedClassifier);
+            var newRelation = new Relation(start, firstUnusedClassifier);
             _relations.Add(newRelation);
 
             return newRelation;
         }
 
         public Relation AddNewRelation(
+            Classifier start,
             Classifier target,
             RelationType associationType = RelationType.Association,
             string startName = "",
@@ -86,8 +71,9 @@ namespace Yuml.DomainObject
             // in the classes relation list
             Requires(associationType != RelationType.Implementation);
             Requires(associationType != RelationType.Inheritance);
+            Requires(start != null);
 
-            var relation = new Relation(_start, target, associationType, startName, endName );
+            var relation = new Relation(start, target, associationType, startName, endName );
             _relations.Add(relation);
 
             return relation;
@@ -100,13 +86,8 @@ namespace Yuml.DomainObject
             Requires(relation != null);
             Requires(relation.Type != RelationType.Implementation);
             Requires(relation.Type != RelationType.Inheritance);
-            Ensures(_start == relation.Start.Classifier);
-            // ensure that if start was already set it did not change or 
-            // if it was not set it now points to the start of this relation
-            Ensures(OldValue(_start) != null ? _start == OldValue(_start) : _start == relation.Start.Classifier);
-
+         
             _relations.Add(relation);
-            _start = relation.Start.Classifier;
         }
 
         public IEnumerator<Relation> GetEnumerator() => _relations.GetEnumerator();

@@ -105,6 +105,25 @@ namespace Yuml.Test
             Assert.AreEqual(expectedResult, umlText);
         }
 
+        [TestDescription("Create a uses-relation between two classes")]
+        public void DiagramWriter_CreateUsesRelation()
+        {
+            var umlText =
+                _diagram
+                    .StartRelation()
+                        .WithStartNode("Car")
+                        .WithName("uses")
+                        .AsUsesRelation()
+                        .WithNavigation()
+                        .ToClassifier("Fuel")
+                    .Finish()
+                .Finish()
+                .ToString();
+
+            const string expectedResult = "[Car]uses-.->[Fuel]";
+            Assert.AreEqual(expectedResult, umlText);
+        }
+
         [TestDescription("Create an interface implementation")]
         public void DiagramWriter_CreateInterfaceImplementation()
         {
