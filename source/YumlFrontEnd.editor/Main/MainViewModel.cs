@@ -19,32 +19,36 @@ namespace YumlFrontEnd.editor
     {
         private readonly ClassifierListCommandContext _classifierCommands;
         private readonly ViewModelFactory _viewModelFactory;
-        private readonly ClassifierDictionary _classifiers;
+        private readonly Diagram _diagram;
         private readonly ApplicationSettings _applicationSettings;
         private readonly SerializationMixin _serialization;
+        private readonly DiagramCommands _commands;
 
         public MainViewModel(
             ClassifierListCommandContext classifierCommands,
+            DiagramCommands commands,
             ViewModelFactory viewModelFactory,
-            ClassifierDictionary classifiers,
+            Diagram diagram,
             ApplicationSettings applicationSettings)
         {
+            Requires(commands != null);
             Requires(classifierCommands != null);
             Requires(viewModelFactory != null);
-            Requires(classifiers != null);
+            Requires(diagram != null);
             Requires(applicationSettings != null);
 
             var messageSystem = viewModelFactory.MessageSystem;
 
             _classifierCommands = classifierCommands;
+            _commands = commands;
             _viewModelFactory = viewModelFactory;
-            _classifiers = classifiers;
+            _diagram = diagram;
             _applicationSettings = applicationSettings;
-            _serialization = new SerializationMixin(classifiers, messageSystem,applicationSettings);
+            _serialization = new SerializationMixin(diagram, messageSystem,applicationSettings);
 
             // reload the view models when the classifiers are reset after
             // a load operation
-            messageSystem.Subscribe<ClassifiersResetEvent>(_classifiers,_ => UpdateViewModels());
+            messageSystem.Subscribe<ClassifiersResetEvent>(diagram.Classifiers,_ => UpdateViewModels());
 
             // try to load the last file that was edited by the user
             LoadLastFile();
@@ -55,14 +59,27 @@ namespace YumlFrontEnd.editor
             ClassifierList = _viewModelFactory
                 .WithCommand(_classifierCommands)
                 .CreateViewModelForList<ClassifierListViewModel>();
+            //  by default, collapse all classes
+            ClassifierList.Collapse();
+
             Renderer = new RendererViewModel(
-                _classifiers,
+                _diagram,
                 _applicationSettings,
                 _viewModelFactory.MessageSystem);
+
+            // initialize the note directly through the diagram
+            // maybe later we change this to work via Automapper as we did with
+            // other viewmodels
+            Note = new NoteViewModel(_commands.ChangeNoteColor, _commands.ChangeNoteText)
+            {
+                InitialColor = _diagram.Note.Color.ToColorFromFriendlyName(),
+                Text = _diagram.Note.Text
+            };
         }
 
         private ClassifierListViewModel _classifierList;
         private RendererViewModel _renderer;
+        private NoteViewModel _note;
 
         public ClassifierListViewModel ClassifierList
         {
@@ -75,6 +92,13 @@ namespace YumlFrontEnd.editor
             get { return _renderer; }
             private set { _renderer = value;NotifyOfPropertyChange(); }
         }
+
+        public NoteViewModel Note
+        {
+            get { return _note; }
+            set { _note = value;NotifyOfPropertyChange(); }
+        }
+
         public void Save() => _serialization.Save();
         public void Open() => _serialization.Open();
         public void New() => _serialization.New();

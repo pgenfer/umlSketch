@@ -34,11 +34,34 @@ namespace Yuml.Serializer.Dto
             // store the classfier mappings so that we can resolve them later
             _mapperConfiguration = new MapperConfiguration(x =>
             {
+                x.CreateMap<Diagram, DiagramDataDto>()
+                    .PreserveReferences()
+                    .ReverseMap()
+                    .ForMember(d => d.Note, c => c.Ignore())
+                    .ForMember(d => d.Classifiers, c => c.Ignore())
+                    .AfterMap((s, d) => // load classifiers from dto to diagram
+                    {
+                        foreach (var classifierDto in s.Classifiers)
+                            d.Classifiers.AddNewClassifier(_mapper.Map<Classifier>(classifierDto));
+                        d.Classifiers.AddMissingSystemTypes();
+                        d.Note.Color = s.NoteColor;
+                        d.Note.Text = s.NoteText;
+                    });
+                x.CreateMap<DiagramDataDto, Note>() // map diagram dto to note
+                    .ForMember(d => d.Text, c => c.MapFrom(s => s.NoteText))
+                    .ForMember(d => d.Color, c => c.MapFrom(s => s.NoteColor));
                 // classifier mapping
                 x.CreateMap<Classifier, ClassifierDto>()
                     .PreserveReferences()
                     .ReverseMap()
+                    // this is a way of unflattening the note DTO data back to the classifier
+                    // see here for details:
+                    // http://stackoverflow.com/questions/3145062/using-automapper-to-unflatten-a-dto
+                    .ForMember(d => d.Note,c => c.MapFrom(s => s)) // map note to classifierDto
                     .PreserveReferences();
+                x.CreateMap<ClassifierDto, Note>() // and set properties from classifierDto to note
+                    .ForMember(d => d.Text, c => c.MapFrom(s => s.NoteText))
+                    .ForMember(d => d.Color, c => c.MapFrom(s => s.NoteColor));
                 // property mapping
                 x.CreateMap<Property, PropertyDto>()
                     .PreserveReferences()
@@ -115,34 +138,15 @@ namespace Yuml.Serializer.Dto
         }
 
         /// <summary>
-        /// converts the given classifier dictonary to a list of
-        /// classifier DTOs
-        /// </summary>
-        /// <param name="classifiers"></param>
-        /// <returns></returns>
-        public IEnumerable<ClassifierDto> ToDto(ClassifierDictionary classifiers)
-        {
-            return _mapper.Map<IEnumerable<ClassifierDto>>(classifiers);
-        }
-
-        /// <summary>
         /// converts the list of classifier DTOs back to a classifier dictionary
         /// </summary>
-        /// <param name="classifierDtos">DTOs which were loaded from persistant storage</param>
-        /// <param name="classifierDictionary">dictionary where the domain objects hydrated from the DTOs should be stored</param>
-        /// <returns></returns>
-        public void ToDomain(
-            IEnumerable<ClassifierDto> classifierDtos,
-            ClassifierDictionary classifierDictionary)
+        public void ToDomain(Diagram diagram, DiagramDataDto diagramDto)
         {
             // remove all existing classifiers before adding new ones
-            classifierDictionary.Clear();
-
-            var classifiers = _mapper.Map<IEnumerable<Classifier>>(classifierDtos);
-            foreach (var classifier in classifiers)
-                classifierDictionary.AddNewClassifier(classifier);
-            // at the end, add all missing system types
-            classifierDictionary.AddMissingSystemTypes();
+            diagram.Classifiers.Clear();
+            _mapper.Map(diagramDto,diagram);
         }
+
+        public DiagramDataDto ToDto(Diagram diagram) => _mapper.Map<DiagramDataDto>(diagram);
     }
 }

@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="YumlFrontEnd.editor.NoteView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:YumlFrontEnd.editor"
+             xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+             xmlns:userControls="clr-namespace:YumlFrontEnd.editor.UserControls"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance local:NoteViewModel}"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             Focusable="False">
+  <UserControl.Resources>
+    <ResourceDictionary Source="../Styles/ControlStyles.xaml"/>
+  </UserControl.Resources>
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <!-- header -->
+      <RowDefinition Height="Auto" />
+      <!-- Text -->
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <!-- header control -->
+    <local:HeaderControl
+      IsExpanded="{Binding IsExpanded}"
+      HasDeleteButton="True"
+      HasNewButton="False"
+      HasExpandButton="True"
+      Title="{x:Static local:EditorStrings.Note}"
+      caliburn:Bind.Model="{Binding}"
+      HasColorPicker="True"/>
+    <!-- Text -->
+    <TextBox
+      Style="{StaticResource TextBox-Sketch}"
+      TextWrapping="WrapWithOverflow"
+      AcceptsReturn="True"
+      x:Name="Text"
+      Grid.Row="1"
+      Margin="28,0,10,0"
+      Height="150"
+      Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}"/>
+  </Grid>
+</UserControl>

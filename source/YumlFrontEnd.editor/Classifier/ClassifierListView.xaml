@@ -10,21 +10,26 @@
     <Style BasedOn="{StaticResource ListBox-Sketch}" TargetType="ListBox"/>
   </UserControl.Resources>
   <DockPanel>
-  <StackPanel 
-    Margin="5,0"
-    HorizontalAlignment="Right"
-    DockPanel.Dock="Top">
-    <local:ActionButton 
-      x:Name="New"
-      Style="{StaticResource NewButtonStyle}"/>
-  </StackPanel>
-  <ItemsControl Name="Items"
-                DockPanel.Dock="Bottom">
-    <ItemsControl.ItemTemplate>
-      <DataTemplate>
-        <ContentControl caliburn:View.Model="{Binding}"/>
-      </DataTemplate>
-    </ItemsControl.ItemTemplate>
-  </ItemsControl>  
+    <StackPanel
+      Margin="5"
+      HorizontalAlignment="Right"
+      DockPanel.Dock="Top">
+      <local:ActionButton
+        x:Name="New"
+        Style="{StaticResource NewButtonStyle}"/>
+    </StackPanel>
+    <Separator DockPanel.Dock="Top"/>
+    <ScrollViewer
+      Style="{StaticResource ScrollViewer-Sketch-List}"
+      VerticalScrollBarVisibility="Auto"
+      DockPanel.Dock="Bottom">
+      <ItemsControl Name="Items">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <ContentControl caliburn:View.Model="{Binding}"/>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
   </DockPanel>
 </UserControl>

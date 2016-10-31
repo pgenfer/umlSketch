@@ -168,9 +168,14 @@
       <DependentUpon>EditorStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Extension\ColorExtension.cs" />
+    <Compile Include="Mixin\BackgroundColorMixin.cs" />
     <Compile Include="Mixin\ChangeVisibilityMixin.cs" />
     <Compile Include="Mixin\SelectClassifierWithNullItemMixin.cs" />
     <Compile Include="Mixin\SerializationMixin.cs" />
+    <Compile Include="Note\NoteView.xaml.cs">
+      <DependentUpon>NoteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Note\NoteViewModel.cs" />
     <Compile Include="Renderer\BrowserBehavior.cs" />
     <Compile Include="Renderer\RendererView.xaml.cs">
       <DependentUpon>RendererView.xaml</DependentUpon>
@@ -239,6 +244,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Association\AssociationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Note\NoteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

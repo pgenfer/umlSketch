@@ -101,6 +101,6 @@ namespace YumlFrontEnd.editor
         {
             _visibility.ShowOrHide();
             NotifyOfPropertyChange(nameof(IsVisible));
-        } 
+        }
     }
 }

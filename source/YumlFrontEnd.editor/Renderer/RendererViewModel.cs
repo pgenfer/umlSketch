@@ -20,18 +20,18 @@ namespace YumlFrontEnd.editor
     /// </summary>
     public class RendererViewModel : PropertyChangedBase
     {
-        private readonly ClassifierDictionary _classifiers;
+        private readonly Diagram _diagram;
         private readonly ApplicationSettings _settings;
         private readonly HttpClient _yumleHttpConnection = new HttpClient();
         private string _uriToDiagram;
         private string _lastDslText = string.Empty;
 
         public RendererViewModel(
-            ClassifierDictionary classifiers,
+            Diagram diagram,
             ApplicationSettings settings,
             MessageSystem messageSystem)
         {
-            _classifiers = classifiers;
+            _diagram = diagram;
             _settings = settings;
             _yumleHttpConnection.BaseAddress = new Uri(settings.YumlBaseUrl);
             _yumleHttpConnection.DefaultRequestHeaders.Add("Accept-Language", "en-GB,en-US,de-DE,de-AT;q=0.8,en;q=0.6,ru;q=0.4");
@@ -69,7 +69,7 @@ namespace YumlFrontEnd.editor
         {
             // write classifiers and relations to diagram
             var diagramWriter = new DiagramWriter();
-            _classifiers.WriteTo(diagramWriter);
+            _diagram.WriteTo(diagramWriter);
             var diagramText = diagramWriter.ToString();
 
             // skip if diagram did not change
@@ -84,20 +84,27 @@ namespace YumlFrontEnd.editor
             };
 
             // wait for response image URI
-            var response = await _yumleHttpConnection.PostAsync(
+            try
+            {
+                var response = await _yumleHttpConnection.PostAsync(
                 _settings.YumlDiagramRequestUri,
                 new FormUrlEncodedContent(content));
-            // the result is the file name of the cached png,
-            // we remove the extension to access the resource
-            if (response.IsSuccessStatusCode)
-            {
-                var result = await response.Content.ReadAsStringAsync();
-                var uri = $"{_settings.YumlBaseUrl}{GetFileNameWithoutExtension(result)}";
-                UriToDiagram = uri;
+                // the result is the file name of the cached png,
+                // we remove the extension to access the resource
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    var uri = $"{_settings.YumlBaseUrl}{GetFileNameWithoutExtension(result)}";
+                    UriToDiagram = uri;
+                }
+                else
+                {
+                    // TODO: show some error message here (in HTML maybe?)
+                }
             }
-            else
+            catch (HttpRequestException exception)
             {
-                // TODO: show some error message here
+                // TODO: show correct error message here (in HTML maybe?)
             }
         }
 

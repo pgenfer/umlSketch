@@ -35,6 +35,14 @@ namespace Yuml
         {
             Requires(writer != null);
 
+            // skip if no relations are available
+            if (_relations.Count == 0)
+                return;
+
+            // relations are always after classifiers,
+            // so add a separator
+            writer.AddSeparator();
+
             foreach (var relation in _relations)
             {
                 var relationWriter = writer.StartRelation();

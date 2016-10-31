@@ -21,5 +21,7 @@ namespace Yuml.Serializer.Dto
         /// be serialized
         /// </summary>
         public List<ClassifierDto> Classifiers { get; set; }
+        public string NoteText { get; set; }
+        public string NoteColor { get; set; }
     }
 }

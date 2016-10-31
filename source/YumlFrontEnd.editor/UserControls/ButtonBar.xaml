@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:editor="clr-namespace:YumlFrontEnd.editor"
+             xmlns:userControls="clr-namespace:YumlFrontEnd.editor.UserControls"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              x:Name="ButtonBarControl">
@@ -11,6 +12,9 @@
     Margin="5,0"
     Orientation="Horizontal"
     DockPanel.Dock="Right">
+    <userControls:ColorPicker
+     Color="{Binding BackgroundColor,Mode=TwoWay}"
+     Visibility="{Binding ElementName=ButtonBarControl,Path=HasColorPicker,Converter={editor:FalseToHideConverter}}"/>
     <editor:ActionButton
       HorizontalAlignment="Right"
       Style="{StaticResource ActionButtonStyle}"

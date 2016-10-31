@@ -22,8 +22,8 @@ namespace YumlFrontEnd.editor
     {
         private readonly ExpandableMixin _expanded = new ExpandableMixin();
         private SelectClassifierWithNullItemMixin _selectBaseClass;
-        private Color _backgroundColor;
-
+        private BackgroundColorMixin _backgroundColor;
+  
         /// <summary>
         /// name of the base class which is intially set when reading
         /// data from view model. Used to choose the correct item in the classifier itemssource.
@@ -32,11 +32,15 @@ namespace YumlFrontEnd.editor
         public string InitialBaseClass { get; set; }
 
         public ClassifierViewModel(
-            ISingleClassifierCommands commands):base(commands){}
+            ISingleClassifierCommands commands) : base(commands)
+        {
+            Note = new NoteViewModel(_commands.ChangeNoteColor,_commands.ChangeNoteText);
+        }
 
         public PropertyListViewModel Properties { get; private set; }
         public MethodListViewModel Methods { get; private set; }
         public AssociationListViewModel Associations { get; private set; }
+        public NoteViewModel Note { get; private set; }
 
         public bool IsExpanded
         {
@@ -57,15 +61,21 @@ namespace YumlFrontEnd.editor
             Associations =
                 WithCommand(_commands.CommandsForAssociations)
                 .CreateViewModelForList<AssociationListViewModel>();
-            
+             
             // list of base classifiers can  have a null item and should not
             // have the class item itself
             _selectBaseClass = new SelectClassifierWithNullItemMixin(
                 ClassifiersToSelect.Exclude(Name),
                 _commands.ChangeBaseClass);
 
+            _backgroundColor = new BackgroundColorMixin(_commands.ChangeClassifierColor)
+            {
+                InitialColor = InitialColor
+            };
+
             _selectBaseClass.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
             _expanded.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
+            _backgroundColor.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
 
             SelectClassifierByName(InitialBaseClass);
         }
@@ -88,27 +98,17 @@ namespace YumlFrontEnd.editor
         public void OnBaseClassCleared(ClearBaseClassEvent domainEvent) => ClearClassifierWithoutCommand();
 
         /// <summary>
-        /// background color used for this classifier
+        /// used to read the color from the domain object
+        /// after all mixins are initialized, color will be set to mixin,
+        /// so this property will not be delegated to the mixin directly
         /// </summary>
+        public Color InitialColor { get; set; }
+
         public Color BackgroundColor
         {
-            get { return _backgroundColor; }
-            set
-            {
-                _backgroundColor = value;
-                _commands.ChangeColor.ChangeColor(value.ToFriendlyName());
-                NotifyOfPropertyChange();
-            }
+            get { return _backgroundColor.BackgroundColor; }
+            set { _backgroundColor.BackgroundColor = value; }
         }
-
-        /// <summary>
-        /// only used for initialization, will be used set initially during model => viewmodel mapping.
-        /// If mapping would set Backgroundcolor directly, the command would be executed.
-        /// </summary>
-        public Color InitialColor
-        {
-            get { return _backgroundColor; }
-            set { _backgroundColor = value; } 
-        }
+        public void Collapse() => _expanded.Collapse();
     }
 }

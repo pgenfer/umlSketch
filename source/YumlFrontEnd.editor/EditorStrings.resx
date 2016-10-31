@@ -137,6 +137,9 @@
   <data name="None" xml:space="preserve">
     <value>(none)</value>
   </data>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
   <data name="Open" xml:space="preserve">
     <value>Opening new uml diagram</value>
   </data>

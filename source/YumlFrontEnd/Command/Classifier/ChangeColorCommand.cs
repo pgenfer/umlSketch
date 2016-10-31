@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Yuml.Command
 {
-    public class ChangeColorCommand : DomainObjectBaseCommand<Classifier>
+    public class ChangeColorCommand : DomainObjectBaseCommand<Classifier>, IChangeColorCommand
     {
         public ChangeColorCommand(
             Classifier domainObject,

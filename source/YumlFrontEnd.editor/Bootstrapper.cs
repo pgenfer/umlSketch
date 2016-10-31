@@ -73,24 +73,19 @@ namespace YumlFrontEnd.editor
 
         private void ConfigureDomainModel()
         {
-            var classifierDictionary = new ClassifierDictionary();
-            var relations = new RelationList();
+            var diagram = new Diagram();
+            var classifierDictionary = diagram.Classifiers;
             var messageSystem = new MessageSystem();
-            //CreateDummyData(classifierDictionary,relations);
-            // register classifier dictionary
-            _container.Instance(classifierDictionary);
-            _container.Instance(relations);
-            _container.Instance(messageSystem);
 
-            // TODO: this should be put somewhere else later
-            foreach (var classifier in classifierDictionary)
-                messageSystem.Subscribe<DomainObjectCreatedEvent<Relation>>(
-                    classifier, x => relations.AddRelation(x.DomainObject));
+            _container.Instance(diagram);
+            _container.Instance(classifierDictionary);
+            _container.Instance(messageSystem);
 
             _container.Singleton<IClassifierSelectionItemsSource,ClassifierSelectionItemsSource>();
             _container.PerRequest<ClassifierListCommandContext>();
             _container.Singleton<DeletionService>();
             _container.Singleton<ViewModelFactory>();
+            _container.PerRequest<DiagramCommands>();
 
             // load application settings
             var applicationSettings = new ApplicationSettings();

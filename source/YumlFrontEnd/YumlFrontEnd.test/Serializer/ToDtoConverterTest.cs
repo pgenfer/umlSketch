@@ -25,7 +25,7 @@ namespace Yuml.Test
             _classifiers = new ClassifierDictionary(Integer, String);
           
             // Act
-            var dtos = _converter.ToDto(_classifiers).ToArray();
+            var dtos = _converter.ToDto(new Diagram(_classifiers)).Classifiers;
 
             // ensure that integer classifier is the same reference
             // for the dto and the type of the string's property
@@ -40,7 +40,7 @@ namespace Yuml.Test
             _classifiers = new ClassifierDictionary(Void, String, Service);
           
             // Act
-            var dtos = _converter.ToDto(_classifiers).ToArray();
+            var dtos = _converter.ToDto(new Diagram(_classifiers)).Classifiers;
 
             // Assert
             Assert.AreEqual(dtos[0], dtos[2].Methods[0].ReturnType);
@@ -51,8 +51,8 @@ namespace Yuml.Test
         public void ClassifierWithBaseClass_ConvertToDto_KeepBaseClass()
         {
             Car.BaseClass = Vehicle;
-            var classifiers = new ClassifierDictionary(Car, Vehicle);
-            var dtos = _converter.ToDto(classifiers).ToArray();
+            _classifiers = new ClassifierDictionary(Car, Vehicle);
+            var dtos = _converter.ToDto(new Diagram(_classifiers)).Classifiers;
 
             Assert.AreEqual(dtos[0].BaseClass,dtos[1]);
         }
@@ -63,7 +63,7 @@ namespace Yuml.Test
             _classifiers = new ClassifierDictionary();
             // act: convert dtos to classifier types
             _converter = new DomainDtoConverter();
-            _converter.ToDomain(new ClassifierDto[] {},_classifiers);
+            _converter.ToDomain(new Diagram(_classifiers),new DiagramDataDto {Classifiers = new List<ClassifierDto>()});
 
             Assert.AreEqual(new SystemTypes().Count(), _classifiers.Count);
         }

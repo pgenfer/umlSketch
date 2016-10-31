@@ -20,6 +20,8 @@ namespace Yuml.Serializer.Dto
         public bool IsSystemType { get; set; }
         public string Color { get; set; }
         public List<RelationDto> Associations { get; set; }
+        public string NoteText { get; set; }
+        public string NoteColor { get; set; }
 
         public override bool Equals(object obj) => 
             obj is ClassifierDto && Name == ((ClassifierDto)obj).Name;

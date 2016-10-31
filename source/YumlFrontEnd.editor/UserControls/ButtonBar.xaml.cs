@@ -42,5 +42,14 @@ namespace YumlFrontEnd.editor
             get { return (bool) GetValue(HasDeleteButtonProperty); }
             set { SetValue(HasDeleteButtonProperty, value); }
         }
+
+        public static readonly DependencyProperty HasColorPickerProperty = DependencyProperty.Register(
+            "HasColorPicker", typeof(bool), typeof(ButtonBar), new PropertyMetadata(default(bool)));
+
+        public bool HasColorPicker
+        {
+            get { return (bool) GetValue(HasColorPickerProperty); }
+            set { SetValue(HasColorPickerProperty, value); }
+        }
     }
 }

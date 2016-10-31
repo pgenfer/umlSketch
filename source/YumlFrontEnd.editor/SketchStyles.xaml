@@ -290,7 +290,9 @@
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
-			<SketchControls:SketchRectangleUC HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="{TemplateBinding Foreground}" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" StrokeWidth="2"/>
+			<!--
+      <SketchControls:SketchRectangleUC HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="{TemplateBinding Foreground}" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" StrokeWidth="2"/>
+      -->
 			<ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Grid.Column="0" Grid.Row="0" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False"/>
 			<ScrollBar x:Name="PART_VerticalScrollBar" Cursor="Arrow" Style="{DynamicResource ScrollBar-Sketch}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Foreground="{TemplateBinding Foreground}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Grid.Column="1" Grid.Row="0" ViewportSize="{TemplateBinding ViewportHeight}" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Value="{Binding Path=VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.AutomationId="VerticalScrollBar"/>
 			<ScrollBar x:Name="PART_HorizontalScrollBar" Cursor="Arrow" Style="{DynamicResource ScrollBar-Sketch}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Foreground="{TemplateBinding Foreground}" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Grid.Column="0" Grid.Row="1" Orientation="Horizontal" ViewportSize="{TemplateBinding ViewportWidth}" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Value="{Binding Path=HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.AutomationId="HorizontalScrollBar"/>
@@ -1257,9 +1259,11 @@
                           d:IsStaticText="False"/>
 					</Grid>
 					<ControlTemplate.Triggers>
-						<Trigger Property="IsFocused" Value="True">
+            <!--
+            <Trigger Property="IsFocused" Value="True">
 							<Setter Property="Background" TargetName="PART_ContentHost" Value="#FFBBBBBB"/>
 						</Trigger>
+            -->
 						<Trigger Property="IsEnabled" Value="False">
 							<Setter Property="Background" TargetName="PART_ContentHost" Value="{DynamicResource DisabledBackground-Sketch}"/>
 						</Trigger>

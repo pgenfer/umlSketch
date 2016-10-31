@@ -22,5 +22,6 @@ namespace YumlFrontEnd.editor
             set { _isExpanded = value; NotifyOfPropertyChange(nameof(IsExpanded)); }
         }
         public void ExpandOrCollapse() =>  IsExpanded = !IsExpanded;
+        public void Collapse() => IsExpanded = false;
     }
 }

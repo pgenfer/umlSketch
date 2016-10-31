@@ -23,16 +23,16 @@ namespace YumlFrontEnd.editor
     public class SerializationMixin
     {
         private FileName _fileName;
-        private readonly ClassifierDictionary _classifierDictionary;
+        private readonly Diagram _diagram;
         private readonly MessageSystem _messageSystem;
         private readonly ApplicationSettings _applicationSettings;
 
         public SerializationMixin(
-            ClassifierDictionary classifierDictionary,
+            Diagram diagram,
             MessageSystem messageSystem,
             ApplicationSettings applicationSettings)
         {
-            _classifierDictionary = classifierDictionary;
+            _diagram = diagram;
             _messageSystem = messageSystem;
             _applicationSettings = applicationSettings;
             _fileName = applicationSettings.LastFile;
@@ -41,8 +41,8 @@ namespace YumlFrontEnd.editor
         public void New()
         {
             _fileName = null;
-            _classifierDictionary.Clear();
-            _messageSystem.Publish(_classifierDictionary, new ClassifiersResetEvent());
+            _diagram.Clear();
+            _messageSystem.Publish(_diagram.Classifiers, new ClassifiersResetEvent());
         }
 
         public void Save()
@@ -65,7 +65,7 @@ namespace YumlFrontEnd.editor
             if (_fileName == null)
                 return;
 
-            var jsonContent = new JsonSerializer().Save(_classifierDictionary);
+            var jsonContent = new JsonSerializer().Save(_diagram);
             try
             {
                 System.IO.File.WriteAllText(
@@ -105,9 +105,9 @@ namespace YumlFrontEnd.editor
             // load content from json source
             var content = System.IO.File.ReadAllText(_fileName.Value);
             var jsonContent = new JsonContent(content);
-            new JsonSerializer().Load(jsonContent, _classifierDictionary);
+            new JsonSerializer().Load(jsonContent, _diagram);
             // fire event that view models have updated
-            _messageSystem.Publish(_classifierDictionary, new ClassifiersResetEvent());
+            _messageSystem.Publish(_diagram.Classifiers, new ClassifiersResetEvent());
         }
 
         public void Open()

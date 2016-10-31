@@ -42,13 +42,17 @@ namespace Yuml.Command
                 messageSystem);
             Delete = new DeleteClassifierCommand(classifier, deletionService);
             Visibility = new ShowOrHideSingleObjectCommand(classifier, messageSystem);
-            ChangeColor = new ChangeColorCommand(classifier, messageSystem);
+            ChangeClassifierColor = new ChangeColorCommand(classifier, messageSystem);
+            ChangeNoteColor = new ChangeNoteColorCommand(classifier.Note,messageSystem);
+            ChangeNoteText = new ChangeNoteTextCommand(classifier.Note,messageSystem);
         }
 
         public IListCommandContext<Property> CommandsForProperties { get; }
         public IListCommandContext<Method> CommandsForMethods { get; }
         public IListCommandContext<Relation> CommandsForAssociations { get; set; }
         public IChangeTypeToNullCommand ChangeBaseClass { get; }
-        public ChangeColorCommand ChangeColor { get; }
+        public IChangeColorCommand ChangeClassifierColor { get; }
+        public IChangeColorCommand ChangeNoteColor { get; }
+        public ChangeNoteTextCommand ChangeNoteText { get; }
     }
 }

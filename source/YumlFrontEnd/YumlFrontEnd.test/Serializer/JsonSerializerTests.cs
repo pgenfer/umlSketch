@@ -16,13 +16,15 @@ namespace Yuml.Test
         {
             var fromClassifiers = new ClassifierDictionary(String);
             var toClassifiers = new ClassifierDictionary();
+            var fromDiagram = new Diagram(fromClassifiers);
+            var toDiagram = new Diagram(toClassifiers);
            
             var serializer = new JsonSerializer();
 
             // store the classifiers as json
-            var json = serializer.Save(fromClassifiers);
+            var json = serializer.Save(fromDiagram);
             // read them from json to another dictionary
-            serializer.Load(json, toClassifiers);
+            serializer.Load(json, toDiagram);
 
             // Ensure that both have the same classifiers
             Assert.IsTrue(toClassifiers.Count(x => x.Name == String.Name) == 1);

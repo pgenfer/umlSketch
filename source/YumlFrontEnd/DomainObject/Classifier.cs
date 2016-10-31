@@ -134,5 +134,10 @@ namespace Yuml
             // TODO: collect interfaces here
             return relationList;
         }
+
+        /// <summary>
+        /// note that is attached to this classifier
+        /// </summary>
+        public Note Note { get; set; } = new Note();
     }
 }

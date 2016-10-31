@@ -26,7 +26,7 @@ namespace Yuml.Test.Serializer
             var dtos = new List<ClassifierDto> { StringDto, IntegerDto };
             var converter = new DomainDtoConverter();
             // Act
-            converter.ToDomain(dtos, _classifierDictionary);
+            converter.ToDomain(new Diagram(_classifierDictionary), new DiagramDataDto {Classifiers = dtos});
 
             // ensure that properties use the same object references
             // as the classifier dictionary
@@ -44,7 +44,7 @@ namespace Yuml.Test.Serializer
             var dtos = new List<ClassifierDto> {VoidDto, StringDto, ServiceDto};
             var converter = new DomainDtoConverter();
             // Act
-            converter.ToDomain(dtos, _classifierDictionary);
+            converter.ToDomain(new Diagram(_classifierDictionary), new DiagramDataDto { Classifiers = dtos });
             // Assert return type has correct reference
             Assert.AreEqual(
                 _classifierDictionary.Void,
@@ -67,7 +67,7 @@ namespace Yuml.Test.Serializer
             var dtos = new List<ClassifierDto> { StringDto };
             var converter = new DomainDtoConverter();
             // Act
-            converter.ToDomain(dtos, _classifierDictionary);
+            converter.ToDomain(new Diagram(_classifierDictionary), new DiagramDataDto { Classifiers = dtos });
             // Assert => one system type was loaded, the other ones should be added automatically
             Assert.AreEqual(new SystemTypes().Count(),_classifierDictionary.Count);
         }
@@ -85,7 +85,7 @@ namespace Yuml.Test.Serializer
             var dtos = new List<ClassifierDto> { dtoWithSystemTypeProperty,StringDto };
             var converter = new DomainDtoConverter();
             // Act
-            converter.ToDomain(dtos, _classifierDictionary);
+            converter.ToDomain(new Diagram(_classifierDictionary), new DiagramDataDto { Classifiers = dtos });
             // Assert => ensure that the instance of String is always the same in the dictionary
             Assert.AreEqual(
                 _classifierDictionary.String,

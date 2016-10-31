@@ -23,12 +23,33 @@
             return new ClassWriter(false, _content);
         }
 
+        public DiagramWriter WithNote(Note note)
+        {
+            _content.AppendToken($"[note: {note.Text}");
+            if(note.HasColor)
+                _content.AppendToken($"{{bg:{note.Color}}}");
+            _content.AppendToken("]");
+            return this;
+        }
+
+        public DiagramWriter WithClassifierNote(string classifier, Note note)
+        {
+            _content.AppendToken($"[{classifier}]-");
+            return WithNote(note);
+        }
+
         public RelationWriter StartRelation() => new RelationWriter(_content, true);
 
         public override string ToString() => _content.ToString();
         public DiagramWriter(DiagramContentMixin content = null)
         {
             _content = content ?? new DiagramContentMixin();
+        }
+
+        public DiagramWriter AddSeparator()
+        {
+            _content.AppendToken(",");
+            return this;
         }
     }
 }

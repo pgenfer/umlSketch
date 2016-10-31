@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace Yuml
 {
-    public class ChangeClassifierColorEvent : IDomainEvent
+    public class ChangeClassifierColorEvent : ChangeColorEventBase
     {
-        public string Color { get; }
-
-        public ChangeClassifierColorEvent(string newColor)
-        {
-            Color = newColor;
-        }
+        public ChangeClassifierColorEvent(string newColor) : base(newColor) { }
     }
 }

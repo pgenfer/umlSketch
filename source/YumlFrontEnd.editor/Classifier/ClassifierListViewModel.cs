@@ -27,6 +27,12 @@ namespace YumlFrontEnd.editor
         /// </summary>
         public override bool CanExpand => false;
 
+        public void Collapse()
+        {
+            foreach (var item in Items)
+                ((ClassifierViewModel) item).Collapse();
+        }
+
         protected override void UpdateItemList()
         {
             // we store the expand positions of the existing classifiers

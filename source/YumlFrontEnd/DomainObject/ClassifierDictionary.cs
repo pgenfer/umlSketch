@@ -153,8 +153,9 @@ namespace Yuml
             {
                 var classWriter = writer.StartClass();
                 classWriter = classifier.WriteTo(classWriter);
-                classWriter.Finish(++index == _dictionary.Count);
-
+                writer = classWriter.Finish(++index == _dictionary.Count);
+                if (classifier.Note.HasText)
+                    writer = writer.WithClassifierNote(classifier.Name, classifier.Note);
                 relations.AddRelations(classifier.FindAllRelationStartingFromClass());
             }
             relations.WriteTo(writer);

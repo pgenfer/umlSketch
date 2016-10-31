@@ -25,6 +25,14 @@ namespace Yuml.Command
         /// <summary>
         /// changes the color of the classifier
         /// </summary>
-        ChangeColorCommand ChangeColor { get; }
+        IChangeColorCommand ChangeClassifierColor { get; }
+        /// <summary>
+        /// changes the color of the note that is attached to this classifier
+        /// </summary>
+        IChangeColorCommand ChangeNoteColor { get; }
+        /// <summary>
+        /// commands for changing the text of a note
+        /// </summary>
+        ChangeNoteTextCommand ChangeNoteText { get; }
     }
 }

@@ -19,7 +19,9 @@
       Style="{StaticResource ExpanderButtonStyle}"/>
     <local:ButtonBar
       DockPanel.Dock="Right"
-      HasDeleteButton="False"
+      HasDeleteButton="{Binding ElementName=MainControl,Path=HasDeleteButton}"
+      HasNewButton="{Binding ElementName=MainControl,Path=HasNewButton}"
+      HasColorPicker="{Binding HasColorPicker,ElementName=MainControl}"
       cal:Bind.Model="{Binding}"/>
     <!-- caption -->
     <TextBlock
