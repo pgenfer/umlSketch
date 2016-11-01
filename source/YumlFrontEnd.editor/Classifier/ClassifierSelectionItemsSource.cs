@@ -15,47 +15,38 @@ namespace YumlFrontEnd.editor
     /// Methods here are public because unit testing, production code
     /// should access class only via interface to know which methods are available
     /// </summary>
-    public class ClassifierSelectionItemsSource : 
-        BindableCollection<ClassifierItemViewModel>, 
+    public class ClassifierSelectionItemsSource :
+        BindableCollection<ClassifierItemViewModel>,
         IClassifierSelectionItemsSource
     {
         private readonly MessageSystem _messageSystem;
-        private readonly ClassifierDictionary _classifiers;
         private readonly Func<IEnumerable<Classifier>> _queryForAvailableClassifiers;
 
         /// <summary>
-        /// only for test, should not be used in production code
+        /// only for test cases, should not be used in production code
         /// </summary>
-        public ClassifierSelectionItemsSource()
-        {
-            _classifiers = new ClassifierDictionary();
-        }
+        public ClassifierSelectionItemsSource(){ }
 
-
-        /// <summary>
-        /// internal constructor allows user to define
-        /// a query that is used to retrieve the classifiers from the dictionary.
-        /// In that way, classifiers can be filtered for interfaces, for a specific name etc...
-        /// </summary>
-        /// <param name="classifiers">dictionary where all classifiers are stored</param>
-        /// <param name="queryForAvailableClassifiers">
-        /// query that is used to retrieve the classifiers from the classifier dictionary</param>
-        /// <param name="messageSystem"></param>
-        protected ClassifierSelectionItemsSource(
-            ClassifierDictionary classifiers,
-            Func<IEnumerable<Classifier>> queryForAvailableClassifiers,
-            MessageSystem messageSystem)
+        public ClassifierSelectionItemsSource(
+           ClassifierDictionary classifiers,
+           Predicate<Classifier> filter,
+           MessageSystem messageSystem,
+           bool addNullItem = false)
         {
-            _queryForAvailableClassifiers = queryForAvailableClassifiers;
+            // apply the filter on the list of classifiers and sort them by name
+            // before retrieving
+            _queryForAvailableClassifiers = () => classifiers.Where(x => filter(x)).OrderBy(x => x.Name);
             _messageSystem = messageSystem;
-            _classifiers = classifiers;
-            
+
             UpdateClassifierList();
-            
+
             // register events fired by the whole classifier list
             messageSystem.Subscribe<DomainObjectCreatedEvent<Classifier>>(
                 classifiers, OnNewClassifierCreated);
-            messageSystem.Subscribe<ClassifiersResetEvent>(classifiers,OnClassifiersReset);
+            messageSystem.Subscribe<ClassifiersResetEvent>(classifiers, OnClassifiersReset);
+
+            if (addNullItem)
+                Insert(0, ClassifierItemViewModel.None);
         }
 
         /// <summary>
@@ -82,7 +73,8 @@ namespace YumlFrontEnd.editor
         private void OnClassiferDeleted(DomainObjectDeletedEvent<Classifier> classifierDeletedEvent)
         {
             var viewModel = ByName(classifierDeletedEvent.DomainObject.Name);
-            Remove(viewModel);
+            if (viewModel != null)
+                Remove(viewModel);
         }
 
         private void OnClassifiersReset(ClassifiersResetEvent classifiersResetEvent)
@@ -118,30 +110,19 @@ namespace YumlFrontEnd.editor
             var newIndex = FindNewItemPosition(tmp);
             // rename the item and move it to the new position
             item.Name = nameChangedEvent.NewName;
-            if(oldIndex != newIndex)
-               Move(oldIndex, newIndex);
-        }
-
-        public ClassifierSelectionItemsSource(
-            ClassifierDictionary classifiers,
-            MessageSystem messageSystem)
-            :this(classifiers,() => classifiers.OrderBy(x => x.Name),messageSystem)
-        {
+            if (oldIndex != newIndex)
+                Move(oldIndex, newIndex);
         }
 
         /// <summary>
         /// returns the classifier with the given name.
         /// </summary>
-        /// <param name="name">name of the classifier. A classifier
-        /// with this name must exist in the list and there may only be one 
-        /// classifier with this name</param>
-        /// <returns></returns>
+        /// <param name="name">name of the classifier. It can be
+        /// that the classifier is not in the list (in case it was excluded from the list before)</param>
+        /// <returns>ViewModel of the classifier or null if the given classifier does not exist in this list.</returns>
         public ClassifierItemViewModel ByName(string name)
         {
-            Contract.Requires(!string.IsNullOrEmpty(name));
-            Contract.Requires(this.Count(x => x.Name == name) == 1);
-
-            return this.Single(x => x.Name == name);
+           return this.FirstOrDefault(x => x.Name == name);
         }
 
         private int FindNewItemPosition(INamed item) => BinarySearch(item, 0, Count - 1);
@@ -150,7 +131,7 @@ namespace YumlFrontEnd.editor
         {
             while (min < max)
             {
-                var mid = (min + max)/2;
+                var mid = (min + max) / 2;
                 var result = string.Compare(item.Name, this[mid].Name, StringComparison.OrdinalIgnoreCase);
                 if (result == 0)
                     return mid;
@@ -160,24 +141,6 @@ namespace YumlFrontEnd.editor
                     min = mid + 1;
             }
             return max > -1 ? max : 0;
-        }
-
-        /// <summary>
-        /// excludes the given item from the list and returns a new list
-        /// without the excluded item.
-        /// </summary>
-        /// <param name="classifierName"></param>
-        /// <param name="withNullItem">if true, the list will also contain a "null" entry</param>
-        /// <returns></returns>
-        public IClassifierSelectionItemsSource Exclude(string classifierName, bool withNullItem = true)
-        {
-            var newSource = new ClassifierSelectionSourceWithExcludedItem(
-                _classifiers,
-                _messageSystem,
-                classifierName);
-            if(withNullItem)
-                newSource.Insert(0, ClassifierItemViewModel.None);
-            return newSource;
         }
     }
 }
