@@ -63,7 +63,8 @@ namespace YumlFrontEnd.editor
             _association = Associations[InitialAssociationType];
             // and the target of the association
             _selectedClassifierMixin = new SelectClassifierMixin(
-                ClassifiersToSelect,_commands.ChangeAssociationTargetCommand);
+                 Context.CreateClassifierItemSource(x => !x.IsSystemType), 
+                _commands.ChangeAssociationTargetCommand);
             SelectClassifierByName(InitialTargetClassiferName);
         }
 

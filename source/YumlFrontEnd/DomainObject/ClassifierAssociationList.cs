@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
@@ -25,10 +26,14 @@ namespace Yuml.DomainObject
         /// <param name="start"></param>
         /// <param name="classifiers"></param>
         /// <returns></returns>
-        public Relation CreateNewAssociationWithBestInitialValues(Classifier start,ClassifierDictionary classifiers)
+        public Relation CreateNewAssociationWithBestInitialValues(
+            Classifier start,
+            ClassifierDictionary classifiers)
         {
             Requires(start != null);
             Requires(classifiers.Count > 0);
+            // ensure that the relation is not bound to a system type
+            Ensures(!Result<Relation>().End.Classifier.IsSystemType);
 
             // try to find a classifier that is suitable for this relation.
             // we take the first one which is not used already and which is not the
@@ -36,10 +41,10 @@ namespace Yuml.DomainObject
             var usedClassifiers = _list.Select(x => x.End.Classifier).Concat(new[] { start });
             var firstUnusedClassifier = classifiers
                 .Except(usedClassifiers)
-                .FirstOrDefault();
+                .FirstOrDefault(x => !x.IsSystemType);
             // all classifiers are already used, so take the first one which is used
             // there must always be one, at least the source itself
-            firstUnusedClassifier = firstUnusedClassifier ?? classifiers.First();
+            firstUnusedClassifier = firstUnusedClassifier ?? classifiers.First(x => !x.IsSystemType);
 
             var newRelation = new Relation(start, firstUnusedClassifier);
             AddNewMember(newRelation);

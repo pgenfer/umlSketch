@@ -6,7 +6,6 @@ using Yuml;
 using Yuml.Command;
 using Yuml.Serializer;
 using Yuml.Service;
-using YumlFrontEnd.editor.ViewModel;
 
 namespace YumlFrontEnd.editor
 {
@@ -75,16 +74,14 @@ namespace YumlFrontEnd.editor
         {
             var diagram = new Diagram();
             var classifierDictionary = diagram.Classifiers;
-            var messageSystem = new MessageSystem();
-
+       
             _container.Instance(diagram);
             _container.Instance(classifierDictionary);
-            _container.Instance(messageSystem);
 
-            _container.Singleton<IClassifierSelectionItemsSource,ClassifierSelectionItemsSource>();
+            _container.Singleton<MessageSystem>();
             _container.PerRequest<ClassifierListCommandContext>();
             _container.Singleton<DeletionService>();
-            _container.Singleton<ViewModelFactory>();
+            _container.Singleton<ViewModelContext>();
             _container.PerRequest<DiagramCommands>();
 
             // load application settings

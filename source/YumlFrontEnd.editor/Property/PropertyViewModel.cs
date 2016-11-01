@@ -25,7 +25,7 @@ namespace YumlFrontEnd.editor
         protected override void CustomInit()
         {
             _selectClassifier = new SelectClassifierMixin(
-                ClassifiersToSelect,
+                Context.CreateClassifierItemSource(x => x.Name != SystemTypes.Void),
                 _commands.ChangeTypeOfProperty);
             _selectClassifier.PropertyChanged += (_, e) => NotifyOfPropertyChange(e.PropertyName);
             SelectClassifierByName(InitialPropertyType);

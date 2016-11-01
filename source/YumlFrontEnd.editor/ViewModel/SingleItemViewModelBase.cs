@@ -2,7 +2,7 @@ using System.Diagnostics.Contracts;
 using Caliburn.Micro;
 using Yuml;
 using Yuml.Command;
-using YumlFrontEnd.editor.ViewModel;
+using YumlFrontEnd.editor;
 
 namespace YumlFrontEnd.editor
 {
@@ -12,7 +12,7 @@ namespace YumlFrontEnd.editor
     /// is not necessary.
     /// </summary>
     /// <typeparam name="TDomain"></typeparam>
-    internal abstract class SingleItemViewModelBase<TDomain> : PropertyChangedBase
+    public abstract class SingleItemViewModelBase<TDomain> : PropertyChangedBase
     {
         /// <summary>
         /// commands are stored in base class. Derived class of command is
@@ -29,10 +29,7 @@ namespace YumlFrontEnd.editor
         /// </summary>
         protected ListViewModelBase<TDomain> _parentViewModel;
 
-        /// <summary>
-        /// factory can be used to create other view models
-        /// </summary>
-        private ViewModelFactory _viewModelFactory;
+        public ViewModelContext Context { get; private set; }
 
         /// <summary>
         /// view model converter is used to
@@ -61,37 +58,27 @@ namespace YumlFrontEnd.editor
         /// Custom initialization code should be implemented in CustomInit
         /// </summary>
         /// <param name="domain"></param>
-        /// <param name="viewModelFactory"></param>
+        /// <param name="context"></param>
         /// <param name="parentViewModel"></param>
         public virtual void Init(
-            TDomain domain, 
-            ViewModelFactory viewModelFactory,
+            TDomain domain,
             ListViewModelBase<TDomain> parentViewModel )
         {
-            _viewModelFactory = viewModelFactory;
             _toViewModel.InitViewModel(domain, this);
             _parentViewModel = parentViewModel;
             // all event handlers in this view model will automatically be
             // registered at the message system
-            viewModelFactory.MessageSystem.Subscribe(domain, this);
+            Context = parentViewModel.Context;
+            Context.MessageSystem.Subscribe(domain, this);
             CustomInit();
         }
-
-        /// <summary>
-        /// factory method to create other view models
-        /// </summary>
-        /// <param name="commands"></param>
-        /// <returns></returns>
-        public ViewModelFactory<TOtherDomain> WithCommand<TOtherDomain>(IListCommandContext<TOtherDomain> commands) =>
-            _viewModelFactory.WithCommand(commands);
 
         /// <summary>
         /// custom initialization code can be implemented here.
         /// If no custom code is required, leave the implementation empty.
         /// </summary>
         protected abstract void CustomInit();
-        public IClassifierSelectionItemsSource ClassifiersToSelect => _viewModelFactory.ClassifiersToSelect;
-
+     
         public void Delete()
         {
             _commands.Delete.DeleteItem();
@@ -105,7 +92,7 @@ namespace YumlFrontEnd.editor
         public void OnSingleItemDeleted(DomainObjectDeletedEvent<TDomain> domainEvent)
         {
             _parentViewModel.RemoveItem(this);
-            _viewModelFactory.MessageSystem.Unsubscribe(this);
+            Context.MessageSystem.Unsubscribe(this);
         }
 
         /// <summary>

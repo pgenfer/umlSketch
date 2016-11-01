@@ -38,7 +38,7 @@ namespace Yuml.Test
             var classifier3 = new Classifier(3.ToString());
             var classifier2 = new Classifier(2.ToString());
             var classifiers = new ClassifierDictionary(classifier3, classifier2);
-            var classifierSelectionSource = new ClassifierSelectionItemsSource(classifiers,_messageSystem);
+            var classifierSelectionSource = new ClassifierSelectionItemsSource(classifiers,_ => true,_messageSystem);
             // Act
             classifierSelectionSource.OnNameChanged(new NameChangedEvent(3.ToString(), 1.ToString()));
             // Assert: after renaming, item should be at first position

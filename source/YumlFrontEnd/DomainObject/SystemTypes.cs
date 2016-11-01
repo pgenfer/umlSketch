@@ -15,6 +15,9 @@ namespace Yuml
     /// </summary>
     public class SystemTypes : IEnumerable<Classifier>
     {
+        public const string String = "string";
+        public const string Void = "void";
+
         private readonly Dictionary<string,Classifier> _systemTypes = new Dictionary<string, Classifier>();
         /// <summary>
         /// required to get the correct C# specific type names

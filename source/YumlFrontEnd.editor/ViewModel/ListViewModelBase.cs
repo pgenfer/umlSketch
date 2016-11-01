@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Caliburn.Micro;
 using Yuml;
 using Yuml.Command;
-using YumlFrontEnd.editor.ViewModel;
+
 
 
 namespace YumlFrontEnd.editor
@@ -15,16 +15,14 @@ namespace YumlFrontEnd.editor
     /// base class for view models that represent a list of items.
     /// </summary>
     /// <typeparam name="TDomain">Type of domain objects within the list</typeparam>
-    internal class ListViewModelBase<TDomain> : PropertyChangedBase
+    public class ListViewModelBase<TDomain> : PropertyChangedBase
     {
-        private ViewModelFactory<TDomain> _viewModelFactory;
         /// <summary>
         /// every list view model has an expandable button for
         /// the child items. An additional flag controls
         /// whether this button should be visible or not
         /// </summary>
         private readonly ExpandableMixin _expandable = new ExpandableMixin();
-
         private readonly ChangeVisibilityMixin _visibility;
         
         /// <summary>
@@ -36,6 +34,8 @@ namespace YumlFrontEnd.editor
         protected readonly IListCommandContext<TDomain> _commands;
 
         public BindableCollection<SingleItemViewModelBase<TDomain>> Items => _items.Items;
+
+        public ViewModelContext Context { get; private set; }
 
         public void New()
         {
@@ -59,8 +59,8 @@ namespace YumlFrontEnd.editor
                 // command context (as base interface, must be cast to concrete type)
                 var singleCommandContextInstance = _commands.GetCommandsForSingleItem(domainObject);
                 // use constructor to create the item and cast it to the correct type
-                var singleViewModel = _viewModelFactory.CreateViewModelForSingleItem(singleCommandContextInstance);
-                singleViewModel.Init(domainObject, _viewModelFactory,this);
+                var singleViewModel = Context.Factory.CreateViewModelForSingleItem<TDomain>(singleCommandContextInstance);
+                singleViewModel.Init(domainObject,this);
                 Items.Add(singleViewModel);
             }
 
@@ -74,15 +74,9 @@ namespace YumlFrontEnd.editor
             _visibility = new ChangeVisibilityMixin(commands.Visibility);
         }
 
-        /// <summary>
-        /// initializes this view model. Will be called by the factory 
-        /// that is responsible for creating this object.
-        /// </summary>
-        /// <param name="factory">factory that was used to create this object.
-        /// Can be used to create further viewmodels</param>
-        internal void Init(ViewModelFactory<TDomain> factory)
+        internal void Init(ViewModelContext context)
         {
-            _viewModelFactory = factory;
+            Context = context;
             _expandable.PropertyChanged += (_, e) => NotifyOfPropertyChange(e.PropertyName);
             UpdateItemList();
         }

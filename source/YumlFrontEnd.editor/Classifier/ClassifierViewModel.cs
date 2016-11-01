@@ -52,20 +52,16 @@ namespace YumlFrontEnd.editor
 
         protected override void CustomInit()
         {
-            Properties = 
-                WithCommand(_commands.CommandsForProperties)
-                .CreateViewModelForList<PropertyListViewModel>();
-            Methods =
-                WithCommand(_commands.CommandsForMethods)
-                .CreateViewModelForList<MethodListViewModel>();
-            Associations =
-                WithCommand(_commands.CommandsForAssociations)
-                .CreateViewModelForList<AssociationListViewModel>();
+            var factory = Context.Factory;
+            // TODO: we could use reflection to automatically find the correct type of list view models here
+            Properties = factory.CreateListViewModel<Property, PropertyListViewModel>(_commands.CommandsForProperties);
+            Methods = factory.CreateListViewModel<Method, MethodListViewModel>(_commands.CommandsForMethods);
+            Associations = factory.CreateListViewModel<Relation,AssociationListViewModel>(_commands.CommandsForAssociations);
              
             // list of base classifiers can  have a null item and should not
-            // have the class item itself
+            // have the class item itself and also no void item
             _selectBaseClass = new SelectClassifierWithNullItemMixin(
-                ClassifiersToSelect.Exclude(Name),
+                Context.CreateClassifierItemSource(x => x.Name != Name && !x.IsSystemType,true),
                 _commands.ChangeBaseClass);
 
             _backgroundColor = new BackgroundColorMixin(_commands.ChangeClassifierColor)

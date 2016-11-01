@@ -104,23 +104,5 @@ namespace Yuml {
                 return ResourceManager.GetString("NewProperty", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to string.
-        /// </summary>
-        public static string String {
-            get {
-                return ResourceManager.GetString("String", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to void.
-        /// </summary>
-        public static string Void {
-            get {
-                return ResourceManager.GetString("Void", resourceCulture);
-            }
-        }
     }
 }

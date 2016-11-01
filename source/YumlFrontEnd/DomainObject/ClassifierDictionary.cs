@@ -176,8 +176,8 @@ namespace Yuml
         /// <summary>
         /// returns string system type
         /// </summary>
-        internal virtual Classifier String => FindByName(Strings.String);
-        internal virtual Classifier Void => FindByName(Strings.Void);
+        internal virtual Classifier String => FindByName(SystemTypes.String);
+        internal virtual Classifier Void => FindByName(SystemTypes.Void);
 
         /// <summary>
         /// adds all system types to the dictionary which were not already added before

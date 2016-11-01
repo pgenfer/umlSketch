@@ -132,10 +132,4 @@
   <data name="NewProperty" xml:space="preserve">
     <value>New Property</value>
   </data>
-  <data name="String" xml:space="preserve">
-    <value>string</value>
-  </data>
-  <data name="Void" xml:space="preserve">
-    <value>void</value>
-  </data>
 </root>

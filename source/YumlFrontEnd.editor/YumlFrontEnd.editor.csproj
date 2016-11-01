@@ -153,7 +153,6 @@
       <DependentUpon>AssociationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Association\AssociationViewModel.cs" />
-    <Compile Include="Classifier\ClassifierSelectionSourceWithExcludedItem.cs" />
     <Compile Include="Classifier\IClassifierSelectionItemsSource.cs" />
     <Compile Include="Converter\ColorToGradientBrushConverter.cs" />
     <Compile Include="Converter\IsVisibleToColorConverter.cs" />
@@ -218,6 +217,7 @@
     <Compile Include="Mixin\SelectClassifierMixin.cs" />
     <Compile Include="ViewModel\SingleItemViewModel.cs" />
     <Compile Include="ViewModel\SingleItemViewModelBase.cs" />
+    <Compile Include="ViewModel\ViewModelContext.cs" />
     <Compile Include="ViewModel\ViewModelConverter.cs" />
     <Compile Include="Classifier\ClassifierItemView.xaml.cs">
       <DependentUpon>ClassifierItemView.xaml</DependentUpon>

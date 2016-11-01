@@ -13,7 +13,7 @@ namespace YumlFrontEnd.editor
     /// converter class used to init viewmodels out of
     /// domain objects
     /// </summary>
-    internal class ViewModelConverter
+    public class ViewModelConverter
     {
         /// <summary>
         /// mapping configuration
