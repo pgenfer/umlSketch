@@ -41,7 +41,7 @@ namespace YumlFrontEnd.editor
         public void New()
         {
             _fileName = null;
-            _diagram.Clear();
+            _diagram.Reset();
             _messageSystem.Publish(_diagram.Classifiers, new ClassifiersResetEvent());
         }
 

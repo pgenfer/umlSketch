@@ -114,6 +114,7 @@
     <Compile Include="Event\MessageSystemTest.cs" />
     <Compile Include="Extension\ColorExtensionTest.cs" />
     <Compile Include="Mixin\SelectClassifierWithNullItemMixinTest.cs" />
+    <Compile Include="Mixin\SerializationMixinTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serializer\JsonApplicationSettingSerializerTest.cs" />
     <Compile Include="Serializer\JsonSerializerTests.cs" />

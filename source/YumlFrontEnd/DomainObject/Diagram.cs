@@ -17,10 +17,11 @@ namespace Yuml
         public Note Note { get; set; } = new Note();
         public ClassifierDictionary Classifiers { get; }  = new ClassifierDictionary();
 
-        public void Clear()
+        public void Reset()
         {
             Note.Clear();
             Classifiers.Clear();
+            Classifiers.AddMissingSystemTypes();
         }
 
         public Diagram() { }
