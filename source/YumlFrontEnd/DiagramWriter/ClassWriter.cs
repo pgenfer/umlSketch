@@ -15,11 +15,9 @@ namespace Yuml
             _hasMembers = hasMembers;
             _content = content;
         }
-        public DiagramWriter Finish(bool lastEntry = true)
+        public DiagramWriter Finish()
         {
             AppendToken("]");
-            if (!lastEntry)
-                AppendToken(",");
             return new DiagramWriter(_content);
         }
         public ClassWriter WithName(string name)

@@ -147,17 +147,30 @@ namespace Yuml
         {
             Requires(writer != null);
 
-            var index = 0;
             var relations = new RelationList();
-            foreach (var classifier in NoSystemTypes.Where(x => x.IsVisible))
+            var classifiers = NoSystemTypes.Where(x => x.IsVisible).ToArray();
+            for (var i = 0; i < classifiers.Length; i++)
             {
+                var classifier = classifiers[i];
                 var classWriter = writer.StartClass();
-                classWriter = classifier.WriteTo(classWriter);
-                writer = classWriter.Finish(++index == _dictionary.Count);
+                classifier.WriteTo(classWriter);
+                writer = classWriter.Finish();
+                var lastClassifier = i == classifiers.Length - 1;
+                var addSeparator = !lastClassifier || classifier.Note.HasText;
+                if (addSeparator)
+                    writer.AddSeparator();
                 if (classifier.Note.HasText)
+                {
                     writer = writer.WithClassifierNote(classifier.Name, classifier.Note);
+                    if (!lastClassifier) // add separator also after note if there are still more classifiers
+                        writer.AddSeparator();
+                }
+                
+                // store relations for later writing
                 relations.AddRelations(classifier.FindAllRelationStartingFromClass());
+               
             }
+           
             relations.WriteTo(writer);
         }
 
