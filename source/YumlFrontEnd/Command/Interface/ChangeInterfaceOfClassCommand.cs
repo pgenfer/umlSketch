@@ -7,16 +7,16 @@ using Yuml.Event;
 
 namespace Yuml.Command.Interface
 {
-    public class ChangeInterfaceOfClassifierCommand
+    public class ChangeInterfaceOfClassifierCommand : IChangeTypeCommand
     {
         private readonly Classifier _interfaceOwner;
-        private readonly Classifier _existingInterface;
+        private readonly Implementation _existingInterface;
         private readonly ClassifierDictionary _classifiers;
         private readonly MessageSystem _messageSystem;
 
         public ChangeInterfaceOfClassifierCommand(
             Classifier interfaceOwner,
-            Classifier existingInterface, 
+            Implementation existingInterface, 
             ClassifierDictionary classifiers,
             MessageSystem messageSystem)
         {
@@ -26,13 +26,13 @@ namespace Yuml.Command.Interface
             _messageSystem = messageSystem;
         }
 
-        public void Change(string nameOfNewInterface)
+        public void ChangeType(string nameOfOldType, string nameOfNewInterface)
         {
             var newInterface = _classifiers.FindByName(nameOfNewInterface);
-            _interfaceOwner.Interfaces.ReplaceInterface(_existingInterface, newInterface);
+            _interfaceOwner.InterfaceImplementations.ReplaceInterface(_existingInterface, newInterface);
             _messageSystem.Publish(
                 _interfaceOwner,
-                new ChangeInterfaceOfClassEvent(_existingInterface.Name,nameOfNewInterface));
+                new ChangeInterfaceOfClassEvent(nameOfOldType, nameOfNewInterface));
         }
     }
 }

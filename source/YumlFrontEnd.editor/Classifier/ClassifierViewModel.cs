@@ -38,6 +38,7 @@ namespace YumlFrontEnd.editor
             Note = new NoteViewModel(_commands.ChangeNoteColor,_commands.ChangeNoteText);
         }
 
+        public InterfaceImplementationListViewModel Interfaces { get; private set; }
         public PropertyListViewModel Properties { get; private set; }
         public MethodListViewModel Methods { get; private set; }
         public AssociationListViewModel Associations { get; private set; }
@@ -58,6 +59,7 @@ namespace YumlFrontEnd.editor
             Properties = factory.CreateListViewModel<Property, PropertyListViewModel>(_commands.CommandsForProperties);
             Methods = factory.CreateListViewModel<Method, MethodListViewModel>(_commands.CommandsForMethods);
             Associations = factory.CreateListViewModel<Relation,AssociationListViewModel>(_commands.CommandsForAssociations);
+            Interfaces = factory.CreateListViewModel<Implementation, InterfaceImplementationListViewModel>(_commands.CommandsForInterfaceImplementations);
              
             // list of base classifiers can  have a null item and should not
             // have the class item itself and also no void item
@@ -113,7 +115,7 @@ namespace YumlFrontEnd.editor
         public bool IsInterfaceInitial
         {
             get { return _isInterface; }
-            set { _isInterface = value; }
+            set { _isInterface = value;NotifyOfPropertyChange(nameof(IsInterface)); }
         }
 
         public bool IsInterface

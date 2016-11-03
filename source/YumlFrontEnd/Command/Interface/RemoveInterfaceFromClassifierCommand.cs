@@ -5,12 +5,12 @@ namespace Yuml.Command.Interface
     public class RemoveInterfaceFromClassifierCommand : IDeleteCommand
     {
         private readonly Classifier _interfaceOwner;
-        private readonly Classifier _existingInterface;
+        private readonly Implementation _existingInterface;
         private readonly MessageSystem _messageSystem;
 
         public RemoveInterfaceFromClassifierCommand(
             Classifier interfaceOwner,
-            Classifier existingInterface,
+            Implementation existingInterface,
             MessageSystem messageSystem)
         {
             _interfaceOwner = interfaceOwner;
@@ -20,8 +20,8 @@ namespace Yuml.Command.Interface
 
         public void DeleteItem()
         {
-            _interfaceOwner.Interfaces.RemoveInterfaceFromList(_existingInterface);
-            _messageSystem.Publish(_interfaceOwner,new RemoveInterfaceFromClassEvent(_existingInterface.Name));
+            _interfaceOwner.InterfaceImplementations.RemoveInterfaceFromList(_existingInterface);
+            _messageSystem.Publish(_interfaceOwner,new DomainObjectDeletedEvent<Implementation>(_existingInterface));
         }
     }
 }

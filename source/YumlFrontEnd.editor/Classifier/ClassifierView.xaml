@@ -11,77 +11,73 @@
              d:DesignHeight="300"
              d:DesignWidth="300"
              Focusable="False">
-  <UserControl.Resources>
-    <ResourceDictionary Source="../Styles/ControlStyles.xaml"/>
-  </UserControl.Resources>
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="Auto" />
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
-    <local:ExpanderButton
-      Grid.Column="0"
-      Grid.Row="0"
-      x:Name="ExpandOrCollapse"
-      Margin="5"
-      IsExpanded="{Binding IsExpanded}"
-      Style="{StaticResource ExpanderButtonStyle}"/>
-    <!-- class name -->
-    <local:EditableTextBlock
-      HorizontalAlignment="Stretch"
-      ForegroundTextBrush="{Binding IsVisible,Converter={StaticResource IsVisibleToColor}}"
-      FontWeight="Bold"
-      Grid.Column="1"
-      Grid.Row="0"
-      Margin="0,5"
-      caliburn:Bind.Model="{Binding}"
-      Background="{Binding BackgroundColor, Converter={StaticResource ColorToGradientBrush}}"/>
-    <local:ButtonBar
-      HorizontalAlignment="Right"
-      Grid.Row="0"
-      Grid.Column="3"
-      HasNewButton="False"
-      HasColorPicker="True"
-      caliburn:Bind.Model="{Binding}"/>
-    <StackPanel
-       Grid.Row="1"
-       Grid.Column="1"
-       Grid.ColumnSpan="3"
-       Orientation="Vertical"
-       Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}">
-      <StackPanel
-        Margin="25,0,0,0"
-        Orientation="Vertical">
-        <!-- base class -->
-        <DockPanel>
-          <TextBlock Style="{StaticResource TextBlock-Sketch}"
-                     Text="{x:Static local:EditorStrings.BaseClass}"
-                     DockPanel.Dock="Left"/>
-          <ComboBox x:Name="Classifiers"
-                    Margin="5,0"
-                    DockPanel.Dock="Right"/>
-        </DockPanel>
-        <!-- is interface -->
-        <CheckBox
-          Content="{x:Static local:EditorStrings.IsInterface}"
-          VerticalContentAlignment="Bottom"
-          Style="{StaticResource CheckBox-Sketch}"
-          x:Name="IsInterface"/>
-      </StackPanel>
-      <!-- Properties -->
-      <ContentControl caliburn:View.Model="{Binding Properties}"/>
-      <!-- Methods -->
-      <ContentControl caliburn:View.Model="{Binding Methods}"/>
-      <!-- Association -->
-      <ContentControl caliburn:View.Model="{Binding Associations}"/>
-      <!-- Note -->
-      <ContentControl caliburn:View.Model="{Binding Note}"/>
-    </StackPanel>
-  </Grid>
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Styles/ControlStyles.xaml" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <local:ExpanderButton Grid.Column="0"
+                              Grid.Row="0"
+                              x:Name="ExpandOrCollapse"
+                              Margin="5"
+                              IsExpanded="{Binding IsExpanded}"
+                              Style="{StaticResource ExpanderButtonStyle}" />
+        <!-- class name -->
+        <local:EditableTextBlock HorizontalAlignment="Stretch"
+                                 ForegroundTextBrush="{Binding IsVisible,Converter={StaticResource IsVisibleToColor}}"
+                                 FontWeight="Bold"
+                                 Grid.Column="1"
+                                 Grid.Row="0"
+                                 Margin="0,5"
+                                 caliburn:Bind.Model="{Binding}"
+                                 Background="{Binding BackgroundColor, Converter={StaticResource ColorToGradientBrush}}" />
+        <local:ButtonBar HorizontalAlignment="Right"
+                         Grid.Row="0"
+                         Grid.Column="3"
+                         HasNewButton="False"
+                         HasColorPicker="True"
+                         caliburn:Bind.Model="{Binding}" />
+        <StackPanel Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="3"
+                    Orientation="Vertical"
+                    Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}">
+            <StackPanel Margin="25,0,0,0"
+                        Orientation="Vertical">
+                <!-- is interface -->
+                <CheckBox Content="{x:Static local:EditorStrings.IsInterface}"
+                          VerticalContentAlignment="Bottom"
+                          Style="{StaticResource CheckBox-Sketch}"
+                          x:Name="IsInterface" />
+                <!-- base class -->
+                <DockPanel>
+                    <TextBlock Style="{StaticResource TextBlock-Sketch}"
+                               Text="{x:Static local:EditorStrings.BaseClass}"
+                               DockPanel.Dock="Left" />
+                    <ComboBox x:Name="Classifiers"
+                              Margin="5,0"
+                              DockPanel.Dock="Right" />
+                </DockPanel>
+            </StackPanel>
+            <!-- interfaces -->
+            <ContentControl caliburn:View.Model="{Binding Interfaces}"/>
+            <!-- Properties -->
+            <ContentControl caliburn:View.Model="{Binding Properties}" />
+            <!-- Methods -->
+            <ContentControl caliburn:View.Model="{Binding Methods}" />
+            <!-- Association -->
+            <ContentControl caliburn:View.Model="{Binding Associations}" />
+            <!-- Note -->
+            <ContentControl caliburn:View.Model="{Binding Note}" />
+        </StackPanel>
+    </Grid>
 </UserControl>

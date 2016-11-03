@@ -40,6 +40,10 @@ namespace Yuml.Command
                 classifier,
                 classifierDictionary,
                 messageSystem);
+            CommandsForInterfaceImplementations = new InterfaceListCommandContext(
+                classifier,
+                classifierDictionary,
+                messageSystem);
             Delete = new DeleteClassifierCommand(classifier, deletionService);
             Visibility = new ShowOrHideSingleObjectCommand(classifier, messageSystem);
             ChangeClassifierColor = new ChangeColorCommand(classifier, messageSystem);
@@ -50,7 +54,8 @@ namespace Yuml.Command
 
         public IListCommandContext<Property> CommandsForProperties { get; }
         public IListCommandContext<Method> CommandsForMethods { get; }
-        public IListCommandContext<Relation> CommandsForAssociations { get; set; }
+        public IListCommandContext<Relation> CommandsForAssociations { get; }
+        public IListCommandContext<Implementation> CommandsForInterfaceImplementations { get;}
         public IChangeTypeToNullCommand ChangeBaseClass { get; }
         public IChangeColorCommand ChangeClassifierColor { get; }
         public IChangeColorCommand ChangeNoteColor { get; }

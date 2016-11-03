@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="Association\AssociationViewModel.cs" />
     <Compile Include="Classifier\IClassifierSelectionItemsSource.cs" />
+    <Compile Include="Classifier\InterfaceSelectionItemsSource.cs" />
     <Compile Include="Converter\ColorToGradientBrushConverter.cs" />
     <Compile Include="Converter\IsVisibleToColorConverter.cs" />
     <Compile Include="Converter\TestConverter.cs" />
@@ -167,7 +168,14 @@
       <DependentUpon>EditorStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Extension\ColorExtension.cs" />
-    <Compile Include="Interface\InterfaceViewModel.cs" />
+    <Compile Include="InterfaceImplementation\InterfaceImplementationListView.xaml.cs">
+      <DependentUpon>InterfaceImplementationListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceImplementation\InterfaceImplementationListViewModel.cs" />
+    <Compile Include="InterfaceImplementation\InterfaceImplementationView.xaml.cs">
+      <DependentUpon>InterfaceImplementationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceImplementation\InterfaceImplementationViewModel.cs" />
     <Compile Include="Mixin\BackgroundColorMixin.cs" />
     <Compile Include="Mixin\ChangeVisibilityMixin.cs" />
     <Compile Include="Mixin\SelectClassifierWithNullItemMixin.cs" />
@@ -245,6 +253,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Association\AssociationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InterfaceImplementation\InterfaceImplementationListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InterfaceImplementation\InterfaceImplementationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

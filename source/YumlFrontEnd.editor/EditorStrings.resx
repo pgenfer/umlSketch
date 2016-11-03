@@ -131,6 +131,9 @@
     <value>owns</value>
     <comment>Composite association</comment>
   </data>
+  <data name="Interfaces" xml:space="preserve">
+    <value>Interfaces</value>
+  </data>
   <data name="IsInterface" xml:space="preserve">
     <value>is interface</value>
   </data>

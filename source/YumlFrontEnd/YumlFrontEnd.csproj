@@ -119,10 +119,10 @@
     <Compile Include="Command\Method\NewMethodCommand.cs" />
     <Compile Include="Command\Method\RenameMethodCommand.cs" />
     <Compile Include="DomainObject\Diagram.cs" />
-    <Compile Include="DomainObject\InterfaceList.cs" />
+    <Compile Include="DomainObject\Implementation.cs" />
+    <Compile Include="DomainObject\ImplementationList.cs" />
     <Compile Include="DomainObject\NamedBaseList.cs" />
     <Compile Include="DomainObject\Note.cs" />
-    <Compile Include="Event\AddInterfaceToClassEvent.cs" />
     <Compile Include="Event\BaseClassChangedEvent.cs" />
     <Compile Include="Event\BaseClassRemovedEvent.cs" />
     <Compile Include="Event\BaseClassSetEvent.cs" />
@@ -136,7 +136,6 @@
     <Compile Include="Event\InterfaceToClassEvent.cs" />
     <Compile Include="Event\NameChangedEvent.cs" />
     <Compile Include="Event\PropertyTypeChangedEvent.cs" />
-    <Compile Include="Event\RemoveInterfaceFromClassEvent.cs" />
     <Compile Include="Event\TypeChangedEventBase.cs" />
     <Compile Include="Event\VisibilityChangedEvent.cs" />
     <Compile Include="Command\Property\ChangeTypeOfPropertyCommand.cs" />

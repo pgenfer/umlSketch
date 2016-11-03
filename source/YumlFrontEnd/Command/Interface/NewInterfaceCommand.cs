@@ -25,9 +25,10 @@ namespace Yuml.Command
 
         public void CreateNew()
         {
-            var addedInterface = _interfaceOwner.AddNewInterfaceEntryToList(_classifiers);
-            if(addedInterface != null)
-                _messageSystem.Publish(_interfaceOwner,new AddInterfaceToClassEvent(addedInterface.Name));
+            var addedInterface = _interfaceOwner.AddNewImplementation(_classifiers);
+            if (addedInterface != null)
+                _messageSystem.PublishCreated(_interfaceOwner, addedInterface);
+
         }
     }
 }

@@ -47,6 +47,8 @@ namespace YumlFrontEnd.editor
                     .ForMember(d => d.Properties, c => c.Ignore())
                     .ForMember(d => d.Methods, c => c.Ignore())
                     .ForMember(d => d.Associations, c => c.Ignore())
+                    .ForMember(d => d.Interfaces, c => c.Ignore())
+                    .ForMember(d => d.IsInterface,c => c.Ignore()) // don't set, otherwise command will be executed
                     .ForMember(d => d.IsInterfaceInitial,c => c.MapFrom(s => s.IsInterface))
                     .ForMember(d => d.Note, c => c.ResolveUsing(noteResolver));
                // store note information
@@ -60,6 +62,8 @@ namespace YumlFrontEnd.editor
                     .ForMember(d => d.Name, c => c.MapFrom(s => s.Start.Name))
                     .ForMember(d => d.InitialAssociationType, c => c.MapFrom(s => s.Type))
                     .ForMember(d => d.InitialTargetClassiferName, c => c.MapFrom(s => s.End.Classifier.Name));
+                x.CreateMap<Implementation, InterfaceImplementationViewModel>()
+                    .ForMember(d => d.InitialInterfaceImplementation, c => c.MapFrom(s => s.End.Classifier.Name));
             });
 
             _mapper = _mapperConfiguration.CreateMapper();

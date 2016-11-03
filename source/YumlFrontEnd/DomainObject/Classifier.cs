@@ -67,7 +67,7 @@ namespace Yuml
         /// internal setter only used by serialization, should not be used by other production code
         /// </summary>
         public MethodList Methods { get; internal set; } = new MethodList();
-        public InterfaceList Interfaces { get; internal set; } = new InterfaceList();
+        public ImplementationList InterfaceImplementations { get; internal set; } = new ImplementationList();
 
         public override string ToString() => _name.ToString();
 
@@ -75,6 +75,7 @@ namespace Yuml
         /// true if the class is an interface, otherwise false
         /// </summary>
         public bool IsInterface { get; set; }
+
         public Property CreateProperty(string name, Classifier type,bool isVisible = true) => 
             Properties.CreateProperty(name, type,isVisible);
         public IEnumerator<Property> GetEnumerator() => Properties.GetEnumerator();
@@ -95,8 +96,8 @@ namespace Yuml
         public Property CreateNewPropertyWithBestInitialValues(ClassifierDictionary systemClassifiers) => 
             Properties.CreateNewPropertyWithBestInitialValues(systemClassifiers);
 
-        public Classifier AddNewInterfaceEntryToList(ClassifierDictionary classifiers) =>
-            Interfaces.AddNewInterfaceEntryToList(this, classifiers);
+        public Implementation AddNewImplementation(ClassifierDictionary classifiers) => 
+            InterfaceImplementations.AddNewImplementation(this, classifiers);
 
         /// <summary>
         /// optional base class of this classifier
@@ -134,7 +135,7 @@ namespace Yuml
             var relationList = new RelationList(Associations);
             if (BaseClass != null)
                 relationList.AddRelation(new Relation(this, BaseClass, RelationType.Inheritance));
-            // TODO: collect interfaces here
+            relationList.AddRelations(InterfaceImplementations);
             return relationList;
         }
 

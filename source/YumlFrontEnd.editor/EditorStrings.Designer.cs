@@ -97,6 +97,15 @@ namespace YumlFrontEnd.editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Interfaces.
+        /// </summary>
+        public static string Interfaces {
+            get {
+                return ResourceManager.GetString("Interfaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to is interface.
         /// </summary>
         public static string IsInterface {
