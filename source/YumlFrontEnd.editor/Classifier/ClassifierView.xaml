@@ -24,7 +24,6 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
     <local:ExpanderButton
       Grid.Column="0"
@@ -50,25 +49,31 @@
       HasNewButton="False"
       HasColorPicker="True"
       caliburn:Bind.Model="{Binding}"/>
-    <DockPanel
-      Margin="25,0,0,0"
-      Grid.Column="1"
-      Grid.ColumnSpan="3"
-      Grid.Row="1"
-      Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}">
-      <TextBlock Style="{StaticResource TextBlock-Sketch}"
-                 Text="{x:Static local:EditorStrings.BaseClass}"
-                 DockPanel.Dock="Left"/>
-      <ComboBox x:Name="Classifiers"
-                Margin="5,0"
-                DockPanel.Dock="Right"/>
-    </DockPanel>
     <StackPanel
-       Grid.Row="2"
+       Grid.Row="1"
        Grid.Column="1"
        Grid.ColumnSpan="3"
        Orientation="Vertical"
        Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibility}}">
+      <StackPanel
+        Margin="25,0,0,0"
+        Orientation="Vertical">
+        <!-- base class -->
+        <DockPanel>
+          <TextBlock Style="{StaticResource TextBlock-Sketch}"
+                     Text="{x:Static local:EditorStrings.BaseClass}"
+                     DockPanel.Dock="Left"/>
+          <ComboBox x:Name="Classifiers"
+                    Margin="5,0"
+                    DockPanel.Dock="Right"/>
+        </DockPanel>
+        <!-- is interface -->
+        <CheckBox
+          Content="{x:Static local:EditorStrings.IsInterface}"
+          VerticalContentAlignment="Bottom"
+          Style="{StaticResource CheckBox-Sketch}"
+          x:Name="IsInterface"/>
+      </StackPanel>
       <!-- Properties -->
       <ContentControl caliburn:View.Model="{Binding Properties}"/>
       <!-- Methods -->

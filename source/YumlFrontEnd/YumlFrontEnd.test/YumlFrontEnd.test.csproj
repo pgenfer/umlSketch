@@ -102,6 +102,7 @@
     <Compile Include="ArchitectureLoader\ReflectionTypeLoaderTests.cs" />
     <Compile Include="Classifier\ClassifierSelectionItemsSourceTest.cs" />
     <Compile Include="Command\Association\ChangeAssociationCommandTest.cs" />
+    <Compile Include="Command\Classifier\MakeClassifierToInterfaceCommandTest.cs" />
     <Compile Include="Command\RenameClassifierCommandTest.cs" />
     <Compile Include="Command\TypeChangedPropertyCommandTest.cs" />
     <Compile Include="DomainObject\ClassifierDictionaryTest.cs" />

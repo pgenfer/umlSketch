@@ -22,6 +22,7 @@ namespace Yuml.Serializer.Dto
         public List<RelationDto> Associations { get; set; }
         public string NoteText { get; set; }
         public string NoteColor { get; set; }
+        public bool IsInterface { get; set; }
 
         public override bool Equals(object obj) => 
             obj is ClassifierDto && Name == ((ClassifierDto)obj).Name;

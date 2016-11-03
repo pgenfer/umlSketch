@@ -23,7 +23,8 @@ namespace YumlFrontEnd.editor
         private readonly ExpandableMixin _expanded = new ExpandableMixin();
         private SelectClassifierWithNullItemMixin _selectBaseClass;
         private BackgroundColorMixin _backgroundColor;
-  
+        private bool _isInterface;
+
         /// <summary>
         /// name of the base class which is intially set when reading
         /// data from view model. Used to choose the correct item in the classifier itemssource.
@@ -105,6 +106,27 @@ namespace YumlFrontEnd.editor
             get { return _backgroundColor.BackgroundColor; }
             set { _backgroundColor.BackgroundColor = value; }
         }
+
+        /// <summary>
+        /// flag that will be set initially 
+        /// </summary>
+        public bool IsInterfaceInitial
+        {
+            get { return _isInterface; }
+            set { _isInterface = value; }
+        }
+
+        public bool IsInterface
+        {
+            get { return _isInterface; }
+            set
+            {
+                _commands.ChangeIsInterface.ToggleInterfaceFlag();
+                _isInterface = value;
+                NotifyOfPropertyChange();
+            }
+        }
+
         public void Collapse() => _expanded.Collapse();
     }
 }

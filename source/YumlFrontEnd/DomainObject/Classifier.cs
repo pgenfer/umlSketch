@@ -63,18 +63,18 @@ namespace Yuml
         /// internal setter is only used by serialization, should not be used by other production code
         /// </summary>
         public PropertyList Properties { get; internal set; } = new PropertyList();
-
         /// <summary>
         /// internal setter only used by serialization, should not be used by other production code
         /// </summary>
         public MethodList Methods { get; internal set; } = new MethodList();
+        public InterfaceList Interfaces { get; internal set; } = new InterfaceList();
 
         public override string ToString() => _name.ToString();
 
         /// <summary>
         /// true if the class is an interface, otherwise false
         /// </summary>
-        public bool IsInterface { get; internal set; }
+        public bool IsInterface { get; set; }
         public Property CreateProperty(string name, Classifier type,bool isVisible = true) => 
             Properties.CreateProperty(name, type,isVisible);
         public IEnumerator<Property> GetEnumerator() => Properties.GetEnumerator();
@@ -94,6 +94,9 @@ namespace Yuml
             Methods.CreateMethod(name, type,isVisible);
         public Property CreateNewPropertyWithBestInitialValues(ClassifierDictionary systemClassifiers) => 
             Properties.CreateNewPropertyWithBestInitialValues(systemClassifiers);
+
+        public Classifier AddNewInterfaceEntryToList(ClassifierDictionary classifiers) =>
+            Interfaces.AddNewInterfaceEntryToList(this, classifiers);
 
         /// <summary>
         /// optional base class of this classifier

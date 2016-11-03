@@ -34,5 +34,9 @@ namespace Yuml.Command
         /// commands for changing the text of a note
         /// </summary>
         ChangeNoteTextCommand ChangeNoteText { get; }
+        /// <summary>
+        /// toggles the interface state of this classifier
+        /// </summary>
+        MakeClassifierToInterfaceCommand ChangeIsInterface { get; }
     }
 }

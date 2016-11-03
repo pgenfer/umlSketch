@@ -167,6 +167,7 @@
       <DependentUpon>EditorStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Extension\ColorExtension.cs" />
+    <Compile Include="Interface\InterfaceViewModel.cs" />
     <Compile Include="Mixin\BackgroundColorMixin.cs" />
     <Compile Include="Mixin\ChangeVisibilityMixin.cs" />
     <Compile Include="Mixin\SelectClassifierWithNullItemMixin.cs" />

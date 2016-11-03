@@ -45,6 +45,7 @@ namespace Yuml.Command
             ChangeClassifierColor = new ChangeColorCommand(classifier, messageSystem);
             ChangeNoteColor = new ChangeNoteColorCommand(classifier.Note,messageSystem);
             ChangeNoteText = new ChangeNoteTextCommand(classifier.Note,messageSystem);
+            ChangeIsInterface = new MakeClassifierToInterfaceCommand(classifier, messageSystem);
         }
 
         public IListCommandContext<Property> CommandsForProperties { get; }
@@ -54,5 +55,6 @@ namespace Yuml.Command
         public IChangeColorCommand ChangeClassifierColor { get; }
         public IChangeColorCommand ChangeNoteColor { get; }
         public ChangeNoteTextCommand ChangeNoteText { get; }
+        public MakeClassifierToInterfaceCommand ChangeIsInterface { get; }
     }
 }

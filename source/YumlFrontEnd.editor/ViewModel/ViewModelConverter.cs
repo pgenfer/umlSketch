@@ -47,6 +47,7 @@ namespace YumlFrontEnd.editor
                     .ForMember(d => d.Properties, c => c.Ignore())
                     .ForMember(d => d.Methods, c => c.Ignore())
                     .ForMember(d => d.Associations, c => c.Ignore())
+                    .ForMember(d => d.IsInterfaceInitial,c => c.MapFrom(s => s.IsInterface))
                     .ForMember(d => d.Note, c => c.ResolveUsing(noteResolver));
                // store note information
                 x.CreateMap<Note, NoteViewModel>()
