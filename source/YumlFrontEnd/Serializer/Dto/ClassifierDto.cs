@@ -20,6 +20,7 @@ namespace Yuml.Serializer.Dto
         public bool IsSystemType { get; set; }
         public string Color { get; set; }
         public List<RelationDto> Associations { get; set; }
+        public List<ImplementationDto> InterfaceImplementations { get; set; }
         public string NoteText { get; set; }
         public string NoteColor { get; set; }
         public bool IsInterface { get; set; }

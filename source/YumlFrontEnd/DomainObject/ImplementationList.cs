@@ -65,5 +65,8 @@ namespace Yuml
 
             AddExistingMember(implementation);
         }
+
+        public SubSet FindImplementationsOfInterface(Classifier @interface) =>
+            @interface.IsInterface ? Filter(x => x.End.Classifier == @interface) : SubSet.Empty;
     }
 }

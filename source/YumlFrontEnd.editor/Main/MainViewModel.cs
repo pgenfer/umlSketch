@@ -68,7 +68,8 @@ namespace YumlFrontEnd.editor
             Note = new NoteViewModel(_commands.ChangeNoteColor, _commands.ChangeNoteText)
             {
                 InitialColor = _diagram.Note.Color.ToColorFromFriendlyName(),
-                Text = _diagram.Note.Text
+                Text = _diagram.Note.Text,
+                IsExpanded = false // by default, do not show the note
             };
         }
 

@@ -26,9 +26,8 @@ namespace Yuml.Command
         public void CreateNew()
         {
             var addedInterface = _interfaceOwner.AddNewImplementation(_classifiers);
-            if (addedInterface != null)
-                _messageSystem.PublishCreated(_interfaceOwner, addedInterface);
-
+            if (addedInterface != null) // fire the event on the interface list (so the correct view model can react)
+                _messageSystem.PublishCreated(_interfaceOwner.InterfaceImplementations, addedInterface);
         }
     }
 }

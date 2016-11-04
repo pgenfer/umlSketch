@@ -16,6 +16,11 @@ namespace Yuml
     {
         private RelationType _Type = RelationType.Implementation;
 
+        /// <summary>
+        /// should only be used for testing and mapping
+        /// </summary>
+        public Implementation() { }
+
         public Implementation(Classifier start, Classifier end)
             :base(start,end, RelationType.Implementation, string.Empty)
         {

@@ -14,11 +14,10 @@ namespace Yuml.Command
         /// base interface that is used by all other view models, we have to keep it there.
         /// </summary>
         public IRenameCommand Rename => null;
-
         public IDeleteCommand Delete { get; }
         public ChangeInterfaceOfClassifierCommand ChangeInterface { get; }
-
         public ShowOrHideSingleObjectCommand Visibility { get; }
+        public QueryAvailableInterfaces AvailableInterfaces { get; }
 
         public SingleInterfaceCommandContext(
             Classifier interfaceOwner,
@@ -26,13 +25,17 @@ namespace Yuml.Command
             ClassifierDictionary classifiers,
             MessageSystem messageSystem)
         {
-            Delete = new RemoveInterfaceFromClassifierCommand(interfaceOwner, existingInterface, messageSystem);
+            Delete = new RemoveInterfaceFromClassifierCommand(
+                interfaceOwner.InterfaceImplementations, 
+                existingInterface, 
+                messageSystem);
             ChangeInterface = new ChangeInterfaceOfClassifierCommand(
-                interfaceOwner,
+                interfaceOwner.InterfaceImplementations,
                 existingInterface,
                 classifiers,
                 messageSystem);
             Visibility = new ShowOrHideSingleObjectCommand(existingInterface, messageSystem);
+            AvailableInterfaces = new QueryAvailableInterfaces(interfaceOwner,classifiers);
         }
     }
 }

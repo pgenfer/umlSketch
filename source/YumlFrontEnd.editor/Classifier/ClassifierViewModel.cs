@@ -35,7 +35,7 @@ namespace YumlFrontEnd.editor
         public ClassifierViewModel(
             ISingleClassifierCommands commands) : base(commands)
         {
-            Note = new NoteViewModel(_commands.ChangeNoteColor,_commands.ChangeNoteText);
+            Note = new NoteViewModel(_commands.ChangeNoteColor, _commands.ChangeNoteText) {IsExpanded = false};
         }
 
         public InterfaceImplementationListViewModel Interfaces { get; private set; }

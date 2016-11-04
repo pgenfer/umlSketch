@@ -6,67 +6,67 @@
         xmlns:local="clr-namespace:YumlFrontEnd.editor"
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1024"
+        Title="MainWindow"
+        Height="768"
+        Width="1024"
         WindowStartupLocation="CenterScreen">
-  <Grid>
-    <Grid.RowDefinitions>
-      <!-- toolbar -->
-      <RowDefinition Height="Auto"/>
-      <!-- class view and renderer -->
-      <RowDefinition Height="Auto"/>
-      <!-- separator -->
-      <RowDefinition Height="*"/>
-      <!-- note -->
-      <RowDefinition Height="Auto"/>
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="0.382*"/>
-      <ColumnDefinition Width="0.618*"/>
-    </Grid.ColumnDefinitions>
-    <StackPanel
-      Margin="10"
-      Grid.Row="0"
-      Grid.ColumnSpan="2"
-      Orientation="Horizontal">
-      <local:ImageButton
-       Margin="5,0"
-       x:Name="New"
-       Style="{StaticResource ImageButtonStyle}"
-       DefaultImage="{StaticResource NewImage}"
-       MouseOverImage="{StaticResource NewHighlightImage}"/>
-      <local:ImageButton
-        Margin="5,0"
-        x:Name="Save"
-        Style="{StaticResource ImageButtonStyle}"
-        DefaultImage="{StaticResource SaveImage}"
-        MouseOverImage="{StaticResource SaveHighlightImage}"/>
-      <local:ImageButton
-        x:Name="Open"
-        Style="{StaticResource ImageButtonStyle}"
-        Margin="5,0"
-        DefaultImage="{StaticResource OpenImage}"
-        MouseOverImage="{StaticResource OpenHighlightImage}"/>
-    </StackPanel>
-    <!-- Note -->
-    <ContentControl
-      Grid.Column="0"
-      Grid.Row="1"
-      Margin="15,5,5,5"
-      cal:View.Model="{Binding Note}"/>
-    <ContentControl
-          x:Name="ClassifierList"
-          Grid.Column="0"
-          Grid.Row="2"
-          Margin="10"/>
-    <GridSplitter
-        Grid.Column="0"
-        Grid.Row="1"
-        Grid.RowSpan="3"
-        Width="5"/>
-    <ContentControl
-      x:Name="Renderer"
-      Grid.Column="1"
-      Grid.Row="1"
-      Grid.RowSpan="2"/>
-  </Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- toolbar -->
+            <RowDefinition Height="Auto" />
+            <!-- class view and renderer -->
+            <RowDefinition Height="*" />
+            <!-- separator -->
+            <RowDefinition Height="Auto" />
+            <!-- note -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.382*" />
+            <ColumnDefinition Width="0.618*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="10"
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal">
+            <local:ImageButton Margin="5,0"
+                               x:Name="New"
+                               Style="{StaticResource ImageButtonStyle}"
+                               DefaultImage="{StaticResource NewImage}"
+                               MouseOverImage="{StaticResource NewHighlightImage}" />
+            <local:ImageButton Margin="5,0"
+                               x:Name="Save"
+                               Style="{StaticResource ImageButtonStyle}"
+                               DefaultImage="{StaticResource SaveImage}"
+                               MouseOverImage="{StaticResource SaveHighlightImage}" />
+            <local:ImageButton x:Name="Open"
+                               Style="{StaticResource ImageButtonStyle}"
+                               Margin="5,0"
+                               DefaultImage="{StaticResource OpenImage}"
+                               MouseOverImage="{StaticResource OpenHighlightImage}" />
+        </StackPanel>
+        <ContentControl x:Name="ClassifierList"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Margin="10" />
+        <GridSplitter Grid.Column="0"
+                      Grid.Row="1"
+                      Grid.RowSpan="3"
+                      Width="5" />
+        <ContentControl x:Name="Renderer"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Grid.RowSpan="2" />
+        <!-- Separator -->
+        <Separator 
+            Grid.Column="0"
+            Grid.Row="2"
+            Margin="10"/>
+        <!-- Note -->
+        <ContentControl 
+            Grid.Column="0"
+            Grid.Row="3"
+            Margin="15,5,5,5"
+            cal:View.Model="{Binding Note}" />
+    </Grid>
 </Window>

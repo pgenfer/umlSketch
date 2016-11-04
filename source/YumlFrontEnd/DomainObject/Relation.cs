@@ -19,7 +19,7 @@ namespace Yuml
         private readonly IVisible _visible = new VisibleMixin();
 
         /// <summary>
-        /// should only be used for testing
+        /// should only be used for mappoing and testing
         /// </summary>
         public Relation(){}
         

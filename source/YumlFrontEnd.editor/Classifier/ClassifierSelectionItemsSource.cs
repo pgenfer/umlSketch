@@ -27,15 +27,15 @@ namespace YumlFrontEnd.editor
         /// </summary>
         public ClassifierSelectionItemsSource(){ }
 
-        public ClassifierSelectionItemsSource(
-           ClassifierDictionary classifiers,
-           Predicate<Classifier> filter,
-           MessageSystem messageSystem,
-           bool addNullItem = false)
+        protected ClassifierSelectionItemsSource(
+            ClassifierDictionary classifiers,
+            Func<IEnumerable<Classifier>> queryForAvailableClassifiers,
+            MessageSystem messageSystem,
+            bool addNullItem = false)
         {
             // apply the filter on the list of classifiers and sort them by name
             // before retrieving
-            _queryForAvailableClassifiers = () => classifiers.Where(x => filter(x)).OrderBy(x => x.Name);
+            _queryForAvailableClassifiers = queryForAvailableClassifiers;
             _messageSystem = messageSystem;
 
             UpdateClassifierList();
@@ -49,13 +49,22 @@ namespace YumlFrontEnd.editor
                 Insert(0, ClassifierItemViewModel.None);
         }
 
+        public ClassifierSelectionItemsSource(
+           ClassifierDictionary classifiers,
+           Predicate<Classifier> filter,
+           MessageSystem messageSystem,
+           bool addNullItem = false):
+            this(classifiers, () => classifiers.Where(x => filter(x)),messageSystem,addNullItem)
+        {
+        }
+
         /// <summary>
         /// should be called whenever the complete list of classifier should be regenerated.
         /// Can happen if a new diagram is loaded from persistant storage or during initialization.
         /// </summary>
         private void UpdateClassifierList()
         {
-            foreach (var classifier in _queryForAvailableClassifiers())
+            foreach (var classifier in _queryForAvailableClassifiers().OrderBy(x => x.Name))
             {
                 Add(new ClassifierItemViewModel(classifier.Name));
                 // register for changes of this classifier
@@ -101,6 +110,9 @@ namespace YumlFrontEnd.editor
         public virtual void OnNameChanged(NameChangedEvent nameChangedEvent)
         {
             var item = ByName(nameChangedEvent.OldName);
+            // check that classifier was not filtered out from list
+            if (item == null)
+                return;
             // create a temporary item so that we get the new index
             var tmp = new ClassifierItemViewModel(nameChangedEvent.NewName);
             var oldIndex = IndexOf(item);

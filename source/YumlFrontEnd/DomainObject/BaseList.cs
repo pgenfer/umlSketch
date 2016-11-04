@@ -48,6 +48,8 @@ namespace Yuml
             private readonly BaseList<T> _parent;
             private readonly IEnumerable<T> _chosenSelection;
 
+            internal static SubSet Empty { get; } = new SubSet(null,Enumerable.Empty<T>());
+
             internal SubSet(BaseList<T> parent, IEnumerable<T> chosenSelection)
             {
                 _parent = parent;

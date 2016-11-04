@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yuml;
+using Yuml.Command;
 
 namespace YumlFrontEnd.editor
 {
@@ -19,10 +20,9 @@ namespace YumlFrontEnd.editor
     public class InterfaceSelectionItemsSource : ClassifierSelectionItemsSource
     {
         public InterfaceSelectionItemsSource(
-           ClassifierDictionary classifiers,
-           Predicate<Classifier> filter,
-           MessageSystem messageSystem,
-           bool addNullItem = false)//:base(classifiers,x => x.IsInterface && )
+            ClassifierDictionary classifiers,
+            Query<Classifier> availableClassifiers,
+            MessageSystem messageSystem):base(classifiers,availableClassifiers.Get,messageSystem)
         {
         }
     }

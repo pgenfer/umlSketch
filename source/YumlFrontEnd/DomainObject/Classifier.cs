@@ -114,6 +114,7 @@ namespace Yuml
         /// property must have setter, otherwise we cannot set it via AutoMapper
         /// </summary>
         public ClassifierAssociationList Associations { get; internal set; } = new ClassifierAssociationList();
+        
 
         public Relation CreateNewAssociationWithBestInitialValues(ClassifierDictionary classifiers) => 
             Associations.CreateNewAssociationWithBestInitialValues(this,classifiers);

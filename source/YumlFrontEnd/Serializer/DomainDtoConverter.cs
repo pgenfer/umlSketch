@@ -51,9 +51,7 @@ namespace Yuml.Serializer.Dto
                     .ForMember(d => d.Text, c => c.MapFrom(s => s.NoteText))
                     .ForMember(d => d.Color, c => c.MapFrom(s => s.NoteColor));
                 // classifier mapping
-                x.CreateMap<Classifier, ClassifierDto>()
-                    .PreserveReferences()
-                    .ReverseMap()
+                x.CreateMap<Classifier, ClassifierDto>().PreserveReferences().ReverseMap()
                     // this is a way of unflattening the note DTO data back to the classifier
                     // see here for details:
                     // http://stackoverflow.com/questions/3145062/using-automapper-to-unflatten-a-dto
@@ -63,10 +61,7 @@ namespace Yuml.Serializer.Dto
                     .ForMember(d => d.Text, c => c.MapFrom(s => s.NoteText))
                     .ForMember(d => d.Color, c => c.MapFrom(s => s.NoteColor));
                 // property mapping
-                x.CreateMap<Property, PropertyDto>()
-                    .PreserveReferences()
-                    .ReverseMap()
-                    .PreserveReferences();
+                x.CreateMap<Property, PropertyDto>().PreserveReferences().ReverseMap().PreserveReferences();
                 x.CreateMap<List<PropertyDto>, PropertyList>().PreserveReferences()
                     .AfterMap((s, d) =>
                     {
@@ -74,10 +69,7 @@ namespace Yuml.Serializer.Dto
                             d.AddExistingMember(_mapper.Map<Property>(property));
                     });
                 // method mapping
-                x.CreateMap<Method, MethodDto>()
-                    .PreserveReferences()
-                    .ReverseMap()
-                    .PreserveReferences();
+                x.CreateMap<Method, MethodDto>().PreserveReferences().ReverseMap().PreserveReferences();
                 x.CreateMap<List<MethodDto>, MethodList>().PreserveReferences()
                     .AfterMap((s, d) =>
                     {
@@ -85,10 +77,7 @@ namespace Yuml.Serializer.Dto
                             d.AddExistingMember(_mapper.Map<Method>(member));
                     });
                 // parameter mapping
-                x.CreateMap<Parameter, ParameterDto>()
-                    .PreserveReferences()
-                    .ReverseMap()
-                    .PreserveReferences();
+                x.CreateMap<Parameter, ParameterDto>().PreserveReferences().ReverseMap().PreserveReferences();
                 x.CreateMap<List<ParameterDto>, ParameterList>().PreserveReferences()
                     .AfterMap((s, d) =>
                     {
@@ -96,8 +85,7 @@ namespace Yuml.Serializer.Dto
                             d.AddExistingMember(_mapper.Map<Parameter>(parameter));
                     });
                 // mapping from relation => DTO
-                x.CreateMap<Relation, RelationDto>()
-                    .PreserveReferences()
+                x.CreateMap<Relation, RelationDto>().PreserveReferences()
                     .ForMember(d => d.Start, c =>
                     {
                         c.MapFrom(s => _mapper.Map<ClassifierDto>(s.Start.Classifier));
@@ -107,9 +95,11 @@ namespace Yuml.Serializer.Dto
                         c.MapFrom(s => _mapper.Map<ClassifierDto>(s.End.Classifier));
                     })
                     .ForMember(d => d.RelationType, c => c.MapFrom(s => s.Type));
+                // mapping for implementations works like relation mapping
+                x.CreateMap<Implementation, ImplementationDto>().PreserveReferences()
+                    .IncludeBase<Relation,RelationDto>();
                 // mapping from DTO => relation
-                x.CreateMap<RelationDto,Relation>()
-                    .PreserveReferences()
+                x.CreateMap<RelationDto,Relation>().PreserveReferences()
                     .ForMember(d => d.Start, c =>
                     {
                         c.MapFrom(s => new StartNode(
@@ -125,12 +115,20 @@ namespace Yuml.Serializer.Dto
                             true));
                     })
                     .ForMember(d => d.Type,c => c.MapFrom(s => s.RelationType));
-
+                // mapping for implementation dtos
+                x.CreateMap<ImplementationDto, Implementation>().PreserveReferences()
+                    .IncludeBase<RelationDto, Relation>();
                 x.CreateMap<List<RelationDto>, ClassifierAssociationList>().PreserveReferences()
                     .AfterMap((s, d) =>
                     {
-                        foreach (var relation in s)
-                            d.AddExistingRelation(_mapper.Map<Relation>(relation));
+                        foreach (var relationDto in s)
+                            d.AddExistingRelation(_mapper.Map<Relation>(relationDto));
+                    });
+                x.CreateMap<List<ImplementationDto>, ImplementationList>().PreserveReferences()
+                    .AfterMap((s, d) =>
+                    {
+                        foreach (var implementationDto in s)
+                            d.AddInterfaceToList(_mapper.Map<Implementation>(implementationDto));
                     });
             });
 
