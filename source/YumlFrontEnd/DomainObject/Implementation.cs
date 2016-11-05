@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,13 @@ namespace Yuml
     /// </summary>
     public class Implementation : Relation
     {
-        private RelationType _Type = RelationType.Implementation;
-
         /// <summary>
         /// should only be used for testing and mapping
         /// </summary>
-        public Implementation() { }
+        public Implementation()
+        {
+            Type = RelationType.Implementation;
+        }
 
         public Implementation(Classifier start, Classifier end)
             :base(start,end, RelationType.Implementation, string.Empty)
@@ -28,15 +30,10 @@ namespace Yuml
             Requires(end.IsInterface);
         }
 
-        public override RelationType Type
-        {
-            get { return _Type; }
-            set
-            {
-                // implementations can only have an "implementation" relation type.
-                Requires(value == RelationType.Implementation);
-                _Type = value; 
-            }
-        }
+        /// <summary>
+        /// invariant: implementation associations must always have the correct relation type.
+        /// </summary>
+        [ContractInvariantMethod]
+        private void ImplementationHasCorrectRelationType() => Contract.Invariant(Type == RelationType.Implementation);
     }
 }

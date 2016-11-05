@@ -44,12 +44,19 @@ namespace YumlFrontEnd.editor
             Contract.Requires(commands != null);
 
             _commands = commands;
-            // setup mixins
-            _name = new EditableNameMixin(commands.Rename);
-            _changeVisibility = new ChangeVisibilityMixin(commands.Visibility);
-            // forward mixin events
-            _name.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
-            _changeVisibility.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
+            // setup mixins. There can be view models where the commands are not defined
+            // (i.g. InterfaceImplementationViewModel does not need a rename command)
+            // in that case the mixins should not be created
+            if (commands.Rename != null)
+            {
+                _name = new EditableNameMixin(commands.Rename);
+                _name.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
+            }
+            if (commands.Visibility != null)
+            {
+                _changeVisibility = new ChangeVisibilityMixin(commands.Visibility);
+                _changeVisibility.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
+            }
         }
 
         /// <summary>
@@ -58,7 +65,6 @@ namespace YumlFrontEnd.editor
         /// Custom initialization code should be implemented in CustomInit
         /// </summary>
         /// <param name="domain"></param>
-        /// <param name="context"></param>
         /// <param name="parentViewModel"></param>
         public virtual void Init(
             TDomain domain,

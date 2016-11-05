@@ -16,7 +16,7 @@ namespace Yuml.Command
         public IRenameCommand Rename => null;
         public IDeleteCommand Delete { get; }
         public ChangeInterfaceOfClassifierCommand ChangeInterface { get; }
-        public ShowOrHideSingleObjectCommand Visibility { get; }
+        public IShowOrHideCommand Visibility { get; }
         public QueryAvailableInterfaces AvailableInterfaces { get; }
 
         public SingleInterfaceCommandContext(

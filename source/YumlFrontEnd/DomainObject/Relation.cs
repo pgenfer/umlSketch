@@ -59,7 +59,7 @@ namespace Yuml
         /// <summary>
         /// type of the relation (from start -> end)
         /// </summary>
-        public virtual RelationType Type { get; set; }
+        public RelationType Type { get; set; }
 
         public RelationWriter WriteTo(RelationWriter relationWriter)
         {

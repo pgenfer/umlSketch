@@ -71,7 +71,9 @@ namespace YumlFrontEnd.editor
         protected ListViewModelBase(IListCommandContext<TDomain> commands)
         {
             _commands = commands;
-            _visibility = new ChangeVisibilityMixin(commands.Visibility);
+            // if command is not available, list view does not support visibility
+            if (commands.Visibility != null)
+               _visibility = new ChangeVisibilityMixin(commands.Visibility);
         }
 
         internal void Init(ViewModelContext context)
@@ -87,7 +89,12 @@ namespace YumlFrontEnd.editor
         /// controls whether the expand button is visible
         /// </summary>
         public virtual bool CanExpand => Items.Any();
-        public void RemoveItem(SingleItemViewModelBase<TDomain> item) => _items.RemoveItem(item);
+        public void RemoveItem(SingleItemViewModelBase<TDomain> item)
+        {
+            _items.RemoveItem(item);
+            if (Items.Count == 0) // last item was removed => hide expander
+                NotifyOfPropertyChange(nameof(CanExpand));
+        } 
 
         public bool IsVisible => _visibility.IsVisible;
 
