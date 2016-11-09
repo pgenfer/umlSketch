@@ -15,12 +15,8 @@ namespace YumlFrontEnd.editor
     /// view model for handling a complete list of classifiers.
     /// A separate view model is created for every classifier
     /// </summary>
-    internal class ClassifierListViewModel : ListViewModelBase<Classifier>
+    internal class ClassifierListViewModel : ListViewModelBase<Classifier,ClassifierListCommandContext>
     {
-        public ClassifierListViewModel(IListCommandContext<Classifier> commands) : base(commands)
-        {
-        }
-
         /// <summary>
         /// always hide the expand button in the class list
         /// TODO: later when we have relations, we could let the user expand/collapse the class list
@@ -33,22 +29,16 @@ namespace YumlFrontEnd.editor
                 ((ClassifierViewModel) item).Collapse();
         }
 
-        protected override void UpdateItemList()
+        protected override SingleItemViewModelBaseSimple<Classifier> OnNewItemAdded(DomainObjectCreatedEvent<Classifier> itemCreated)
         {
-            // we store the expand positions of the existing classifiers
-            // and restore them after the update.
-            // Unfortunately we must cast the single items to the correct type here
-            var expandStatesOfClassifiers = Items.ToDictionary(x => x.Name, y => ((ClassifierViewModel) y).IsExpanded);
-            base.UpdateItemList();
-            foreach (var classifier in Items.OfType<ClassifierViewModel>())
-            {
-                bool isExpanded;
-                // items that were not in the list will be expanded by default, otherwise
-                // use the expand state the item had before
-                classifier.IsExpanded = 
-                    !expandStatesOfClassifiers.TryGetValue(classifier.Name, out isExpanded) || 
-                    isExpanded;
-            }
+            var newViewModel = base.OnNewItemAdded(itemCreated);
+            ((ClassifierViewModel) newViewModel).IsExpanded = true;
+            return newViewModel;
+        }
+
+        protected override void SubscribeToMessageSystem(BaseList<Classifier> domainList)
+        {
+            Context.MessageSystem.Subscribe(Context.Classifiers, this);
         }
     }
 }

@@ -6,20 +6,26 @@ using System.Threading.Tasks;
 
 namespace Yuml.Command
 {
-    public class NewMethodCommand : NewCommandBase
+    public class NewMethodCommand : INewCommand
     {
+        private readonly MethodList _methods;
+        private readonly ClassifierDictionary _availableClassifiers;
+        private readonly MessageSystem _messageSystem;
+
         public NewMethodCommand(
-            Classifier parentClassifier, 
+            MethodList methods, 
             ClassifierDictionary availableClassifiers, 
-            MessageSystem messageSystem) : 
-            base(parentClassifier, availableClassifiers, messageSystem)
+            MessageSystem messageSystem)
         {
+            _methods = methods;
+            _availableClassifiers = availableClassifiers;
+            _messageSystem = messageSystem;
         }
 
-        public override void CreateNew()
+        public void CreateNew()
         {
-            var method = _parentClassifier.CreateNewMethodWithBestInitialValues(_availableClassifiers);
-            _messageSystem.PublishCreated(_parentClassifier, method);
+            var method = _methods.CreateNewMethodWithBestInitialValues(_availableClassifiers);
+            _messageSystem.PublishCreated(_methods, method);
         }
     }
 }

@@ -61,11 +61,19 @@ namespace YumlFrontEnd.editor
         /// <summary>
         /// should be called whenever the complete list of classifier should be regenerated.
         /// Can happen if a new diagram is loaded from persistant storage or during initialization.
+        /// This is a template method that can be extended by derived classes to control which items
+        /// should be visible in the list and on which events the itemsource should react.
         /// </summary>
         private void UpdateClassifierList()
         {
             foreach (var classifier in _queryForAvailableClassifiers().OrderBy(x => x.Name))
             {
+                RegisterForClassifierEvent(_messageSystem, classifier);
+                
+                // derived class can control whether this item should be visible
+                if (!ShouldItemBeVisible(classifier))
+                    continue;
+
                 Add(new ClassifierItemViewModel(classifier.Name));
                 // register for changes of this classifier
                 _messageSystem.Subscribe<DomainObjectDeletedEvent<Classifier>>(
@@ -74,6 +82,28 @@ namespace YumlFrontEnd.editor
                     classifier, OnNameChanged);
             }
         }
+
+        /// <summary>
+        /// derived classes can register additional message handling for a classifier here
+        /// </summary>
+        /// <param name="messageSystem"></param>
+        /// <param name="classifier"></param>
+        protected virtual void RegisterForClassifierEvent(MessageSystem messageSystem, Classifier classifier)
+        {
+            // base implementation does nothing
+        }
+
+        /// <summary>
+        /// additional filter method that can be implemented by
+        /// derived classes, can be used to narrow the list of elements that should be visible in
+        /// the class list.
+        /// Base class items source needs this because the condition whether a class is an interface or not 
+        /// can change so the itemssource also has to react on items that were not in the list before
+        /// </summary>
+        /// <param name="classifier">The classifier for which an additional
+        /// check should be done.</param>
+        /// <returns></returns>
+        protected virtual bool ShouldItemBeVisible(Classifier classifier) => true;
 
         /// <summary>
         /// event handler which is called when a classifier is removed

@@ -1,10 +1,10 @@
 ﻿namespace Yuml.Command
 {
-    public class PropertySingleCommandContext : SingleCommandContextBase, ISinglePropertyCommands
+    public class PropertySingleCommandContext : SingleCommandContextBase<Property>, ISinglePropertyCommands
     {
         public PropertySingleCommandContext(
-            ClassifierDictionary availableClassifiers,
             Property property,
+            ClassifierDictionary availableClassifiers,
             IValidateNameService propertyValidationNameService,
             MessageSystem messageSystem)
         {

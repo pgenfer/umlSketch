@@ -47,15 +47,13 @@ namespace Yuml.Service
                 associations.DeleteSelection(_messageSystem);
             foreach (var implementation in dependentImplementations)
                 implementation.DeleteSelection(_messageSystem);
-            
+
+            // remove the deleted class as base class
             foreach (var derivedClass in derivedClasses)
-            {
-                derivedClass.BaseClass = null;
-                _messageSystem.Publish(derivedClass,new ClearBaseClassEvent());
-            }
+                derivedClass.ClearBaseClass(_messageSystem);
 
             _classifiers.RemoveClassifier(classifier);
-            _messageSystem.PublisDeleted(classifier);
+            _messageSystem.PublishDeleted(classifier);
         }
     }
 }

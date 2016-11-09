@@ -7,7 +7,7 @@ using Yuml.Command.Interface;
 
 namespace Yuml.Command
 {
-    public class SingleInterfaceCommandContext : ISingleCommandContext
+    public class SingleInterfaceCommandContext : ISingleCommandContext<Implementation>
     {
         /// <summary>
         /// this is a bit ugly, because the command is not available for interfaces but is in the
@@ -20,22 +20,19 @@ namespace Yuml.Command
         public QueryAvailableInterfaces AvailableInterfaces { get; }
 
         public SingleInterfaceCommandContext(
-            Classifier interfaceOwner,
-            Implementation existingInterface,
-            ClassifierDictionary classifiers,
-            MessageSystem messageSystem)
+             Implementation existingInterface,
+             ClassifierDictionary classifiers,
+             MessageSystem messageSystem)
         {
             Delete = new RemoveInterfaceFromClassifierCommand(
-                interfaceOwner.InterfaceImplementations, 
                 existingInterface, 
                 messageSystem);
             ChangeInterface = new ChangeInterfaceOfClassifierCommand(
-                interfaceOwner.InterfaceImplementations,
                 existingInterface,
                 classifiers,
                 messageSystem);
             Visibility = new ShowOrHideSingleObjectCommand(existingInterface, messageSystem);
-            AvailableInterfaces = new QueryAvailableInterfaces(interfaceOwner,classifiers);
+            AvailableInterfaces = new QueryAvailableInterfaces(existingInterface, classifiers);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Yuml.Command
         public void ClearType(string nameOfOldType)
         {
             _domainObject.BaseClass = null;
-            _messageSystem.Publish(_domainObject,new BaseClassRemovedEvent());
+            _messageSystem.Publish(_domainObject,new ClearBaseClassEvent());
         }
 
         public void SetNewType(string nameOfNewType)

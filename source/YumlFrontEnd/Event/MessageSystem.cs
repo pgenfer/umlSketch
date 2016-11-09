@@ -2,6 +2,7 @@ using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using DomainEventHandlers = System.Collections.Generic.List<Yuml.DomainEventHandler>;
 
 namespace Yuml
@@ -143,7 +144,7 @@ namespace Yuml
         {
             // get all methods that accepts a domain event as parameter
             var subscriptionMethodInfos = subscriber.GetType()
-                .GetMethods()
+                .GetMethods(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance)
                 .Where(x => x.GetParameters()
                     .Count(p => typeof(IDomainEvent).IsAssignableFrom(p.ParameterType)) == 1)
                 .ToList();
@@ -175,7 +176,7 @@ namespace Yuml
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="deletedDomainObject"></param>
-        public void PublisDeleted<T>(T deletedDomainObject)
+        public void PublishDeleted<T>(T deletedDomainObject)
         {
             Publish(deletedDomainObject, new DomainObjectDeletedEvent<T>(deletedDomainObject));
             // since the object does not exist any more, we

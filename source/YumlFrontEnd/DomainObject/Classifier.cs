@@ -20,6 +20,9 @@ namespace Yuml
     {
         private readonly NameMixin _name = new NameMixin();
         private readonly IVisible _visible = new VisibleMixin();
+        private Classifier _baseClass;
+        private ImplementationList _interfaceImplementations = new ImplementationList();
+        private ClassifierAssociationList _associations = new ClassifierAssociationList();
 
         /// <summary>
         /// color is stored in hex format as AARRGGBB.
@@ -67,7 +70,12 @@ namespace Yuml
         /// internal setter only used by serialization, should not be used by other production code
         /// </summary>
         public MethodList Methods { get; internal set; } = new MethodList();
-        public ImplementationList InterfaceImplementations { get; internal set; } = new ImplementationList();
+
+        public ImplementationList InterfaceImplementations
+        {
+            get { return _interfaceImplementations; }
+            internal set { _interfaceImplementations = value; }
+        }
 
         public override string ToString() => _name.ToString();
 
@@ -96,28 +104,45 @@ namespace Yuml
         public Property CreateNewPropertyWithBestInitialValues(ClassifierDictionary systemClassifiers) => 
             Properties.CreateNewPropertyWithBestInitialValues(systemClassifiers);
 
-        public Implementation AddNewImplementation(ClassifierDictionary classifiers) => 
-            InterfaceImplementations.AddNewImplementation(this, classifiers);
-
         /// <summary>
         /// optional base class of this classifier
         /// </summary>
-        public Classifier BaseClass { get; set; }
+        public Classifier BaseClass
+        {
+            get { return _baseClass; }
+            set
+            {
+                // if a base class is set, it must not be an interface
+                Requires(value == null || !value.IsInterface);
+                _baseClass = value; 
+            }
+        }
+
         public Relation AddNewRelation(
             Classifier target,
             RelationType associationType,
             string startName="", 
             string endName="") => 
-            Associations.AddNewRelation(this,target, associationType, startName, endName);
+            Associations.AddNewRelation(target, associationType, startName, endName);
 
         /// <summary>
         /// property must have setter, otherwise we cannot set it via AutoMapper
         /// </summary>
-        public ClassifierAssociationList Associations { get; internal set; } = new ClassifierAssociationList();
-        
+        public ClassifierAssociationList Associations
+        {
+            get { return _associations; }
+            internal set
+            {
+                Requires(value != null);
+
+                _associations = value;
+                _associations.Root = this;
+            }
+        }
+
 
         public Relation CreateNewAssociationWithBestInitialValues(ClassifierDictionary classifiers) => 
-            Associations.CreateNewAssociationWithBestInitialValues(this,classifiers);
+            Associations.CreateNewAssociationWithBestInitialValues(classifiers);
 
         public Method CreateNewMethodWithBestInitialValues(ClassifierDictionary classifiers) =>
             Methods.CreateNewMethodWithBestInitialValues(classifiers);
@@ -144,5 +169,46 @@ namespace Yuml
         /// note that is attached to this classifier
         /// </summary>
         public Note Note { get; set; } = new Note();
+
+        /// <summary>
+        /// clears the base class of this class and fires
+        /// the required event
+        /// </summary>
+        /// <param name="messageSystem">optional, if set, a domain event
+        /// will be fired that the base class was removed.</param>
+        public void ClearBaseClass(MessageSystem messageSystem = null)
+        {
+            BaseClass = null;
+            messageSystem?.Publish(this,new ClearBaseClassEvent());
+        }
+
+        public void SetBaseClass(Classifier @interface, MessageSystem messageSystem)
+        {
+            var oldBaseClass = BaseClass;
+            BaseClass = @interface;
+            if (oldBaseClass == null)
+                messageSystem.Publish(this, new BaseClassSetEvent(@interface.Name));
+            else
+                messageSystem.Publish(this, new BaseClassChangedEvent(oldBaseClass.Name,@interface.Name));
+        }
+
+        public void AddInterfaceImplementation(Classifier newInterface,MessageSystem messageSystem = null)
+        {
+            var newImplementation = new Implementation(this, newInterface);
+            InterfaceImplementations.AddInterfaceToList(new Implementation(this, newInterface));
+            messageSystem?.PublishCreated(InterfaceImplementations, newImplementation);
+        }
+
+        public IEnumerable<Classifier> ImplementedInterfaces => 
+            _interfaceImplementations.ImplementedInterfaces;
+        public void ReplaceInterface(Implementation implementation, Classifier newInterface) => 
+            _interfaceImplementations.ReplaceInterface(implementation, newInterface);
+        public void RemoveInterfaceFromList(Implementation implementation) => 
+            _interfaceImplementations.RemoveInterfaceFromList(implementation);
+        public virtual BaseList<Implementation>.SubSet FindImplementationsOfInterface(Classifier @interface) => 
+            _interfaceImplementations.FindImplementationsOfInterface(@interface);
+
+        public void RemoveImplementationForInterface(Classifier @interface,MessageSystem messageSystem = null) =>
+            _interfaceImplementations.RemoveImplementationForInterface(@interface,messageSystem);
     }
 }

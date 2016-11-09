@@ -20,17 +20,21 @@ namespace Yuml.DomainObject
     public class ClassifierAssociationList : BaseList<Relation>
     {
         /// <summary>
+        /// the root classifier where all relations of this list start.
+        /// Should be set after the association list is assigned to a classifier
+        /// </summary>
+        public Classifier Root { get; set; }
+        
+        /// <summary>
         /// creates a new association with default values, adds it to the assocation
         /// list and returns the newly created assocication.
         /// </summary>
-        /// <param name="start"></param>
         /// <param name="classifiers"></param>
         /// <returns></returns>
         public Relation CreateNewAssociationWithBestInitialValues(
-            Classifier start,
             ClassifierDictionary classifiers)
         {
-            Requires(start != null);
+            Requires(Root != null);
             Requires(classifiers.Count > 0);
             // ensure that the relation is not bound to a system type
             Ensures(!Result<Relation>().End.Classifier.IsSystemType);
@@ -38,7 +42,7 @@ namespace Yuml.DomainObject
             // try to find a classifier that is suitable for this relation.
             // we take the first one which is not used already and which is not the
             // source itself
-            var usedClassifiers = _list.Select(x => x.End.Classifier).Concat(new[] { start });
+            var usedClassifiers = _list.Select(x => x.End.Classifier).Concat(new[] { Root });
             var firstUnusedClassifier = classifiers
                 .Except(usedClassifiers)
                 .FirstOrDefault(x => !x.IsSystemType);
@@ -46,14 +50,13 @@ namespace Yuml.DomainObject
             // there must always be one, at least the source itself
             firstUnusedClassifier = firstUnusedClassifier ?? classifiers.First(x => !x.IsSystemType);
 
-            var newRelation = new Relation(start, firstUnusedClassifier);
+            var newRelation = new Relation(Root, firstUnusedClassifier);
             AddNewMember(newRelation);
 
             return newRelation;
         }
 
         public Relation AddNewRelation(
-            Classifier start,
             Classifier target,
             RelationType associationType = RelationType.Association,
             string startName = "",
@@ -63,9 +66,9 @@ namespace Yuml.DomainObject
             // in the classes relation list
             Requires(associationType != RelationType.Implementation);
             Requires(associationType != RelationType.Inheritance);
-            Requires(start != null);
+            Requires(Root != null);
 
-            var relation = new Relation(start, target, associationType, startName, endName );
+            var relation = new Relation(Root, target, associationType, startName, endName );
             AddNewMember(relation);
 
             return relation;

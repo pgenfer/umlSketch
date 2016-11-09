@@ -1,29 +1,20 @@
-﻿namespace Yuml.Command
+﻿using Yuml.DomainObject;
+
+namespace Yuml.Command
 {
     /// <summary>
     /// commands that can be executed on the association list of a classifier
     /// </summary>
     public class AssociationListCommandContext : ListCommandContextBase<Relation>
     {
-        private readonly ClassifierDictionary _classifiers;
-        private readonly MessageSystem _messageSystem;
-
         public AssociationListCommandContext(
-            Classifier classifier,
-            ClassifierDictionary classifiers,
-            MessageSystem messageSystem)
+         ClassifierAssociationList associations,
+         ClassifierDictionary classifiers,
+         MessageSystem messageSystem)
         {
-            _classifiers = classifiers;
-            _messageSystem = messageSystem;
-            New = new NewAssociationCommand(classifier, classifiers,messageSystem);
-            All = new Query<Relation>(() => classifier.Associations);
-            Visibility = new ShowOrHideAllObjectsInListCommand(classifier.Associations,messageSystem);
-
-        }
-
-        public override ISingleCommandContext GetCommandsForSingleItem(Relation domainObject)
-        {
-            return new SingleAssociationCommands(_classifiers,domainObject,_messageSystem);
+            New = new NewAssociationCommand(associations, classifiers, messageSystem);
+            All = new Query<Relation>(() => associations);
+            Visibility = new ShowOrHideAllObjectsInListCommand(associations, messageSystem);
         }
     }
 }

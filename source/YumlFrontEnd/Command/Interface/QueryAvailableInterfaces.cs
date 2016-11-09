@@ -12,11 +12,16 @@ namespace Yuml.Command
     /// </summary>
     public class QueryAvailableInterfaces : Query<Classifier>
     {
-        public QueryAvailableInterfaces(Classifier owner,ClassifierDictionary classifiers)
+        public QueryAvailableInterfaces(Implementation implementation, ClassifierDictionary classifiers)
             :base(() => classifiers
-                        .Where(x => x.IsInterface) // show only interfaces
-                        .Where(x => x != owner) // a class cannot implement itself
-                        .Except(owner.InterfaceImplementations.ImplementedInterfaces)) // skip interfaces which are already implemented
+                        // show only interfaces            
+                        .Where(x => x.IsInterface)
+                        // a class cannot implement itself
+                        .Where(x => x != implementation.Start.Classifier) 
+                        // skip interfaces which are already implemented
+                        // TODO: the chaining to access the classifier is a bit awful
+                        .Except(implementation.Start.Classifier.InterfaceImplementations.ImplementedInterfaces)) 
+            
         { }
     }
 }

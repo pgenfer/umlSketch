@@ -1,6 +1,6 @@
 ﻿namespace Yuml.Command
 {
-    public class MethodSingleCommandContext : SingleCommandContextBase
+    public class MethodSingleCommandContext : SingleCommandContextBase<Method>
     {
         public MethodSingleCommandContext(
             Method method,

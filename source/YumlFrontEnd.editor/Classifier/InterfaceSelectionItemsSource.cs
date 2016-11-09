@@ -21,7 +21,7 @@ namespace YumlFrontEnd.editor
     {
         public InterfaceSelectionItemsSource(
             ClassifierDictionary classifiers,
-            Query<Classifier> availableClassifiers,
+            IQuery<Classifier> availableClassifiers,
             MessageSystem messageSystem):base(classifiers,availableClassifiers.Get,messageSystem)
         {
         }

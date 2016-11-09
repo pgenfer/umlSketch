@@ -108,8 +108,8 @@
     <Compile Include="Command\Classifier\MakeClassifierToInterfaceCommand.cs" />
     <Compile Include="Command\Classifier\NewClassifierCommand.cs" />
     <Compile Include="Command\Diagram\DiagramCommands.cs" />
+    <Compile Include="Command\General\CommandFactory.cs" />
     <Compile Include="Command\General\IShowOrHideCommand.cs" />
-    <Compile Include="Command\General\List\NewCommandBase.cs" />
     <Compile Include="Command\General\List\ShowOrHideAllObjectsInListCommand.cs" />
     <Compile Include="Command\Interface\ChangeInterfaceOfClassCommand.cs" />
     <Compile Include="Command\Interface\InterfaceListCommandContext.cs" />
@@ -125,7 +125,6 @@
     <Compile Include="DomainObject\NamedBaseList.cs" />
     <Compile Include="DomainObject\Note.cs" />
     <Compile Include="Event\BaseClassChangedEvent.cs" />
-    <Compile Include="Event\BaseClassRemovedEvent.cs" />
     <Compile Include="Event\BaseClassSetEvent.cs" />
     <Compile Include="Event\ChangeClassifierColorEvent.cs" />
     <Compile Include="Event\ChangeColorEventBase.cs" />
@@ -195,6 +194,8 @@
     <Compile Include="Serializer\Dto\RelationDto.cs" />
     <Compile Include="Serializer\JsonApplicationSettingSerializer.cs" />
     <Compile Include="Service\DeletionService.cs" />
+    <Compile Include="Service\IRelationService.cs" />
+    <Compile Include="Service\RelationService.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="ClassDiagram.cs" />
     <Compile Include="Settings\ApplicationSettingsDataMixin.cs" />

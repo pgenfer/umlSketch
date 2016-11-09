@@ -46,28 +46,7 @@ namespace YumlFrontEnd.editor
 
         private void ConfigureViewModel()
         {
-            _container.PerRequest<MainViewModel, MainViewModel>();
-        }
-
-        private static void CreateDummyData(
-            ClassifierDictionary classifierDictionary,
-            RelationList relations)
-        {
-            // just for debug
-            var car = classifierDictionary.CreateNewClass("Car");
-            var airplane = classifierDictionary.CreateNewClass("Airplane");
-            var vehicle = classifierDictionary.CreateNewClass("Vehicle");
-            var color = classifierDictionary.CreateNewClass("color");
-
-            car.CreateProperty("Color", color);
-            airplane.CreateProperty("Length", classifierDictionary.FindByName("int"));
-
-            car.CreateMethod("Drive", classifierDictionary.FindByName("void"));
-            airplane.CreateMethod("Fly", classifierDictionary.FindByName("void"));
-
-            car.BaseClass = vehicle;
-            var relation = car.AddNewRelation(color,RelationType.Aggregation);
-            relations.AddRelation(relation);
+            _container.PerRequest<MainViewModel>();
         }
 
         private void ConfigureDomainModel()
@@ -79,9 +58,10 @@ namespace YumlFrontEnd.editor
             _container.Instance(classifierDictionary);
 
             _container.Singleton<MessageSystem>();
-            _container.PerRequest<ClassifierListCommandContext>();
             _container.Singleton<DeletionService>();
+            _container.Singleton<IRelationService,RelationService>();
             _container.Singleton<ViewModelContext>();
+            _container.Singleton<CommandFactory>();
             _container.PerRequest<DiagramCommands>();
 
             // load application settings

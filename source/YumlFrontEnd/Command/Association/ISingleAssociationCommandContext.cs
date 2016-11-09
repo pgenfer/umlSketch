@@ -2,7 +2,7 @@
 
 namespace Yuml.Command
 {
-    public interface ISingleAssociationCommands : ISingleCommandContext
+    public interface ISingleAssociationCommands : ISingleCommandContext<Relation>
     {
         /// <summary>
         /// command that is executed when the target classifier of the association

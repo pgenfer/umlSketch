@@ -8,10 +8,7 @@ using Yuml.Command;
 
 namespace YumlFrontEnd.editor
 {
-    public class InterfaceImplementationListViewModel : ListViewModelBase<Implementation>
+    public class InterfaceImplementationListViewModel : ListViewModelBase<Implementation,InterfaceListCommandContext>
     {
-        public InterfaceImplementationListViewModel(IListCommandContext<Implementation> commands) : base(commands)
-        {
-        }
     }
 }

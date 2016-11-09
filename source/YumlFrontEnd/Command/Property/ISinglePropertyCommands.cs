@@ -9,7 +9,7 @@ namespace Yuml.Command
     /// <summary>
     /// additional commands available for a single property
     /// </summary>
-    public interface ISinglePropertyCommands : ISingleCommandContext
+    public interface ISinglePropertyCommands : ISingleCommandContext<Property>
     {
         IChangeTypeCommand ChangeTypeOfProperty { get; }
     }

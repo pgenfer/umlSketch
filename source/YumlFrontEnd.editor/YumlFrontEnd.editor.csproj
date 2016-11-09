@@ -153,9 +153,11 @@
       <DependentUpon>AssociationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Association\AssociationViewModel.cs" />
+    <Compile Include="Classifier\BaseClassSelectionItemSource.cs" />
     <Compile Include="Classifier\IClassifierSelectionItemsSource.cs" />
     <Compile Include="Classifier\InterfaceSelectionItemsSource.cs" />
     <Compile Include="Converter\ColorToGradientBrushConverter.cs" />
+    <Compile Include="Converter\InverseBooleanConverter.cs" />
     <Compile Include="Converter\IsVisibleToColorConverter.cs" />
     <Compile Include="Converter\TestConverter.cs" />
     <Compile Include="Converter\TrueToCollapseConverter.cs" />
@@ -168,6 +170,7 @@
       <DependentUpon>EditorStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Extension\ColorExtension.cs" />
+    <Compile Include="Extension\TypeExtension.cs" />
     <Compile Include="InterfaceImplementation\InterfaceImplementationListView.xaml.cs">
       <DependentUpon>InterfaceImplementationListView.xaml</DependentUpon>
     </Compile>
@@ -224,8 +227,9 @@
     </Compile>
     <Compile Include="UserControls\ExpanderButton.cs" />
     <Compile Include="Mixin\SelectClassifierMixin.cs" />
-    <Compile Include="ViewModel\SingleItemViewModel.cs" />
+    <Compile Include="ViewModel\ListViewModelBaseSimple.cs" />
     <Compile Include="ViewModel\SingleItemViewModelBase.cs" />
+    <Compile Include="ViewModel\SingleItemViewModelBaseSimple.cs" />
     <Compile Include="ViewModel\ViewModelContext.cs" />
     <Compile Include="ViewModel\ViewModelConverter.cs" />
     <Compile Include="Classifier\ClassifierItemView.xaml.cs">

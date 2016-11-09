@@ -2,11 +2,11 @@
 
 namespace Yuml.Command
 {
-    public class SingleAssociationCommands : SingleCommandContextBase, ISingleAssociationCommands
+    public class SingleAssociationCommands : SingleCommandContextBase<Relation>, ISingleAssociationCommands
     {
         public SingleAssociationCommands(
-            ClassifierDictionary classifiers,
             Relation association,
+            ClassifierDictionary classifiers,
             MessageSystem messageSystem)
         {
             Rename = new RenameAssociationCommand();

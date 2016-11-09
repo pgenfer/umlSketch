@@ -1,5 +1,5 @@
 using System.Diagnostics.Contracts;
-using Caliburn.Micro;
+using Common;
 using Yuml;
 using Yuml.Command;
 using YumlFrontEnd.editor;
@@ -12,37 +12,29 @@ namespace YumlFrontEnd.editor
     /// is not necessary.
     /// </summary>
     /// <typeparam name="TDomain"></typeparam>
-    public abstract class SingleItemViewModelBase<TDomain> : PropertyChangedBase
+    /// <typeparam name="TCommand"></typeparam>
+    public abstract class SingleItemViewModelBase<TDomain,TCommand> : 
+        SingleItemViewModelBaseSimple<TDomain>
+        where TDomain : IVisible
+        where TCommand : ISingleCommandContext<TDomain>
     {
-        /// <summary>
-        /// commands are stored in base class. Derived class of command is
-        /// stored in derived class.
-        /// TODO: would it make sense to separate all command relevant code into
-        /// a separate class?
-        /// </summary>
-        private readonly ISingleCommandContext _commands;
-
-        /// <summary>
-        /// the view model that is used to host this single item view model.
-        /// This reference is needed in case the single view model must notify
-        /// its parent about any updates
-        /// </summary>
-        protected ListViewModelBase<TDomain> _parentViewModel;
-
-        public ViewModelContext Context { get; private set; }
+        protected TCommand _commands;
 
         /// <summary>
         /// view model converter is used to
         /// convert any domain objects to view models.
         /// </summary>
-        protected readonly ViewModelConverter _toViewModel = new ViewModelConverter();
-        private readonly EditableNameMixin _name;
-        private readonly ChangeVisibilityMixin _changeVisibility;
-
-        protected SingleItemViewModelBase(ISingleCommandContext commands)
+        private EditableNameMixin _name;
+        private ChangeVisibilityMixin _changeVisibility;
+       
+        /// <summary>
+        /// initialization method will be called when view model is created by the factory.
+        /// Additional command initialization code can be added here.
+        /// Don't forget to call base method when overriding.
+        /// </summary>
+        /// <param name="commands"></param>
+        internal virtual void InitCommands(TCommand commands)
         {
-            Contract.Requires(commands != null);
-
             _commands = commands;
             // setup mixins. There can be view models where the commands are not defined
             // (i.g. InterfaceImplementationViewModel does not need a rename command)
@@ -59,32 +51,6 @@ namespace YumlFrontEnd.editor
             }
         }
 
-        /// <summary>
-        /// called by owning list view model, initializes the single view model
-        /// by setting all required properties.
-        /// Custom initialization code should be implemented in CustomInit
-        /// </summary>
-        /// <param name="domain"></param>
-        /// <param name="parentViewModel"></param>
-        public virtual void Init(
-            TDomain domain,
-            ListViewModelBase<TDomain> parentViewModel )
-        {
-            _toViewModel.InitViewModel(domain, this);
-            _parentViewModel = parentViewModel;
-            // all event handlers in this view model will automatically be
-            // registered at the message system
-            Context = parentViewModel.Context;
-            Context.MessageSystem.Subscribe(domain, this);
-            CustomInit();
-        }
-
-        /// <summary>
-        /// custom initialization code can be implemented here.
-        /// If no custom code is required, leave the implementation empty.
-        /// </summary>
-        protected abstract void CustomInit();
-     
         public void Delete()
         {
             _commands.Delete.DeleteItem();
@@ -97,7 +63,6 @@ namespace YumlFrontEnd.editor
         /// <param name="domainEvent"></param>
         public void OnSingleItemDeleted(DomainObjectDeletedEvent<TDomain> domainEvent)
         {
-            _parentViewModel.RemoveItem(this);
             Context.MessageSystem.Unsubscribe(this);
         }
 

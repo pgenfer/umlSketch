@@ -3,23 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yuml.DomainObject;
 
 namespace Yuml.Command
 {
-    public class NewAssociationCommand : NewCommandBase
+    public class NewAssociationCommand : INewCommand
     {
+        private readonly ClassifierAssociationList _associations;
+        private readonly ClassifierDictionary _availableClassifiers;
+        private readonly MessageSystem _messageSystem;
+
         public NewAssociationCommand(
-            Classifier sourceClassifier,
+            ClassifierAssociationList associations,
             ClassifierDictionary availableClassifiers,
             MessageSystem messageSystem)
-            :base(sourceClassifier,availableClassifiers,messageSystem)
         {
+            _associations = associations;
+            _availableClassifiers = availableClassifiers;
+            _messageSystem = messageSystem;
         }
 
-        public override void CreateNew()
+        public virtual void CreateNew()
         {
-            var relation = _parentClassifier.CreateNewAssociationWithBestInitialValues(_availableClassifiers);
-            _messageSystem.PublishCreated(_parentClassifier, relation);
+            var relation = _associations.CreateNewAssociationWithBestInitialValues(_availableClassifiers);
+            _messageSystem.PublishCreated(_associations, relation);
         }
     }
 }

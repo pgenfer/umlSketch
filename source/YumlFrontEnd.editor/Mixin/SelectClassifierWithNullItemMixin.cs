@@ -20,8 +20,8 @@ namespace YumlFrontEnd.editor
 
         public override void SelectClassifierByName(string classifierName)
         {
-            if(string.IsNullOrEmpty(classifierName))
-                SelectedClassifier = ClassifierItemViewModel.None;
+            if (string.IsNullOrEmpty(classifierName))
+                ClearClassifier();
             else
                 base.SelectClassifierByName(classifierName);
         }
@@ -31,7 +31,7 @@ namespace YumlFrontEnd.editor
         /// without executing the command. (e.g. if the base class of a class
         /// is deleted). 
         /// </summary>
-        public void ClearClassifierWithoutCommand()
+        public void ClearClassifier()
         {
             _selectedClassifier = ClassifierItemViewModel.None;
             // ReSharper disable once ExplicitCallerInfoArgument
@@ -49,7 +49,6 @@ namespace YumlFrontEnd.editor
                     value = ClassifierItemViewModel.None;
 
                 var oldClassifier = SelectedClassifier;
-                _selectedClassifier = value;
                 if (oldClassifier != null && oldClassifier != value)
                 {
                     // type was changed from null -> new type
@@ -64,8 +63,6 @@ namespace YumlFrontEnd.editor
                     else
                         _command.ChangeType(oldClassifier.Name, value.Name);
                 }
-                
-                NotifyOfPropertyChange();
             }
         }
     }

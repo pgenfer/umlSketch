@@ -24,7 +24,6 @@ namespace YumlFrontEnd.editor
         /// chooses a new classifier
         /// </summary>
         private readonly IChangeTypeCommand _command;
-
         /// <summary>
         /// the currently selected classifier
         /// </summary>
@@ -40,7 +39,8 @@ namespace YumlFrontEnd.editor
 
         public virtual void SelectClassifierByName(string classifierName)
         {
-            SelectedClassifier = _itemsSource.ByName(classifierName);
+            _selectedClassifier = _itemsSource.ByName(classifierName);
+            NotifyOfPropertyChange(nameof(SelectedClassifier));
         }
 
         public IEnumerable<ClassifierItemViewModel> Classifiers => _itemsSource;
@@ -62,11 +62,11 @@ namespace YumlFrontEnd.editor
                     return;
 
                 var oldClassifier = _selectedClassifier;
-                _selectedClassifier = value;
                 // execute the command only if selected item was not set initially
+                // command will fire event that will trigger the view model notification update,
+                // viewmodel has to set classifier then
                 if(oldClassifier != null)
-                    _command.ChangeType(oldClassifier.Name, value.Name);
-                NotifyOfPropertyChange();
+                   _command.ChangeType(oldClassifier.Name, value.Name);
             }
         }
     }

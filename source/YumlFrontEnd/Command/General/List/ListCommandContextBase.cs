@@ -17,6 +17,5 @@ namespace Yuml.Command
         public INewCommand New { get; protected set; }
         public ShowOrHideAllObjectsInListCommand Visibility { get; protected set; }
         public IQuery<TDomain> All { get; protected set; }
-        public abstract ISingleCommandContext GetCommandsForSingleItem(TDomain domainObject);
     }
 }

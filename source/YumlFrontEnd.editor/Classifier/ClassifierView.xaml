@@ -64,6 +64,7 @@
                                Text="{x:Static local:EditorStrings.BaseClass}"
                                DockPanel.Dock="Left" />
                     <ComboBox x:Name="Classifiers"
+                              IsEnabled="{Binding IsInterface,Converter={local:InverseBooleanConverter}}"
                               Margin="5,0"
                               DockPanel.Dock="Right" />
                 </DockPanel>

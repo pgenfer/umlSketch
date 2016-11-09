@@ -36,6 +36,7 @@ namespace Yuml
         /// </summary>
         /// <param name="className"></param>
         /// <returns>The classifier or null if no classifier was found</returns>
+        [Pure]
         public virtual Classifier FindByName(string className)
         {
             Requires(!string.IsNullOrEmpty(className));
@@ -54,6 +55,14 @@ namespace Yuml
         /// <returns></returns>
         public virtual IEnumerable<Classifier> FindAllDerivedClassifiers(Classifier baseClass) =>
             _dictionary.Values.Where(x => x.BaseClass == baseClass);
+
+        /// <summary>
+        /// returns all classifiers that implement the given interface
+        /// </summary>
+        /// <param name="interface"></param>
+        /// <returns></returns>
+        public virtual IEnumerable<Classifier> FindAllImplementers(Classifier @interface) =>
+            _dictionary.Values.Where(x => x.FindImplementationsOfInterface(@interface).IsNotEmpty());
 
         [Pure]
         public int Count => _dictionary.Count;

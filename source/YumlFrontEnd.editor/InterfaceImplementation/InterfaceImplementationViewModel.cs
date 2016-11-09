@@ -8,15 +8,8 @@ using Yuml.Command;
 
 namespace YumlFrontEnd.editor
 {
-    public class InterfaceImplementationViewModel : SingleItemViewModelBase<Implementation>
+    public class InterfaceImplementationViewModel : SingleItemViewModelBase<Implementation, SingleInterfaceCommandContext>
     {
-        private readonly SingleInterfaceCommandContext _commands;
-
-        public InterfaceImplementationViewModel(SingleInterfaceCommandContext commands) : base(commands)
-        {
-            _commands = commands;
-        }
-
         protected override void CustomInit()
         {
             _selectClassifier = new SelectClassifierMixin(

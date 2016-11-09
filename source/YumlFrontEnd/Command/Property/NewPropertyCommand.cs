@@ -12,28 +12,27 @@ namespace Yuml.Command
         /// <summary>
         /// the classifier where the new property will be placed
         /// </summary>
-        private readonly Classifier _classifier;
-
+        private readonly PropertyList _properties;
         private readonly MessageSystem _messageSystem;
 
         public NewPropertyCommand(
             ClassifierDictionary availableClassifiers,
-            Classifier classifier,
+            PropertyList properties,
             MessageSystem messageSystem)
         {
-            Requires(classifier != null);
+            Requires(properties != null);
             Requires(messageSystem != null);
             Requires(availableClassifiers != null);
 
             _availableClassifiers = availableClassifiers;
-            _classifier = classifier;
+            _properties = properties;
             _messageSystem = messageSystem;
         }
 
         public void CreateNew()
         {
-            var property = _classifier.CreateNewPropertyWithBestInitialValues(_availableClassifiers);
-            _messageSystem.PublishCreated(_classifier, property);
+            var property = _properties.CreateNewPropertyWithBestInitialValues(_availableClassifiers);
+            _messageSystem.PublishCreated(_properties, property);
         }
     }
 }

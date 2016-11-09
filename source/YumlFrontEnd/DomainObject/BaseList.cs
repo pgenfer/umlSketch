@@ -50,6 +50,14 @@ namespace Yuml
 
             internal static SubSet Empty { get; } = new SubSet(null,Enumerable.Empty<T>());
 
+            /// <summary>
+            /// should only be used for testing purposes
+            /// </summary>
+            public SubSet()
+            {
+                _chosenSelection = Enumerable.Empty<T>();
+            }
+
             internal SubSet(BaseList<T> parent, IEnumerable<T> chosenSelection)
             {
                 _parent = parent;
@@ -68,9 +76,11 @@ namespace Yuml
                 foreach (var selected in _chosenSelection)
                 {
                     _parent._list.Remove(selected);
-                    messageSystem?.PublisDeleted(selected);
+                    messageSystem?.PublishDeleted(selected);
                 }
             }
+
+            public virtual bool IsNotEmpty() => _chosenSelection.Any();
         }
 
 

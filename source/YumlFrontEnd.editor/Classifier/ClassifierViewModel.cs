@@ -18,7 +18,7 @@ namespace YumlFrontEnd.editor
     /// <summary>
     /// view model for interaction with a single classifier object
     /// </summary>
-    internal class ClassifierViewModel : SingleItemViewModel<Classifier,ISingleClassifierCommands>
+    internal class ClassifierViewModel : SingleItemViewModelBase<Classifier,ISingleClassifierCommands>
     {
         private readonly ExpandableMixin _expanded = new ExpandableMixin();
         private SelectClassifierWithNullItemMixin _selectBaseClass;
@@ -31,12 +31,6 @@ namespace YumlFrontEnd.editor
         /// Can be null or empty string in case no base class was set
         /// </summary>
         public string InitialBaseClass { get; set; }
-
-        public ClassifierViewModel(
-            ISingleClassifierCommands commands) : base(commands)
-        {
-            Note = new NoteViewModel(_commands.ChangeNoteColor, _commands.ChangeNoteText) {IsExpanded = false};
-        }
 
         public InterfaceImplementationListViewModel Interfaces { get; private set; }
         public PropertyListViewModel Properties { get; private set; }
@@ -52,19 +46,38 @@ namespace YumlFrontEnd.editor
 
         public void ExpandOrCollapse() => _expanded.ExpandOrCollapse();
 
+        /// <summary>
+        /// we need to override Init here because we need to access the domain object
+        /// directly, otherwise we would only override CustomInit
+        /// </summary>
+        /// <param name="domainObject"></param>
+        /// <param name="parentViewModel"></param>
+        /// <param name="context"></param>
+        public override void Init(
+            Classifier domainObject, 
+            PropertyChangedBase parentViewModel, 
+            ViewModelContext context)
+        {
+            Note = new NoteViewModel(_commands.ChangeNoteColor, _commands.ChangeNoteText) { IsExpanded = false };
+
+            base.Init(domainObject, parentViewModel, context);
+
+            var factory = Context.ViewModelFactory;
+
+            Properties = (PropertyListViewModel)factory.CreateListViewModel(domainObject.Properties);
+            Methods = (MethodListViewModel)factory.CreateListViewModel(domainObject.Methods);
+            Associations = (AssociationListViewModel)factory.CreateListViewModel(domainObject.Associations);
+            Interfaces = (InterfaceImplementationListViewModel)factory.CreateListViewModel(domainObject.InterfaceImplementations);
+        }
+
         protected override void CustomInit()
         {
-            var factory = Context.Factory;
-            // TODO: we could use reflection to automatically find the correct type of list view models here
-            Properties = factory.CreateListViewModel<Property, PropertyListViewModel>(_commands.CommandsForProperties);
-            Methods = factory.CreateListViewModel<Method, MethodListViewModel>(_commands.CommandsForMethods);
-            Associations = factory.CreateListViewModel<Relation,AssociationListViewModel>(_commands.CommandsForAssociations);
-            Interfaces = factory.CreateListViewModel<Implementation, InterfaceImplementationListViewModel>(_commands.CommandsForInterfaceImplementations);
-             
+            
+
             // list of base classifiers can  have a null item and should not
             // have the class item itself and also no void item
             _selectBaseClass = new SelectClassifierWithNullItemMixin(
-                Context.CreateClassifierItemSource(x => x.Name != Name && !x.IsSystemType,true),
+                new BaseClassSelectionItemSource(Context.Classifiers, Name, Context.MessageSystem),
                 _commands.ChangeBaseClass);
 
             _backgroundColor = new BackgroundColorMixin(_commands.ChangeClassifierColor)
@@ -87,14 +100,15 @@ namespace YumlFrontEnd.editor
         }
         private void SelectClassifierByName(string classifierName) => 
             _selectBaseClass.SelectClassifierByName(classifierName);
-        public void ClearClassifierWithoutCommand() => _selectBaseClass.ClearClassifierWithoutCommand();
 
         /// <summary>
         /// Reacts on the event that is raised when the base class of this
         /// classifier was set to null
         /// </summary>
         /// <param name="domainEvent"></param>
-        public void OnBaseClassCleared(ClearBaseClassEvent domainEvent) => ClearClassifierWithoutCommand();
+        public void OnBaseClassCleared(ClearBaseClassEvent domainEvent) => _selectBaseClass.ClearClassifier();
+        public void OnBaseClassChanged(BaseClassChangedEvent domainEvent) => _selectBaseClass.SelectClassifierByName(domainEvent.NameOfNewType);
+        public void OnBaseClassSet(BaseClassSetEvent domainEvent) => _selectBaseClass.SelectClassifierByName(domainEvent.NameOfNewBaseClass);
 
         /// <summary>
         /// used to read the color from the domain object

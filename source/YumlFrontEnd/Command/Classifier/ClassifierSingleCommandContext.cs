@@ -9,12 +9,13 @@ using Yuml.Service;
 
 namespace Yuml.Command
 {
-    public class ClassifierSingleCommandContext : SingleCommandContextBase, ISingleClassifierCommands
+    public class ClassifierSingleCommandContext : SingleCommandContextBase<Classifier>, ISingleClassifierCommands
     {
         public ClassifierSingleCommandContext(
             Classifier classifier,
             ClassifierDictionary classifierDictionary,
             DeletionService deletionService,
+            IRelationService relationService,
             MessageSystem messageSystem)
         {
             Rename = new RenameClassifierCommand(
@@ -22,25 +23,7 @@ namespace Yuml.Command
                 classifierDictionary,
                 new ClassifierValidationService(classifierDictionary),
                 messageSystem);
-            CommandsForProperties = new PropertyListCommandContext(
-                classifier,
-                classifierDictionary,
-                new PropertyValidationService(classifier.Properties), 
-                messageSystem);
-            CommandsForMethods = new MethodListCommandContext(
-                classifier,
-                classifierDictionary,
-                new MethodValidationService(classifier.Methods),
-                messageSystem);
-            CommandsForAssociations = new AssociationListCommandContext(
-                classifier,
-                classifierDictionary,
-                messageSystem);
             ChangeBaseClass = new ChangeBaseClassCommand(
-                classifier,
-                classifierDictionary,
-                messageSystem);
-            CommandsForInterfaceImplementations = new InterfaceListCommandContext(
                 classifier,
                 classifierDictionary,
                 messageSystem);
@@ -49,13 +32,9 @@ namespace Yuml.Command
             ChangeClassifierColor = new ChangeColorCommand(classifier, messageSystem);
             ChangeNoteColor = new ChangeNoteColorCommand(classifier.Note,messageSystem);
             ChangeNoteText = new ChangeNoteTextCommand(classifier.Note,messageSystem);
-            ChangeIsInterface = new MakeClassifierToInterfaceCommand(classifier, messageSystem);
+            ChangeIsInterface = new MakeClassifierToInterfaceCommand(classifier, relationService);
         }
 
-        public IListCommandContext<Property> CommandsForProperties { get; }
-        public IListCommandContext<Method> CommandsForMethods { get; }
-        public IListCommandContext<Relation> CommandsForAssociations { get; }
-        public IListCommandContext<Implementation> CommandsForInterfaceImplementations { get;}
         public IChangeTypeToNullCommand ChangeBaseClass { get; }
         public IChangeColorCommand ChangeClassifierColor { get; }
         public IChangeColorCommand ChangeNoteColor { get; }

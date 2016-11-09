@@ -6,35 +6,21 @@ using System.Threading.Tasks;
 
 namespace Yuml.Command
 {
-    internal class InterfaceListCommandContext : ListCommandContextBase<Implementation>
+    public class InterfaceListCommandContext : ListCommandContextBase<Implementation>
     {
-        private readonly ClassifierDictionary _classifiers;
-        private readonly Classifier _interfaceOwner;
-        private readonly MessageSystem _messageSystem;
+        private readonly ImplementationList _implementations;
 
         public InterfaceListCommandContext(
-            Classifier interfaceOwner,
+            ImplementationList implementations,
             ClassifierDictionary classifiers,
-            MessageSystem messageSystem)
+            MessageSystem messageSystem )
         {
-            _classifiers = classifiers;
-            _interfaceOwner = interfaceOwner;
-            _messageSystem = messageSystem;
+            _implementations = implementations;
 
-            All = new Query<Implementation>(() => interfaceOwner.InterfaceImplementations);
-            New = new NewInterfaceCommand(_interfaceOwner, classifiers, _messageSystem);
+            All = new Query<Implementation>(() => _implementations);
+            New = new NewInterfaceCommand(implementations, classifiers, messageSystem);
             // TODO: check if visibility is also changed if interface was later added to list
-            Visibility = new ShowOrHideAllObjectsInListCommand(interfaceOwner.InterfaceImplementations, messageSystem);
-        }
-
-
-        public override ISingleCommandContext GetCommandsForSingleItem(Implementation interfaceObject)
-        {
-            return new SingleInterfaceCommandContext(
-                _interfaceOwner,
-                interfaceObject,
-                _classifiers,
-                _messageSystem);
+            Visibility = new ShowOrHideAllObjectsInListCommand(_implementations, messageSystem);
         }
     }
 }

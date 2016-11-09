@@ -8,7 +8,7 @@ using Yuml.Command;
 
 namespace YumlFrontEnd.editor
 {
-    internal class AssociationViewModel : SingleItemViewModel<Relation,ISingleAssociationCommands>
+    internal class AssociationViewModel : SingleItemViewModelBase<Relation,ISingleAssociationCommands>
     {
         /// <summary>
         /// viewmodel that holds the current association
@@ -29,9 +29,9 @@ namespace YumlFrontEnd.editor
         /// </summary>
         public string InitialTargetClassiferName { get; set; }
 
-        public AssociationViewModel(ISingleAssociationCommands commands) : base(commands)
+        internal override void InitCommands(ISingleAssociationCommands commands)
         {
-            Associations = new AssociationItemList();
+            base.InitCommands(commands);
 
             // TO DO:
             // add commands for
@@ -55,7 +55,7 @@ namespace YumlFrontEnd.editor
         /// <summary>
         /// list of available associations for this type
         /// </summary>
-        public AssociationItemList Associations { get; }
+        public AssociationItemList Associations { get; } = new AssociationItemList();
 
         protected override void CustomInit()
         {

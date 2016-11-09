@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yuml.Service;
 
 namespace Yuml.Command
 {
     public class MakeClassifierToInterfaceCommand
     {
         private readonly Classifier _classifier;
-        private readonly MessageSystem _messageSystem;
+        private readonly IRelationService _relationService;
 
-        public MakeClassifierToInterfaceCommand(Classifier classifier, MessageSystem messageSystem)
+        public MakeClassifierToInterfaceCommand(
+            Classifier classifier,
+            IRelationService relationService)
         {
             _classifier = classifier;
-            _messageSystem = messageSystem;
+            _relationService = relationService;
         }
 
         public void ToggleInterfaceFlag()
         {
             var isInterface = _classifier.IsInterface;
-            _classifier.IsInterface = !isInterface;
             // changed from interface => class
-            if(isInterface)
-                _messageSystem.Publish(_classifier,new InterfaceToClassEvent(_classifier.Name));
-            // changed from class => interface
-            if (!isInterface)
-                _messageSystem.Publish(_classifier, new ClassToInterfaceEvent(_classifier.Name));
+            if (isInterface)
+                _relationService.ChangeFromInterfaceToClass(_classifier);
+            else // changed from class => interface
+                _relationService.ChangeFromClassToInterface(_classifier);
         }
     }
 }

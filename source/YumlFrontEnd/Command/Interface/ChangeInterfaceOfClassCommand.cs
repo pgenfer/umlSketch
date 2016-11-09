@@ -9,18 +9,15 @@ namespace Yuml.Command.Interface
 {
     public class ChangeInterfaceOfClassifierCommand : IChangeTypeCommand
     {
-        private readonly ImplementationList _interfaceImplementationList;
         private readonly Implementation _existingInterface;
         private readonly ClassifierDictionary _classifiers;
         private readonly MessageSystem _messageSystem;
 
         public ChangeInterfaceOfClassifierCommand(
-            ImplementationList interfaceImplementationList,
             Implementation existingInterface, 
             ClassifierDictionary classifiers,
             MessageSystem messageSystem)
         {
-            _interfaceImplementationList = interfaceImplementationList;
             _existingInterface = existingInterface;
             _classifiers = classifiers;
             _messageSystem = messageSystem;
@@ -29,9 +26,9 @@ namespace Yuml.Command.Interface
         public void ChangeType(string nameOfOldType, string nameOfNewInterface)
         {
             var newInterface = _classifiers.FindByName(nameOfNewInterface);
-            _interfaceImplementationList.ReplaceInterface(_existingInterface, newInterface);
+            _existingInterface.ReplaceInterface(newInterface);
             _messageSystem.Publish(
-                _interfaceImplementationList,
+                _existingInterface,
                 new ChangeInterfaceOfClassEvent(nameOfOldType, nameOfNewInterface));
         }
     }

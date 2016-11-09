@@ -11,11 +11,7 @@ namespace YumlFrontEnd.editor
     /// <summary>
     /// stores the list of associations that are related to a class
     /// </summary>
-    internal class AssociationListViewModel : ListViewModelBase<Relation>
+    internal class AssociationListViewModel : ListViewModelBase<Relation,AssociationListCommandContext>
     {
-        public AssociationListViewModel(IListCommandContext<Relation> commands) : 
-            base(commands)
-        {
-        }
     }
 }

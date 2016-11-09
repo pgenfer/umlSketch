@@ -35,5 +35,13 @@ namespace Yuml
         /// </summary>
         [ContractInvariantMethod]
         private void ImplementationHasCorrectRelationType() => Contract.Invariant(Type == RelationType.Implementation);
+
+        public void ReplaceInterface(Classifier newInterface)
+        {
+            Requires(newInterface != null);
+            Requires(newInterface.IsInterface);
+
+            End.Classifier = newInterface;
+        }
     }
 }

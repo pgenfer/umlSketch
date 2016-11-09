@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yuml;
+using Yuml.Command;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace YumlFrontEnd.editor
@@ -22,14 +23,18 @@ namespace YumlFrontEnd.editor
         /// message system for communicating domain events
         /// </summary>
         public MessageSystem MessageSystem { get; }
-
         /// <summary>
         /// factory can be used to create other view models
         /// </summary>
-        public ViewModelFactory Factory { get; }
+        public ViewModelFactory ViewModelFactory { get; }
+        /// <summary>
+        /// factory used to create domain commands
+        /// </summary>
+        public CommandFactory CommandFactory { get; }
 
         public ViewModelContext(
             ClassifierDictionary availableClassifiers,
+            CommandFactory commandFactory,
             MessageSystem messageSystem)
         {
             Requires(availableClassifiers != null);
@@ -37,7 +42,8 @@ namespace YumlFrontEnd.editor
 
             Classifiers = availableClassifiers;
             MessageSystem = messageSystem;
-            Factory = new ViewModelFactory(this);
+            ViewModelFactory = new ViewModelFactory(this);
+            CommandFactory = commandFactory;
         }
 
         public IClassifierSelectionItemsSource CreateClassifierItemSource(Predicate<Classifier> filter,bool addNullItem=false) =>
