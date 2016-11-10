@@ -49,7 +49,14 @@ namespace YumlFrontEnd.editor
                     value = ClassifierItemViewModel.None;
 
                 var oldClassifier = SelectedClassifier;
-                if (oldClassifier != null && oldClassifier != value)
+                // there was no classifier set before => inital setup, so do not fire any command
+                if (oldClassifier == null)
+                {
+                    SelectClassifierByName(value == ClassifierItemViewModel.None ? string.Empty : value.Name);
+                    return;
+                }
+
+                if (oldClassifier != value)
                 {
                     // type was changed from null -> new type
                     if (oldClassifier == ClassifierItemViewModel.None &&

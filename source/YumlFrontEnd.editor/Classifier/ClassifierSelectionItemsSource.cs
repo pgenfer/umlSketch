@@ -162,10 +162,7 @@ namespace YumlFrontEnd.editor
         /// <param name="name">name of the classifier. It can be
         /// that the classifier is not in the list (in case it was excluded from the list before)</param>
         /// <returns>ViewModel of the classifier or null if the given classifier does not exist in this list.</returns>
-        public ClassifierItemViewModel ByName(string name)
-        {
-           return this.FirstOrDefault(x => x.Name == name);
-        }
+        public virtual ClassifierItemViewModel ByName(string name) => this.FirstOrDefault(x => x.Name == name);
 
         private int FindNewItemPosition(INamed item) => BinarySearch(item, 0, Count - 1);
 

@@ -168,7 +168,7 @@ namespace Yuml
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <param name="createdDomainObject"></param>
-        public void PublishCreated<T>(object source, T createdDomainObject) 
+        public virtual void PublishCreated<T>(object source, T createdDomainObject) 
             => Publish(source, new DomainObjectCreatedEvent<T>(createdDomainObject));
 
         /// <summary>

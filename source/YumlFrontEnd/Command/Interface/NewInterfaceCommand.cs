@@ -10,12 +10,12 @@ namespace Yuml.Command
     public class NewInterfaceCommand : INewCommand
     {
         private readonly ImplementationList _implementations;
-        private readonly ClassifierDictionary _classifiers;
+        private readonly IEnumerable<Classifier> _classifiers;
         private readonly MessageSystem _messageSystem;
 
         public NewInterfaceCommand(
             ImplementationList implementations,
-            ClassifierDictionary classifiers,
+            IEnumerable<Classifier> classifiers,
             MessageSystem messageSystem)
         {
             _implementations = implementations;

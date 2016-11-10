@@ -12,7 +12,7 @@ namespace Yuml
     /// </summary>
     public class ImplementationList : BaseList<Implementation>
     {
-        public Classifier Root { get; set; }
+        public virtual Classifier Root { get; set; }
 
         /// <summary>
         /// returns all interfaces that are implemented.
@@ -26,7 +26,7 @@ namespace Yuml
         /// </summary>
         /// <param name="classifiers">classifier list used to obtain available interfaces</param>
         /// <returns></returns>
-        public Implementation AddNewImplementation(ClassifierDictionary classifiers)
+        public virtual Implementation AddNewImplementation(IEnumerable<Classifier> classifiers)
         {
             Requires(Root != null);
 

@@ -14,13 +14,12 @@ namespace Yuml.Test
     
     public class MakeClassifierToInterfaceCommandTest : TestBase
     {
-        private MessageSystem _messageSystem;
         private readonly Classifier _classifier = new Classifier("TestClass");
         private IRelationService _relationService;
 
         protected override void Init()
         {
-            _messageSystem = For<MessageSystem>();
+           
             _relationService = For<IRelationService>();
         }
 
@@ -30,9 +29,7 @@ namespace Yuml.Test
             _classifier.IsInterface = true;
             var command = new MakeClassifierToInterfaceCommand(_classifier, _relationService);
             command.ToggleInterfaceFlag();
-            _messageSystem.Received().Publish(
-                 _classifier,
-                 Arg.Any<InterfaceToClassEvent>());
+            _relationService.Received().ChangeFromInterfaceToClass(_classifier);
         }
 
         [TestDescription("Check that correct event is fired when changing class to interface")]
@@ -41,9 +38,7 @@ namespace Yuml.Test
             _classifier.IsInterface = false;
             var command = new MakeClassifierToInterfaceCommand(_classifier, _relationService);
             command.ToggleInterfaceFlag();
-            _messageSystem.Received().Publish(
-                 _classifier,
-                 Arg.Any<ClassToInterfaceEvent>());
+            _relationService.Received().ChangeFromClassToInterface(_classifier);
         }
     }
 }

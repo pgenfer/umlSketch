@@ -24,6 +24,7 @@ namespace YumlFrontEnd.editor.Test
         {
             _command = For<IChangeTypeToNullCommand>();
             _source = For<ClassifierSelectionItemsSource>();
+            _source.ByName(Dummy).Returns(_dummyClassifier); // the control contains the one classifier
             _selectClassMixin = new SelectClassifierWithNullItemMixin(_source, _command);
         }
 

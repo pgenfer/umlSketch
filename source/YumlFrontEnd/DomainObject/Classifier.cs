@@ -74,7 +74,12 @@ namespace Yuml
         public ImplementationList InterfaceImplementations
         {
             get { return _interfaceImplementations; }
-            internal set { _interfaceImplementations = value; }
+            set
+            {
+                _interfaceImplementations = value;
+                if(_interfaceImplementations != null)
+                   _interfaceImplementations.Root = this;
+            }
         }
 
         public override string ToString() => _name.ToString();
