@@ -133,7 +133,9 @@ namespace Yuml
             get { return _associations; }
             internal set
             {
-                Requires(value != null);
+                if (value == null)
+                    return;
+                //Requires(value != null);
 
                 _associations = value;
                 _associations.Root = this;
