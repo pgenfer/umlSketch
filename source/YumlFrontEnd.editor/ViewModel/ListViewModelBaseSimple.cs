@@ -13,6 +13,13 @@ namespace YumlFrontEnd.editor
         where TDomain : IVisible // required for BaseList<T>
     {
         /// <summary>
+        /// store a reference to the list of domain objects we
+        /// host because we must give a reference of the list to the
+        /// single domain items later (maybe we should put this dependency in the domain layer?)
+        /// </summary>
+        private BaseList<TDomain> _domainList;
+        
+        /// <summary>
         /// every list view model has an expandable button for
         /// the child items. An additional flag controls
         /// whether this button should be visible or not
@@ -54,7 +61,7 @@ namespace YumlFrontEnd.editor
         {
             // we need dynamics here because the type of the command is not known
             // during runtime
-            var singleViewModel = Context.ViewModelFactory.CreateSingleViewModel(domainObject);
+            var singleViewModel = Context.ViewModelFactory.CreateSingleViewModel(domainObject,_domainList);
             singleViewModel.Init(domainObject, this, Context);
             Items.Add(singleViewModel);
             return singleViewModel;
@@ -62,6 +69,7 @@ namespace YumlFrontEnd.editor
 
         internal void Init(BaseList<TDomain> domainList, ViewModelContext context)
         {
+            _domainList = domainList;
             Context = context;
             _expandable.PropertyChanged += (_, e) => NotifyOfPropertyChange(e.PropertyName);
             UpdateItemList();

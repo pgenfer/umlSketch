@@ -22,13 +22,13 @@ namespace Yuml
         /// </summary>
         public Property() { }
 
-        public Property(string name, Classifier type,bool isVisible=true)
+        public Property(string name, Classifier type, bool isVisible = true)
         {
             Type = type;
             Name = name;
             IsVisible = isVisible;
         }
-        
+
         /// <summary>
         /// a property always has a type.
         /// This type is a reference to another classifier

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
 {
@@ -12,6 +13,8 @@ namespace Yuml
 
         public PropertyValidationService(IEnumerable<Property> properties)
         {
+            Requires(properties != null);
+
             _properties = properties;
         }
 

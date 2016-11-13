@@ -46,7 +46,8 @@ namespace YumlFrontEnd.editor
             return viewModel;
         }
 
-        public SingleItemViewModelBaseSimple<TDomain> CreateSingleViewModel<TDomain>(TDomain domainObject)
+        public SingleItemViewModelBaseSimple<TDomain> CreateSingleViewModel<TDomain>(
+            TDomain domainObject,BaseList<TDomain> parentList) where TDomain : IVisible
         {
             Func<object> createFunc;
             if (!_singleViewModelCreationFunctions.TryGetValue(typeof(TDomain), out createFunc))
@@ -55,7 +56,7 @@ namespace YumlFrontEnd.editor
                 _singleViewModelCreationFunctions.Add(typeof(TDomain), createFunc);
             }
             dynamic singleViewModel = (SingleItemViewModelBaseSimple<TDomain>)createFunc();
-            dynamic commands = Context.CommandFactory.GetSingleCommands(domainObject);
+            dynamic commands = Context.CommandFactory.GetSingleCommands(domainObject,parentList);
             singleViewModel.InitCommands(commands);
             return singleViewModel;
         }

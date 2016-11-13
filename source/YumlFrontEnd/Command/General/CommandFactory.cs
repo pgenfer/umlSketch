@@ -51,21 +51,26 @@ namespace Yuml.Command
                 x => new InterfaceListCommandContext((ImplementationList)x,classifiers,messageSystem));
             // TODO: parameters
 
+            // factory functions to create single commands.
+            // Every function accepts the domain object for which the commands should be created
+            // and as second parameter the list where the single object is contained in. 
+            // The second parameter can be optional as it is not needed in all cases.
+
             // classifier
             RegisterFactoryFuncForSingleCommands<Classifier>(
-                x => new ClassifierSingleCommandContext(x,classifiers,deletionService,relationService,messageSystem));
+                (x,_) => new ClassifierSingleCommandContext(x,classifiers,deletionService,relationService,messageSystem));
             // property
             RegisterFactoryFuncForSingleCommands<Property>(
-                x => new PropertySingleCommandContext(x,classifiers,propertyValidationService,messageSystem));
+                (x,y) => new PropertySingleCommandContext(x,classifiers,new PropertyValidationService(y), messageSystem));
             // method
             RegisterFactoryFuncForSingleCommands<Method>(
-                x => new MethodSingleCommandContext(x,methodValidationService,messageSystem));
+                (x,y) => new MethodSingleCommandContext(x,new MethodValidationService(y), messageSystem));
             // association
             RegisterFactoryFuncForSingleCommands<Relation>(
-                x => new SingleAssociationCommands(x,classifiers,messageSystem));
+                (x,_) => new SingleAssociationCommands(x,classifiers,messageSystem));
             // implementation
             RegisterFactoryFuncForSingleCommands<Implementation>(
-                x => new SingleInterfaceCommandContext(x,classifiers,messageSystem));
+                (x,_) => new SingleInterfaceCommandContext(x,classifiers,messageSystem));
             // TODO: parameter
         }
 
@@ -87,8 +92,8 @@ namespace Yuml.Command
         /// <typeparam name="TDomain"></typeparam>
         /// <param name="factoryFunc"></param>
         private void RegisterFactoryFuncForSingleCommands<TDomain>(
-            Func<TDomain, ISingleCommandContext<TDomain>> factoryFunc)
-            where TDomain : class
+            Func<TDomain,BaseList<TDomain>, ISingleCommandContext<TDomain>> factoryFunc)
+            where TDomain : class, IVisible
         {
             _singleCommandCreatorFunctions[typeof(TDomain)] = factoryFunc;
         }
@@ -103,11 +108,12 @@ namespace Yuml.Command
                 $"Don't know how to create commands for a list of type {typeof(TDomain).Name}");
         }
 
-        public ISingleCommandContext<TDomain> GetSingleCommands<TDomain>(TDomain domainObject)
+        public ISingleCommandContext<TDomain> GetSingleCommands<TDomain>(TDomain domainObject,BaseList<TDomain> parentList ) 
+            where TDomain : IVisible
         {
             Delegate commandFunc;
             if (_singleCommandCreatorFunctions.TryGetValue(typeof(TDomain), out commandFunc))
-                return ((Func<TDomain, ISingleCommandContext<TDomain>>)commandFunc)(domainObject);
+                return ((Func<TDomain, BaseList<TDomain>,ISingleCommandContext<TDomain>>)commandFunc)(domainObject,parentList);
             throw new NotImplementedException(
                 $"Don't know how to create commands for a single instance of type {typeof(TDomain).Name}");
         }
