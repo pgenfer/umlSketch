@@ -36,6 +36,9 @@ namespace Yuml.Service
         public void ChangeFromInterfaceToClass(Classifier @interface)
         {
             @interface.IsInterface = false;
+            // fire the event first, otherwise the interface item sources
+            // do not contain have the new interface in their list yet
+            _messageSystem.Publish(@interface, new InterfaceToClassEvent(@interface.Name));
 
             var implementers = _classifiers.FindAllImplementers(@interface);
             foreach (var implementer in implementers)
@@ -46,7 +49,7 @@ namespace Yuml.Service
                     implementer.SetBaseClass(@interface, _messageSystem);
             }
 
-            _messageSystem.Publish(@interface, new InterfaceToClassEvent(@interface.Name));
+            
         }
 
         public void ChangeFromClassToInterface(Classifier @class)

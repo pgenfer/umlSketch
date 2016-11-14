@@ -76,7 +76,7 @@ namespace Yuml
                 foreach (var selected in _chosenSelection)
                 {
                     _parent._list.Remove(selected);
-                    messageSystem?.PublishDeleted(selected);
+                    messageSystem?.PublishDeleted(_parent,selected);
                 }
             }
 

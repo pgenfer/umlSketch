@@ -175,10 +175,11 @@ namespace Yuml
         /// helper method for publishing delete events
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="domainList"></param>
         /// <param name="deletedDomainObject"></param>
-        public void PublishDeleted<T>(T deletedDomainObject)
+        public void PublishDeleted<T>(IEnumerable<T> domainList, T deletedDomainObject)
         {
-            Publish(deletedDomainObject, new DomainObjectDeletedEvent<T>(deletedDomainObject));
+            Publish(domainList, new DomainObjectDeletedEvent<T>(deletedDomainObject));
             // since the object does not exist any more, we
             // will also remove it as a source for messages
             RemoveSource(deletedDomainObject);

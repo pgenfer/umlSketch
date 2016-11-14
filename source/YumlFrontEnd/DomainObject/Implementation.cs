@@ -28,6 +28,7 @@ namespace Yuml
         {
             Requires(start != end);
             Requires(end.IsInterface);
+
         }
 
         /// <summary>

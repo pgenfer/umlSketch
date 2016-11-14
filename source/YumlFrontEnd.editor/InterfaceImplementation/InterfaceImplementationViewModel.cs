@@ -13,8 +13,11 @@ namespace YumlFrontEnd.editor
         protected override void CustomInit()
         {
             _selectClassifier = new SelectClassifierMixin(
-            Context.CreateClassifierItemSource(x => x.IsInterface),
-            _commands.ChangeInterface);
+                new InterfaceSelectionItemsSource(
+                    Context.Classifiers,
+                    _commands.AvailableInterfaces,
+                    Context.MessageSystem),
+                _commands.ChangeInterface);
             _selectClassifier.PropertyChanged += (_, e) => NotifyOfPropertyChange(e.PropertyName);
             SelectClassifierByName(InitialInterfaceImplementation);
         }

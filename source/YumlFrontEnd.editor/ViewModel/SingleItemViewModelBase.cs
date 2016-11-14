@@ -57,16 +57,6 @@ namespace YumlFrontEnd.editor
         }
 
         /// <summary>
-        /// handler that reacts on the delete domain event of this item. When the event is raised,
-        /// the parent view model will be notified so that is can delete this single view model from its list.
-        /// </summary>
-        /// <param name="domainEvent"></param>
-        public void OnSingleItemDeleted(DomainObjectDeletedEvent<TDomain> domainEvent)
-        {
-            Context.MessageSystem.Unsubscribe(this);
-        }
-
-        /// <summary>
         /// reacts on changes of the visibility of the domain object.
         /// </summary>
         /// <param name="domainEvent"></param>

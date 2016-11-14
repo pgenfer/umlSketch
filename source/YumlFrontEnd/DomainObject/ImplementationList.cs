@@ -14,6 +14,8 @@ namespace Yuml
     {
         public virtual Classifier Root { get; set; }
 
+        public int Count => _list.Count;
+
         /// <summary>
         /// returns all interfaces that are implemented.
         /// </summary>
@@ -52,14 +54,6 @@ namespace Yuml
             implementation.End.Classifier = newInterface;
         }
 
-        public void RemoveInterfaceFromList(Implementation implementation)
-        {
-            Requires(implementation != null);
-            Requires(this.Contains(implementation));
-
-            _list.Remove(implementation);
-        }
-
         public void AddInterfaceToList(Implementation implementation)
         {
             Requires(implementation != null);
@@ -68,16 +62,34 @@ namespace Yuml
             AddExistingMember(implementation);
         }
 
-        public SubSet FindImplementationsOfInterface(Classifier @interface) =>
-            @interface.IsInterface ? Filter(x => x.End.Classifier == @interface) : SubSet.Empty;
+        public SubSet FindImplementationsOfInterface(Classifier @interface)
+            => Filter(x => x.End.Classifier == @interface);
 
-        internal void RemoveImplementationForInterface(Classifier @interface, MessageSystem messageSystem = null)
+        /// <summary>
+        /// removes the given implementatin from the interface list 
+        /// and fires a notification after the interface was removed.
+        /// </summary>
+        /// <param name="implementation"></param>
+        /// <param name="messageSystem"></param>
+        internal void RemoveImplementationForInterface(
+            Implementation implementation,
+            MessageSystem messageSystem = null) =>
+                RemoveImplementationForInterface(implementation.End.Classifier, messageSystem);
+
+        /// <summary>
+        /// deletes the implementation for the given interface from the implementation list
+        /// and fires a notification that the implementation was removed.
+        /// </summary>
+        /// <param name="interface"></param>
+        /// <param name="messageSystem"></param>
+        internal void RemoveImplementationForInterface(
+            Classifier @interface, 
+            MessageSystem messageSystem = null)
         {
             Requires(@interface != null);
 
-            var implementation = _list.Single(x => x.End.Classifier == @interface);
-            RemoveInterfaceFromList(implementation);
-            messageSystem?.PublishDeleted(implementation);
+            var implementations = Filter(x => x.End.Classifier == @interface);
+            implementations.DeleteSelection(messageSystem);
         }
     }
 }

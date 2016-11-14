@@ -125,6 +125,10 @@ namespace YumlFrontEnd.editor
         public void OnNewClassifierCreated(DomainObjectCreatedEvent<Classifier> newClassifierEvent)
         {
             var newClassifier = newClassifierEvent.DomainObject;
+            // check if item must be filtered out
+            if (!ShouldItemBeVisible(newClassifier))
+                return;
+
             var newItem = new ClassifierItemViewModel(newClassifier.Name);
             var newIndex = FindNewItemPosition(newItem);
             if (newIndex == -1) // list was empty before

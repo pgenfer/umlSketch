@@ -52,6 +52,20 @@ namespace YumlFrontEnd.editor
         }
 
         /// <summary>
+        /// handler that reacts on the delete domain event of this item. 
+        /// The view model for this item is searched and will be removed from the list
+        /// of domain objects.
+        /// </summary>
+        /// <param name="domainEvent"></param>
+        protected void OnSingleItemDeleted(DomainObjectDeletedEvent<TDomain> domainEvent)
+        {
+            var singleViewModel = Items.FirstOrDefault(x => x.RepresentsDomainObject(domainEvent.DomainObject));
+            if (singleViewModel != null)
+                RemoveItem(singleViewModel);
+        }
+
+
+        /// <summary>
         /// updates the list of available items by calling the query which is part of the
         /// command context
         /// </summary>
@@ -87,9 +101,12 @@ namespace YumlFrontEnd.editor
         /// controls whether the expand button is visible
         /// </summary>
         public virtual bool CanExpand => Items.Any();
-        public void RemoveItem(SingleItemViewModelBaseSimple<TDomain> item)
+
+        private void RemoveItem(SingleItemViewModelBaseSimple<TDomain> item)
         {
             _items.RemoveItem(item);
+            // the single view model should not receive any message any more
+            Context.MessageSystem.Unsubscribe(item);
             if (Items.Count == 0) // last item was removed => hide expander
                 NotifyOfPropertyChange(nameof(CanExpand));
         }

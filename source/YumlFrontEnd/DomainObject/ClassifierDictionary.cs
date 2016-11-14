@@ -54,7 +54,7 @@ namespace Yuml
         /// <param name="baseClass"></param>
         /// <returns></returns>
         public virtual IEnumerable<Classifier> FindAllDerivedClassifiers(Classifier baseClass) =>
-            _dictionary.Values.Where(x => x.BaseClass == baseClass);
+            _dictionary.Values.Where(x => x.BaseClass == baseClass).ToList();
 
         /// <summary>
         /// returns all classifiers that implement the given interface

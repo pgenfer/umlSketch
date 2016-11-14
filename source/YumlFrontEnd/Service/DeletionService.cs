@@ -53,7 +53,7 @@ namespace Yuml.Service
                 derivedClass.ClearBaseClass(_messageSystem);
 
             _classifiers.RemoveClassifier(classifier);
-            _messageSystem.PublishDeleted(classifier);
+            _messageSystem.PublishDeleted(_classifiers,classifier);
         }
     }
 }

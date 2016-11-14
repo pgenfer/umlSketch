@@ -20,11 +20,13 @@ namespace Yuml.Command
         public QueryAvailableInterfaces AvailableInterfaces { get; }
 
         public SingleInterfaceCommandContext(
+            ImplementationList implementationList,
              Implementation existingInterface,
              ClassifierDictionary classifiers,
              MessageSystem messageSystem)
         {
             Delete = new RemoveInterfaceFromClassifierCommand(
+                implementationList,
                 existingInterface, 
                 messageSystem);
             ChangeInterface = new ChangeInterfaceOfClassifierCommand(

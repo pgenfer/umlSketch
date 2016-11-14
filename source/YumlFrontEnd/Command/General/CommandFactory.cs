@@ -70,7 +70,7 @@ namespace Yuml.Command
                 (x,_) => new SingleAssociationCommands(x,classifiers,messageSystem));
             // implementation
             RegisterFactoryFuncForSingleCommands<Implementation>(
-                (x,_) => new SingleInterfaceCommandContext(x,classifiers,messageSystem));
+                (x,y) => new SingleInterfaceCommandContext((ImplementationList)y,x,classifiers,messageSystem));
             // TODO: parameter
         }
 

@@ -1,6 +1,7 @@
 ﻿using Common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,8 @@ namespace Yuml
         private readonly NameMixin _name = new NameMixin();
         private readonly IVisible _visible = new VisibleMixin();
         private Classifier _baseClass;
-        private ImplementationList _interfaceImplementations = new ImplementationList();
-        private ClassifierAssociationList _associations = new ClassifierAssociationList();
+        private ImplementationList _interfaceImplementations;
+        private ClassifierAssociationList _associations;
 
         /// <summary>
         /// color is stored in hex format as AARRGGBB.
@@ -41,9 +42,13 @@ namespace Yuml
         /// <summary>
         /// only used for test stubs, do not delete and do not use in production code
         /// </summary>
-        public Classifier() { }
+        public Classifier()
+        {
+            _interfaceImplementations = new ImplementationList {Root = this};
+            _associations = new ClassifierAssociationList {Root = this};
+        }
 
-        public Classifier(string name, bool isSystemType=false)
+        public Classifier(string name, bool isSystemType=false):this()
         {
             Name = name;
             IsVisible = true;
@@ -81,6 +86,19 @@ namespace Yuml
                    _interfaceImplementations.Root = this;
             }
         }
+
+        /// <summary>
+        /// invariant: if the interface implementation list is set, it must always point to the classifier
+        /// </summary>
+        [ContractInvariantMethod]
+        private void ImplementationListNeedsRoot() => Contract.Invariant(_interfaceImplementations == null || _interfaceImplementations.Root == this);
+        
+        /// <summary>
+        /// invariant: associations must always be linked to this classifier
+        /// </summary>
+        [ContractInvariantMethod]
+        private void AssociationListNeedsRoot() => Contract.Invariant(_associations == null || _associations.Root == this);
+
 
         public override string ToString() => _name.ToString();
 
@@ -201,8 +219,12 @@ namespace Yuml
 
         public void AddInterfaceImplementation(Classifier newInterface,MessageSystem messageSystem = null)
         {
+            // ensure that only one interface is created after this method was executed
+            // used to ensure a previous issue was fixed (two implementations were created instead of one)
+            Ensures(InterfaceImplementations.Count == OldValue(InterfaceImplementations.Count + 1));
+
             var newImplementation = new Implementation(this, newInterface);
-            InterfaceImplementations.AddInterfaceToList(new Implementation(this, newInterface));
+            InterfaceImplementations.AddInterfaceToList(newImplementation);
             messageSystem?.PublishCreated(InterfaceImplementations, newImplementation);
         }
 
@@ -210,8 +232,6 @@ namespace Yuml
             _interfaceImplementations.ImplementedInterfaces;
         public void ReplaceInterface(Implementation implementation, Classifier newInterface) => 
             _interfaceImplementations.ReplaceInterface(implementation, newInterface);
-        public void RemoveInterfaceFromList(Implementation implementation) => 
-            _interfaceImplementations.RemoveInterfaceFromList(implementation);
         public virtual BaseList<Implementation>.SubSet FindImplementationsOfInterface(Classifier @interface) => 
             _interfaceImplementations.FindImplementationsOfInterface(@interface);
 

@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="ArchitectureLoader\ReflectionTypeLoaderTests.cs" />
     <Compile Include="Classifier\ClassifierSelectionItemsSourceTest.cs" />
+    <Compile Include="Classifier\InterfaceSelectionItemsSourceTest.cs" />
     <Compile Include="Command\Association\ChangeAssociationCommandTest.cs" />
     <Compile Include="Command\Classifier\MakeClassifierToInterfaceCommandTest.cs" />
     <Compile Include="Command\Interface\NewInterfaceCommandTest.cs" />
@@ -123,7 +124,9 @@
     <Compile Include="Serializer\JsonSerializerTests.cs" />
     <Compile Include="Serializer\ToDomainConverterTest.cs" />
     <Compile Include="Serializer\ToDtoConverterTest.cs" />
+    <Compile Include="SimpleTestBase.cs" />
     <Compile Include="TestBase.cs" />
+    <Compile Include="TestBaseWithContext.cs" />
     <Compile Include="TestDescriptionAttribute.cs" />
     <Compile Include="Validation\ClassifierValidationServiceTests.cs" />
     <Compile Include="ViewModel\EditableMixinTest.cs" />
