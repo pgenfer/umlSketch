@@ -1,10 +1,14 @@
 ﻿
 
+using Yuml.DomainObject;
+
 namespace Yuml.Command
 {
-    public class SingleAssociationCommands : SingleCommandContextBase<Relation>, ISingleAssociationCommands
+    public class SingleAssociationCommands : 
+        SingleCommandContextBase<Relation>, ISingleAssociationCommands
     {
         public SingleAssociationCommands(
+            ClassifierAssociationList associations,
             Relation association,
             ClassifierDictionary classifiers,
             MessageSystem messageSystem)
@@ -15,6 +19,7 @@ namespace Yuml.Command
             ChangeAssociationTypeCommand = new 
                 ChangeAssociationCommand(association,messageSystem);
             Visibility = new ShowOrHideSingleObjectCommand(association, messageSystem);
+            Delete = new DeleteAssocationCommand(associations,association,messageSystem);
         }
 
         public IChangeTypeCommand ChangeAssociationTargetCommand { get; }

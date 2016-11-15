@@ -87,5 +87,11 @@ namespace Yuml.DomainObject
 
         public SubSet FindAssociationsThatDependOnClassifier(Classifier classifier) => 
             Filter(x => x.End.Classifier == classifier);
+
+        public void RemoveAssociation(Relation association, MessageSystem messageSystem = null)
+        {
+            var associationToRemove = Filter(x => x == association);
+            associationToRemove.DeleteSelection(messageSystem);
+        }
     }
 }

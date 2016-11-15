@@ -67,7 +67,7 @@ namespace Yuml.Command
                 (x,y) => new MethodSingleCommandContext(x,new MethodValidationService(y), messageSystem));
             // association
             RegisterFactoryFuncForSingleCommands<Relation>(
-                (x,_) => new SingleAssociationCommands(x,classifiers,messageSystem));
+                (x,y) => new SingleAssociationCommands((ClassifierAssociationList)y,x,classifiers,messageSystem));
             // implementation
             RegisterFactoryFuncForSingleCommands<Implementation>(
                 (x,y) => new SingleInterfaceCommandContext((ImplementationList)y,x,classifiers,messageSystem));

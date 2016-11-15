@@ -97,6 +97,7 @@
     <Compile Include="Command\Association\AssociationListCommandContext.cs" />
     <Compile Include="Command\Association\ChangeAssociationCommand.cs" />
     <Compile Include="Command\Association\ChangeAssociationTargetCommand.cs" />
+    <Compile Include="Command\Association\DeleteAssocationCommand.cs" />
     <Compile Include="Command\Association\ISingleAssociationCommandContext.cs" />
     <Compile Include="Command\Association\NewAssociationCommand.cs" />
     <Compile Include="Command\Association\RenameAssociationCommand.cs" />
