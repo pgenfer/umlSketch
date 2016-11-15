@@ -38,6 +38,13 @@ namespace YumlFrontEnd.editor
             _fileName = applicationSettings.LastFile;
         }
 
+        private void StoreProjectFileName()
+        {
+            // update the application settings
+            _applicationSettings.LastFile = _fileName;
+            _applicationSettings.Save();
+        }
+
         public void New()
         {
             _fileName = null;
@@ -58,6 +65,7 @@ namespace YumlFrontEnd.editor
                 if (saveFileDialog.ShowDialog() == true)
                 {
                     _fileName = new FileName(saveFileDialog.FileName);
+                    StoreProjectFileName();
                 }
             }
 
@@ -97,6 +105,11 @@ namespace YumlFrontEnd.editor
                     New();
                 }
             }
+            else
+            {
+                // no file to load, so start with a new file
+                New();
+            }
 
         }
 
@@ -129,8 +142,7 @@ namespace YumlFrontEnd.editor
                 {
                     LoadFile();
                     // update the application settings
-                    _applicationSettings.LastFile = _fileName;
-                    _applicationSettings.Save();
+                    StoreProjectFileName();
                 }
                 catch (Exception ex)
                 {

@@ -1,11 +1,15 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.Security.AccessControl;
 using System.Windows;
 using Yuml;
 using Yuml.Command;
 using Yuml.Serializer;
 using Yuml.Service;
+using static System.Environment;
+using static System.IO.Path;
+using static System.IO.Directory;
 
 namespace YumlFrontEnd.editor
 {
@@ -66,9 +70,23 @@ namespace YumlFrontEnd.editor
 
             // load application settings
             var applicationSettings = new ApplicationSettings();
-            var settingsFilePath = System.IO.Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "umlsketch.settings");
+            var applicationSettingsPath = Combine(
+                GetFolderPath(SpecialFolder.ApplicationData),
+                "umlsketch");
+            if (!Exists(applicationSettingsPath))
+            {
+                try
+                {
+                    CreateDirectory(applicationSettingsPath);
+                }
+                catch (Exception)
+                {
+                    // could not create the application folder, so 
+                    // use the appdata folder directly
+                    applicationSettingsPath = GetFolderPath(SpecialFolder.ApplicationData);
+                }
+            }
+            var settingsFilePath = Combine(applicationSettingsPath,"umlsketch.settings");
             applicationSettings.Load(settingsFilePath);
             _container.Instance(applicationSettings);
         }
