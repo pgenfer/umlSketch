@@ -9,6 +9,11 @@
              d:DesignHeight="300" d:DesignWidth="300">
   <DockPanel
    HorizontalAlignment="Stretch">
+    <ComboBox
+     DockPanel.Dock="Left"
+     Foreground="{Binding IsVisible,Converter={StaticResource IsVisibleToColor}}"
+     x:Name="Classifiers"
+     Margin="5"/>
     <local:ButtonBar
       DockPanel.Dock="Right"
       HasDeleteButton="True"

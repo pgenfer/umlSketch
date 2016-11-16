@@ -66,17 +66,6 @@ namespace Yuml
             => Filter(x => x.End.Classifier == @interface);
 
         /// <summary>
-        /// removes the given implementatin from the interface list 
-        /// and fires a notification after the interface was removed.
-        /// </summary>
-        /// <param name="implementation"></param>
-        /// <param name="messageSystem"></param>
-        internal void RemoveImplementationForInterface(
-            Implementation implementation,
-            MessageSystem messageSystem = null) =>
-                RemoveImplementationForInterface(implementation.End.Classifier, messageSystem);
-
-        /// <summary>
         /// deletes the implementation for the given interface from the implementation list
         /// and fires a notification that the implementation was removed.
         /// </summary>

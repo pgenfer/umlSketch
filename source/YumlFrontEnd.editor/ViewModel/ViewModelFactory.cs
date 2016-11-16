@@ -37,7 +37,7 @@ namespace YumlFrontEnd.editor
         /// <param name="domainList">the list of domain objects that are represented by this view model</param>
         /// <returns>the generated view model</returns>
         public ListViewModelBaseSimple<TDomain> CreateListViewModel<TDomain>(BaseList<TDomain> domainList)
-            where TDomain : IVisible
+            where TDomain : class, IVisible
         {
             dynamic viewModel = CreateListViewModelWithCommand<TDomain>();
             dynamic commands = Context.CommandFactory.GetListCommands(domainList);
@@ -47,7 +47,7 @@ namespace YumlFrontEnd.editor
         }
 
         public SingleItemViewModelBaseSimple<TDomain> CreateSingleViewModel<TDomain>(
-            TDomain domainObject,BaseList<TDomain> parentList) where TDomain : IVisible
+            TDomain domainObject,BaseList<TDomain> parentList) where TDomain : class, IVisible
         {
             Func<object> createFunc;
             if (!_singleViewModelCreationFunctions.TryGetValue(typeof(TDomain), out createFunc))
@@ -68,7 +68,7 @@ namespace YumlFrontEnd.editor
         /// <typeparam name="TDomain"></typeparam>
         /// <returns></returns>
         private ListViewModelBaseSimple<TDomain> CreateListViewModelWithCommand<TDomain>()
-            where TDomain : IVisible =>
+            where TDomain : class, IVisible =>
             // we execute the function immediately and return the resulting view model
             (ListViewModelBaseSimple<TDomain>)CreateViewModelFactoryFunctionForDomain(
                 typeof(ListViewModelBase<,>)

@@ -36,7 +36,7 @@ namespace Yuml
         {
             Requires(classWriter != null);
 
-            foreach (var property in this.Where(x => x.IsVisible))
+            foreach (var property in this.Where(x => x.IsVisible && x.Type.IsVisible))
             {
                 var propertyWriter = classWriter.WithNewProperty();
                 propertyWriter = property.WriteTo(propertyWriter);

@@ -61,10 +61,10 @@ namespace Yuml.Command
                 (x,_) => new ClassifierSingleCommandContext(x,classifiers,deletionService,relationService,messageSystem));
             // property
             RegisterFactoryFuncForSingleCommands<Property>(
-                (x,y) => new PropertySingleCommandContext(x,classifiers,new PropertyValidationService(y), messageSystem));
+                (x,y) => new PropertySingleCommandContext((PropertyList)y,x,classifiers,new PropertyValidationService(y), messageSystem));
             // method
             RegisterFactoryFuncForSingleCommands<Method>(
-                (x,y) => new MethodSingleCommandContext(x,new MethodValidationService(y), messageSystem));
+                (x,y) => new MethodSingleCommandContext((MethodList)y,x,classifiers,new MethodValidationService(y), messageSystem));
             // association
             RegisterFactoryFuncForSingleCommands<Relation>(
                 (x,y) => new SingleAssociationCommands((ClassifierAssociationList)y,x,classifiers,messageSystem));
@@ -81,7 +81,7 @@ namespace Yuml.Command
         /// <param name="factoryFunc">function to create the list commands for a given domain list</param>
         private void RegisterFactoryFuncForListCommands<TDomain>(
             Func<BaseList<TDomain>,IListCommandContext<TDomain>> factoryFunc)
-            where TDomain : IVisible
+            where TDomain : class,IVisible
         {
             _listCommandCreatorFunctions[typeof(TDomain)] = factoryFunc;
         }
@@ -99,7 +99,7 @@ namespace Yuml.Command
         }
 
         public IListCommandContext<TDomain> GetListCommands<TDomain>(BaseList<TDomain> list) 
-            where TDomain : IVisible
+            where TDomain : class, IVisible
         {
             Delegate commandFunc;
             if (_listCommandCreatorFunctions.TryGetValue(typeof(TDomain), out commandFunc))
@@ -109,7 +109,7 @@ namespace Yuml.Command
         }
 
         public ISingleCommandContext<TDomain> GetSingleCommands<TDomain>(TDomain domainObject,BaseList<TDomain> parentList ) 
-            where TDomain : IVisible
+            where TDomain : class,IVisible
         {
             Delegate commandFunc;
             if (_singleCommandCreatorFunctions.TryGetValue(typeof(TDomain), out commandFunc))

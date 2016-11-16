@@ -10,7 +10,7 @@ namespace YumlFrontEnd.editor
     /// </summary>
     /// <typeparam name="TDomain">Type of domain objects within the list</typeparam>
     public abstract class ListViewModelBaseSimple<TDomain> : PropertyChangedBase
-        where TDomain : IVisible // required for BaseList<T>
+        where TDomain : class, IVisible // required for BaseList<T>
     {
         /// <summary>
         /// store a reference to the list of domain objects we

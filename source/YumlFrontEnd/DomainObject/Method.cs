@@ -40,7 +40,7 @@ namespace Yuml
         public ParameterList Parameters { get { return _parameters;} internal set { _parameters = value; } }
 
         // TODO: return type can be changed by user
-        public Classifier ReturnType { get;}
+        public Classifier ReturnType { get; set; }
 
         public Method(string name, Classifier returnType, bool isVisible = true)
         {

@@ -9,7 +9,11 @@ using Yuml.Service;
 
 namespace Yuml.Command
 {
-    public class ClassifierSingleCommandContext : SingleCommandContextBase<Classifier>, ISingleClassifierCommands
+    /// <summary>
+    /// classifier command context does not inherit from SingleCommandContext
+    /// because it needs different parameters and also has a different Delete command
+    /// </summary>
+    public class ClassifierSingleCommandContext : ISingleClassifierCommands
     {
         public ClassifierSingleCommandContext(
             Classifier classifier,
@@ -40,5 +44,8 @@ namespace Yuml.Command
         public IChangeColorCommand ChangeNoteColor { get; }
         public ChangeNoteTextCommand ChangeNoteText { get; }
         public MakeClassifierToInterfaceCommand ChangeIsInterface { get; }
+        public IRenameCommand Rename { get; }
+        public IDeleteCommand Delete { get; }
+        public IShowOrHideCommand Visibility { get; }
     }
 }

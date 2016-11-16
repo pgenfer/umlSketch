@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using Common;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
@@ -30,7 +29,7 @@ namespace Yuml
         {
             Requires(classWriter != null);
 
-            foreach (var method in this.Where(x => x.IsVisible))
+            foreach (var method in this.Where(x => x.IsVisible && x.ReturnType.IsVisible))
             {
                 var methodWriter = classWriter.WithNewMethod();
                 methodWriter = method.WriteTo(methodWriter);

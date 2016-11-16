@@ -3,10 +3,11 @@
     public class PropertySingleCommandContext : SingleCommandContextBase<Property>, ISinglePropertyCommands
     {
         public PropertySingleCommandContext(
+            PropertyList properties,
             Property property,
             ClassifierDictionary availableClassifiers,
             IValidateNameService propertyValidationNameService,
-            MessageSystem messageSystem)
+            MessageSystem messageSystem):base(properties,property,messageSystem)
         {
             Rename = new RenameMemberCommand(
                 property,
@@ -16,7 +17,6 @@
                 availableClassifiers,
                 property,
                 messageSystem);
-            Visibility = new ShowOrHideSingleObjectCommand(property, messageSystem);
         }
 
         public IChangeTypeCommand ChangeTypeOfProperty { get; }

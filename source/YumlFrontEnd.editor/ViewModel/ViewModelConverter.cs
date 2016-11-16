@@ -57,7 +57,8 @@ namespace YumlFrontEnd.editor
                     .ForMember(d => d.InitialColor, c => c.MapFrom(s => s.Color.ToColorFromFriendlyName()));
                 x.CreateMap<Property, PropertyViewModel>()
                     .ForMember(d => d.InitialPropertyType, c => c.MapFrom(s => s.Type.Name));
-                x.CreateMap<Method, MethodViewModel>();
+                x.CreateMap<Method, MethodViewModel>()
+                    .ForMember(d => d.InitialReturnType, c => c.MapFrom(s => s.ReturnType.Name));
                 x.CreateMap<Relation, AssociationViewModel>()
                     .ForMember(d => d.Name, c => c.MapFrom(s => s.Start.Name))
                     .ForMember(d => d.InitialAssociationType, c => c.MapFrom(s => s.Type))

@@ -43,7 +43,10 @@ namespace Yuml
             // so add a separator
             writer.AddSeparator();
 
-            foreach (var relation in _relations)
+            foreach (var relation in _relations.Where(x => 
+                x.IsVisible && 
+                x.Start.Classifier.IsVisible && 
+                x.End.Classifier.IsVisible))
             {
                 var relationWriter = writer.StartRelation();
                 relationWriter = relation.WriteTo(relationWriter);

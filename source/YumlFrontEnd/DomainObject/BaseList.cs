@@ -15,7 +15,7 @@ namespace Yuml
     /// handle classifier members or parameters
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class BaseList<T> : IEnumerable<T>, IVisibleObjectList where T: IVisible
+    public abstract class BaseList<T> : IEnumerable<T>, IVisibleObjectList where T: class, IVisible
     {
         protected readonly List<T> _list = new List<T>();
    
@@ -34,10 +34,23 @@ namespace Yuml
             return newMember;
         }
 
+        /// <summary>
+        /// deletes the given member and fires a notification
+        /// if a message system is provided.
+        /// </summary>
+        /// <param name="member">member that should be deleted</param>
+        /// <param name="messageSystem">optional message system that is used to publish a domain event
+        /// after the member was deleted.</param>
+        public void DeleteMember(T member, MessageSystem messageSystem = null)
+        {
+            var memberToDelete = Filter(x => x == member);
+            memberToDelete.DeleteSelection(messageSystem);
+        }
+
         public IEnumerator<T> GetEnumerator() => _list.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _list.GetEnumerator();
 
-        protected SubSet Filter(Func<T,bool> filter ) => new SubSet(this,_list.Where(filter));
+        public SubSet Filter(Func<T,bool> filter ) => new SubSet(this,_list.Where(filter));
 
         /// <summary>
         /// represents a subset of an existing property list.

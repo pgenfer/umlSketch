@@ -8,12 +8,12 @@ namespace Yuml
     /// in the list
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class NamedBaseList<T> : BaseList<T> where T : INamed, IVisible
+    public abstract class NamedBaseList<T> : BaseList<T> where T : class, INamed, IVisible
     {
         private readonly FindBestNameMixin _findBestName;
         protected NamedBaseList()
         {
-            _findBestName = new FindBestNameMixin(_list.OfType<INamed>());
+            _findBestName = new FindBestNameMixin(_list);
         }
         protected string FindBestName(string defaultName) => _findBestName.FindBestName(defaultName);
     }

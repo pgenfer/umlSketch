@@ -16,7 +16,7 @@ namespace YumlFrontEnd.editor
     /// <typeparam name="TDomain">Type of domain objects within the list</typeparam>
     /// <typeparam name="TCommand">Commands that can be used for this view model</typeparam>
     public class ListViewModelBase<TDomain,TCommand> : ListViewModelBaseSimple<TDomain> 
-        where TDomain: IVisible // required for BaseList<T>
+        where TDomain: class, IVisible // required for BaseList<T>
         where TCommand : IListCommandContext<TDomain>
     {
         private ChangeVisibilityMixin _visibility;

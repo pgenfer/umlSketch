@@ -97,7 +97,6 @@
     <Compile Include="Command\Association\AssociationListCommandContext.cs" />
     <Compile Include="Command\Association\ChangeAssociationCommand.cs" />
     <Compile Include="Command\Association\ChangeAssociationTargetCommand.cs" />
-    <Compile Include="Command\Association\DeleteAssocationCommand.cs" />
     <Compile Include="Command\Association\ISingleAssociationCommandContext.cs" />
     <Compile Include="Command\Association\NewAssociationCommand.cs" />
     <Compile Include="Command\Association\RenameAssociationCommand.cs" />
@@ -112,12 +111,14 @@
     <Compile Include="Command\General\CommandFactory.cs" />
     <Compile Include="Command\General\IShowOrHideCommand.cs" />
     <Compile Include="Command\General\List\ShowOrHideAllObjectsInListCommand.cs" />
+    <Compile Include="Command\General\Single\DeleteCommand.cs" />
     <Compile Include="Command\Interface\ChangeInterfaceOfClassCommand.cs" />
     <Compile Include="Command\Interface\InterfaceListCommandContext.cs" />
     <Compile Include="Command\Interface\NewInterfaceCommand.cs" />
     <Compile Include="Command\Interface\QueryAvailableInterfaces.cs" />
-    <Compile Include="Command\Interface\RemoveInterfaceFromClassifierCommand.cs" />
     <Compile Include="Command\Interface\SingleInterfaceCommandContext.cs" />
+    <Compile Include="Command\Method\ChangeMethodReturnTypeCommand.cs" />
+    <Compile Include="Event\MethodReturnTypeChanged.cs" />
     <Compile Include="Command\Method\NewMethodCommand.cs" />
     <Compile Include="Command\Method\RenameMethodCommand.cs" />
     <Compile Include="DomainObject\Diagram.cs" />
