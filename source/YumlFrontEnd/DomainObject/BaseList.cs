@@ -34,6 +34,8 @@ namespace Yuml
             return newMember;
         }
 
+        public abstract T CreateNew(ClassifierDictionary classifiers);
+
         /// <summary>
         /// deletes the given member and fires a notification
         /// if a message system is provided.

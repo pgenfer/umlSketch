@@ -129,6 +129,9 @@
   <data name="NewMethod" xml:space="preserve">
     <value>New Method</value>
   </data>
+  <data name="NewParameter" xml:space="preserve">
+    <value>New Parameter</value>
+  </data>
   <data name="NewProperty" xml:space="preserve">
     <value>New Property</value>
   </data>

@@ -187,6 +187,14 @@
       <DependentUpon>NoteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Note\NoteViewModel.cs" />
+    <Compile Include="Parameter\ParameterListViewModel.cs" />
+    <Compile Include="Parameter\ParameterViewModel.cs" />
+    <Compile Include="Parameter\ParameterView.xaml.cs">
+      <DependentUpon>ParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parameter\ParameterListView.xaml.cs">
+      <DependentUpon>ParameterListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Renderer\BrowserBehavior.cs" />
     <Compile Include="Renderer\RendererView.xaml.cs">
       <DependentUpon>RendererView.xaml</DependentUpon>
@@ -271,6 +279,14 @@
     <Page Include="Note\NoteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parameter\ParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Parameter\ParameterListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Renderer\RendererView.xaml">
       <SubType>Designer</SubType>

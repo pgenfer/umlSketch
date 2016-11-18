@@ -49,7 +49,7 @@ namespace Yuml
         /// and a useful data type (e.g. the data type that was not used before)
         /// </summary>
         /// <returns></returns>
-        public Property CreateNewPropertyWithBestInitialValues(ClassifierDictionary systemClassifiers)
+        public override Property CreateNew(ClassifierDictionary systemClassifiers)
         {
             var bestDefaultName = FindBestName(Strings.NewProperty);
 

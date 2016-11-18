@@ -30,8 +30,6 @@ namespace Yuml.Command
         public CommandFactory(ClassifierDictionary classifiers,
             DeletionService deletionService,
             IRelationService relationService,
-            IValidateNameService propertyValidationService,
-            IMethodNameValidationService methodValidationService,
             MessageSystem messageSystem)
         {
             // classifier list
@@ -49,7 +47,8 @@ namespace Yuml.Command
             // implementations
             RegisterFactoryFuncForListCommands<Implementation>(
                 x => new InterfaceListCommandContext((ImplementationList)x,classifiers,messageSystem));
-            // TODO: parameters
+            RegisterFactoryFuncForListCommands<Parameter>(
+                x => new ListParameterContext((ParameterList) x, classifiers, messageSystem));
 
             // factory functions to create single commands.
             // Every function accepts the domain object for which the commands should be created
@@ -71,7 +70,8 @@ namespace Yuml.Command
             // implementation
             RegisterFactoryFuncForSingleCommands<Implementation>(
                 (x,y) => new SingleInterfaceCommandContext((ImplementationList)y,x,classifiers,messageSystem));
-            // TODO: parameter
+            RegisterFactoryFuncForSingleCommands<Parameter>(
+                (x, y) => new SingleParameterCommandContext((ParameterList) y,x, classifiers, messageSystem));
         }
 
         /// <summary>

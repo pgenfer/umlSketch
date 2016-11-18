@@ -153,6 +153,9 @@
     <value>File could not be opened due to the following error:
 {0}</value>
   </data>
+  <data name="Parameters" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
   <data name="Properties" xml:space="preserve">
     <value>Properties</value>
   </data>

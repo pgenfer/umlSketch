@@ -49,8 +49,7 @@ namespace Yuml
             IsVisible = isVisible;
         }
         public IEnumerator<Parameter> GetEnumerator() => _parameters.GetEnumerator();
-        public Parameter CreateParameter(Classifier type, string name) => _parameters.CreateParameter(type, name);
-
+       
         public MethodWriter WriteTo(MethodWriter methodWriter)
         {
             Requires(methodWriter != null);
@@ -58,6 +57,10 @@ namespace Yuml
             return methodWriter
                 .WithReturnType(ReturnType.Name)
                 .WithName(Name);
+            // TODO: write parameters
         }
+
+        public void CreateParameter(Classifier classifier, string name)
+            => _parameters.CreateParameter(classifier, name);
     }
 }

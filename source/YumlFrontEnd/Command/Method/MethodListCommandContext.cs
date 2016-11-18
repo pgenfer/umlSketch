@@ -6,10 +6,8 @@
             MethodList methods,
             ClassifierDictionary availableClassifiers,
             MessageSystem messageSystem)
+            :base(methods,availableClassifiers,messageSystem)
         {
-            All = new Query<Method>(() => methods);
-            Visibility = new ShowOrHideAllObjectsInListCommand(methods, messageSystem);
-            New = new NewMethodCommand(methods, availableClassifiers, messageSystem);
         }
     }
 }

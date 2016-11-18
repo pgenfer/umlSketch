@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 using Yuml.Command;
 
 namespace Yuml.Command
@@ -11,11 +12,23 @@ namespace Yuml.Command
     /// base class for command list context.
     /// The individual commands must be implemented by derived types.
     /// </summary>
-    /// <typeparam name="TDomain"></typeparam>
-    public abstract class ListCommandContextBase<TDomain> : IListCommandContext<TDomain>
+    /// <typeparam name="T"></typeparam>
+    public abstract class ListCommandContextBase<T> : IListCommandContext<T> where T : class, IVisible
     {
-        public INewCommand New { get; protected set; }
-        public ShowOrHideAllObjectsInListCommand Visibility { get; protected set; }
-        public IQuery<TDomain> All { get; protected set; }
+        protected ListCommandContextBase(
+            BaseList<T> memberList,
+            ClassifierDictionary classifiers,
+            MessageSystem messageSystem)
+        {
+            // default implementation, derived types
+            // can define special implementation for "All" query
+            All = new Query<T>(() => memberList);
+            New = new NewCommand<T>(memberList, classifiers, messageSystem);
+            Visibility = new ShowOrHideAllObjectsInListCommand(memberList, messageSystem);
+        }
+
+        public INewCommand New { get; }
+        public ShowOrHideAllObjectsInListCommand Visibility { get; }
+        public IQuery<T> All { get; protected set; }
     }
 }

@@ -98,7 +98,6 @@
     <Compile Include="Command\Association\ChangeAssociationCommand.cs" />
     <Compile Include="Command\Association\ChangeAssociationTargetCommand.cs" />
     <Compile Include="Command\Association\ISingleAssociationCommandContext.cs" />
-    <Compile Include="Command\Association\NewAssociationCommand.cs" />
     <Compile Include="Command\Association\RenameAssociationCommand.cs" />
     <Compile Include="Command\Classifier\ChangeBaseClassCommand.cs" />
     <Compile Include="Command\Classifier\ChangeColorCommand.cs" />
@@ -110,16 +109,20 @@
     <Compile Include="Command\Diagram\DiagramCommands.cs" />
     <Compile Include="Command\General\CommandFactory.cs" />
     <Compile Include="Command\General\IShowOrHideCommand.cs" />
+    <Compile Include="Command\General\List\NewCommand.cs" />
     <Compile Include="Command\General\List\ShowOrHideAllObjectsInListCommand.cs" />
     <Compile Include="Command\General\Single\DeleteCommand.cs" />
     <Compile Include="Command\Interface\ChangeInterfaceOfClassCommand.cs" />
     <Compile Include="Command\Interface\InterfaceListCommandContext.cs" />
-    <Compile Include="Command\Interface\NewInterfaceCommand.cs" />
     <Compile Include="Command\Interface\QueryAvailableInterfaces.cs" />
     <Compile Include="Command\Interface\SingleInterfaceCommandContext.cs" />
     <Compile Include="Command\Method\ChangeMethodReturnTypeCommand.cs" />
+    <Compile Include="Command\Parameter\ChangeParameterTypeCommand.cs" />
+    <Compile Include="Command\Parameter\ListParameterContext.cs" />
+    <Compile Include="Command\Parameter\RenameParameterCommand.cs" />
+    <Compile Include="Command\Parameter\SingleParameterCommandContext.cs" />
+    <Compile Include="Event\ChangeParameterTypeEvent.cs" />
     <Compile Include="Event\MethodReturnTypeChanged.cs" />
-    <Compile Include="Command\Method\NewMethodCommand.cs" />
     <Compile Include="Command\Method\RenameMethodCommand.cs" />
     <Compile Include="DomainObject\Diagram.cs" />
     <Compile Include="DomainObject\Implementation.cs" />
@@ -143,7 +146,6 @@
     <Compile Include="Command\Property\ChangeTypeOfPropertyCommand.cs" />
     <Compile Include="Command\General\Single\IChangeTypeCommand.cs" />
     <Compile Include="Command\General\Single\RenameMemberCommand.cs" />
-    <Compile Include="Command\Property\NewPropertyCommand.cs" />
     <Compile Include="Command\Classifier\ClassifierListCommandContext.cs" />
     <Compile Include="Command\Classifier\ClassifierSingleCommandContext.cs" />
     <Compile Include="Command\General\List\ListCommandContextBase.cs" />
@@ -258,9 +260,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Command\Parameter\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

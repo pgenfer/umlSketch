@@ -161,6 +161,15 @@ namespace YumlFrontEnd.editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameters.
+        /// </summary>
+        public static string Parameters {
+            get {
+                return ResourceManager.GetString("Parameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Properties.
         /// </summary>
         public static string Properties {

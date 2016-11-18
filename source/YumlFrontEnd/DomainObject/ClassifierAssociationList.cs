@@ -31,11 +31,8 @@ namespace Yuml.DomainObject
         /// </summary>
         /// <param name="classifiers"></param>
         /// <returns></returns>
-        public Relation CreateNewAssociationWithBestInitialValues(
-            ClassifierDictionary classifiers)
+        public override Relation CreateNew(ClassifierDictionary classifiers)
         {
-            Requires(Root != null);
-            Requires(classifiers.Count > 0);
             // ensure that the relation is not bound to a system type
             Ensures(!Result<Relation>().End.Classifier.IsSystemType);
 

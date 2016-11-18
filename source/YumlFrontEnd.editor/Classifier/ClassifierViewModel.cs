@@ -72,8 +72,6 @@ namespace YumlFrontEnd.editor
 
         protected override void CustomInit()
         {
-            
-
             // list of base classifiers can  have a null item and should not
             // have the class item itself and also no void item
             _selectBaseClass = new SelectClassifierWithNullItemMixin(

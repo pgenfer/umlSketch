@@ -97,6 +97,15 @@ namespace Yuml {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Parameter.
+        /// </summary>
+        public static string NewParameter {
+            get {
+                return ResourceManager.GetString("NewParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Property.
         /// </summary>
         public static string NewProperty {

@@ -37,7 +37,9 @@ namespace Yuml.Service
                 _classifiers.Select(x => x.Associations.FindAssociationsThatDependOnClassifier(classifier));
             var dependentImplementations =
                 _classifiers.Select(x => x.InterfaceImplementations.FindImplementationsOfInterface(classifier));
-            // TODO: handle parameters here
+            var dependentParameters = 
+                _classifiers.SelectMany(x => x.Methods)
+                    .Select(m => m.Parameters.FindMethodsThatDependOnClassifier(classifier));
 
             foreach (var properties in dependentProperties)
                 properties.DeleteSelection(_messageSystem);
@@ -47,6 +49,8 @@ namespace Yuml.Service
                 associations.DeleteSelection(_messageSystem);
             foreach (var implementation in dependentImplementations)
                 implementation.DeleteSelection(_messageSystem);
+            foreach (var parameter in dependentParameters)
+                parameter.DeleteSelection(_messageSystem);
 
             // remove the deleted class as base class
             foreach (var derivedClass in derivedClasses)

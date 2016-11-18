@@ -28,10 +28,8 @@ namespace Yuml
         /// </summary>
         /// <param name="classifiers">classifier list used to obtain available interfaces</param>
         /// <returns></returns>
-        public virtual Implementation AddNewImplementation(IEnumerable<Classifier> classifiers)
+        public override Implementation CreateNew(ClassifierDictionary classifiers)
         {
-            Requires(Root != null);
-
             Implementation newImplementation = null;
             // all interfaces except
             // 1. the ones which are already in the interface list

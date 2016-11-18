@@ -28,7 +28,7 @@ namespace Yuml.Test
             properties.CreateProperty("New Property 1", String);
             properties.CreateProperty("New Property 2", String);
 
-            var newProperty = properties.CreateNewPropertyWithBestInitialValues(_classifiers);
+            var newProperty = properties.CreateNew(_classifiers);
 
             Assert.AreEqual("New Property 3", newProperty.Name);
             Assert.AreEqual(String, newProperty.Type);
@@ -41,7 +41,7 @@ namespace Yuml.Test
             properties.CreateProperty("New Property 1", String);
             properties.CreateProperty("Name", String);
 
-            var newProperty = properties.CreateNewPropertyWithBestInitialValues(_classifiers);
+            var newProperty = properties.CreateNew(_classifiers);
 
             Assert.AreEqual("New Property 2", newProperty.Name);
             Assert.AreEqual(String, newProperty.Type);
@@ -55,7 +55,7 @@ namespace Yuml.Test
             properties.CreateProperty("New Property 2", Integer);
             properties.CreateProperty("New Property 3", String);
 
-            var newProperty = properties.CreateNewPropertyWithBestInitialValues(_classifiers);
+            var newProperty = properties.CreateNew(_classifiers);
 
             Assert.AreEqual("New Property 4", newProperty.Name);
             Assert.AreEqual(Integer, newProperty.Type);
@@ -66,7 +66,7 @@ namespace Yuml.Test
         {
             var properties = new PropertyList();
 
-            var newProperty = properties.CreateNewPropertyWithBestInitialValues(_classifiers);
+            var newProperty = properties.CreateNew(_classifiers);
 
             Assert.AreEqual("New Property 1", newProperty.Name);
             Assert.AreEqual(String, newProperty.Type);

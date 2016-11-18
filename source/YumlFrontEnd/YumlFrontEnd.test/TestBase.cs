@@ -78,7 +78,7 @@ namespace Yuml.Test
             Integer.CreateProperty("TypeName", String,false);
 
             Service.CreateMethod("DoSomething", Void)
-                .CreateParameter(String, "firstParameter");
+               .CreateParameter(String, "firstParameter");
         }
 
         private void InitClassifierDtos()

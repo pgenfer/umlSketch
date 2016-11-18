@@ -37,7 +37,6 @@ namespace Yuml
             set
             {
                 Requires(value != null);
-                // TODO: Ensure that value cannot be void
                 _type = value;
                     
             }

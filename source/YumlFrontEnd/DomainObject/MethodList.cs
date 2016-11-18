@@ -44,7 +44,7 @@ namespace Yuml
         /// and a useful data type (e.g. the data type that was not used before)
         /// </summary>
         /// <returns></returns>
-        public Method CreateNewMethodWithBestInitialValues(ClassifierDictionary systemClassifiers)
+        public override Method CreateNew(ClassifierDictionary systemClassifiers)
         {
             var bestDefaultName = FindBestName(Strings.NewMethod);
             var newMethod = CreateMethod(bestDefaultName, systemClassifiers.Void);

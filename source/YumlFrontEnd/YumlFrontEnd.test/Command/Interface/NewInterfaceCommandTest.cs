@@ -17,12 +17,12 @@ namespace Yuml.Command.Test
         public void CreateNewInterfaceImplementation()
         {
             var implementations = For<ImplementationList>();
-            var classifiers = For<IList<Classifier>>();
+            var classifiers = new ClassifierDictionary();
             var messageSystem = For<MessageSystem>();
             var implementation = For<Implementation>();
-            implementations.AddNewImplementation(classifiers).Returns(implementation);
+            implementations.CreateNew(classifiers).Returns(implementation);
 
-            var newCommand = new NewInterfaceCommand(implementations, classifiers, messageSystem);
+            var newCommand = new NewCommand<Implementation>(implementations, classifiers, messageSystem);
             newCommand.CreateNew();
 
             messageSystem.Received().PublishCreated(implementations, implementation);

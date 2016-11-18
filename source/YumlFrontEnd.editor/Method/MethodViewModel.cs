@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Caliburn.Micro;
 using Yuml;
 using Yuml.Command;
 
@@ -13,10 +14,24 @@ namespace YumlFrontEnd.editor
         private SelectClassifierMixin _selectClassifierForReturnType;
 
         /// <summary>
+        /// view model that is used to represent the parameters of a method
+        /// </summary>
+        public ParameterListViewModel Parameters { get; private set; }
+
+        /// <summary>
         /// name of the property type which is intially set when reading
         /// data from view model. Used to choose the correct item in the classifier itemssource
         /// </summary>
         public string InitialReturnType { get; set; }
+
+        public override void Init(
+            Method domain, 
+            PropertyChangedBase parentViewModel, 
+            ViewModelContext context)
+        {
+            base.Init(domain, parentViewModel, context);
+            Parameters = (ParameterListViewModel)context.ViewModelFactory.CreateListViewModel(domain.Parameters);
+        }
 
         protected override void CustomInit()
         {

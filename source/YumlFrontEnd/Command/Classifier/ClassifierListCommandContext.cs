@@ -9,7 +9,7 @@ using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml.Command
 {
-    public class ClassifierListCommandContext : ListCommandContextBase<Classifier>
+    public class ClassifierListCommandContext : IListCommandContext<Classifier>
     {
         public ClassifierListCommandContext(
             ClassifierDictionary classifiers,
@@ -22,5 +22,9 @@ namespace Yuml.Command
             Visibility = new ShowOrHideAllObjectsInListCommand(classifiers, messageSystem);
             New = new NewClassifierCommand(classifiers, messageSystem);
         }
+
+        public INewCommand New { get; }
+        public ShowOrHideAllObjectsInListCommand Visibility { get; }
+        public IQuery<Classifier> All { get; }
     }
 }

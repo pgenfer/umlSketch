@@ -4,15 +4,21 @@ using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
 {
-    public class ParameterList : BaseList<Parameter>
+    public class ParameterList : NamedBaseList<Parameter>
     {
-        public Parameter CreateParameter(Classifier type, string name)
+        public override Parameter CreateNew(ClassifierDictionary classifiers)
         {
-            // TODO: also check that type is not void
-            Requires(type != null);
-            Requires(!string.IsNullOrEmpty(name));
-
-            return AddNewMember(new Parameter(type, name));
+            var newName = FindBestName(Strings.NewParameter);
+            var stringType = classifiers.String;
+            var parameter = new Parameter(stringType, newName);
+            AddNewMember(parameter);
+            return parameter;
         }
+
+        public SubSet FindMethodsThatDependOnClassifier(Classifier classifier) => 
+            Filter(x => x.Type == classifier);
+
+        public void CreateParameter(Classifier classifier, string name) =>
+            AddNewMember(new Parameter(classifier, name));
     }
 }

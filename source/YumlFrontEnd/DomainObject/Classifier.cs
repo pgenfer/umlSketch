@@ -124,9 +124,7 @@ namespace Yuml
 
         public Method CreateMethod(string name, Classifier type,bool isVisible = true) => 
             Methods.CreateMethod(name, type,isVisible);
-        public Property CreateNewPropertyWithBestInitialValues(ClassifierDictionary systemClassifiers) => 
-            Properties.CreateNewPropertyWithBestInitialValues(systemClassifiers);
-
+   
         /// <summary>
         /// optional base class of this classifier
         /// </summary>
@@ -164,13 +162,6 @@ namespace Yuml
                 _associations.Root = this;
             }
         }
-
-
-        public Relation CreateNewAssociationWithBestInitialValues(ClassifierDictionary classifiers) => 
-            Associations.CreateNewAssociationWithBestInitialValues(classifiers);
-
-        public Method CreateNewMethodWithBestInitialValues(ClassifierDictionary classifiers) =>
-            Methods.CreateNewMethodWithBestInitialValues(classifiers);
 
         /// <summary>
         /// collects all relations from this classifier to adjacent classifiers.

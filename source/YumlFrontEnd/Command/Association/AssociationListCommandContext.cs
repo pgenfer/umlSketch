@@ -11,10 +11,8 @@ namespace Yuml.Command
          ClassifierAssociationList associations,
          ClassifierDictionary classifiers,
          MessageSystem messageSystem)
+            :base(associations,classifiers,messageSystem)
         {
-            New = new NewAssociationCommand(associations, classifiers, messageSystem);
-            All = new Query<Relation>(() => associations);
-            Visibility = new ShowOrHideAllObjectsInListCommand(associations, messageSystem);
         }
     }
 }
