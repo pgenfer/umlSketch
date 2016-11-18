@@ -1,4 +1,6 @@
-﻿namespace Yuml.Command
+﻿using Yuml.Service;
+
+namespace Yuml.Command
 {
     public class PropertySingleCommandContext : SingleCommandContextBase<Property>, ISinglePropertyCommands
     {
@@ -7,7 +9,9 @@
             Property property,
             ClassifierDictionary availableClassifiers,
             IValidateNameService propertyValidationNameService,
-            MessageSystem messageSystem):base(properties,property,messageSystem)
+            MessageSystem messageSystem,
+            IAskUserBeforeDeletionService askUserBeforeDeletion):
+            base(properties,property,messageSystem,askUserBeforeDeletion)
         {
             Rename = new RenameMemberCommand(
                 property,

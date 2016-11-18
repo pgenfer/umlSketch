@@ -192,6 +192,7 @@
       <DependentUpon>RendererView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Renderer\RendererViewModel.cs" />
+    <Compile Include="Service\AskUserBeforeDeletionService.cs" />
     <Compile Include="Tooltips.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

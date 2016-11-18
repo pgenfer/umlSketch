@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yuml.Command.Interface;
+using Yuml.Service;
 
 namespace Yuml.Command
 {
@@ -16,8 +17,8 @@ namespace Yuml.Command
             ImplementationList implementationList,
             Implementation existingInterface,
             ClassifierDictionary classifiers,
-            MessageSystem messageSystem):
-            base(implementationList,existingInterface,messageSystem)
+            MessageSystem messageSystem, IAskUserBeforeDeletionService askUserBeforeDeletion) :
+            base(implementationList, existingInterface, messageSystem, askUserBeforeDeletion)
         {
             ChangeInterface = new ChangeInterfaceOfClassifierCommand(
                 existingInterface,

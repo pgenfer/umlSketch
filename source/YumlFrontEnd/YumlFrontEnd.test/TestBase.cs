@@ -9,7 +9,7 @@ namespace Yuml.Test
     /// test base class that already contains
     /// some test dummy data that can be used by test cases
     /// </summary>
-    public class TestBase : SimpleTestBase
+    public abstract class TestBase : SimpleTestBase
     {
         /// <summary>
         /// dummy classifier that represents an integer

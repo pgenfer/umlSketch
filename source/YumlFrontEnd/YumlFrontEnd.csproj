@@ -197,6 +197,7 @@
     <Compile Include="Serializer\JsonApplicationSettingSerializer.cs" />
     <Compile Include="Service\DeletionService.cs" />
     <Compile Include="Service\IRelationService.cs" />
+    <Compile Include="Service\IAskUserBeforeDeletionService.cs" />
     <Compile Include="Service\RelationService.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="ClassDiagram.cs" />

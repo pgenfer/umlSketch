@@ -131,6 +131,9 @@
     <value>owns</value>
     <comment>Composite association</comment>
   </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Confirm delete </value>
+  </data>
   <data name="Interfaces" xml:space="preserve">
     <value>Interfaces</value>
   </data>

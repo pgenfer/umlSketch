@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AskBeforeDeletingClassifier" xml:space="preserve">
+    <value>Do you really want to delete this classifier and all the relations pointing to it?</value>
+  </data>
+  <data name="AskUserBeforeDeletingDomainObject" xml:space="preserve">
+    <value>Do you really want to delete this {0}?</value>
+  </data>
+  <data name="Classifier" xml:space="preserve">
+    <value>classifier</value>
+  </data>
+  <data name="Implementation" xml:space="preserve">
+    <value>interface implementation</value>
+  </data>
+  <data name="Method" xml:space="preserve">
+    <value>method</value>
+  </data>
   <data name="NameAlreadyExists" xml:space="preserve">
     <value>This name is already in use.</value>
   </data>
@@ -131,5 +146,14 @@
   </data>
   <data name="NewProperty" xml:space="preserve">
     <value>New Property</value>
+  </data>
+  <data name="Parameter" xml:space="preserve">
+    <value>parameter</value>
+  </data>
+  <data name="Property" xml:space="preserve">
+    <value>property</value>
+  </data>
+  <data name="Relation" xml:space="preserve">
+    <value>association</value>
   </data>
 </root>

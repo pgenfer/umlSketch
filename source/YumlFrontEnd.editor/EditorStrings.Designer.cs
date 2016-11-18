@@ -97,6 +97,15 @@ namespace YumlFrontEnd.editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm delete .
+        /// </summary>
+        public static string ConfirmDelete {
+            get {
+                return ResourceManager.GetString("ConfirmDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Interfaces.
         /// </summary>
         public static string Interfaces {

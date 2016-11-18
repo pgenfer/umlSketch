@@ -32,6 +32,7 @@ namespace Yuml.Command
             IRelationService relationService,
             IValidateNameService propertyValidationService,
             IMethodNameValidationService methodValidationService,
+            IAskUserBeforeDeletionService askUserBeforeDeletionService,
             MessageSystem messageSystem)
         {
             // classifier list
@@ -58,19 +59,19 @@ namespace Yuml.Command
 
             // classifier
             RegisterFactoryFuncForSingleCommands<Classifier>(
-                (x,_) => new ClassifierSingleCommandContext(x,classifiers,deletionService,relationService,messageSystem));
+                (x,_) => new ClassifierSingleCommandContext(x,classifiers,deletionService,relationService, askUserBeforeDeletionService,messageSystem));
             // property
             RegisterFactoryFuncForSingleCommands<Property>(
-                (x,y) => new PropertySingleCommandContext((PropertyList)y,x,classifiers,new PropertyValidationService(y), messageSystem));
+                (x,y) => new PropertySingleCommandContext((PropertyList)y,x,classifiers,new PropertyValidationService(y), messageSystem,askUserBeforeDeletionService));
             // method
             RegisterFactoryFuncForSingleCommands<Method>(
-                (x,y) => new MethodSingleCommandContext((MethodList)y,x,classifiers,new MethodValidationService(y), messageSystem));
+                (x,y) => new MethodSingleCommandContext((MethodList)y,x,classifiers,new MethodValidationService(y), messageSystem,askUserBeforeDeletionService));
             // association
             RegisterFactoryFuncForSingleCommands<Relation>(
-                (x,y) => new SingleAssociationCommands((ClassifierAssociationList)y,x,classifiers,messageSystem));
+                (x,y) => new SingleAssociationCommands((ClassifierAssociationList)y,x,classifiers,messageSystem, askUserBeforeDeletionService));
             // implementation
             RegisterFactoryFuncForSingleCommands<Implementation>(
-                (x,y) => new SingleInterfaceCommandContext((ImplementationList)y,x,classifiers,messageSystem));
+                (x,y) => new SingleInterfaceCommandContext((ImplementationList)y,x,classifiers,messageSystem, askUserBeforeDeletionService));
             // TODO: parameter
         }
 

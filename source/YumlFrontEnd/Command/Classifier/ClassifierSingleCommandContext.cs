@@ -20,6 +20,7 @@ namespace Yuml.Command
             ClassifierDictionary classifierDictionary,
             DeletionService deletionService,
             IRelationService relationService,
+            IAskUserBeforeDeletionService askUserService,
             MessageSystem messageSystem)
         {
             Rename = new RenameClassifierCommand(
@@ -31,7 +32,7 @@ namespace Yuml.Command
                 classifier,
                 classifierDictionary,
                 messageSystem);
-            Delete = new DeleteClassifierCommand(classifier, deletionService);
+            Delete = new DeleteClassifierCommand(classifier, deletionService,askUserService);
             Visibility = new ShowOrHideSingleObjectCommand(classifier, messageSystem);
             ChangeClassifierColor = new ChangeColorCommand(classifier, messageSystem);
             ChangeNoteColor = new ChangeNoteColorCommand(classifier.Note,messageSystem);

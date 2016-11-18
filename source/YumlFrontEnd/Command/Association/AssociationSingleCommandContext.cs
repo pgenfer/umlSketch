@@ -1,6 +1,7 @@
 ﻿
 
 using Yuml.DomainObject;
+using Yuml.Service;
 
 namespace Yuml.Command
 {
@@ -10,7 +11,8 @@ namespace Yuml.Command
             ClassifierAssociationList associations,
             Relation association,
             ClassifierDictionary classifiers,
-            MessageSystem messageSystem):base(associations,association,messageSystem)
+            MessageSystem messageSystem,IAskUserBeforeDeletionService askUserBeforeDeletion):
+            base(associations,association,messageSystem, askUserBeforeDeletion)
         {
             Rename = new RenameAssociationCommand();
             ChangeAssociationTargetCommand = new 
