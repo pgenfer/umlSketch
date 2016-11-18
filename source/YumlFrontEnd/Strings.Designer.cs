@@ -61,6 +61,51 @@ namespace Yuml {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you really want to delete this classifier and all the relations pointing to it?.
+        /// </summary>
+        public static string AskBeforeDeletingClassifier {
+            get {
+                return ResourceManager.GetString("AskBeforeDeletingClassifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you really want to delete this {0}?.
+        /// </summary>
+        public static string AskUserBeforeDeletingDomainObject {
+            get {
+                return ResourceManager.GetString("AskUserBeforeDeletingDomainObject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to classifier.
+        /// </summary>
+        public static string Classifier {
+            get {
+                return ResourceManager.GetString("Classifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to interface implementation.
+        /// </summary>
+        public static string Implementation {
+            get {
+                return ResourceManager.GetString("Implementation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to method.
+        /// </summary>
+        public static string Method {
+            get {
+                return ResourceManager.GetString("Method", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This name is already in use..
         /// </summary>
         public static string NameAlreadyExists {
@@ -111,6 +156,33 @@ namespace Yuml {
         public static string NewProperty {
             get {
                 return ResourceManager.GetString("NewProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to parameter.
+        /// </summary>
+        public static string Parameter {
+            get {
+                return ResourceManager.GetString("Parameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to property.
+        /// </summary>
+        public static string Property {
+            get {
+                return ResourceManager.GetString("Property", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to association.
+        /// </summary>
+        public static string Relation {
+            get {
+                return ResourceManager.GetString("Relation", resourceCulture);
             }
         }
     }

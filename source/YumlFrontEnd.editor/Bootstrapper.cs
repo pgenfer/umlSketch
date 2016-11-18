@@ -64,6 +64,7 @@ namespace YumlFrontEnd.editor
             _container.Singleton<MessageSystem>();
             _container.Singleton<DeletionService>();
             _container.Singleton<IRelationService,RelationService>();
+            _container.Singleton<IAskUserBeforeDeletionService, AskUserBeforeDeletionService>();
             _container.Singleton<ViewModelContext>();
             _container.Singleton<CommandFactory>();
             _container.PerRequest<DiagramCommands>();
@@ -88,6 +89,7 @@ namespace YumlFrontEnd.editor
             }
             var settingsFilePath = Combine(applicationSettingsPath,"umlsketch.settings");
             applicationSettings.Load(settingsFilePath);
+           
             _container.Instance(applicationSettings);
         }
 

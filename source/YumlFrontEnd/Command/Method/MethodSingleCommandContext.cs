@@ -1,4 +1,6 @@
-﻿namespace Yuml.Command
+﻿using Yuml.Service;
+
+namespace Yuml.Command
 {
     public class MethodSingleCommandContext : SingleCommandContextBase<Method>
     {
@@ -7,7 +9,8 @@
             Method method,
             ClassifierDictionary availableClassifiers,
             IMethodNameValidationService validateName,
-            MessageSystem messageSystem):base(methods,method,messageSystem)
+            MessageSystem messageSystem,
+            IAskUserBeforeDeletionService askUserBeforeDeletion):base(methods,method,messageSystem, askUserBeforeDeletion)
         {
             Rename = new RenameMethodCommand(
                 method,

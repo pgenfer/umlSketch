@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using Yuml.Service;
 
 namespace Yuml.Command
 {
@@ -21,9 +22,10 @@ namespace Yuml.Command
         protected SingleCommandContextBase(
             BaseList<T> memberList, 
             T member, 
-            MessageSystem messageSystem)
+            MessageSystem messageSystem,
+            IAskUserBeforeDeletionService askUserService)
         {
-            Delete = new DeleteCommand<T>(memberList, member, messageSystem);
+            Delete = new DeleteCommand<T>(memberList, member, messageSystem,askUserService);
             Visibility = new ShowOrHideSingleObjectCommand(member, messageSystem);
         }
     }

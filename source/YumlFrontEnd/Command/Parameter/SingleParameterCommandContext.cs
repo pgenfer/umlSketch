@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yuml;
+using Yuml.Service;
 
 namespace Yuml.Command
 {
@@ -13,8 +14,9 @@ namespace Yuml.Command
             BaseList<Parameter> memberList,
             Parameter member,
             ClassifierDictionary classifiers,
-            MessageSystem messageSystem) : 
-            base(memberList, member, messageSystem)
+            MessageSystem messageSystem,
+            IAskUserBeforeDeletionService askUserService) : 
+            base(memberList, member, messageSystem,askUserService)
         {
             ChangeType = new ChangeParameterTypeCommand(classifiers, member, messageSystem);
         }
