@@ -8,9 +8,9 @@ namespace Yuml
 {
     internal class MethodValidationService : IMethodNameValidationService
     {
-        private readonly IEnumerable<Method> _methods;
+        private readonly MethodList _methods;
 
-        public MethodValidationService(IEnumerable<Method> methods)
+        public MethodValidationService(MethodList methods)
         {
             _methods = methods;
         }
@@ -23,8 +23,10 @@ namespace Yuml
             // name has not changed, so it can be reused
             if (oldName == newName || string.IsNullOrEmpty(oldName)) // no old name => initial case
                 return new Success();
-            // TODO: implement method name comparision (check also parameters)
-            return new Error("Not implemented");
+            var hasMethodWithSameSignature = _methods.ContainsMethodWithSignature(newName, method.Parameters);
+            if (hasMethodWithSameSignature)
+                return new Error(Strings.MethodWithSameSignatureExists);
+            return new Success();
         }
     }
 }

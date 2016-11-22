@@ -40,6 +40,22 @@ namespace Yuml
         public SubSet FindMethodsThatDependOnClassifier(Classifier classifier) => Filter(x => x.ReturnType == classifier);
 
         /// <summary>
+        /// checks if this method list already contains a method with the given name
+        /// and the parameter list.
+        /// </summary>
+        /// <param name="newMethodName">name the method would have</param>
+        /// <param name="parameters">list of parameters the method would have</param>
+        /// <returns>true if there is already a method with the same name and signature</returns>
+        public bool ContainsMethodWithSignature(string newMethodName, ParameterList parameters)
+        {
+            var methodsWithSameName = this.Where(x => x.Name == newMethodName).ToArray();
+            // if there is no method with the same, we do not have to check for parameters
+            return 
+                methodsWithSameName.Length != 0 && 
+                methodsWithSameName.Any(method => method.Parameters.IsSame(parameters));
+        }
+
+        /// <summary>
         /// creates a property with a useful name (e.g. New Property 1, New Property 2 etc...)
         /// and a useful data type (e.g. the data type that was not used before)
         /// </summary>

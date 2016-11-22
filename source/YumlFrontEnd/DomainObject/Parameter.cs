@@ -16,10 +16,11 @@ namespace Yuml
         private readonly NameMixin _name = new NameMixin();
         private Classifier _type;
 
-        public Parameter(Classifier type, string name)
+        public Parameter(Classifier type, string name, bool isVisible=true)
         {
             _type = type;
             Name = name;
+            _visible.IsVisible = isVisible;
         }
 
         public bool IsVisible

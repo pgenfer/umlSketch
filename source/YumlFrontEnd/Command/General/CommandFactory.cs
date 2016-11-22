@@ -27,7 +27,8 @@ namespace Yuml.Command
         private readonly Dictionary<Type, Delegate> _singleCommandCreatorFunctions =
             new Dictionary<Type, Delegate>();
 
-        public CommandFactory(ClassifierDictionary classifiers,
+        public CommandFactory(
+            ClassifierDictionary classifiers,
             DeletionService deletionService,
             IRelationService relationService,
             IAskUserBeforeDeletionService askUserBeforeDeletionService,
@@ -58,21 +59,54 @@ namespace Yuml.Command
 
             // classifier
             RegisterFactoryFuncForSingleCommands<Classifier>(
-                (x,_) => new ClassifierSingleCommandContext(x,classifiers,deletionService,relationService, askUserBeforeDeletionService,messageSystem));
+                (x,_) => new ClassifierSingleCommandContext(
+                    x,
+                    classifiers,
+                    deletionService,
+                    relationService, 
+                    askUserBeforeDeletionService,messageSystem));
             // property
             RegisterFactoryFuncForSingleCommands<Property>(
-                (x,y) => new PropertySingleCommandContext((PropertyList)y,x,classifiers,new PropertyValidationService(y), messageSystem,askUserBeforeDeletionService));
+                (x,y) => new PropertySingleCommandContext(
+                    (PropertyList)y,
+                    x,
+                    classifiers,
+                    new PropertyValidationService(y), 
+                    messageSystem,askUserBeforeDeletionService));
             // method
             RegisterFactoryFuncForSingleCommands<Method>(
-                (x,y) => new MethodSingleCommandContext((MethodList)y,x,classifiers,new MethodValidationService(y), messageSystem,askUserBeforeDeletionService));
+                (x,y) => new MethodSingleCommandContext(
+                    (MethodList)y,
+                    x,
+                    classifiers,
+                    new MethodValidationService((MethodList)y), 
+                    messageSystem,
+                    askUserBeforeDeletionService));
             // association
             RegisterFactoryFuncForSingleCommands<Relation>(
-                (x,y) => new SingleAssociationCommands((ClassifierAssociationList)y,x,classifiers,messageSystem, askUserBeforeDeletionService));
+                (x,y) => new SingleAssociationCommands(
+                    (ClassifierAssociationList)y,
+                    x,
+                    classifiers,
+                    messageSystem, 
+                    askUserBeforeDeletionService));
             // implementation
             RegisterFactoryFuncForSingleCommands<Implementation>(
-                (x,y) => new SingleInterfaceCommandContext((ImplementationList)y,x,classifiers,messageSystem, askUserBeforeDeletionService));
+                (x,y) => new SingleInterfaceCommandContext(
+                    (ImplementationList)y,
+                    x,
+                    classifiers,
+                    messageSystem, 
+                    askUserBeforeDeletionService));
+            // parameter
             RegisterFactoryFuncForSingleCommands<Parameter>(
-                (x, y) => new SingleParameterCommandContext((ParameterList) y,x, classifiers, messageSystem,askUserBeforeDeletionService));
+                (x, y) => new SingleParameterCommandContext(
+                    (ParameterList) y,
+                    x, 
+                    classifiers, 
+                    messageSystem,
+                    new ParameterValidationNameService(y),
+                    askUserBeforeDeletionService));
         }
 
         /// <summary>

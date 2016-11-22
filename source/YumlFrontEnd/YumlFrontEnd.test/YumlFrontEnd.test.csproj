@@ -109,6 +109,8 @@
     <Compile Include="Command\TypeChangedPropertyCommandTest.cs" />
     <Compile Include="DomainObject\ClassifierDictionaryTest.cs" />
     <Compile Include="DomainObject\ImplementationListTest.cs" />
+    <Compile Include="DomainObject\MethodListTest.cs" />
+    <Compile Include="DomainObject\ParameterListTest.cs" />
     <Compile Include="DomainObject\PropertyListTest.cs" />
     <Compile Include="DomainObject\RelationTest.cs" />
     <Compile Include="DomainObject\SystemTypesTest.cs" />

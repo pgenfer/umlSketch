@@ -15,10 +15,12 @@ namespace Yuml.Command
             Parameter member,
             ClassifierDictionary classifiers,
             MessageSystem messageSystem,
+            IValidateNameService validateParameterNameService,
             IAskUserBeforeDeletionService askUserService) : 
             base(memberList, member, messageSystem,askUserService)
         {
             ChangeType = new ChangeParameterTypeCommand(classifiers, member, messageSystem);
+            Rename = new RenameMemberCommand(member, validateParameterNameService, messageSystem);
         }
 
         public IChangeTypeCommand ChangeType { get; }

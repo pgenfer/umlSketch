@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using static System.Diagnostics.Contracts.Contract;
 
 namespace Yuml
@@ -20,5 +21,34 @@ namespace Yuml
 
         public void CreateParameter(Classifier classifier, string name) =>
             AddNewMember(new Parameter(classifier, name));
+
+        public virtual bool IsSame(ParameterList others)
+        {
+            if (others.Count != Count)
+                return false;
+            for(var i=0;i<Count;i++)
+                if (others._list[i].Name != _list[i].Name ||
+                    others._list[i].Type != _list[i].Type)
+                    return false;
+            return true;
+        }
+
+        private int Count => _list.Count;
+
+
+        public void WriteTo(MethodWriter methodWriter)
+        {
+            Requires(methodWriter != null);
+
+            var parameters = this.Where(x => x.IsVisible && x.Type.IsVisible).ToArray();
+            for(var i=0;i<parameters.Length;i++)
+            {
+                var parameter = parameters[i];
+                var parameterWriter = methodWriter.WithParameter();
+                parameterWriter = parameterWriter.AddParameter(parameter.Type.Name, parameter.Name);
+                if (i < parameters.Length - 1)
+                    parameterWriter.AppendToken(",");
+            }
+        }
     }
 }

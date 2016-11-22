@@ -33,8 +33,8 @@
             // because we are just inside the property writer
             return new ClassWriter(true, _content);
         }
-        protected void AppendIdentifier(string identifier) => _content.AppendIdentifier(identifier);
-        protected void AppendToken(string token) => _content.AppendToken(token);
+        private void AppendIdentifier(string identifier) => _content.AppendIdentifier(identifier);
+        private void AppendToken(string token) => _content.AppendToken(token);
       
         public PropertyWriter(DiagramContentMixin content = null)
         {

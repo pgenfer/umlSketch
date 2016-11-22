@@ -106,6 +106,15 @@ namespace Yuml {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A method with the same signature already exists..
+        /// </summary>
+        public static string MethodWithSameSignatureExists {
+            get {
+                return ResourceManager.GetString("MethodWithSameSignatureExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This name is already in use..
         /// </summary>
         public static string NameAlreadyExists {

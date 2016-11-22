@@ -132,6 +132,9 @@
   <data name="Method" xml:space="preserve">
     <value>method</value>
   </data>
+  <data name="MethodWithSameSignatureExists" xml:space="preserve">
+    <value>A method with the same signature already exists.</value>
+  </data>
   <data name="NameAlreadyExists" xml:space="preserve">
     <value>This name is already in use.</value>
   </data>

@@ -119,8 +119,8 @@
     <Compile Include="Command\Method\ChangeMethodReturnTypeCommand.cs" />
     <Compile Include="Command\Parameter\ChangeParameterTypeCommand.cs" />
     <Compile Include="Command\Parameter\ListParameterContext.cs" />
-    <Compile Include="Command\Parameter\RenameParameterCommand.cs" />
     <Compile Include="Command\Parameter\SingleParameterCommandContext.cs" />
+    <Compile Include="DiagramWriter\ParameterWriter.cs" />
     <Compile Include="Event\ChangeParameterTypeEvent.cs" />
     <Compile Include="Event\MethodReturnTypeChanged.cs" />
     <Compile Include="Command\Method\RenameMethodCommand.cs" />
@@ -235,6 +235,7 @@
     <Compile Include="Validation\IMethodNameValidationService.cs" />
     <Compile Include="Validation\IValidateNameService.cs" />
     <Compile Include="Validation\MethodValidationService.cs" />
+    <Compile Include="Validation\ParameterValidationNameService.cs" />
     <Compile Include="Validation\PropertyValidationService.cs" />
     <Compile Include="Validation\Success.cs" />
     <Compile Include="Validation\ValidateNameBase.cs" />

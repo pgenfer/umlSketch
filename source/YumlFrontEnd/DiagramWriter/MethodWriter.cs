@@ -21,18 +21,23 @@
         public MethodWriter WithName(string name)
         {
             AppendIdentifier(name);
-            AppendToken("()");
+            AppendToken("(");
             return this;
         }
         public MethodWriter WithNewMethod()
         {
-            AppendToken(";");
+            AppendToken(");");
             return new MethodWriter(_content);
+        }
+
+        public ParameterWriter WithParameter()
+        {
+            return new ParameterWriter(_content);
         }
 
         public ClassWriter Finish()
         {
-            AppendToken(";");
+            AppendToken(");");
             // this class must have at least one method,
             // because we are just inside the property writer
             return new ClassWriter(true, _content);

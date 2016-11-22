@@ -62,7 +62,7 @@ namespace Yuml.Test
         [TestDescription("Create a diagram from a classifier with methods")]
         public void ClassifiersWithMethods_WriteTo()
         {
-            _result = "[Service|void DoSomething();]";
+            _result = "[Service|void DoSomething(string firstParameter);]";
             _classifiers = new ClassifierDictionary(Service);
             Service.IsVisible = true;
             Service.Methods.Single().IsVisible = true;

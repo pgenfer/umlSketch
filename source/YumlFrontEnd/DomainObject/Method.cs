@@ -37,10 +37,16 @@ namespace Yuml
         /// <summary>
         /// internal setter is only used for serialization.
         /// </summary>
-        public ParameterList Parameters { get { return _parameters;} internal set { _parameters = value; } }
+        public virtual ParameterList Parameters { get { return _parameters;} internal set { _parameters = value; } }
 
-        // TODO: return type can be changed by user
         public Classifier ReturnType { get; set; }
+
+        /// <summary>
+        /// only for testing, do not use in production
+        /// </summary>
+        public Method()
+        {
+        }
 
         public Method(string name, Classifier returnType, bool isVisible = true)
         {
@@ -54,10 +60,11 @@ namespace Yuml
         {
             Requires(methodWriter != null);
 
-            return methodWriter
+            methodWriter
                 .WithReturnType(ReturnType.Name)
                 .WithName(Name);
-            // TODO: write parameters
+            Parameters.WriteTo(methodWriter);
+            return methodWriter;
         }
 
         public void CreateParameter(Classifier classifier, string name)
