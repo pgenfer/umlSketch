@@ -7,7 +7,25 @@
     public enum DiagramDirection
     {
         TopDown,
-        LefToRight,
+        LeftToRight,
         RightToLeft
+    }
+
+    public static class DiagramDirectionExtension
+    {
+        public static string ToDsl(this DiagramDirection direction)
+        {
+            switch (direction)
+            {
+                case DiagramDirection.LeftToRight:
+                    return "LR";
+                case DiagramDirection.RightToLeft:
+                    return "RL";
+                case DiagramDirection.TopDown:
+                    return "TD";
+                default:
+                    return string.Empty;
+            }
+        }
     }
 }

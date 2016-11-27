@@ -121,11 +121,20 @@
     <value>has</value>
     <comment>Aggregate association</comment>
   </data>
+  <data name="ApplicationSettings" xml:space="preserve">
+    <value>Application Settings</value>
+  </data>
+  <data name="AskBeforeDelete" xml:space="preserve">
+    <value>Let user confirm any delete operation.</value>
+  </data>
   <data name="Associations" xml:space="preserve">
     <value>Associations</value>
   </data>
   <data name="BaseClass" xml:space="preserve">
     <value>Base class</value>
+  </data>
+  <data name="Big" xml:space="preserve">
+    <value>big</value>
   </data>
   <data name="CompositeAssociation" xml:space="preserve">
     <value>owns</value>
@@ -134,11 +143,29 @@
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Confirm delete </value>
   </data>
+  <data name="DiagramDirection" xml:space="preserve">
+    <value>Diagram direction</value>
+  </data>
+  <data name="DiagramSettings" xml:space="preserve">
+    <value>Diagram settings</value>
+  </data>
+  <data name="DiagramSize" xml:space="preserve">
+    <value>Diagram size</value>
+  </data>
+  <data name="GeneralSettings" xml:space="preserve">
+    <value>General settings</value>
+  </data>
+  <data name="Huge" xml:space="preserve">
+    <value>huge</value>
+  </data>
   <data name="Interfaces" xml:space="preserve">
     <value>Interfaces</value>
   </data>
   <data name="IsInterface" xml:space="preserve">
     <value>is interface</value>
+  </data>
+  <data name="LeftToRight" xml:space="preserve">
+    <value>from left to right</value>
   </data>
   <data name="Methods" xml:space="preserve">
     <value>Methods</value>
@@ -146,8 +173,14 @@
   <data name="None" xml:space="preserve">
     <value>(none)</value>
   </data>
+  <data name="Normal" xml:space="preserve">
+    <value>normal</value>
+  </data>
   <data name="Note" xml:space="preserve">
     <value>Note</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
   </data>
   <data name="Open" xml:space="preserve">
     <value>Opening new uml diagram</value>
@@ -162,6 +195,9 @@
   <data name="Properties" xml:space="preserve">
     <value>Properties</value>
   </data>
+  <data name="RightToLeft" xml:space="preserve">
+    <value>from right to left</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Saving current uml diagram</value>
   </data>
@@ -169,9 +205,24 @@
     <value>File could not be saved due to the following error:
 {0}</value>
   </data>
+  <data name="ServiceSettings" xml:space="preserve">
+    <value>Yuml service settings</value>
+  </data>
+  <data name="ServiceUrl" xml:space="preserve">
+    <value>Service URL</value>
+  </data>
   <data name="SimpleAssociation" xml:space="preserve">
     <value>not specified</value>
     <comment>Simple association between two classes</comment>
+  </data>
+  <data name="Small" xml:space="preserve">
+    <value>small</value>
+  </data>
+  <data name="Tiny" xml:space="preserve">
+    <value>tiny</value>
+  </data>
+  <data name="TopDown" xml:space="preserve">
+    <value>top down</value>
   </data>
   <data name="UmlJsonFileFilter" xml:space="preserve">
     <value>UML json file (*.json)|*.json</value>
@@ -179,5 +230,8 @@
   <data name="UsesAssociation" xml:space="preserve">
     <value>uses</value>
     <comment>Uses association</comment>
+  </data>
+  <data name="YumlServiceUrl" xml:space="preserve">
+    <value>Yuml.me service address</value>
   </data>
 </root>

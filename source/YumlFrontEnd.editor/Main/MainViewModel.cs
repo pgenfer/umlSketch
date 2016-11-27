@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -95,5 +96,20 @@ namespace YumlFrontEnd.editor
         public void Open() => _serialization.Open();
         public void New() => _serialization.New();
         public void LoadLastFile() => _serialization.LoadLastFile();
+
+        public void Settings()
+        {
+            // create settings for dialog
+            // TODO: this should be done by in a more platform independent way
+            dynamic settings = new ExpandoObject();
+            settings.WindowStartup = WindowStartupLocation.CenterOwner;
+            settings.ResizeMode = ResizeMode.NoResize;
+            // open view model
+            _context.WindowManager.ShowWindow(
+                new ApplicationSettingsViewModel(
+                    _applicationSettings,
+                    _context.MessageSystem),
+                settings:settings);
+        }
     }
 }

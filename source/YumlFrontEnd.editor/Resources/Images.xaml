@@ -21,4 +21,6 @@
   <BitmapImage UriSource="Images/save_gray.png" x:Key="SaveImage"/>
   <BitmapImage UriSource="Images/new.png" x:Key="NewHighlightImage"/>
   <BitmapImage UriSource="Images/new_gray.png" x:Key="NewImage"/>
+  <BitmapImage UriSource="Images/configuration.png" x:Key="SettingsHighlightImage"/>
+  <BitmapImage UriSource="Images/configuration_gray.png" x:Key="SettingsImage"/>
 </ResourceDictionary>

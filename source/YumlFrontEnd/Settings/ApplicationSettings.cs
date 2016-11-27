@@ -67,12 +67,6 @@ namespace Yuml
             set { _data.YumlBaseUrl = value; }
         }
 
-        public string YumlDiagramRequestUri
-        {
-            get { return _data.YumlDiagramRequestUri; }
-            set { _data.YumlDiagramRequestUri = value; }
-        }
-
         public DiagramSize DiagramSize
         {
             get { return _data.DiagramSize; }

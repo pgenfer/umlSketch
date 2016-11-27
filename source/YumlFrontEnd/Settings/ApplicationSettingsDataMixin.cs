@@ -6,20 +6,17 @@ namespace Yuml
     internal class ApplicationSettingsDataMixin
     {
         private const string BaseUri = @"http://yuml.me/";
-        private const string DiagramRequestUri = @"diagram/scruffy/class/";
-
+    
         public ApplicationSettingsDataMixin(
             string lastFile = null,
             bool askBeforeDelete = true,
             string baseUri = BaseUri,
-            string diagramRequestUri = DiagramRequestUri,
             DiagramSize size = DiagramSize.Big,
             DiagramDirection direction = DiagramDirection.TopDown)
         {
             LastFile = lastFile;
             AskBeforeDelete = askBeforeDelete;
             YumlBaseUrl = baseUri;
-            YumlDiagramRequestUri = diagramRequestUri;
             DiagramSize = size;
             DiagramDirection = direction;
         }
@@ -38,10 +35,6 @@ namespace Yuml
         /// the base address used to access all Yumle services.
         /// </summary>
         public string YumlBaseUrl { get; set; }
-        /// <summary>
-        /// Url used to access the diagram drawing service
-        /// </summary>
-        public string YumlDiagramRequestUri { get; set; }
         /// <summary>
         /// predefined size of the diagram
         /// </summary>

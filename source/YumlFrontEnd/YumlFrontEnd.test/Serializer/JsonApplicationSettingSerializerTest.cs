@@ -17,7 +17,7 @@ namespace Yuml.Serializer.Test
         {
             var settings = new ApplicationSettingsDataMixin(
                 size: DiagramSize.Huge,
-                direction: DiagramDirection.LefToRight);
+                direction: DiagramDirection.LeftToRight);
 
             var serializer = new JsonApplicationSettingSerializer();
             var json = serializer.Save(settings);

@@ -44,6 +44,11 @@
                                Margin="5,0"
                                DefaultImage="{StaticResource OpenImage}"
                                MouseOverImage="{StaticResource OpenHighlightImage}" />
+          <local:ImageButton x:Name="Settings"
+                              Style="{StaticResource ImageButtonStyle}"
+                              Margin="5,0"
+                              DefaultImage="{StaticResource SettingsImage}"
+                              MouseOverImage="{StaticResource SettingsHighlightImage}" />
         </StackPanel>
         <ContentControl x:Name="ClassifierList"
                         Grid.Column="0"

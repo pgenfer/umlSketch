@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Caliburn.Micro;
 using Yuml;
 using Yuml.Command;
 using static System.Diagnostics.Contracts.Contract;
@@ -31,17 +32,24 @@ namespace YumlFrontEnd.editor
         /// factory used to create domain commands
         /// </summary>
         public CommandFactory CommandFactory { get; }
+        /// <summary>
+        /// can be used by view models to open
+        /// dialogs.
+        /// </summary>
+        public IWindowManager WindowManager { get; }
 
         public ViewModelContext(
             ClassifierDictionary availableClassifiers,
             CommandFactory commandFactory,
-            MessageSystem messageSystem)
+            MessageSystem messageSystem,
+            IWindowManager windowManager)
         {
             Requires(availableClassifiers != null);
             Requires(messageSystem != null);
 
             Classifiers = availableClassifiers;
             MessageSystem = messageSystem;
+            WindowManager = windowManager;
             ViewModelFactory = new ViewModelFactory(this);
             CommandFactory = commandFactory;
         }

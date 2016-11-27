@@ -1,0 +1,151 @@
+﻿<UserControl x:Class="YumlFrontEnd.editor.ApplicationSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:editor="clr-namespace:YumlFrontEnd.editor"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:yuml="clr-namespace:Yuml;assembly=YumlFrontEnd"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance editor:ApplicationSettingsViewModel}"
+             Margin="20"
+             Width="600" Height="450">
+  <UserControl.Resources>
+    <Style TargetType="{x:Type TextBlock}"
+           BasedOn="{StaticResource TextBlock-Sketch}"/>
+    <Style TargetType="{x:Type CheckBox}"
+           BasedOn="{StaticResource CheckBox-Sketch}"/>
+    <!-- diagram size enum -->
+    <ObjectDataProvider MethodName="GetValues"
+                ObjectType="{x:Type sys:Enum}"
+                x:Key="DiagramSizeEnum">
+      <ObjectDataProvider.MethodParameters>
+        <x:Type Type="yuml:DiagramSize"/>
+      </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+    <!-- diagram direction enum -->
+    <ObjectDataProvider MethodName="GetValues"
+                ObjectType="{x:Type sys:Enum}"
+                x:Key="DiagramDirectionEnum">
+      <ObjectDataProvider.MethodParameters>
+        <x:Type Type="yuml:DiagramDirection"/>
+      </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+  </UserControl.Resources>
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <!-- general settings -->
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <!-- connection data -->
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <!-- diagram data -->
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <!-- OK Button -->
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <!-- general settings -->
+    <TextBlock
+       Grid.Column="0"
+       Grid.ColumnSpan="2"
+       Grid.Row="0"
+       Margin="10"
+       Text="{x:Static editor:EditorStrings.GeneralSettings}"
+       Style="{StaticResource SubtitleLeft-Sketch}"/>
+    <!-- ask before delete -->
+    <TextBlock
+      Grid.Column="0"
+      Grid.Row="1"
+      Margin="50,10,10,10"
+      Text="{x:Static editor:EditorStrings.AskBeforeDelete}"/>
+    <CheckBox
+      Grid.Column="1"
+      Grid.Row="1"
+      Margin="10"
+      x:Name="AskBeforeDelete"/>
+    <!-- service settings -->
+    <TextBlock
+       Grid.Column="0"
+       Grid.ColumnSpan="2"
+       Grid.Row="2"
+       Margin="10"
+       Text="{x:Static editor:EditorStrings.ServiceSettings}"
+       Style="{StaticResource SubtitleLeft-Sketch}"/>
+    <TextBlock
+      Grid.Column="0"
+      Grid.Row="3"
+      Margin="50,10,10,10"
+      Text="{x:Static editor:EditorStrings.YumlServiceUrl}"/>
+    <TextBox
+      Grid.Column="1"
+      Grid.Row="3"
+      Margin="10"
+      x:Name="YumlBaseUrl"/>
+    <!-- diagram settings -->
+    <TextBlock
+       Grid.Column="0"
+       Grid.ColumnSpan="2"
+       Grid.Row="4"
+       Margin="10"
+       Text="{x:Static editor:EditorStrings.DiagramSettings}"
+       Style="{StaticResource SubtitleLeft-Sketch}"/>
+    <!-- diagram size-->
+    <TextBlock
+      Grid.Column="0"
+      Grid.Row="5"
+      Margin="50,10,10,10"
+      Text="{x:Static editor:EditorStrings.DiagramSize}"/>
+    <ComboBox
+      Grid.Column="1"
+      Grid.Row="5"
+      Margin="10"
+      x:Name="DiagramSize"
+      ItemsSource="{Binding Source={StaticResource DiagramSizeEnum}}"
+      SelectedItem="{Binding DiagramSize}">
+      <ComboBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding .,Converter={editor:EnumToTextKeyConverter}}"/>
+        </DataTemplate>
+      </ComboBox.ItemTemplate>
+    </ComboBox>
+    <!-- diagram direction -->
+    <TextBlock
+      Grid.Column="0"
+      Grid.Row="6"
+      Margin="50,10,10,10"
+      Text="{x:Static editor:EditorStrings.DiagramDirection}"/>
+    <ComboBox
+     Grid.Column="1"
+     Grid.Row="6"
+     Margin="10"
+     x:Name="DiagramDirection"
+     ItemsSource="{Binding Source={StaticResource DiagramDirectionEnum}}"
+     SelectedItem="{Binding DiagramDirection}">
+      <ComboBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding .,Converter={editor:EnumToTextKeyConverter}}"/>
+        </DataTemplate>
+      </ComboBox.ItemTemplate>
+    </ComboBox>
+  <StackPanel 
+    Grid.Row="7"
+    Grid.Column="0"
+    Grid.ColumnSpan="2"
+    HorizontalAlignment="Right"
+    VerticalAlignment="Bottom">
+    <Button 
+      x:Name="Ok"
+      Content="{x:Static editor:EditorStrings.Ok}"
+      Width="50"
+      Height="30"
+      Style="{StaticResource Button-Sketch}"/>
+  </StackPanel>
+  </Grid>
+</UserControl>

@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
@@ -73,22 +77,22 @@ namespace YumlFrontEnd.editor
             var diagramText = diagramWriter.ToString();
 
             // skip if diagram did not change
-            if (diagramText == _lastDslText)
-                return;
+            //if (diagramText == _lastDslText)
+            //    return;
 
             // send diagram data to server
             _lastDslText = diagramText;
             var content = new Dictionary<string, string>
             {
-                ["dsl_text"] = diagramText
+                ["dsl_text"] = diagramText,
             };
 
             // wait for response image URI
             try
             {
-                var response = await _yumleHttpConnection.PostAsync(
-                _settings.YumlDiagramRequestUri,
-                new FormUrlEncodedContent(content));
+                var requestUri =
+                    $"diagram/scruffy;dir:{_settings.DiagramDirection.ToDsl()};scale:{(int) _settings.DiagramSize}/class/";
+                var response = await _yumleHttpConnection.PostAsync(requestUri,new FormUrlEncodedContent(content));
                 // the result is the file name of the cached png,
                 // we remove the extension to access the resource
                 if (response.IsSuccessStatusCode)
@@ -105,6 +109,10 @@ namespace YumlFrontEnd.editor
             catch (HttpRequestException exception)
             {
                 // TODO: show correct error message here (in HTML maybe?)
+            }
+            catch (Exception exception)
+            {
+                // TODO: show other error message
             }
         }
 

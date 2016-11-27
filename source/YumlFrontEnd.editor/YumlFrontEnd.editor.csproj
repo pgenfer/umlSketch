@@ -141,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationSettings\ApplicationSettingsView.xaml.cs">
+      <DependentUpon>ApplicationSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationSettings\ApplicationSettingsViewModel.cs" />
     <Compile Include="Association\AssociationItemView.xaml.cs">
       <DependentUpon>AssociationItemView.xaml</DependentUpon>
     </Compile>
@@ -157,6 +161,7 @@
     <Compile Include="Classifier\IClassifierSelectionItemsSource.cs" />
     <Compile Include="Classifier\InterfaceSelectionItemsSource.cs" />
     <Compile Include="Converter\ColorToGradientBrushConverter.cs" />
+    <Compile Include="Converter\EnumToTextKeyConverter.cs" />
     <Compile Include="Converter\InverseBooleanConverter.cs" />
     <Compile Include="Converter\IsVisibleToColorConverter.cs" />
     <Compile Include="Converter\TestConverter.cs" />
@@ -257,6 +262,10 @@
       <DependentUpon>PropertyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ViewModelFactory.cs" />
+    <Page Include="ApplicationSettings\ApplicationSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Association\AssociationItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -461,6 +470,10 @@
   <ItemGroup>
     <Resource Include="Resources\Images\new.png" />
     <Resource Include="Resources\Images\new_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\configuration.png" />
+    <Resource Include="Resources\Images\configuration_gray.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

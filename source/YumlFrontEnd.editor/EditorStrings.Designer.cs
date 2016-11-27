@@ -70,6 +70,24 @@ namespace YumlFrontEnd.editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Application Settings.
+        /// </summary>
+        public static string ApplicationSettings {
+            get {
+                return ResourceManager.GetString("ApplicationSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Let user confirm any delete operation..
+        /// </summary>
+        public static string AskBeforeDelete {
+            get {
+                return ResourceManager.GetString("AskBeforeDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Associations.
         /// </summary>
         public static string Associations {
@@ -84,6 +102,15 @@ namespace YumlFrontEnd.editor {
         public static string BaseClass {
             get {
                 return ResourceManager.GetString("BaseClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to big.
+        /// </summary>
+        public static string Big {
+            get {
+                return ResourceManager.GetString("Big", resourceCulture);
             }
         }
         
@@ -106,6 +133,51 @@ namespace YumlFrontEnd.editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diagram direction.
+        /// </summary>
+        public static string DiagramDirection {
+            get {
+                return ResourceManager.GetString("DiagramDirection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diagram settings.
+        /// </summary>
+        public static string DiagramSettings {
+            get {
+                return ResourceManager.GetString("DiagramSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diagram size.
+        /// </summary>
+        public static string DiagramSize {
+            get {
+                return ResourceManager.GetString("DiagramSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General settings.
+        /// </summary>
+        public static string GeneralSettings {
+            get {
+                return ResourceManager.GetString("GeneralSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to huge.
+        /// </summary>
+        public static string Huge {
+            get {
+                return ResourceManager.GetString("Huge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Interfaces.
         /// </summary>
         public static string Interfaces {
@@ -120,6 +192,15 @@ namespace YumlFrontEnd.editor {
         public static string IsInterface {
             get {
                 return ResourceManager.GetString("IsInterface", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to from left to right.
+        /// </summary>
+        public static string LeftToRight {
+            get {
+                return ResourceManager.GetString("LeftToRight", resourceCulture);
             }
         }
         
@@ -142,11 +223,29 @@ namespace YumlFrontEnd.editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to normal.
+        /// </summary>
+        public static string Normal {
+            get {
+                return ResourceManager.GetString("Normal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Note.
         /// </summary>
         public static string Note {
             get {
                 return ResourceManager.GetString("Note", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         
@@ -188,6 +287,15 @@ namespace YumlFrontEnd.editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to from right to left.
+        /// </summary>
+        public static string RightToLeft {
+            get {
+                return ResourceManager.GetString("RightToLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saving current uml diagram.
         /// </summary>
         public static string Save {
@@ -207,11 +315,56 @@ namespace YumlFrontEnd.editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yuml service settings.
+        /// </summary>
+        public static string ServiceSettings {
+            get {
+                return ResourceManager.GetString("ServiceSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service URL.
+        /// </summary>
+        public static string ServiceUrl {
+            get {
+                return ResourceManager.GetString("ServiceUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to not specified.
         /// </summary>
         public static string SimpleAssociation {
             get {
                 return ResourceManager.GetString("SimpleAssociation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to small.
+        /// </summary>
+        public static string Small {
+            get {
+                return ResourceManager.GetString("Small", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tiny.
+        /// </summary>
+        public static string Tiny {
+            get {
+                return ResourceManager.GetString("Tiny", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to top down.
+        /// </summary>
+        public static string TopDown {
+            get {
+                return ResourceManager.GetString("TopDown", resourceCulture);
             }
         }
         
@@ -230,6 +383,15 @@ namespace YumlFrontEnd.editor {
         public static string UsesAssociation {
             get {
                 return ResourceManager.GetString("UsesAssociation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yuml.me service address.
+        /// </summary>
+        public static string YumlServiceUrl {
+            get {
+                return ResourceManager.GetString("YumlServiceUrl", resourceCulture);
             }
         }
     }

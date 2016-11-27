@@ -6,10 +6,10 @@
     /// </summary>
     public enum DiagramSize
     {
-        Tiny,
-        Small,
-        Normal,
-        Big,
-        Huge
+        Tiny = 50,
+        Small = 75,
+        Normal = 100,
+        Big = 120,
+        Huge = 180
     }
 }
