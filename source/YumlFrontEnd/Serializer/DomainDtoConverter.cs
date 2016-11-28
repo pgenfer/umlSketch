@@ -98,6 +98,9 @@ namespace Yuml.Serializer.Dto
                 // mapping for implementations works like relation mapping
                 x.CreateMap<Implementation, ImplementationDto>().PreserveReferences()
                     .IncludeBase<Relation,RelationDto>();
+                x.CreateMap<Association, AssociationDto>().PreserveReferences()
+                    .IncludeBase<Relation, RelationDto>();
+                
                 // mapping from DTO => relation
                 x.CreateMap<RelationDto,Relation>().PreserveReferences()
                     .ForMember(d => d.Start, c =>
@@ -118,17 +121,20 @@ namespace Yuml.Serializer.Dto
                 // mapping for implementation dtos
                 x.CreateMap<ImplementationDto, Implementation>().PreserveReferences()
                     .IncludeBase<RelationDto, Relation>();
-                x.CreateMap<List<RelationDto>, ClassifierAssociationList>().PreserveReferences()
-                    .AfterMap((s, d) =>
-                    {
-                        foreach (var relationDto in s)
-                            d.AddExistingRelation(_mapper.Map<Relation>(relationDto));
-                    });
                 x.CreateMap<List<ImplementationDto>, ImplementationList>().PreserveReferences()
                     .AfterMap((s, d) =>
                     {
                         foreach (var implementationDto in s)
                             d.AddInterfaceToList(_mapper.Map<Implementation>(implementationDto));
+                    });
+                // mapping for associations
+                x.CreateMap<AssociationDto, Association>().PreserveReferences()
+                    .IncludeBase<RelationDto, Relation>();
+                x.CreateMap<List<AssociationDto>, ClassifierAssociationList>().PreserveReferences()
+                    .AfterMap((s, d) =>
+                    {
+                        foreach (var associationDto in s)
+                            d.AddExistingRelation(_mapper.Map<Association>(associationDto));
                     });
             });
 

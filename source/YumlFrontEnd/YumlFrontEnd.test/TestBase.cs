@@ -48,7 +48,7 @@ namespace Yuml.Test
         internal readonly ClassifierDto CarDto = new ClassifierDto { Name = "Car" };
         internal readonly ClassifierDto TireDto = new ClassifierDto { Name = "Tyre" };
         // relations
-        internal readonly RelationDto CarHasTiresDto = new RelationDto();
+        internal readonly AssociationDto CarHasTiresDto = new AssociationDto();
 
         /// <summary>
         /// a dto to a service class that provides some methods
@@ -103,7 +103,7 @@ namespace Yuml.Test
                     }
                 }
             };
-            CarDto.Associations = new List<RelationDto> {CarHasTiresDto};
+            CarDto.Associations = new List<AssociationDto> {CarHasTiresDto};
         }
 
         private void InitRelationDtos()

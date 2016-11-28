@@ -73,7 +73,6 @@ namespace Yuml.Test
 
             Assert.AreSame(loadedCar, relation.Start);
             Assert.AreSame(loadedTire, relation.End);
-            Assert.AreEqual("has", relation.Name);
             Assert.AreEqual(RelationType.Aggregation, relation.RelationType);
             Assert.AreEqual(Multiplicity.ZeroToMany, relation.EndMultiplicity);
         }

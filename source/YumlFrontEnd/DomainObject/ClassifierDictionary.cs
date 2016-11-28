@@ -152,7 +152,7 @@ namespace Yuml
             _dictionary.Remove(classifierToRemove.Name);
         }
 
-        public void WriteTo(DiagramWriter writer)
+        public void WriteTo(DiagramWriter writer,DiagramDirection direction)
         {
             Requires(writer != null);
 
@@ -180,7 +180,7 @@ namespace Yuml
                
             }
            
-            relations.WriteTo(writer);
+            relations.WriteTo(writer,direction);
         }
 
         public virtual void RenameClassifier(Classifier classifier,string newName)

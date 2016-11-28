@@ -6,9 +6,9 @@ namespace Yuml
     /// </summary>
     public class StartNode : RelationNode
     {
-        public StartNodeWriter WriteTo(RelationWriter writer)
+        public StartNodeWriter WriteTo(RelationWriter writer,DiagramDirection direction)
         {
-            var start = writer.WithStartNode(Classifier.Name);
+            var start = writer.WithStartNode(Classifier.Name,direction);
             if (!string.IsNullOrEmpty(Name))
                 start = start.WithName(Name);
             return start;

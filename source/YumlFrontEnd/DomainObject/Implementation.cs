@@ -35,7 +35,8 @@ namespace Yuml
         /// invariant: implementation associations must always have the correct relation type.
         /// </summary>
         [ContractInvariantMethod]
-        private void ImplementationHasCorrectRelationType() => Contract.Invariant(Type == RelationType.Implementation);
+        private void ImplementationHasCorrectRelationType() => 
+            Contract.Invariant(Type == RelationType.Implementation);
 
         public void ReplaceInterface(Classifier newInterface)
         {
@@ -44,5 +45,35 @@ namespace Yuml
 
             End.Classifier = newInterface;
         }
+    }
+
+    /// <summary>
+    /// relations that represents an inheritance between a
+    /// class and its base class
+    /// </summary>
+    public class Inheritance : Relation
+    {
+        /// <summary>
+        /// should only be used for testing and mapping
+        /// </summary>
+        public Inheritance()
+        {
+            Type = RelationType.Inheritance;
+        }
+
+        public Inheritance(Classifier start, Classifier end)
+            : base(start, end, RelationType.Inheritance, string.Empty)
+        {
+            Requires(start != end);
+            Requires(end != null);
+        }
+
+        /// <summary>
+        /// invariant: implementation associations must always have the correct relation type.
+        /// </summary>
+        [ContractInvariantMethod]
+        private void InheritanceHasCorrectRelationType() =>
+            Contract.Invariant(Type == RelationType.Inheritance);
+
     }
 }

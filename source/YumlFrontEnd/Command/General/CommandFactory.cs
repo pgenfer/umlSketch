@@ -44,7 +44,7 @@ namespace Yuml.Command
             RegisterFactoryFuncForListCommands<Method>(
                 x => new MethodListCommandContext((MethodList)x,classifiers,messageSystem));
             // associations
-            RegisterFactoryFuncForListCommands<Relation>(
+            RegisterFactoryFuncForListCommands<Association>(
                 x => new AssociationListCommandContext((ClassifierAssociationList)x,classifiers,messageSystem));
             // implementations
             RegisterFactoryFuncForListCommands<Implementation>(
@@ -83,7 +83,7 @@ namespace Yuml.Command
                     messageSystem,
                     askUserBeforeDeletionService));
             // association
-            RegisterFactoryFuncForSingleCommands<Relation>(
+            RegisterFactoryFuncForSingleCommands<Association>(
                 (x,y) => new SingleAssociationCommands(
                     (ClassifierAssociationList)y,
                     x,

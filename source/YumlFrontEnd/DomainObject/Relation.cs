@@ -14,14 +14,14 @@ namespace Yuml
     /// two classifiers. A relation has a start node
     /// and an end node.
     /// </summary>
-    public class Relation : IVisible
+    public abstract class Relation : IVisible
     {
         private readonly IVisible _visible = new VisibleMixin();
 
         /// <summary>
         /// should only be used for mappoing and testing
         /// </summary>
-        public Relation(){}
+        protected Relation(){}
         
         /// <summary>
         /// creates a new relation between two nodes
@@ -31,7 +31,7 @@ namespace Yuml
         /// <param name="startName">optional name of the start node of the relation</param>
         /// <param name="endName">optional name of the end node of the relation</param>
         /// <param name="relation">type of the relation</param>
-        public Relation(
+        protected Relation(
             Classifier start,
             Classifier end,
             RelationType relation = RelationType.Association,
@@ -61,11 +61,11 @@ namespace Yuml
         /// </summary>
         public RelationType Type { get; set; }
 
-        public RelationWriter WriteTo(RelationWriter relationWriter)
+        public virtual RelationWriter WriteTo(RelationWriter relationWriter,DiagramDirection direction)
         {
             Requires(relationWriter != null);
 
-            var startNode = Start.WriteTo(relationWriter);
+            var startNode = Start.WriteTo(relationWriter,direction);
             EndNodeWriter relationEnd;
             // normally in UML, we could have an association and a navigation,
             // but Yuml.me only supports one or the other, so we have to check that here

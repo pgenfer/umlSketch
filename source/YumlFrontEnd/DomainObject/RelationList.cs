@@ -31,7 +31,7 @@ namespace Yuml
         /// the diagram writer.
         /// </summary>
         /// <param name="writer"></param>
-        public void WriteTo(DiagramWriter writer)
+        public void WriteTo(DiagramWriter writer,DiagramDirection direction)
         {
             Requires(writer != null);
 
@@ -49,7 +49,7 @@ namespace Yuml
                 x.End.Classifier.IsVisible))
             {
                 var relationWriter = writer.StartRelation();
-                relationWriter = relation.WriteTo(relationWriter);
+                relationWriter = relation.WriteTo(relationWriter,direction);
                 relationWriter.Finish();
             }
         }

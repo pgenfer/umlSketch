@@ -37,7 +37,7 @@ namespace Yuml.Test
             String.IsVisible = true;
             Integer.IsVisible = true;
 
-            _classifiers.WriteTo(_diagramWriter);
+            _classifiers.WriteTo(_diagramWriter, DiagramDirection.LeftToRight);
             var umlText = _diagramWriter.ToString();
 
             Assert.AreEqual(_result, umlText);
@@ -53,7 +53,7 @@ namespace Yuml.Test
             String.Properties.Single().IsVisible = true;
 
 
-            _classifiers.WriteTo(_diagramWriter);
+            _classifiers.WriteTo(_diagramWriter, DiagramDirection.LeftToRight);
             var umlText = _diagramWriter.ToString();
 
             Assert.AreEqual(_result, umlText);
@@ -67,7 +67,7 @@ namespace Yuml.Test
             Service.IsVisible = true;
             Service.Methods.Single().IsVisible = true;
 
-            _classifiers.WriteTo(_diagramWriter);
+            _classifiers.WriteTo(_diagramWriter, DiagramDirection.LeftToRight);
             var umlText = _diagramWriter.ToString();
 
             Assert.AreEqual(_result, umlText);

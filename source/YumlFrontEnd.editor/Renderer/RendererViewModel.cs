@@ -73,7 +73,7 @@ namespace YumlFrontEnd.editor
         {
             // write classifiers and relations to diagram
             var diagramWriter = new DiagramWriter();
-            _diagram.WriteTo(diagramWriter);
+            _diagram.WriteTo(diagramWriter,_settings.DiagramDirection);
             var diagramText = diagramWriter.ToString();
 
             // skip if diagram did not change

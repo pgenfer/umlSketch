@@ -19,7 +19,7 @@ namespace Yuml.Serializer.Dto
         public ClassifierDto BaseClass { get; set; }
         public bool IsSystemType { get; set; }
         public string Color { get; set; }
-        public List<RelationDto> Associations { get; set; }
+        public List<AssociationDto> Associations { get; set; }
         public List<ImplementationDto> InterfaceImplementations { get; set; }
         public string NoteText { get; set; }
         public string NoteColor { get; set; }

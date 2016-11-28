@@ -170,6 +170,9 @@
   <data name="Methods" xml:space="preserve">
     <value>Methods</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="None" xml:space="preserve">
     <value>(none)</value>
   </data>

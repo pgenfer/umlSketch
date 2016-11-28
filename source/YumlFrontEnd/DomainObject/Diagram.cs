@@ -35,9 +35,9 @@ namespace Yuml
             Classifiers = classifiers;
         }
 
-        public void WriteTo(DiagramWriter writer)
+        public void WriteTo(DiagramWriter writer,DiagramDirection direction)
         {
-            Classifiers.WriteTo(writer);
+            Classifiers.WriteTo(writer,direction);
             if (Note.HasText)
             {
                 // we need a separator between the

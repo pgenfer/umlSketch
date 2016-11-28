@@ -176,7 +176,7 @@ namespace Yuml
         {
             var relationList = new RelationList(Associations);
             if (BaseClass != null)
-                relationList.AddRelation(new Relation(this, BaseClass, RelationType.Inheritance));
+                relationList.AddRelation(new Inheritance(this, BaseClass));
             relationList.AddRelations(InterfaceImplementations);
             return relationList;
         }

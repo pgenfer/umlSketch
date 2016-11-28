@@ -75,7 +75,7 @@ namespace Yuml.Test
         {
             var umlText = _diagram
                     .StartRelation()
-                        .WithStartNode("Person")
+                        .WithStartNode("Person",DiagramDirection.LeftToRight)
                         .WithName("has")
                         .AsSimpleAssociation()
                         .ToClassifier("Name")
@@ -93,7 +93,7 @@ namespace Yuml.Test
             var umlText =
                 _diagram
                     .StartRelation()
-                        .WithStartNode("Car")
+                        .WithStartNode("Car",DiagramDirection.LeftToRight)
                         .WithName("exists of")
                         .AsCompositeOwner()
                         .ToClassifier("Parts")
@@ -111,7 +111,7 @@ namespace Yuml.Test
             var umlText =
                 _diagram
                     .StartRelation()
-                        .WithStartNode("Car")
+                        .WithStartNode("Car",DiagramDirection.LeftToRight)
                         .WithName("uses")
                         .AsUsesRelation()
                         .WithNavigation()
@@ -130,7 +130,7 @@ namespace Yuml.Test
             var umlText = 
                 _diagram
                     .StartRelation()
-                        .WithStartNode("INamed")
+                        .WithStartNode("INamed", DiagramDirection.LeftToRight)
                         .WithInterfaceImplementation("Name")
                     .Finish()
                 .Finish()
@@ -146,7 +146,7 @@ namespace Yuml.Test
             var umlText = 
                 _diagram
                     .StartRelation()
-                        .WithStartNode("Base")
+                        .WithStartNode("Base", DiagramDirection.LeftToRight)
                         .WithDerivation("Derived")
                     .Finish()
                 .Finish()

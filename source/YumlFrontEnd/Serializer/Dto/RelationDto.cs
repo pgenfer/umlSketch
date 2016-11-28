@@ -21,10 +21,6 @@
         /// </summary>
         public bool BiDirectional { get; set; }
         /// <summary>
-        /// name of the relation (optional)
-        /// </summary>
-        public string Name { get; set; }
-        /// <summary>
         /// multiplicity of the start relation
         /// </summary>
         public Multiplicity StartMultiplicity { get; set; }

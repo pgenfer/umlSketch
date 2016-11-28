@@ -71,8 +71,8 @@ namespace YumlFrontEnd.editor
                 case Confirmation.Confirmed:
                     // important: we can only disable edit mode 
                     // it text is not empty, otherwise the text box would not be visible
-                    if (string.IsNullOrEmpty(Name))
-                        return;
+                    //if (string.IsNullOrEmpty(Name))
+                    //    return;
                     // only fire change event if name did really change
                     if (_originalName != Name && !HasNameError)
                         Rename(Name);

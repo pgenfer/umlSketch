@@ -17,7 +17,7 @@ namespace Yuml.DomainObject
     /// are not stored in this as this list only handles
     /// assocations
     /// </summary>
-    public class ClassifierAssociationList : BaseList<Relation>
+    public class ClassifierAssociationList : BaseList<Association>
     {
         /// <summary>
         /// the root classifier where all relations of this list start.
@@ -31,7 +31,7 @@ namespace Yuml.DomainObject
         /// </summary>
         /// <param name="classifiers"></param>
         /// <returns></returns>
-        public override Relation CreateNew(ClassifierDictionary classifiers)
+        public override Association CreateNew(ClassifierDictionary classifiers)
         {
             // ensure that the relation is not bound to a system type
             Ensures(!Result<Relation>().End.Classifier.IsSystemType);
@@ -47,10 +47,10 @@ namespace Yuml.DomainObject
             // there must always be one, at least the source itself
             firstUnusedClassifier = firstUnusedClassifier ?? classifiers.First(x => !x.IsSystemType);
 
-            var newRelation = new Relation(Root, firstUnusedClassifier);
-            AddNewMember(newRelation);
+            var newAssociation = new Association(Root, firstUnusedClassifier);
+            AddNewMember(newAssociation);
 
-            return newRelation;
+            return newAssociation;
         }
 
         public Relation AddNewRelation(
@@ -65,21 +65,26 @@ namespace Yuml.DomainObject
             Requires(associationType != RelationType.Inheritance);
             Requires(Root != null);
 
-            var relation = new Relation(Root, target, associationType, startName, endName );
-            AddNewMember(relation);
+            var association = new Association(
+                Root, 
+                target, 
+                associationType, 
+                startName, 
+                endName );
+            AddNewMember(association);
 
-            return relation;
+            return association;
         }
 
-        public void AddExistingRelation(Relation relation)
+        public void AddExistingRelation(Association association)
         {
             // implementation or derivation are not stored
             // in the classes relation list
-            Requires(relation != null);
-            Requires(relation.Type != RelationType.Implementation);
-            Requires(relation.Type != RelationType.Inheritance);
+            Requires(association != null);
+            Requires(association.Type != RelationType.Implementation);
+            Requires(association.Type != RelationType.Inheritance);
 
-            AddExistingMember(relation);
+            AddExistingMember(association);
         }
 
         public SubSet FindAssociationsThatDependOnClassifier(Classifier classifier) => 

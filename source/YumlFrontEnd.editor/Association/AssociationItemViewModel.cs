@@ -40,9 +40,7 @@ namespace YumlFrontEnd.editor
         /// <summary>
         /// creates a predefined list of available associations and their translations
         /// </summary>
-        /// <param name="onlyAssociations">if true, only associations are used,
-        /// otherwise also other relations like inheritance and derivation are used</param>
-        public AssociationItemList(bool onlyAssociations = true)
+        public AssociationItemList()
         {
             _items.AddRange(new[]
             {

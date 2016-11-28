@@ -38,6 +38,7 @@
                Foreground="{Binding ElementName=EditableTextBlockControl,Path=ForegroundTextBrush}"/>
     <TextBox
       Name="EditNameTextBox"
+      Background="Transparent"
       Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
       MinWidth="150"
       Grid.Column="1"
@@ -48,7 +49,7 @@
     <!-- this is the watermark of the text box -->
     <TextBlock 
       Grid.Column="1"
-      IsHitTestVisible="False" 
+      caliburn:Message.Attach="[Event MouseLeftButtonDown] = [Action StartEditing]"
       Text="{Binding ElementName=EditableTextBlockControl,Path=Watermark}" 
       VerticalAlignment="Center" 
       HorizontalAlignment="Left" 
@@ -57,9 +58,15 @@
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlock-Sketch}">
           <Setter Property="Visibility" Value="Collapsed"/>
           <Style.Triggers>
-            <DataTrigger Binding="{Binding ElementName=EditableTextBlockControl,Path=ShowWatermark}" 
-                         Value="True">
+            <DataTrigger 
+              Binding="{Binding ElementName=EditableTextBlockControl,Path=ShowWatermark}" 
+              Value="True">
               <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+            <DataTrigger
+              Binding="{Binding ElementName=EditNameTextBox,Path=Visibility}"
+              Value="Visible">
+              <Setter Property="Visibility" Value="Collapsed"/>
             </DataTrigger>
           </Style.Triggers>
         </Style>

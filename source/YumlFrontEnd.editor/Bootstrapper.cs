@@ -44,8 +44,8 @@ namespace YumlFrontEnd.editor
                 confirmEditNameAction.ConvertKeyToConfirmation);
 
             // update all bindings when the property changes
-            //ConventionManager.ApplyUpdateSourceTrigger = (propert, dependecyObject, binding,propertyInfo) => 
-            //    binding.UpdateSourceTrigger = System.Windows.Data.UpdateSourceTrigger.PropertyChanged;
+            ConventionManager.ApplyUpdateSourceTrigger = (propert, dependecyObject, binding,propertyInfo) => 
+                binding.UpdateSourceTrigger = System.Windows.Data.UpdateSourceTrigger.PropertyChanged;
         }
 
         private void ConfigureViewModel()

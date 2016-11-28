@@ -38,7 +38,7 @@
             return WithNote(note);
         }
 
-        public RelationWriter StartRelation() => new RelationWriter(_content, true);
+        public RelationWriter StartRelation() => new RelationWriter(_content, string.Empty,true);
 
         public override string ToString() => _content.ToString();
         public DiagramWriter(DiagramContentMixin content = null)
