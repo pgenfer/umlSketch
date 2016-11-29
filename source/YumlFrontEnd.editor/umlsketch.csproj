@@ -443,9 +443,9 @@
       <Project>{45650e76-1101-4ffb-a824-8b675f211160}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\YumlFrontEnd\YumlFrontEnd.csproj">
+    <ProjectReference Include="..\YumlFrontEnd\umlsketch.lib.csproj">
       <Project>{d7f14ac9-b4e1-46c7-a5f7-4733b80b6d57}</Project>
-      <Name>YumlFrontEnd</Name>
+      <Name>umlsketch.lib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

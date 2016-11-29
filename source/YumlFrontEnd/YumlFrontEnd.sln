@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YumlFrontEnd", "YumlFrontEnd.csproj", "{D7F14AC9-B4E1-46C7-A5F7-4733B80B6D57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "umlsketch.lib", "umlsketch.lib.csproj", "{D7F14AC9-B4E1-46C7-A5F7-4733B80B6D57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YumlFrontEnd.test", "YumlFrontEnd.test\YumlFrontEnd.test.csproj", "{5CE03801-BFBE-4E3D-9FDB-C192B71D4587}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "umlsketch.test", "YumlFrontEnd.test\umlsketch.test.csproj", "{5CE03801-BFBE-4E3D-9FDB-C192B71D4587}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\Common\Common.csproj", "{45650E76-1101-4FFB-A824-8B675F211160}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YumlFrontEnd.editor", "..\YumlFrontEnd.editor\YumlFrontEnd.editor.csproj", "{9A9C51A8-47AE-4259-9BE8-814CBD82D087}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "umlsketch", "..\YumlFrontEnd.editor\umlsketch.csproj", "{9A9C51A8-47AE-4259-9BE8-814CBD82D087}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

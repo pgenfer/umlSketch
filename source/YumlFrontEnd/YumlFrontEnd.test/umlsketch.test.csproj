@@ -142,13 +142,13 @@
       <Project>{45650e76-1101-4ffb-a824-8b675f211160}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\YumlFrontEnd.editor\YumlFrontEnd.editor.csproj">
+    <ProjectReference Include="..\..\YumlFrontEnd.editor\umlsketch.csproj">
       <Project>{9a9c51a8-47ae-4259-9be8-814cbd82d087}</Project>
-      <Name>YumlFrontEnd.editor</Name>
+      <Name>umlsketch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\YumlFrontEnd.csproj">
+    <ProjectReference Include="..\umlsketch.lib.csproj">
       <Project>{d7f14ac9-b4e1-46c7-a5f7-4733b80b6d57}</Project>
-      <Name>YumlFrontEnd</Name>
+      <Name>umlsketch.lib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
