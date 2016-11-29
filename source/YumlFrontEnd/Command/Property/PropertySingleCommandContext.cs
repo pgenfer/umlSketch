@@ -1,6 +1,9 @@
-﻿using Yuml.Service;
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Service;
+using UmlSketch.Validation;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     public class PropertySingleCommandContext : SingleCommandContextBase<Property>, ISinglePropertyCommands
     {

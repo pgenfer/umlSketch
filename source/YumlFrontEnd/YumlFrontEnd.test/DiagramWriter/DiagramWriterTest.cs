@@ -1,20 +1,15 @@
 ﻿using NUnit.Framework;
-using Yuml;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UmlSketch.Settings;
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
     public class DiagramWriterTest : SimpleTestBase
     {
-        private DiagramWriter _diagram;
+        private DiagramWriter.DiagramWriter _diagram;
 
         protected override void Init()
         {
-            _diagram = new DiagramWriter();
+            _diagram = new DiagramWriter.DiagramWriter();
         }
 
         [TestDescription("Create the uml text for the diagram from a given class with its properties")]

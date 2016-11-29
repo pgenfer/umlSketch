@@ -1,10 +1,7 @@
-﻿using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml;
-using Yuml.Service;
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Service;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     public class DeleteClassifierCommand : DomainObjectBaseCommand<Classifier>, IDeleteCommand
     {

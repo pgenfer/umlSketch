@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Yuml
+﻿namespace UmlSketch.Validation
 {
     /// <summary>
     /// success object in case a validation was successful

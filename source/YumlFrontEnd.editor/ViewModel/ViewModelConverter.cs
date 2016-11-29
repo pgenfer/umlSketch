@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
-using AutoMapper;
-using Yuml;
+﻿using AutoMapper;
+using UmlSketch.DomainObject;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// converter class used to init viewmodels out of

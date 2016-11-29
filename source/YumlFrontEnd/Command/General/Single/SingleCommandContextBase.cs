@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common;
-using Yuml.Service;
+﻿using Common;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Service;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// base class for command context which hosts all available commands

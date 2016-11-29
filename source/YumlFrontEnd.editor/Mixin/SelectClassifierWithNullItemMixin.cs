@@ -1,6 +1,6 @@
-﻿using Yuml.Command;
+﻿using UmlSketch.Command;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// handles selection of classifiers with an additional null item in the list.

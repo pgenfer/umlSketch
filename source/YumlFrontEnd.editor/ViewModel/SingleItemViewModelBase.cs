@@ -1,10 +1,8 @@
-using System.Diagnostics.Contracts;
 using Common;
-using Yuml;
-using Yuml.Command;
-using YumlFrontEnd.editor;
+using UmlSketch.Command;
+using UmlSketch.Event;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// single generic base type for view models.

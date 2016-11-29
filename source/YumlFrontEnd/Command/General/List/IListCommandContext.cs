@@ -1,4 +1,4 @@
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// generic commands for a complete list of domain objects.

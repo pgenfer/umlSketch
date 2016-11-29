@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using Caliburn.Micro;
 using Common;
-using Yuml;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// base class for view models that represent a list of items.

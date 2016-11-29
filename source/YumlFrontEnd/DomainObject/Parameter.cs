@@ -1,11 +1,7 @@
-﻿using Common;
-using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Diagnostics.Contracts.Contract;
+﻿using System.Diagnostics.Contracts;
+using Common;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// a parameter of a method
@@ -37,7 +33,7 @@ namespace Yuml
             get { return _type; }
             set
             {
-                Requires(value != null);
+                Contract.Requires(value != null);
                 _type = value;
                     
             }

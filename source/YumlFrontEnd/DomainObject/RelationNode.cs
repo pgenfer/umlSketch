@@ -1,7 +1,7 @@
-﻿using Common;
-using static System.Diagnostics.Contracts.Contract;
+﻿using System.Diagnostics.Contracts;
+using Common;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// a single node of a relation
@@ -19,7 +19,7 @@ namespace Yuml
             get { return _classifier; }
             set
             {
-                Requires(value != null);
+                Contract.Requires(value != null);
                 _classifier = value;
             }
         }

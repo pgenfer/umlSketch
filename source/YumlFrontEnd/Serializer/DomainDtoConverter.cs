@@ -1,12 +1,9 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml.DomainObject;
+﻿using System.Collections.Generic;
+using AutoMapper;
+using UmlSketch.DomainObject;
+using UmlSketch.Serializer.Dto;
 
-namespace Yuml.Serializer.Dto
+namespace UmlSketch.Serializer
 {
     /// <summary>
     /// Converter used to convert between domain objects and their DTOs.

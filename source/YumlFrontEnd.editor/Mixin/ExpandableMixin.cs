@@ -1,11 +1,6 @@
 ﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// mixin used to represent expandable behavior.

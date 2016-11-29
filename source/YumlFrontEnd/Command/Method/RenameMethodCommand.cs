@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Validation;
 using static System.Diagnostics.Contracts.Contract;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     public class RenameMethodCommand : DomainObjectBaseCommand<Method> , IRenameCommand
     {

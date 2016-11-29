@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Diagnostics.Contracts;
 using System.Linq;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.DiagramWriter;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     public class ParameterList : NamedBaseList<Parameter>
     {
@@ -38,7 +37,7 @@ namespace Yuml
 
         public void WriteTo(MethodWriter methodWriter)
         {
-            Requires(methodWriter != null);
+            Contract.Requires(methodWriter != null);
 
             var parameters = this.Where(x => x.IsVisible && x.Type.IsVisible).ToArray();
             for(var i=0;i<parameters.Length;i++)

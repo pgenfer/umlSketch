@@ -1,4 +1,6 @@
-namespace Yuml
+using UmlSketch.DiagramWriter;
+
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// renders the end node information into the relation 

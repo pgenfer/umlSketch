@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+﻿using System.Diagnostics.Contracts;
 using static System.Diagnostics.Contracts.Contract;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// command interface is used when an assigned classifier 

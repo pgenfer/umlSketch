@@ -1,12 +1,8 @@
-﻿using NUnit.Framework;
-using Yuml.Command;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NSubstitute;
-using Yuml.Test;
+﻿using NSubstitute;
+using UmlSketch.Command;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Test;
 using static NSubstitute.Substitute;
 
 namespace Yuml.Command.Test

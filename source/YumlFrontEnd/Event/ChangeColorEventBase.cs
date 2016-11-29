@@ -1,4 +1,4 @@
-﻿namespace Yuml
+﻿namespace UmlSketch.Event
 {
     public abstract class ChangeColorEventBase : IDomainEvent
     {

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.DomainObject;
 
-namespace Yuml
+namespace UmlSketch.Validation
 {
     public class PropertyValidationService : ValidateNameBase
     {
@@ -13,7 +11,7 @@ namespace Yuml
 
         public PropertyValidationService(IEnumerable<Property> properties)
         {
-            Requires(properties != null);
+            Contract.Requires(properties != null);
 
             _properties = properties;
         }

@@ -1,19 +1,11 @@
-﻿using Caliburn.Micro;
-using Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Collections.Generic;
 using System.Windows.Media;
-using Yuml;
-using Yuml.Command;
-using static System.Diagnostics.Contracts.Contract;
+using Caliburn.Micro;
+using UmlSketch.Command;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// view model for interaction with a single classifier object

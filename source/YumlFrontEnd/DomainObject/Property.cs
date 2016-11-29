@@ -1,12 +1,8 @@
-﻿using Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Diagnostics.Contracts.Contract;
+﻿using System.Diagnostics.Contracts;
+using Common;
+using UmlSketch.DiagramWriter;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// property represents a property of a class or an interface.
@@ -50,7 +46,7 @@ namespace Yuml
 
         public PropertyWriter WriteTo(PropertyWriter propertyWriter)
         {
-            Requires(propertyWriter != null);
+            Contract.Requires(propertyWriter != null);
 
             return propertyWriter.WithType(Type.Name).WithName(Name);
         }

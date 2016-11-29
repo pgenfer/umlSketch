@@ -1,4 +1,4 @@
-﻿namespace Yuml
+﻿namespace UmlSketch.DomainObject
 {
 
     /// <summary>

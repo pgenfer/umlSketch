@@ -1,4 +1,4 @@
-﻿namespace Yuml
+﻿namespace UmlSketch.Event
 {
     public class ChangeNoteColorEvent : ChangeColorEventBase
     {

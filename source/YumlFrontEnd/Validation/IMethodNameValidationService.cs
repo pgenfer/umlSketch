@@ -1,4 +1,6 @@
-﻿namespace Yuml
+﻿using UmlSketch.DomainObject;
+
+namespace UmlSketch.Validation
 {
     /// <summary>
     /// method validation service needs the method itself

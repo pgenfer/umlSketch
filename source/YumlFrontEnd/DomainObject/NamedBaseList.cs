@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using Common;
+﻿using Common;
+using UmlSketch.Mixin;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// base list with additional Name constraint. Provides functionality for named-based searching

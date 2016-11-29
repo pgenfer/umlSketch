@@ -1,9 +1,11 @@
-﻿using NUnit.Framework;
-using Yuml.Command;
-using NSubstitute;
+﻿using NSubstitute;
+using UmlSketch.Command;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Validation;
 using static NSubstitute.Substitute;
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
     public class RenameClassifierCommandTest : SimpleTestBase
     {

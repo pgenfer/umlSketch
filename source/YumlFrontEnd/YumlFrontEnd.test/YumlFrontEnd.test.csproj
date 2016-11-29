@@ -7,8 +7,8 @@
     <ProjectGuid>{5CE03801-BFBE-4E3D-9FDB-C192B71D4587}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Yuml.Test</RootNamespace>
-    <AssemblyName>YumlFrontEnd.test</AssemblyName>
+    <RootNamespace>UmlSketch.Test</RootNamespace>
+    <AssemblyName>umlsketch.test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

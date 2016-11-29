@@ -1,11 +1,7 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UmlSketch.Settings;
 
-namespace Yuml.Serializer
+namespace UmlSketch.Serializer
 {
     /// <summary>
     /// loads and saves the application settings into json format.

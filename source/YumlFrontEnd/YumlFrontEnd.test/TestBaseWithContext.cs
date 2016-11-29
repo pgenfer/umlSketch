@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
 using static NSubstitute.Substitute;
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
     /// <summary>
     /// base class for tests that need access to members of the application context

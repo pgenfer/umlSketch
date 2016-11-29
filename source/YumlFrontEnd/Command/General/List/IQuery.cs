@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// query used to retrieve all domain objects

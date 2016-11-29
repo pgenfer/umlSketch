@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.Contracts;
 using Common;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.DiagramWriter;
+using UmlSketch.Settings;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// class that handles the relation between
@@ -38,8 +34,8 @@ namespace Yuml
             string startName = "",
             string endName = "")
         {
-            Requires(start != null);
-            Requires(end != null);
+            Contract.Requires(start != null);
+            Contract.Requires(end != null);
 
             Start = new StartNode(start,startName);
             End = new EndNode(end, endName);
@@ -63,7 +59,7 @@ namespace Yuml
 
         public virtual RelationWriter WriteTo(RelationWriter relationWriter,DiagramDirection direction)
         {
-            Requires(relationWriter != null);
+            Contract.Requires(relationWriter != null);
 
             var startNode = Start.WriteTo(relationWriter,direction);
             EndNodeWriter relationEnd;

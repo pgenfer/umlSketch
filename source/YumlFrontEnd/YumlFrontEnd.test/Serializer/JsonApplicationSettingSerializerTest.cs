@@ -1,11 +1,7 @@
 ﻿using NUnit.Framework;
-using Yuml.Serializer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml.Test;
+using UmlSketch.Serializer;
+using UmlSketch.Settings;
+using UmlSketch.Test;
 
 namespace Yuml.Serializer.Test
 {

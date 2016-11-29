@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
 
-namespace Yuml.Service
+namespace UmlSketch.Service
 {
     /// <summary>
     /// deleting a domain object is a complex task

@@ -1,6 +1,4 @@
-﻿using AutoMapper.Execution;
-
-namespace Yuml
+﻿namespace UmlSketch.DiagramWriter
 {
     /// <summary>
     /// used to write the content of a class

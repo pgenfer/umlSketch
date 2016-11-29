@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Common;
-using static System.Diagnostics.Contracts.Contract;
 
-namespace Yuml
+namespace UmlSketch.Mixin
 {
     /// <summary>
     /// used to find the best name of for an item within a given list.
@@ -31,8 +28,8 @@ namespace Yuml
         {
             var newName = string.Empty;
 
-            Requires(!string.IsNullOrEmpty(defaultName));
-            Ensures(_namedObjects.All(x => x.Name != newName));
+            Contract.Requires(!string.IsNullOrEmpty(defaultName));
+            Contract.Ensures(_namedObjects.All(x => x.Name != newName));
 
             var defaulMemberNames = _namedObjects
                 .Where(x => x.Name.StartsWith(defaultName))

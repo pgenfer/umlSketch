@@ -1,4 +1,7 @@
-﻿namespace Yuml.Command
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
+
+namespace UmlSketch.Command
 {
     internal class ChangeTypeOfPropertyCommand : 
         DomainObjectBaseCommand<Property>, IChangeTypeCommand

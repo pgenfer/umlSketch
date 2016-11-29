@@ -1,4 +1,7 @@
-﻿namespace Yuml.Command
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
+
+namespace UmlSketch.Command
 {
     /// <summary>
     /// all commands that can be executed on a list of properties

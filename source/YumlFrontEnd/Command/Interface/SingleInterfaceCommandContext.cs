@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml.Command.Interface;
-using Yuml.Service;
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Service;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     public class SingleInterfaceCommandContext : SingleCommandContextBase<Implementation>
     {

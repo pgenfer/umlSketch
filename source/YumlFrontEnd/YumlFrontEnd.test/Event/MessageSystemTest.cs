@@ -1,12 +1,7 @@
 ﻿using NUnit.Framework;
-using Yuml;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UmlSketch.Event;
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
     [TestFixture()]
     public class MessageSystemTest : SimpleTestBase

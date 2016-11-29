@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using Caliburn.Micro;
 using Common;
-using Yuml;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// list of available classifiers.

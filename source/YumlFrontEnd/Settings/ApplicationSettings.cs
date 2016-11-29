@@ -1,8 +1,7 @@
 ﻿using System;
-using Yuml.Serializer;
-using static System.Environment;
+using UmlSketch.Serializer;
 
-namespace Yuml
+namespace UmlSketch.Settings
 {
     /// <summary>
     /// User specific settings that are used by the application.

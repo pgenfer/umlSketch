@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml.Event;
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
 
-namespace Yuml.Command.Interface
+namespace UmlSketch.Command
 {
     public class ChangeInterfaceOfClassifierCommand : IChangeTypeCommand
     {

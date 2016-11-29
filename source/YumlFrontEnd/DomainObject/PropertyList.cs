@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Common;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.DiagramWriter;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// handles the interaction with a list of properties
@@ -25,16 +20,16 @@ namespace Yuml
         /// <returns>the newly added property</returns>
         public Property CreateProperty(string name, Classifier type,bool isVisible = true)
         {
-            Requires(!string.IsNullOrEmpty(name));
-            Requires(type != null);
-            Ensures(_list.Count == OldValue(_list.Count) + 1);
+            Contract.Requires(!string.IsNullOrEmpty(name));
+            Contract.Requires(type != null);
+            Contract.Ensures(_list.Count == Contract.OldValue(_list.Count) + 1);
 
             return AddNewMember(new Property(name, type,isVisible));
         }
 
         public void WriteTo(ClassWriter classWriter)
         {
-            Requires(classWriter != null);
+            Contract.Requires(classWriter != null);
 
             foreach (var property in this.Where(x => x.IsVisible && x.Type.IsVisible))
             {

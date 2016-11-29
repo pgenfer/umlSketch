@@ -1,4 +1,4 @@
-namespace Yuml
+namespace UmlSketch.Event
 {
    /// <summary>
    /// This is just a simple marker interface. 

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Common;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.Event;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// base class for list structures that 
@@ -21,14 +19,14 @@ namespace Yuml
    
         internal void AddExistingMember(T newMember)
         {
-            Requires(newMember != null);
+            Contract.Requires(newMember != null);
 
             _list.Add(newMember);
         }
 
         protected T AddNewMember(T newMember)
         {
-            Requires(newMember != null);
+            Contract.Requires(newMember != null);
 
             _list.Add(newMember);
             return newMember;

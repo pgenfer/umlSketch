@@ -1,6 +1,6 @@
 using Caliburn.Micro;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// single generic base type for view models.

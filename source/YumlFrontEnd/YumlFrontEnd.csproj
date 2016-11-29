@@ -7,8 +7,8 @@
     <ProjectGuid>{D7F14AC9-B4E1-46C7-A5F7-4733B80B6D57}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Yuml</RootNamespace>
-    <AssemblyName>YumlFrontEnd</AssemblyName>
+    <RootNamespace>UmlSketch</RootNamespace>
+    <AssemblyName>umlsketch.lib</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

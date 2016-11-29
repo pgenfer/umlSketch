@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Yuml.Event
+﻿namespace UmlSketch.Event
 {
     /// <summary>
     /// this event is fired

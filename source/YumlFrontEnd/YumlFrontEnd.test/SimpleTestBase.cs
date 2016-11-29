@@ -1,8 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Linq;
+using UmlSketch.DomainObject;
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
 
     /// <summary>

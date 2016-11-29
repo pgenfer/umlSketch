@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml.Command;
-using Yuml.Service;
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
 using static System.Diagnostics.Contracts.Contract;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     public class ClassifierListCommandContext : IListCommandContext<Classifier>
     {

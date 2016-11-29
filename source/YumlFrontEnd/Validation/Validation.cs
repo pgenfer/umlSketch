@@ -1,4 +1,4 @@
-﻿namespace Yuml
+﻿namespace UmlSketch.Validation
 {
     /// <summary>
     /// Enums used to specifiy the type of a

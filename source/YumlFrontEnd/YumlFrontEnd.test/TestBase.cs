@@ -1,8 +1,9 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
-using Yuml.Serializer.Dto;
+using UmlSketch.DomainObject;
+using UmlSketch.Serializer.Dto;
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
 
     /// <summary>

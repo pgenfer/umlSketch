@@ -1,16 +1,10 @@
-﻿using Caliburn.Micro;
+﻿using System.Diagnostics.Contracts;
+using Caliburn.Micro;
 using Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Yuml;
-using Yuml.Command;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.Command;
+using UmlSketch.Validation;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// mixin that supports editing of a name property.
@@ -49,7 +43,7 @@ namespace YumlFrontEnd.editor
       
         public EditableNameMixin(IRenameCommand renameCommand)
         {
-            Requires(renameCommand != null);
+            Contract.Requires(renameCommand != null);
 
             _command = renameCommand;
         }

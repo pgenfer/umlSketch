@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using UmlSketch.DomainObject;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// provides a list of all interfaces that can be implemented by this

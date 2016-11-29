@@ -1,4 +1,4 @@
-﻿namespace Yuml.Command
+﻿namespace UmlSketch.Command
 {
     /// <summary>
     /// command that is called when the color

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using Yuml;
-using Yuml.Service;
+﻿using System.Windows;
+using UmlSketch.Service;
+using UmlSketch.Settings;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     public class AskUserBeforeDeletionService : IAskUserBeforeDeletionService
     {

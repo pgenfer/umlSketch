@@ -1,4 +1,4 @@
-﻿namespace Yuml
+﻿namespace UmlSketch.Event
 {
     /// <summary>
     /// fired when an interface was changed to a class

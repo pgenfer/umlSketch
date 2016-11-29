@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Threading;
 using Caliburn.Micro;
-using Yuml;
-using static System.IO.Path;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Settings;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// receives updates events from the message system whenever
@@ -28,8 +23,7 @@ namespace YumlFrontEnd.editor
         private readonly ApplicationSettings _settings;
         private readonly HttpClient _yumleHttpConnection = new HttpClient();
         private string _uriToDiagram;
-        private string _lastDslText = string.Empty;
-
+    
         public RendererViewModel(
             Diagram diagram,
             ApplicationSettings settings,
@@ -72,7 +66,7 @@ namespace YumlFrontEnd.editor
         private async void UpdateDiagram()
         {
             // write classifiers and relations to diagram
-            var diagramWriter = new DiagramWriter();
+            var diagramWriter = new DiagramWriter.DiagramWriter();
             _diagram.WriteTo(diagramWriter,_settings.DiagramDirection);
             var diagramText = diagramWriter.ToString();
 
@@ -81,7 +75,6 @@ namespace YumlFrontEnd.editor
             //    return;
 
             // send diagram data to server
-            _lastDslText = diagramText;
             var content = new Dictionary<string, string>
             {
                 ["dsl_text"] = diagramText,
@@ -98,7 +91,7 @@ namespace YumlFrontEnd.editor
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsStringAsync();
-                    var uri = $"{_settings.YumlBaseUrl}{GetFileNameWithoutExtension(result)}";
+                    var uri = $"{_settings.YumlBaseUrl}{Path.GetFileNameWithoutExtension(result)}";
                     UriToDiagram = uri;
                 }
                 else

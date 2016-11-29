@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common;
-using Yuml.DomainObject;
-using Yuml.Service;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Service;
+using UmlSketch.Validation;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// command factory is used to retrieve

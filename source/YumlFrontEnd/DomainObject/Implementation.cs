@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Diagnostics.Contracts.Contract;
+﻿using System.Diagnostics.Contracts;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// an implementation is a special kind of 
@@ -26,8 +20,8 @@ namespace Yuml
         public Implementation(Classifier start, Classifier end)
             :base(start,end, RelationType.Implementation, string.Empty)
         {
-            Requires(start != end);
-            Requires(end.IsInterface);
+            Contract.Requires(start != end);
+            Contract.Requires(end.IsInterface);
 
         }
 
@@ -40,8 +34,8 @@ namespace Yuml
 
         public void ReplaceInterface(Classifier newInterface)
         {
-            Requires(newInterface != null);
-            Requires(newInterface.IsInterface);
+            Contract.Requires(newInterface != null);
+            Contract.Requires(newInterface.IsInterface);
 
             End.Classifier = newInterface;
         }
@@ -64,8 +58,8 @@ namespace Yuml
         public Inheritance(Classifier start, Classifier end)
             : base(start, end, RelationType.Inheritance, string.Empty)
         {
-            Requires(start != end);
-            Requires(end != null);
+            Contract.Requires(start != end);
+            Contract.Requires(end != null);
         }
 
         /// <summary>

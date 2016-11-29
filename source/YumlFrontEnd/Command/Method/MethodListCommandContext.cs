@@ -1,4 +1,7 @@
-﻿namespace Yuml.Command
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
+
+namespace UmlSketch.Command
 {
     public class MethodListCommandContext : ListCommandContextBase<Method>
     {

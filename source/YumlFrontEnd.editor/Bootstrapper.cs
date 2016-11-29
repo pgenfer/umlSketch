@@ -1,17 +1,15 @@
-﻿using Caliburn.Micro;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Security.AccessControl;
+using System.IO;
 using System.Windows;
-using Yuml;
-using Yuml.Command;
-using Yuml.Serializer;
-using Yuml.Service;
-using static System.Environment;
-using static System.IO.Path;
-using static System.IO.Directory;
+using Caliburn.Micro;
+using UmlSketch.Command;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Service;
+using UmlSketch.Settings;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     internal class Bootstrapper : BootstrapperBase
     {
@@ -71,23 +69,23 @@ namespace YumlFrontEnd.editor
 
             // load application settings
             var applicationSettings = new ApplicationSettings();
-            var applicationSettingsPath = Combine(
-                GetFolderPath(SpecialFolder.ApplicationData),
+            var applicationSettingsPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 "umlsketch");
-            if (!Exists(applicationSettingsPath))
+            if (!Directory.Exists(applicationSettingsPath))
             {
                 try
                 {
-                    CreateDirectory(applicationSettingsPath);
+                    Directory.CreateDirectory(applicationSettingsPath);
                 }
                 catch (Exception)
                 {
                     // could not create the application folder, so 
                     // use the appdata folder directly
-                    applicationSettingsPath = GetFolderPath(SpecialFolder.ApplicationData);
+                    applicationSettingsPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 }
             }
-            var settingsFilePath = Combine(applicationSettingsPath,"umlsketch.settings");
+            var settingsFilePath = Path.Combine(applicationSettingsPath,"umlsketch.settings");
             applicationSettings.Load(settingsFilePath);
            
             _container.Instance(applicationSettings);

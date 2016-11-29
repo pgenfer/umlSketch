@@ -7,8 +7,8 @@
     <ProjectGuid>{9A9C51A8-47AE-4259-9BE8-814CBD82D087}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>YumlFrontEnd.editor</RootNamespace>
-    <AssemblyName>YumlFrontEnd.editor</AssemblyName>
+    <RootNamespace>UmlSketch.Editor</RootNamespace>
+    <AssemblyName>umlsketch</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

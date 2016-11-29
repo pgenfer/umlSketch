@@ -1,14 +1,10 @@
-﻿using Common;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml.DomainObject;
-using static System.Diagnostics.Contracts.Contract;
+using Common;
+using UmlSketch.DiagramWriter;
+using UmlSketch.Event;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// Generally, you can think of a classifier as a class, 
@@ -113,7 +109,7 @@ namespace Yuml
 
         public ClassWriter WriteTo(ClassWriter classWriter)
         {
-            Requires(classWriter != null);
+            Contract.Requires(classWriter != null);
 
             classWriter.WithName(Name);
             Properties.WriteTo(classWriter);
@@ -134,7 +130,7 @@ namespace Yuml
             set
             {
                 // if a base class is set, it must not be an interface
-                Requires(value == null || !value.IsInterface);
+                Contract.Requires(value == null || !value.IsInterface);
                 _baseClass = value; 
             }
         }
@@ -212,7 +208,7 @@ namespace Yuml
         {
             // ensure that only one interface is created after this method was executed
             // used to ensure a previous issue was fixed (two implementations were created instead of one)
-            Ensures(InterfaceImplementations.Count == OldValue(InterfaceImplementations.Count + 1));
+            Contract.Ensures(InterfaceImplementations.Count == Contract.OldValue(InterfaceImplementations.Count + 1));
 
             var newImplementation = new Implementation(this, newInterface);
             InterfaceImplementations.AddInterfaceToList(newImplementation);

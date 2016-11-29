@@ -1,7 +1,7 @@
-﻿<Application x:Class="YumlFrontEnd.editor.App"
+﻿<Application x:Class="UmlSketch.Editor.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:YumlFrontEnd.editor">
+             xmlns:editor="clr-namespace:UmlSketch.Editor">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
@@ -12,13 +12,13 @@
         <ResourceDictionary Source="Styles/ButtonStyles.xaml"/>
         <ResourceDictionary Source="Styles/ControlStyles.xaml"/>
         <ResourceDictionary>
-          <local:Bootstrapper x:Key="Bootstrapper" />
+          <editor:Bootstrapper x:Key="Bootstrapper" />
           <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
-          <local:IsVisibleToColorConverter
+          <editor:IsVisibleToColorConverter
             x:Key="IsVisibleToColor"
             VisibleBrush="{StaticResource BaseForeground-Sketch}"
             InvisibleBrush="{StaticResource DomainObjectIsInvisibleTextColor}"/>
-          <local:ColorToGradientBrushConverter
+          <editor:ColorToGradientBrushConverter
             x:Key="ColorToGradientBrush" 
             EndColor="White"/>
         </ResourceDictionary>

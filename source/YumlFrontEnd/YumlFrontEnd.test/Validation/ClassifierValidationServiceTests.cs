@@ -1,13 +1,9 @@
 ﻿using NUnit.Framework;
-using Yuml;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NSubstitute;
+using UmlSketch.DomainObject;
+using UmlSketch.Validation;
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
     public class ClassifierValidationServiceTest : SimpleTestBase
     {

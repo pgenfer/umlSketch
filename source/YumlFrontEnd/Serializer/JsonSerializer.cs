@@ -1,12 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml.Serializer.Dto;
+using UmlSketch.DomainObject;
+using UmlSketch.Serializer.Dto;
 
-namespace Yuml.Serializer
+namespace UmlSketch.Serializer
 {
     public class JsonSerializer
     {

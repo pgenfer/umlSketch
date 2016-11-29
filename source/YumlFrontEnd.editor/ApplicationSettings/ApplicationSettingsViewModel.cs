@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 using Caliburn.Micro;
-using Yuml;
-using Yuml.Event;
+using UmlSketch.Event;
+using UmlSketch.Settings;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// Viewmodel that represents the settings

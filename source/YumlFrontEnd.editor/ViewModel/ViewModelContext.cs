@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics.Contracts;
 using Caliburn.Micro;
-using Yuml;
-using Yuml.Command;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.Command;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// class that supports every view model with its context.
@@ -44,8 +41,8 @@ namespace YumlFrontEnd.editor
             MessageSystem messageSystem,
             IWindowManager windowManager)
         {
-            Requires(availableClassifiers != null);
-            Requires(messageSystem != null);
+            Contract.Requires(availableClassifiers != null);
+            Contract.Requires(messageSystem != null);
 
             Classifiers = availableClassifiers;
             MessageSystem = messageSystem;

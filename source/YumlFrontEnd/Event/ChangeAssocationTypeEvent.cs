@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UmlSketch.DomainObject;
 
-namespace Yuml
+namespace UmlSketch.Event
 {
     /// <summary>
     /// event is fired when the type of an association changes

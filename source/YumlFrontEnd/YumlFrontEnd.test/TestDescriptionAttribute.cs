@@ -1,11 +1,6 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
     /// <summary>
     /// extension of NUnit test attribute

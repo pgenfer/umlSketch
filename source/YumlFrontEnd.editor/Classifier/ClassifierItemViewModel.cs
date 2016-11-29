@@ -1,8 +1,7 @@
-using System.Diagnostics.Tracing;
 using Caliburn.Micro;
 using Common;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// a single classifier item in the list of

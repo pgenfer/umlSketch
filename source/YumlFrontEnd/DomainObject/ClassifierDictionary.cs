@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Text;
-using System.Threading.Tasks;
 using Common;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.Mixin;
+using UmlSketch.Settings;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// storage for classifiers. A classifier is always identified
@@ -39,9 +36,9 @@ namespace Yuml
         [Pure]
         public virtual Classifier FindByName(string className)
         {
-            Requires(!string.IsNullOrEmpty(className));
+            Contract.Requires(!string.IsNullOrEmpty(className));
             // check that we never search for non existing classifiers
-            Ensures(Result<Classifier>() != null);
+            Contract.Ensures(Contract.Result<Classifier>() != null);
 
             Classifier result;
             _dictionary.TryGetValue(className, out result);
@@ -74,9 +71,9 @@ namespace Yuml
         /// <returns></returns>
         public Classifier CreateNewClass(string name)
         {
-            Requires(IsClassNameFree(name));
-            Requires(!string.IsNullOrEmpty(name));
-            Ensures(_dictionary.Count == OldValue(_dictionary.Count)+1);
+            Contract.Requires(IsClassNameFree(name));
+            Contract.Requires(!string.IsNullOrEmpty(name));
+            Contract.Ensures(_dictionary.Count == Contract.OldValue(_dictionary.Count)+1);
 
             var newClass = new Classifier(name);
             AddNewClassifier(newClass);
@@ -94,8 +91,8 @@ namespace Yuml
         /// <param name="classifier"></param>
         internal void AddNewClassifier(Classifier classifier)
         {
-            Requires(!string.IsNullOrEmpty(classifier.Name));
-            Requires(IsClassNameFree(classifier.Name));
+            Contract.Requires(!string.IsNullOrEmpty(classifier.Name));
+            Contract.Requires(IsClassNameFree(classifier.Name));
 
             // check if the classifier must also be added to system types
             _dictionary.Add(classifier.Name, classifier);
@@ -126,7 +123,7 @@ namespace Yuml
         /// <param name="classifiers"></param>
         internal ClassifierDictionary(params Classifier[] classifiers):this(false)
         {
-            Requires(classifiers != null);
+            Contract.Requires(classifiers != null);
 
             foreach (var classifier in classifiers)
                 AddNewClassifier(classifier);
@@ -143,18 +140,18 @@ namespace Yuml
 
         public void RemoveClassifier(Classifier classifierToRemove)
         {
-            Requires(classifierToRemove != null);
-            Requires(!string.IsNullOrEmpty(classifierToRemove.Name));
+            Contract.Requires(classifierToRemove != null);
+            Contract.Requires(!string.IsNullOrEmpty(classifierToRemove.Name));
             // the classifer should always be in the list,
             // it does not make much sense to have "phantom classifiers"
-            Ensures(Count == OldValue(Count) - 1);
+            Contract.Ensures(Count == Contract.OldValue(Count) - 1);
 
             _dictionary.Remove(classifierToRemove.Name);
         }
 
-        public void WriteTo(DiagramWriter writer,DiagramDirection direction)
+        public void WriteTo(DiagramWriter.DiagramWriter writer,DiagramDirection direction)
         {
-            Requires(writer != null);
+            Contract.Requires(writer != null);
 
             var relations = new RelationList();
             var classifiers = NoSystemTypes.Where(x => x.IsVisible).ToArray();
@@ -185,10 +182,10 @@ namespace Yuml
 
         public virtual void RenameClassifier(Classifier classifier,string newName)
         {
-            Requires(classifier != null);
-            Requires(!string.IsNullOrEmpty(newName));
-            Ensures(IsClassNameFree(OldValue(classifier.Name)));
-            Ensures(classifier.Name != OldValue(classifier.Name));
+            Contract.Requires(classifier != null);
+            Contract.Requires(!string.IsNullOrEmpty(newName));
+            Contract.Ensures(IsClassNameFree(Contract.OldValue(classifier.Name)));
+            Contract.Ensures(classifier.Name != Contract.OldValue(classifier.Name));
 
             _dictionary.Remove(classifier.Name);
             classifier.Name = newName;

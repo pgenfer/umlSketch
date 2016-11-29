@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using Caliburn.Micro;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// confirmation of the edit operation currently depends

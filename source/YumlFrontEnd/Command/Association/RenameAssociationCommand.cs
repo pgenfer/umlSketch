@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common;
+﻿using Common;
+using UmlSketch.Event;
+using UmlSketch.Validation;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     class RenameAssociationCommand : IRenameCommand
     {

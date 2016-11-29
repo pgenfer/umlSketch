@@ -1,4 +1,4 @@
-﻿namespace YumlFrontEnd.editor
+﻿namespace UmlSketch.Editor
 {
     /// <summary>
     /// enum used to evaluate the result of a edit name confirmation operation.

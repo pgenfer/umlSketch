@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Caliburn.Micro;
-using Yuml;
-using Yuml.Command;
+using UmlSketch.Command;
+using UmlSketch.DomainObject;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     internal class MethodViewModel : SingleItemViewModelBase<Method,MethodSingleCommandContext>
     {

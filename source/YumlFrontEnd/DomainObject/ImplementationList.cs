@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.Event;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// list of interfaces that are implemented by a classifier
@@ -54,8 +52,8 @@ namespace Yuml
 
         public void AddInterfaceToList(Implementation implementation)
         {
-            Requires(implementation != null);
-            Requires(!this.Contains(implementation));
+            Contract.Requires(implementation != null);
+            Contract.Requires(!this.Contains(implementation));
 
             AddExistingMember(implementation);
         }
@@ -73,7 +71,7 @@ namespace Yuml
             Classifier @interface, 
             MessageSystem messageSystem = null)
         {
-            Requires(@interface != null);
+            Contract.Requires(@interface != null);
 
             var implementations = Filter(x => x.End.Classifier == @interface);
             implementations.DeleteSelection(messageSystem);

@@ -1,4 +1,4 @@
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// marker interface for commands

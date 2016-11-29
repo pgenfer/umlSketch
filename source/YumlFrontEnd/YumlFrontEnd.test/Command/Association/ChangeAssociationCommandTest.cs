@@ -1,15 +1,11 @@
 ﻿#define TEST
 
 
-using NUnit.Framework;
-using Yuml.Command.Association;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NSubstitute;
-using Yuml.Test;
+using UmlSketch.Command;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Test;
 using static NSubstitute.Substitute;
 
 namespace Yuml.Command.Association.Test

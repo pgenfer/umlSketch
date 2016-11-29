@@ -1,19 +1,13 @@
-﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
+﻿using System.Diagnostics.Contracts;
 using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Win32;
-using Yuml;
-using Yuml.Command;
-using Yuml.Serializer;
-using static System.Environment;
-using static System.Diagnostics.Contracts.Contract;
+using Caliburn.Micro;
+using UmlSketch.Command;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Settings;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     internal class MainViewModel : Screen
     {
@@ -29,10 +23,10 @@ namespace YumlFrontEnd.editor
             ViewModelContext context,
             ApplicationSettings applicationSettings)
         {
-            Requires(commands != null);
-            Requires(diagram != null);
-            Requires(applicationSettings != null);
-            Requires(context != null);
+            Contract.Requires(commands != null);
+            Contract.Requires(diagram != null);
+            Contract.Requires(applicationSettings != null);
+            Contract.Requires(context != null);
 
             _context = context;
             _commands = commands;

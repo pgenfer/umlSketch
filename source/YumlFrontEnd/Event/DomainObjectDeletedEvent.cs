@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Yuml
+﻿namespace UmlSketch.Event
 {
     /// <summary>
     /// event fired when a domain object was removed from the system.

@@ -1,4 +1,4 @@
-﻿namespace Yuml
+﻿namespace UmlSketch.DiagramWriter
 {
     /// <summary>
     /// writes a single method 

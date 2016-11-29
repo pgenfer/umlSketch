@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Yuml
+﻿namespace UmlSketch.Event
 {
     /// <summary>
     /// generic event that can be used as base class for any type changes that occur.

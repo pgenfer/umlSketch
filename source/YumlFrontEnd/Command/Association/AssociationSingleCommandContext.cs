@@ -1,9 +1,8 @@
-﻿
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Service;
 
-using Yuml.DomainObject;
-using Yuml.Service;
-
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     public class SingleAssociationCommands : 
         SingleCommandContextBase<Association>, 

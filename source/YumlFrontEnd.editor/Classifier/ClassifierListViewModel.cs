@@ -1,15 +1,8 @@
-﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml;
-using Yuml.Command;
+﻿using UmlSketch.Command;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
 
-
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// view model for handling a complete list of classifiers.

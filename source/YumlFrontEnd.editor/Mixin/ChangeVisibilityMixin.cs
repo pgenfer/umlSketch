@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.Contracts;
 using Caliburn.Micro;
-using Yuml.Command;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.Command;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// interaction logic with the change visibility singleObjectCommand.
@@ -20,7 +14,7 @@ namespace YumlFrontEnd.editor
        
         public ChangeVisibilityMixin(IShowOrHideCommand showOrHideCommand)
         {
-            Requires(showOrHideCommand != null);
+            Contract.Requires(showOrHideCommand != null);
 
             _showOrHideCommand = showOrHideCommand;
         }

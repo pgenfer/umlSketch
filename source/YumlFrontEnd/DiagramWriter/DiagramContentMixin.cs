@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Yuml
+namespace UmlSketch.DiagramWriter
 {
     /// <summary>
     /// mixin that is used to hold the internal content of

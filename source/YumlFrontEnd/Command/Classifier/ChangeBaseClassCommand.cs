@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Diagnostics.Contracts.Contract;
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     public class ChangeBaseClassCommand : DomainObjectBaseCommand<Classifier>, IChangeTypeToNullCommand
     {

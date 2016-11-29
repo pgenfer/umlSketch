@@ -1,13 +1,7 @@
-﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml;
-using Yuml.Command;
+﻿using UmlSketch.Command;
+using UmlSketch.DomainObject;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// view model that handles access to a complete list of properties

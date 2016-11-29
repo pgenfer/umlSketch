@@ -8,7 +8,7 @@
 //using NSubstitute;
 //using Yuml;
 //using Yuml.Command;
-//using Yuml.Test;
+//using UmlSketch.Test;
 //using static NSubstitute.Substitute;
 //using ListViewModelMock = YumlFrontEnd.editor.ListViewModelBase<Common.IVisible,object>;
 //using SingleViewModelStub = YumlFrontEnd.editor.SingleItemViewModelBase<object>;

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UmlSketch.Settings;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// representation of a diagram
@@ -35,7 +31,7 @@ namespace Yuml
             Classifiers = classifiers;
         }
 
-        public void WriteTo(DiagramWriter writer,DiagramDirection direction)
+        public void WriteTo(DiagramWriter.DiagramWriter writer,DiagramDirection direction)
         {
             Classifiers.WriteTo(writer,direction);
             if (Note.HasText)

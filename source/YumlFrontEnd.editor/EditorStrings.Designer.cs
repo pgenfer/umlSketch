@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace YumlFrontEnd.editor {
+namespace UmlSketch.Editor {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace YumlFrontEnd.editor {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("YumlFrontEnd.editor.EditorStrings", typeof(EditorStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UmlSketch.Editor.EditorStrings", typeof(EditorStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

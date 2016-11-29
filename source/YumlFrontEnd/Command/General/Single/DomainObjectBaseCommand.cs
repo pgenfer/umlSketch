@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UmlSketch.Event;
 using static System.Diagnostics.Contracts.Contract;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// base class for commands that operate on a single domain object

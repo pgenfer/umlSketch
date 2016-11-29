@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Yuml
+﻿namespace UmlSketch.Validation
 {
     /// <summary>
     /// interface for a service that is used to validate the name of an entity.

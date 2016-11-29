@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
-using Yuml;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// interface is used to access the list of available classifiers whenever

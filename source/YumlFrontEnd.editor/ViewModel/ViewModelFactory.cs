@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using Common;
-using Yuml;
-using Yuml.Command;
+using UmlSketch.Command;
+using UmlSketch.DomainObject;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// ViewModelFactory used to create other view models

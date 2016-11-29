@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using Common;
+﻿using System.Linq;
 using static System.Diagnostics.Contracts.Contract;
 
-namespace Yuml.DomainObject
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// contains a list of all associations 

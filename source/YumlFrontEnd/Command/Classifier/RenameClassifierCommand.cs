@@ -1,6 +1,9 @@
-﻿using static System.Diagnostics.Contracts.Contract;
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Validation;
+using static System.Diagnostics.Contracts.Contract;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
    
 

@@ -1,4 +1,4 @@
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// command used to create a new domain object

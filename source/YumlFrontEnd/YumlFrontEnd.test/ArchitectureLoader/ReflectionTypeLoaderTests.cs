@@ -6,7 +6,7 @@
 //using System.Text;
 //using System.Threading.Tasks;
 
-//namespace Yuml.Test
+//namespace UmlSketch.Test
 //{
 //    [TestFixture]
 //    public class ReflectionTypeLoaderTests

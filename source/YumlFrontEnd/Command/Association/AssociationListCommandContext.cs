@@ -1,6 +1,7 @@
-﻿using Yuml.DomainObject;
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// commands that can be executed on the association list of a classifier

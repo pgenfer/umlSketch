@@ -1,13 +1,12 @@
-﻿<UserControl x:Class="YumlFrontEnd.editor.NoteView"
+﻿<UserControl x:Class="UmlSketch.Editor.NoteView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:YumlFrontEnd.editor"
              xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
-             xmlns:userControls="clr-namespace:YumlFrontEnd.editor.UserControls"
+             xmlns:editor="clr-namespace:UmlSketch.Editor"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance local:NoteViewModel}"
+             d:DataContext="{d:DesignInstance editor:NoteViewModel}"
              d:DesignHeight="300"
              d:DesignWidth="300"
              Focusable="False">
@@ -25,12 +24,12 @@
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
     <!-- header control -->
-    <local:HeaderControl
+    <editor:HeaderControl
       IsExpanded="{Binding IsExpanded}"
       HasDeleteButton="True"
       HasNewButton="False"
       HasExpandButton="True"
-      Title="{x:Static local:EditorStrings.Note}"
+      Title="{x:Static editor:EditorStrings.Note}"
       caliburn:Bind.Model="{Binding}"
       HasColorPicker="True"/>
     <!-- Text -->

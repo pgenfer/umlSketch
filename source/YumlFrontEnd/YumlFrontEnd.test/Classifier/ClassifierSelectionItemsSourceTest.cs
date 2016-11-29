@@ -1,14 +1,11 @@
 ﻿using NUnit.Framework;
-using YumlFrontEnd.editor;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml.Test;
+using UmlSketch.DomainObject;
+using UmlSketch.Editor;
+using UmlSketch.Event;
 using static NSubstitute.Substitute;
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
     public class ClassifierSelectionItemsSourceTest : TestBase
     {

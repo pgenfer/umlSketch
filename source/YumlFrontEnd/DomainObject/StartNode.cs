@@ -1,4 +1,7 @@
-namespace Yuml
+using UmlSketch.DiagramWriter;
+using UmlSketch.Settings;
+
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// calls the correct rendering for the start node of a relation.

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.Contracts;
 using Common;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.DiagramWriter;
+using UmlSketch.Settings;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// an association is a more specific type of 
@@ -45,11 +42,11 @@ namespace Yuml
             string startName = "",
             string endName = "")
         {
-            Requires(start != null);
-            Requires(end != null);
+            Contract.Requires(start != null);
+            Contract.Requires(end != null);
             // ensure that only specific relation types are allowed here
-            Requires(relation != RelationType.Implementation);
-            Requires(relation != RelationType.Inheritance);
+            Contract.Requires(relation != RelationType.Implementation);
+            Contract.Requires(relation != RelationType.Inheritance);
 
             Name = name;
             Start = new StartNode(start, startName);

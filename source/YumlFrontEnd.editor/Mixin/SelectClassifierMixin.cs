@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Caliburn.Micro;
-using Yuml.Command;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.Command;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// mixin handles the interaction logic when selecting

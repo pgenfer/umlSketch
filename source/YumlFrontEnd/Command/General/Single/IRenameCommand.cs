@@ -1,7 +1,6 @@
-﻿using System.Diagnostics.Contracts;
-using static System.Diagnostics.Contracts.Contract;
+﻿using UmlSketch.Validation;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// generic command used to rename a domain object.

@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
-using Yuml;
-using Yuml.Serializer;
-using static System.Environment;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
+using UmlSketch.Serializer;
+using UmlSketch.Settings;
 
-namespace YumlFrontEnd.editor
+namespace UmlSketch.Editor
 {
     /// <summary>
     /// Mixin that handles that loads and stores data
@@ -59,7 +56,7 @@ namespace YumlFrontEnd.editor
                 var saveFileDialog = new SaveFileDialog
                 {
                     Filter = EditorStrings.UmlJsonFileFilter,
-                    InitialDirectory = GetFolderPath(SpecialFolder.MyDocuments)
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 };
 
                 if (saveFileDialog.ShowDialog() == true)
@@ -127,7 +124,7 @@ namespace YumlFrontEnd.editor
         {
             var path = _fileName?.Path;
             // use the path of the last file or use default path
-            path = System.IO.Directory.Exists(path) ? path : GetFolderPath(SpecialFolder.MyDocuments);
+            path = System.IO.Directory.Exists(path) ? path : Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             var openFileDialog = new OpenFileDialog
             {

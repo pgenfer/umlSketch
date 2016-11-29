@@ -1,14 +1,14 @@
-﻿<UserControl x:Class="YumlFrontEnd.editor.EditableTextBlock"
+﻿<UserControl x:Class="UmlSketch.Editor.EditableTextBlock"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:YumlFrontEnd.editor"
              mc:Ignorable="d"
              xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+             xmlns:editor="clr-namespace:UmlSketch.Editor"
              d:DesignHeight="300"
              d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance local:EditableNameMixin}"
+             d:DataContext="{d:DesignInstance editor:EditableNameMixin}"
              x:Name="EditableTextBlockControl">
   <UserControl.Resources>
     <Style BasedOn="{StaticResource TextBlock-Sketch}"
@@ -32,9 +32,9 @@
                Margin="0,5"
                Grid.Column="1"
                caliburn:Message.Attach="[Event MouseLeftButtonDown] = [Action StartEditing]"
-               Visibility="{Binding IsEditable,Converter={local:TrueToCollapseConverter}}"
+               Visibility="{Binding IsEditable,Converter={editor:TrueToCollapseConverter}}"
                HorizontalAlignment="Left"
-               ToolTip="{x:Static local:Tooltips.ClickToStartEditing}"
+               ToolTip="{x:Static editor:Tooltips.ClickToStartEditing}"
                Foreground="{Binding ElementName=EditableTextBlockControl,Path=ForegroundTextBrush}"/>
     <TextBox
       Name="EditNameTextBox"
@@ -72,10 +72,10 @@
         </Style>
       </TextBlock.Style>
     </TextBlock>
-    <local:PersistentToolTip
+    <editor:PersistentToolTip
       Grid.Column="1"
       PlacementTarget="{Binding ElementName=EditNameTextBox}"
       IsOpen="{Binding IsKeyboardFocused, ElementName=EditNameTextBox, Mode=OneWay}"
-      Text="{x:Static local:Tooltips.EnterOrEscape}"/>
+      Text="{x:Static editor:Tooltips.EnterOrEscape}"/>
   </Grid>
 </UserControl>

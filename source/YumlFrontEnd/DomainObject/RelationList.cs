@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.Settings;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// stores all relations of the UML Model.
@@ -31,9 +29,9 @@ namespace Yuml
         /// the diagram writer.
         /// </summary>
         /// <param name="writer"></param>
-        public void WriteTo(DiagramWriter writer,DiagramDirection direction)
+        public void WriteTo(DiagramWriter.DiagramWriter writer,DiagramDirection direction)
         {
-            Requires(writer != null);
+            Contract.Requires(writer != null);
 
             // skip if no relations are available
             if (_relations.Count == 0)

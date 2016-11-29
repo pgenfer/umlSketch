@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common;
-using static System.Diagnostics.Contracts.Contract;
+using UmlSketch.DiagramWriter;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// method of a type.
@@ -58,7 +56,7 @@ namespace Yuml
        
         public MethodWriter WriteTo(MethodWriter methodWriter)
         {
-            Requires(methodWriter != null);
+            Contract.Requires(methodWriter != null);
 
             methodWriter
                 .WithReturnType(ReturnType.Name)

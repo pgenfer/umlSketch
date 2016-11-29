@@ -1,8 +1,8 @@
-﻿using System;
-using Common;
+﻿using Common;
+using UmlSketch.Event;
 
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// generic command used to show or hide a domain

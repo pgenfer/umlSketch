@@ -1,15 +1,10 @@
-﻿using NUnit.Framework;
-using Yuml.Command;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NSubstitute;
-using Yuml.Service;
+﻿using NSubstitute;
+using UmlSketch.Command;
+using UmlSketch.DomainObject;
+using UmlSketch.Service;
 using static NSubstitute.Substitute;
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
     
     public class MakeClassifierToInterfaceCommandTest : TestBase

@@ -1,11 +1,10 @@
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using DomainEventHandlers = System.Collections.Generic.List<Yuml.DomainEventHandler>;
+using DomainEventHandlers = System.Collections.Generic.List<UmlSketch.Event.DomainEventHandler>;
 
-namespace Yuml
+namespace UmlSketch.Event
 {
     /// <summary>
     /// stores information about a handler that reacts on a domain event

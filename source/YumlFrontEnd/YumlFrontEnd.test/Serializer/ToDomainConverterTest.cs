@@ -1,12 +1,11 @@
 ﻿using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yuml.Serializer.Dto;
+using UmlSketch.DomainObject;
+using UmlSketch.Serializer;
+using UmlSketch.Serializer.Dto;
 
-namespace Yuml.Test.Serializer
+namespace UmlSketch.Test.Serializer
 {
     public class ToDomainConverterTest : TestBase
     {

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
+using UmlSketch.Settings;
 
-namespace Yuml
+namespace UmlSketch.DiagramWriter
 {
     /// <summary>
     /// starting classifier and assocation start point of the relation.

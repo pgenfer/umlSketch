@@ -1,4 +1,6 @@
-namespace Yuml.Command
+using UmlSketch.DomainObject;
+
+namespace UmlSketch.Command
 {
     /// <summary>
     /// commands that can be executed on a single classifier.

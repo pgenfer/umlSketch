@@ -1,4 +1,4 @@
-﻿namespace Yuml.Serializer.Dto
+﻿namespace UmlSketch.Serializer.Dto
 {
 
     /// <summary>

@@ -1,6 +1,6 @@
 using Common;
 
-namespace Yuml
+namespace UmlSketch.Event
 {
     /// <summary>
     /// event that is fired when a domain object changes its visibility

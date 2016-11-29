@@ -5,7 +5,7 @@
 //using System.Threading.Tasks;
 //using static System.Diagnostics.Contracts.Contract;
 
-//namespace Yuml.TypeLoaders
+//namespace UmlSketch.TypeLoaders
 //{
 //    /// <summary>
 //    /// loads an architecture from reflection meta data.

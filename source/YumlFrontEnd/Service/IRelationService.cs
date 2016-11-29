@@ -1,4 +1,6 @@
-﻿namespace Yuml.Service
+﻿using UmlSketch.DomainObject;
+
+namespace UmlSketch.Service
 {
     /// <summary>
     /// the relation service handles the relation between classifiers

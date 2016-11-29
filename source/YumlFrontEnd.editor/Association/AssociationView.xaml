@@ -1,21 +1,21 @@
-﻿<UserControl x:Class="YumlFrontEnd.editor.AssociationView"
+﻿<UserControl x:Class="UmlSketch.Editor.AssociationView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:YumlFrontEnd.editor"
              xmlns:cal="http://www.caliburnproject.org"
+             xmlns:editor="clr-namespace:UmlSketch.Editor"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance local:AssociationViewModel}">
+             d:DataContext="{d:DesignInstance editor:AssociationViewModel}">
   <StackPanel Orientation="Vertical">
     <DockPanel>
-      <local:EditableTextBlock 
+      <editor:EditableTextBlock 
         Watermark="Enter name here"
         HorizontalAlignment="Stretch"
         FontWeight="Bold"
         Margin="0,5"
         cal:Bind.Model="{Binding}"/>
-      <local:ButtonBar 
+      <editor:ButtonBar 
         HorizontalAlignment="Right"
         HasNewButton="False"
         HasColorPicker="True"

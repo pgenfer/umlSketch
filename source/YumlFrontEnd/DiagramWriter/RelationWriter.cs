@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UmlSketch.Settings;
 
-namespace Yuml
+namespace UmlSketch.DiagramWriter
 {
     /// <summary>
     /// Starting point for rendering a relation between two classes.

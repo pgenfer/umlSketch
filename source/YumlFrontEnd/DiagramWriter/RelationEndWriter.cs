@@ -1,4 +1,4 @@
-namespace Yuml
+namespace UmlSketch.DiagramWriter
 {
     /// <summary>
     /// The ending link before the relation

@@ -1,14 +1,9 @@
 ﻿using NUnit.Framework;
-using Yuml;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NSubstitute;
+using UmlSketch.DomainObject;
 using static NSubstitute.Substitute;
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
     public class MethodListTest : TestBase
     {

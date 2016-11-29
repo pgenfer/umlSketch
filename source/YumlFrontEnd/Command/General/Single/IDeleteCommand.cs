@@ -1,4 +1,4 @@
-﻿namespace Yuml.Command
+﻿namespace UmlSketch.Command
 {
     /// <summary>
     /// generic command used to delete an existing entity

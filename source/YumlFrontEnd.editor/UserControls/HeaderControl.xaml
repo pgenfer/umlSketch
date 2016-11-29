@@ -1,23 +1,23 @@
-﻿<UserControl x:Class="YumlFrontEnd.editor.HeaderControl"
+﻿<UserControl x:Class="UmlSketch.Editor.HeaderControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:YumlFrontEnd.editor"
              xmlns:cal="http://www.caliburnproject.org"
+             xmlns:editor="clr-namespace:UmlSketch.Editor"
              mc:Ignorable="d"
              x:Name="MainControl">
   <DockPanel
     HorizontalAlignment="Stretch">
     <!-- expander -->
-    <local:ExpanderButton 
+    <editor:ExpanderButton 
       DockPanel.Dock="Left"
       x:Name="ExpandOrCollapse"
       IsExpanded="{Binding ElementName=MainControl,Path=IsExpanded}"
       Visibility="{Binding ElementName=MainControl,Path=HasExpandButton,
-      Converter={local:FalseToHideConverter}}"
+      Converter={editor:FalseToHideConverter}}"
       Style="{StaticResource ExpanderButtonStyle}"/>
-    <local:ButtonBar
+    <editor:ButtonBar
       DockPanel.Dock="Right"
       HasDeleteButton="{Binding ElementName=MainControl,Path=HasDeleteButton}"
       HasNewButton="{Binding ElementName=MainControl,Path=HasNewButton}"

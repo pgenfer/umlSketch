@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
-using Yuml.Command;
-using YumlFrontEnd.editor;
+using UmlSketch.Command;
+using UmlSketch.Editor;
+using UmlSketch.Validation;
 using static NSubstitute.Substitute;
 
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
     public class EditableMixinTest : SimpleTestBase
     {

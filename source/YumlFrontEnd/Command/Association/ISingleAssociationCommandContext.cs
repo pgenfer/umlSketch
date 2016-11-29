@@ -1,6 +1,8 @@
 ﻿
 
-namespace Yuml.Command
+using UmlSketch.DomainObject;
+
+namespace UmlSketch.Command
 {
     public interface ISingleAssociationCommands : ISingleCommandContext<Association>
     {

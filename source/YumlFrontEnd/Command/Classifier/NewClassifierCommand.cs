@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UmlSketch.DomainObject;
+using UmlSketch.Event;
 using static System.Diagnostics.Contracts.Contract;
 
-namespace Yuml.Command
+namespace UmlSketch.Command
 {
     /// <summary>
     /// creates a new classifier with a default name.

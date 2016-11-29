@@ -1,4 +1,6 @@
-﻿namespace Yuml
+﻿using UmlSketch.DomainObject;
+
+namespace UmlSketch.DiagramWriter
 {
 
     /// <summary>

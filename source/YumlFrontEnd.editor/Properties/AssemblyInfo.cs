@@ -55,5 +55,5 @@ using System.Windows;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 // needed for unit testing
 #if DEBUG
-[assembly: InternalsVisibleTo("YumlFrontEnd.test")]
+[assembly: InternalsVisibleTo("UmlSketch.test")]
 #endif

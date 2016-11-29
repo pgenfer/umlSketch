@@ -1,9 +1,11 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
-using Yuml.Command;
+using UmlSketch.Command;
+using UmlSketch.DomainObject;
+using UmlSketch.Event;
 using static NSubstitute.Substitute;
 
-namespace Yuml.Test.Command
+namespace UmlSketch.Test.Command
 {
     public class TypeChangedPropertyCommandTest : SimpleTestBase
     {

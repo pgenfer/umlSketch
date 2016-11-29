@@ -1,4 +1,6 @@
-﻿namespace Yuml.Serializer.Dto
+﻿using UmlSketch.DomainObject;
+
+namespace UmlSketch.Serializer.Dto
 {
     /// <summary>
     /// stores the information of a relation

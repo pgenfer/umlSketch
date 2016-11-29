@@ -1,4 +1,4 @@
-﻿namespace Yuml.Command
+﻿namespace UmlSketch.Event
 {
     public class MethodReturnTypeChanged : TypeChangedEventBase
     {

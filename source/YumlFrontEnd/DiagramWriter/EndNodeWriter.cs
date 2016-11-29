@@ -1,4 +1,4 @@
-﻿namespace Yuml
+﻿namespace UmlSketch.DiagramWriter
 {
     /// <summary>
     /// defines the end node (the target classifier) of a relation.

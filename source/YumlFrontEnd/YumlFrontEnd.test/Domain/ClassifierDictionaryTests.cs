@@ -1,22 +1,19 @@
 ﻿using NUnit.Framework;
-using Yuml;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UmlSketch.DomainObject;
+using UmlSketch.Settings;
 
-namespace Yuml.Test
+namespace UmlSketch.Test
 {
     public class ClassifierDictionaryTests : TestBase
     {
-        private DiagramWriter _diagramWriter;
+        private DiagramWriter.DiagramWriter _diagramWriter;
         private ClassifierDictionary _classifiers;
         private string _result;
 
         protected override void Init()
         {
-            _diagramWriter = new DiagramWriter();
+            _diagramWriter = new DiagramWriter.DiagramWriter();
         }
    
         [Test]

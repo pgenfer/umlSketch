@@ -1,14 +1,9 @@
-﻿using System;
-using System.CodeDom;
+﻿using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.CSharp;
-using static System.Diagnostics.Contracts.Contract;
 
-namespace Yuml
+namespace UmlSketch.DomainObject
 {
     /// <summary>
     /// contains all available system types that are currently supported by the system.

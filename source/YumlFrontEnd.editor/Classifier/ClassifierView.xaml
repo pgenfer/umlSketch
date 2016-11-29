@@ -1,13 +1,12 @@
-﻿<UserControl x:Class="YumlFrontEnd.editor.ClassifierView"
+﻿<UserControl x:Class="UmlSketch.Editor.ClassifierView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:YumlFrontEnd.editor"
              xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
-             xmlns:userControls="clr-namespace:YumlFrontEnd.editor.UserControls"
+             xmlns:editor="clr-namespace:UmlSketch.Editor"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance local:ClassifierViewModel}"
+             d:DataContext="{d:DesignInstance editor:ClassifierViewModel}"
              d:DesignHeight="300"
              d:DesignWidth="300"
              Focusable="False">
@@ -25,14 +24,14 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <local:ExpanderButton Grid.Column="0"
+        <editor:ExpanderButton Grid.Column="0"
                               Grid.Row="0"
                               x:Name="ExpandOrCollapse"
                               Margin="5"
                               IsExpanded="{Binding IsExpanded}"
                               Style="{StaticResource ExpanderButtonStyle}" />
         <!-- class name -->
-        <local:EditableTextBlock HorizontalAlignment="Stretch"
+        <editor:EditableTextBlock HorizontalAlignment="Stretch"
                                  ForegroundTextBrush="{Binding IsVisible,Converter={StaticResource IsVisibleToColor}}"
                                  FontWeight="Bold"
                                  Grid.Column="1"
@@ -40,7 +39,7 @@
                                  Margin="0,5"
                                  caliburn:Bind.Model="{Binding}"
                                  Background="{Binding BackgroundColor, Converter={StaticResource ColorToGradientBrush}}" />
-        <local:ButtonBar HorizontalAlignment="Right"
+        <editor:ButtonBar HorizontalAlignment="Right"
                          Grid.Row="0"
                          Grid.Column="3"
                          HasNewButton="False"
@@ -54,17 +53,17 @@
             <StackPanel Margin="25,0,0,0"
                         Orientation="Vertical">
                 <!-- is interface -->
-                <CheckBox Content="{x:Static local:EditorStrings.IsInterface}"
+                <CheckBox Content="{x:Static editor:EditorStrings.IsInterface}"
                           VerticalContentAlignment="Bottom"
                           Style="{StaticResource CheckBox-Sketch}"
                           x:Name="IsInterface" />
                 <!-- base class -->
                 <DockPanel>
                     <TextBlock Style="{StaticResource TextBlock-Sketch}"
-                               Text="{x:Static local:EditorStrings.BaseClass}"
+                               Text="{x:Static editor:EditorStrings.BaseClass}"
                                DockPanel.Dock="Left" />
                     <ComboBox x:Name="Classifiers"
-                              IsEnabled="{Binding IsInterface,Converter={local:InverseBooleanConverter}}"
+                              IsEnabled="{Binding IsInterface,Converter={editor:InverseBooleanConverter}}"
                               Margin="5,0"
                               DockPanel.Dock="Right" />
                 </DockPanel>
