@@ -138,17 +138,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\Common.csproj">
       <Project>{45650e76-1101-4ffb-a824-8b675f211160}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\YumlFrontEnd.editor\umlsketch.csproj">
-      <Project>{9a9c51a8-47ae-4259-9be8-814cbd82d087}</Project>
-      <Name>umlsketch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\umlsketch.lib.csproj">
+    <ProjectReference Include="..\umlsketch.lib\umlsketch.lib.csproj">
       <Project>{d7f14ac9-b4e1-46c7-a5f7-4733b80b6d57}</Project>
       <Name>umlsketch.lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\umlsketch\umlsketch.csproj">
+      <Project>{9a9c51a8-47ae-4259-9be8-814cbd82d087}</Project>
+      <Name>umlsketch</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
