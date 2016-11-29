@@ -1,7 +1,0 @@
-- Modern UI (MUI) für die Oberfläche
-- Caliburn.Micro für MVVM
-- Nach Möglichkeit nur Standard Controls verwenden
-- AutoMapper, um Daten zwischen Model und View zu mappen
-- so wenig Code wie möglich schreiben
-- Json als Dateiformat
-- CefSharp für Web-View (falls möglich)
