@@ -27,8 +27,8 @@ namespace UmlSketch.Test
                 .CanRenameWith(Arg.Any<string>())
                 .ReturnsForAnyArgs(new Success());
 
-            var newName = RandomString();
-            _editableNameMixin.Name = RandomString();
+            var newName = RandomString(1);
+            _editableNameMixin.Name = RandomString(2);
             _editableNameMixin.StartEditing();
             _editableNameMixin.Name = newName;
             _editableNameMixin.StopEditing(Confirmation.Confirmed);
