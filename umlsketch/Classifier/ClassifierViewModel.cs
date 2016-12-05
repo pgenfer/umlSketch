@@ -44,15 +44,13 @@ namespace UmlSketch.Editor
         /// </summary>
         /// <param name="domainObject"></param>
         /// <param name="parentViewModel"></param>
-        /// <param name="context"></param>
         public override void Init(
             Classifier domainObject, 
-            PropertyChangedBase parentViewModel, 
-            ViewModelContext context)
+            PropertyChangedBase parentViewModel)
         {
             Note = new NoteViewModel(_commands.ChangeNoteColor, _commands.ChangeNoteText) { IsExpanded = false };
 
-            base.Init(domainObject, parentViewModel, context);
+            base.Init(domainObject, parentViewModel);
 
             var factory = Context.ViewModelFactory;
 

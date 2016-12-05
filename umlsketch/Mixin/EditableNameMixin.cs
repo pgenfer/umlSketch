@@ -12,7 +12,7 @@ namespace UmlSketch.Editor
     /// Has a depenency to the validation service to check whether
     /// the new name of the entity is valid
     /// </summary>
-    internal class EditableNameMixin : PropertyChangedBase
+    public class EditableNameMixin : PropertyChangedBase, IEditableName
     {
         /// <summary>
         /// mixin to handle the name interaction
@@ -40,17 +40,22 @@ namespace UmlSketch.Editor
         /// is completed
         /// </summary>
         private readonly IRenameCommand _command;
-      
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="renameCommand">command that is executed to perform the rename action</param>
         public EditableNameMixin(IRenameCommand renameCommand)
         {
             Contract.Requires(renameCommand != null);
-
+        
             _command = renameCommand;
         }
 
         public void StartEditing()
         {
             IsEditable = true;
+   
             // the original name should always be
             // valid, otherwise we would set an invalid
             // name when canceling the editing
@@ -68,9 +73,20 @@ namespace UmlSketch.Editor
                     //if (string.IsNullOrEmpty(Name))
                     //    return;
                     // only fire change event if name did really change
-                    if (_originalName != Name && !HasNameError)
-                        Rename(Name);
-                    _originalName = Name;
+                    if (_originalName != Name)
+                    {
+                        if (!HasNameError)
+                        {
+                            Rename(Name);
+                            _originalName = Name;
+                        }
+                        else
+                        {
+                            // error: reset the name
+                            Name = _originalName;
+                        }
+                        
+                    }
                     IsEditable = false;
                     break;
                 case Confirmation.Canceled:
@@ -136,5 +152,11 @@ namespace UmlSketch.Editor
         public override string ToString() => _name.ToString();
         public void Rename(string newName) => _command.Rename(newName);
         public ValidationResult CanRenameWith(string newName) => _command.CanRenameWith(newName);
+
+        public void ValidateAndClose()
+        {
+            var confirmation = HasNameError ? Confirmation.Canceled : Confirmation.Confirmed;
+            StopEditing(confirmation);
+        }
     }
 }

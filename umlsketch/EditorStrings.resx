@@ -230,6 +230,9 @@
   <data name="UmlJsonFileFilter" xml:space="preserve">
     <value>UML json file (*.json)|*.json</value>
   </data>
+  <data name="UmlSketch" xml:space="preserve">
+    <value>umlSketch</value>
+  </data>
   <data name="UsesAssociation" xml:space="preserve">
     <value>uses</value>
     <comment>Uses association</comment>

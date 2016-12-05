@@ -35,6 +35,20 @@ namespace UmlSketch.Editor
         /// </summary>
         public IWindowManager WindowManager { get; }
 
+        /// <summary>
+        /// stores the editname mixin that is currently in edit mode
+        /// (if any)
+        /// </summary>
+        public IEditableName CurrentEdit { get; set; }
+
+        /// <summary>
+        /// constructor should only be used for testing
+        /// </summary>
+        public ViewModelContext()
+        {
+            /* only for testing */
+        }
+        
         public ViewModelContext(
             ClassifierDictionary availableClassifiers,
             CommandFactory commandFactory,

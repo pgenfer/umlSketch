@@ -2,8 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:YumlFrontEnd.editor.Styles"
                     xmlns:cal="http://www.caliburnproject.org"
-                    xmlns:editor="clr-namespace:UmlSketch.Editor">
+                    xmlns:editor="clr-namespace:UmlSketch.Editor"
+                    xmlns:pc="http://schemas.microsoft.com/prototyping/2010/controls">
   <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+  <editor:IsVisibleToColorConverter
+    x:Key="IsVisibleToColor"
+    VisibleBrush="{StaticResource BaseForeground-Sketch}"
+    InvisibleBrush="{StaticResource DomainObjectIsInvisibleTextColor}"/>
   <!-- combo box -->
   <Style BasedOn="{StaticResource ComboBox-Sketch}"
          TargetType="ComboBox"/>
@@ -22,7 +27,7 @@
       <Setter Property="ItemTemplate">
         <Setter.Value>
           <DataTemplate>
-            <ContentControl cal:View.Model="{Binding}"/>
+            <ContentControl cal:View.Model="{Binding}" FocusVisualStyle="{x:Null}"/>
           </DataTemplate>
         </Setter.Value>
       </Setter>
@@ -36,6 +41,24 @@
         <Setter Property="TextBlock.Foreground" Value="LightGray"/>
       </DataTrigger>
     </Style.Triggers>
-    
+  </Style>
+  <!-- horizontal line -->
+  <Style x:Key="HorizontalLine-Sketch" TargetType="{x:Type pc:SketchRectangleUC}">
+    <Style.Setters>
+      <Setter Property="BorderBrush" Value="{StaticResource MouseOverBackground-Sketch}"/>
+      <Setter Property="Height" Value="2"/>
+    </Style.Setters>
+  </Style>
+
+  <!-- combo box with classifiers -->
+  <Style x:Key="ClassifierCombobox"
+         BasedOn="{StaticResource ComboBox-Sketch}"
+         TargetType="ComboBox">
+    <Style.Setters>
+      <Setter Property="HorizontalAlignment" Value="Left"/>
+      <Setter Property="Width" Value="150"/>
+      <Setter Property="Foreground" Value="{Binding IsVisible,Converter={StaticResource IsVisibleToColor}}"/>
+      <Setter Property="Margin" Value="5"/>
+    </Style.Setters>
   </Style>
 </ResourceDictionary>

@@ -3,6 +3,7 @@ using Caliburn.Micro;
 using Common;
 using UmlSketch.DomainObject;
 using UmlSketch.Event;
+using static System.Diagnostics.Contracts.Contract;
 
 namespace UmlSketch.Editor
 {
@@ -35,7 +36,7 @@ namespace UmlSketch.Editor
 
         public BindableCollection<SingleItemViewModelBaseSimple<TDomain>> Items => _items.Items;
 
-        public ViewModelContext Context { get; private set; }
+        public ViewModelContext Context { protected get; set; }
 
         /// <summary>
         /// event handler that is fired when a new item was added to the list.
@@ -77,15 +78,16 @@ namespace UmlSketch.Editor
             // we need dynamics here because the type of the command is not known
             // during runtime
             var singleViewModel = Context.ViewModelFactory.CreateSingleViewModel(domainObject,_domainList);
-            singleViewModel.Init(domainObject, this, Context);
+            singleViewModel.Init(domainObject, this);
             Items.Add(singleViewModel);
             return singleViewModel;
         }
 
-        internal void Init(BaseList<TDomain> domainList, ViewModelContext context)
+        internal void Init(BaseList<TDomain> domainList)
         {
+            Requires(Context != null);
+
             _domainList = domainList;
-            Context = context;
             _expandable.PropertyChanged += (_, e) => NotifyOfPropertyChange(e.PropertyName);
             UpdateItemList();
             SubscribeToMessageSystem(domainList);

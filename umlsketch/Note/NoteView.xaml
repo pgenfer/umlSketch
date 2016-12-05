@@ -36,6 +36,7 @@
     <TextBox
       Style="{StaticResource TextBox-Sketch}"
       TextWrapping="WrapWithOverflow"
+      BorderBrush="{StaticResource MouseOverBackground-Sketch}"
       AcceptsReturn="True"
       x:Name="Text"
       Grid.Row="1"

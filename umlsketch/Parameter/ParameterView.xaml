@@ -6,14 +6,13 @@
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:editor="clr-namespace:UmlSketch.Editor"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance local:PropertyViewModel}">
+             d:DataContext="{d:DesignInstance editor:PropertyViewModel}">
   <DockPanel
     HorizontalAlignment="Stretch">
     <ComboBox
       DockPanel.Dock="Left"
-      Foreground="{Binding IsVisible,Converter={StaticResource IsVisibleToColor}}"
-      x:Name="Classifiers"
-      Margin="5"/>
+      Style="{StaticResource ClassifierCombobox}"
+      x:Name="Classifiers"/>
     <editor:ButtonBar
       DockPanel.Dock="Right"
       HasDeleteButton="True"

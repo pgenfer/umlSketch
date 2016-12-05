@@ -13,8 +13,7 @@
                          HasNewButton="False"
                          cal:Bind.Model="{Binding}" />
         <ComboBox DockPanel.Dock="Left"
-                  Foreground="{Binding IsVisible,Converter={StaticResource IsVisibleToColor}}"
                   x:Name="Classifiers"
-                  Margin="5" />
+                  Style="{StaticResource ClassifierCombobox}"/>
     </DockPanel>
 </UserControl>

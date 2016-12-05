@@ -27,6 +27,7 @@
     <TextBlock
       DockPanel.Dock="Left"
       TextAlignment="Left"
+      FontWeight="Bold"
       Text="{Binding ElementName=MainControl,Path=Title}"
       Style="{StaticResource TextBlock-Sketch}"
       Margin="5"/>

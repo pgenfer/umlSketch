@@ -387,6 +387,15 @@ namespace UmlSketch.Editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to umlSketch.
+        /// </summary>
+        public static string UmlSketch {
+            get {
+                return ResourceManager.GetString("UmlSketch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to uses.
         /// </summary>
         public static string UsesAssociation {

@@ -1,6 +1,9 @@
-﻿using System.Diagnostics.Contracts;
+﻿using System;
+using System.Diagnostics.Contracts;
 using System.Dynamic;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using Caliburn.Micro;
 using UmlSketch.Command;
 using UmlSketch.DomainObject;
@@ -40,6 +43,8 @@ namespace UmlSketch.Editor
 
             // try to load the last file that was edited by the user
             LoadLastFile();
+
+            DisplayName = EditorStrings.UmlSketch;
         }
 
         private void UpdateViewModels()
@@ -105,5 +110,17 @@ namespace UmlSketch.Editor
                     _context.MessageSystem),
                 settings:settings);
         }
+
+        public void CheckCurrentEdit(MouseButtonEventArgs eventArgs)
+        {
+            var originalSource = eventArgs.OriginalSource as FrameworkElement;
+            var editableName = originalSource?.DataContext as IEditableName;
+            if (editableName != null)
+            {
+                if (editableName == _context.CurrentEdit)
+                    return;
+            }
+            _context.CurrentEdit?.ValidateAndClose(); // validate and close any edit fields
+        } 
     }
 }

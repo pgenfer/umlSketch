@@ -36,7 +36,7 @@
 	<!-- Basic Sketch TextBlock -->
 	<Style x:Key="BasicTextBlock-Sketch" TargetType="{x:Type TextBlock}" d:StyleDefaultContent="Basic Text">
 		<Setter Property="TextWrapping" Value="NoWrap"/>
-		<Setter Property="TextTrimming" Value="None"/>
+		<Setter Property="TextTrimming" Value="CharacterEllipsis"/>
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
 		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
 		<Setter Property="Foreground" Value="{DynamicResource BaseForeground-Sketch}"/>
@@ -165,7 +165,7 @@
 		<Setter Property="BorderBrush" Value="{StaticResource BaseBorder-Sketch}"/>
 		<Setter Property="Background" Value="{StaticResource BaseBackground-Sketch}"/>
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
-		<Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
+		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
 
 
 		<Setter Property="Template">
@@ -270,7 +270,7 @@
 		</Setter>
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
 		<Setter Property="FontWeight" Value="{DynamicResource FontWeight-Sketch}"/>
-		<Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
+		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
 		<Setter Property="Foreground" Value="{DynamicResource BaseForeground-Sketch}"/>
 		<Style.Triggers>
 			<Trigger Property="IsEnabled" Value="False">
@@ -353,7 +353,7 @@
 			</Setter.Value>
 		</Setter>
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
-		<Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
+		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
 		<Setter Property="FontWeight" Value="{DynamicResource FontWeight-Sketch}"/>
 		<Setter Property="Foreground" Value="{DynamicResource BaseForeground-Sketch}"/>
 		<Setter Property="Background" Value="{DynamicResource BaseBackground-Sketch}"/>
@@ -493,7 +493,7 @@
 		</Setter>
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
 		<Setter Property="FontWeight" Value="{DynamicResource FontWeight-Sketch}"/>
-		<Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
+		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
 	</Style>
 
 	<!-- Sketch Note -->
@@ -567,7 +567,7 @@
 			</Setter.Value>
 		</Setter>
 		<Setter Property="Height" Value="30"/>
-		<Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
+		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
 		<Setter Property="FontWeight" Value="{DynamicResource FontWeight-Sketch}"/>
 		<Setter Property="MinWidth" Value="17"/>
 	</Style>
@@ -758,7 +758,7 @@
 		</Setter>
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
 		<Setter Property="FontWeight" Value="{DynamicResource FontWeight-Sketch}"/>
-		<Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
+		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
 		<Style.Triggers>
 			<Trigger Property="IsEnabled" Value="False">
 				<Setter Property="Foreground" Value="{DynamicResource DisabledForeground-Sketch}"/>
@@ -1011,7 +1011,7 @@
 		<Setter Property="Background" Value="{StaticResource BaseBackground-Sketch}"/>
 		<Setter Property="ItemContainerStyle" Value="{DynamicResource ListBoxItem-Sketch}"/>
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
-		<Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
+		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
 		<Setter Property="FontWeight" Value="{DynamicResource FontWeight-Sketch}"/>
 		<Setter Property="Template">
 			<Setter.Value>
@@ -1044,7 +1044,7 @@
     <Setter Property="Background" Value="{StaticResource BaseBackground-Sketch}"/>
     <Setter Property="ItemContainerStyle" Value="{DynamicResource ListBoxItem-Sketch}"/>
     <Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
-    <Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
+    <Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
     <Setter Property="FontWeight" Value="{DynamicResource FontWeight-Sketch}"/>
     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
     <Setter Property="Template">
@@ -1070,7 +1070,7 @@
   
 	<!-- Sketch TabControl -->
 	<Style x:Key="TabControl-Sketch" TargetType="{x:Type TabControl}">
-		<Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
+		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
 		<Setter Property="Foreground" Value="{DynamicResource BaseForeground-Sketch}"/>
 		<Setter Property="Padding" Value="4,4,4,4"/>
 		<Setter Property="BorderThickness" Value="1"/>
@@ -1168,7 +1168,7 @@
 		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
 		<Setter Property="VerticalContentAlignment" Value="Stretch"/>
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
-		<Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
+		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
 		<Setter Property="Foreground" Value="{StaticResource BaseBorder-Sketch}"/>
 		<Setter Property="Template">
 			<Setter.Value>
@@ -1273,7 +1273,7 @@
 		</Setter>
 		<Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
 		<Setter Property="FontWeight" Value="{DynamicResource FontWeight-Sketch}"/>
-		<Setter Property="FontSize" Value="{DynamicResource SizeDouble-Sketch}"/>
+		<Setter Property="FontSize" Value="{DynamicResource SizeNormal-Sketch}"/>
     <Setter Property="Validation.ErrorTemplate">
       <Setter.Value>
         <ControlTemplate>

@@ -22,11 +22,10 @@ namespace UmlSketch.Editor
 
         public override void Init(
             Method domain, 
-            PropertyChangedBase parentViewModel, 
-            ViewModelContext context)
+            PropertyChangedBase parentViewModel)
         {
-            base.Init(domain, parentViewModel, context);
-            Parameters = (ParameterListViewModel)context.ViewModelFactory.CreateListViewModel(domain.Parameters);
+            base.Init(domain, parentViewModel);
+            Parameters = (ParameterListViewModel)Context.ViewModelFactory.CreateListViewModel(domain.Parameters);
         }
 
         protected override void CustomInit()

@@ -5,73 +5,94 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:editor="clr-namespace:UmlSketch.Editor"
+        xmlns:pc="http://schemas.microsoft.com/prototyping/2010/controls"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="{x:Static editor:EditorStrings.UmlSketch}"
         Height="768"
-        Width="1024"
-        WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Grid.RowDefinitions>
-            <!-- toolbar -->
-            <RowDefinition Height="Auto" />
-            <!-- class view and renderer -->
-            <RowDefinition Height="*" />
-            <!-- separator -->
-            <RowDefinition Height="Auto" />
-            <!-- note -->
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.382*" />
-            <ColumnDefinition Width="0.618*" />
-        </Grid.ColumnDefinitions>
-        <StackPanel Margin="10"
-                    Grid.Row="0"
-                    Grid.ColumnSpan="2"
-                    Orientation="Horizontal">
-            <editor:ImageButton Margin="5,0"
-                               x:Name="New"
-                               Style="{StaticResource ImageButtonStyle}"
-                               DefaultImage="{StaticResource NewImage}"
-                               MouseOverImage="{StaticResource NewHighlightImage}" />
-            <editor:ImageButton Margin="5,0"
-                               x:Name="Save"
-                               Style="{StaticResource ImageButtonStyle}"
-                               DefaultImage="{StaticResource SaveImage}"
-                               MouseOverImage="{StaticResource SaveHighlightImage}" />
-            <editor:ImageButton x:Name="Open"
-                               Style="{StaticResource ImageButtonStyle}"
-                               Margin="5,0"
-                               DefaultImage="{StaticResource OpenImage}"
-                               MouseOverImage="{StaticResource OpenHighlightImage}" />
-          <editor:ImageButton x:Name="Settings"
-                              Style="{StaticResource ImageButtonStyle}"
-                              Margin="5,0"
-                              DefaultImage="{StaticResource SettingsImage}"
-                              MouseOverImage="{StaticResource SettingsHighlightImage}" />
-        </StackPanel>
-        <ContentControl x:Name="ClassifierList"
-                        Grid.Column="0"
-                        Grid.Row="1"
-                        Margin="10" />
-        <GridSplitter Grid.Column="0"
-                      Grid.Row="1"
-                      Grid.RowSpan="3"
-                      Width="5" />
-        <ContentControl x:Name="Renderer"
-                        Grid.Column="1"
-                        Grid.Row="1"
-                        Grid.RowSpan="2" />
-        <!-- Separator -->
-        <Separator 
-            Grid.Column="0"
-            Grid.Row="2"
-            Margin="10"/>
-        <!-- Note -->
-        <ContentControl 
-            Grid.Column="0"
-            Grid.Row="3"
-            Margin="15,5,5,5"
-            cal:View.Model="{Binding Note}" />
-    </Grid>
+        Width="1280"
+        WindowStartupLocation="CenterScreen"
+        cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action CheckCurrentEdit($eventArgs)]"
+        Icon="../Resources/Images/logo.png">
+  <Grid>
+    <Grid.RowDefinitions>
+      <!-- toolbar -->
+      <RowDefinition Height="Auto" />
+      <!-- class view and renderer -->
+      <RowDefinition Height="*" />
+      <!-- separator -->
+      <RowDefinition Height="2" />
+      <!-- note -->
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="0.382*" MinWidth="525"/>
+      <ColumnDefinition Width="0.618*" />
+    </Grid.ColumnDefinitions>
+    <StackPanel Margin="10"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Orientation="Horizontal">
+      <editor:ImageButton Margin="5,0"
+                         x:Name="New"
+                         Style="{StaticResource ImageButtonStyle}"
+                         DefaultImage="{StaticResource NewImage}"
+                         MouseOverImage="{StaticResource NewHighlightImage}" />
+      <editor:ImageButton Margin="5,0"
+                         x:Name="Save"
+                         Style="{StaticResource ImageButtonStyle}"
+                         DefaultImage="{StaticResource SaveImage}"
+                         MouseOverImage="{StaticResource SaveHighlightImage}" />
+      <editor:ImageButton x:Name="Open"
+                         Style="{StaticResource ImageButtonStyle}"
+                         Margin="5,0"
+                         DefaultImage="{StaticResource OpenImage}"
+                         MouseOverImage="{StaticResource OpenHighlightImage}" />
+      <editor:ImageButton x:Name="Settings"
+                          Style="{StaticResource ImageButtonStyle}"
+                          Margin="5,0"
+                          DefaultImage="{StaticResource SettingsImage}"
+                          MouseOverImage="{StaticResource SettingsHighlightImage}" />
+    </StackPanel>
+    <ContentControl x:Name="ClassifierList"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Margin="10" />
+    <GridSplitter Grid.Column="0"
+                  Grid.Row="1"
+                  Grid.RowSpan="3"
+                  Width="5">
+      <GridSplitter.Style>
+        <Style TargetType="GridSplitter">
+          <Style.Setters>
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <pc:SketchRectangleUC 
+                    BorderBrush="{StaticResource MouseOverBackground-Sketch}"
+                    Width="5"
+                    Margin="0,20"/>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </Style.Setters>
+        </Style>
+      </GridSplitter.Style>
+      </GridSplitter>
+    <ContentControl x:Name="Renderer"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Grid.RowSpan="2" />
+    <!-- Separator -->
+    <pc:SketchRectangleUC
+      Grid.Column="0"
+      Grid.Row="2"
+      Margin="10,0"
+      Style="{StaticResource HorizontalLine-Sketch}"/>
+    <!-- Note -->
+    <ContentControl
+        Grid.Column="0"
+        Grid.Row="3"
+        Margin="15,5,5,5"
+        cal:View.Model="{Binding Note}" />
+  </Grid>
 </Window>

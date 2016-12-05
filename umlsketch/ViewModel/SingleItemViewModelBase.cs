@@ -1,6 +1,7 @@
 using Common;
 using UmlSketch.Command;
 using UmlSketch.Event;
+using static System.Diagnostics.Contracts.Contract;
 
 namespace UmlSketch.Editor
 {
@@ -12,7 +13,7 @@ namespace UmlSketch.Editor
     /// <typeparam name="TDomain"></typeparam>
     /// <typeparam name="TCommand"></typeparam>
     public abstract class SingleItemViewModelBase<TDomain,TCommand> : 
-        SingleItemViewModelBaseSimple<TDomain>
+        SingleItemViewModelBaseSimple<TDomain>, IEditableName
         where TDomain : IVisible
         where TCommand : ISingleCommandContext<TDomain>
     {
@@ -33,6 +34,10 @@ namespace UmlSketch.Editor
         /// <param name="commands"></param>
         internal virtual void InitCommands(TCommand commands)
         {
+            // command initialization can only
+            // be called after context is set
+            Requires(Context != null);
+
             _commands = commands;
             // setup mixins. There can be view models where the commands are not defined
             // (i.g. InterfaceImplementationViewModel does not need a rename command)
@@ -75,9 +80,20 @@ namespace UmlSketch.Editor
             set { _name.IsEditable = value; }
         }
 
-        public void StartEditing() => _name.StartEditing();
-        public void StopEditing(Confirmation configuration) => _name.StopEditing(configuration);
+        public void StartEditing()
+        {
+            Context.CurrentEdit = this;
+            _name.StartEditing();
+        }
+
+        public void StopEditing(Confirmation configuration)
+        {
+            _name.StopEditing(configuration);
+            if(!_name.IsEditable) // editing was stopped, so clear the current editable item
+                Context.CurrentEdit = null;
+        } 
         public override string ToString() => _name.ToString();
+        public void ValidateAndClose() => _name.ValidateAndClose();
 
         public bool HasNameError
         {

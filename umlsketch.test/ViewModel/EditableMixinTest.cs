@@ -56,6 +56,40 @@ namespace UmlSketch.Test
             // and that the name was not changed
             Assert.AreEqual(_editableNameMixin.Name,oldName);
         }
+
+        [TestDescription("Name is not set if invalid")]
+        public void StopEditingTest_Dont_Set_Invalid_Name()
+        {
+            _renameCommand
+                .CanRenameWith(Arg.Any<string>())
+                .ReturnsForAnyArgs(new Error(string.Empty));
+
+            // set initial name
+            _editableNameMixin.Name = "old";
+            // start editing, name is invalid, so it won't be set
+            _editableNameMixin.StartEditing();
+            _editableNameMixin.Name = "new";
+            _editableNameMixin.StopEditing(Confirmation.Confirmed);
+            // ensure that the name remains the same if invalid
+            Assert.AreEqual("old",_editableNameMixin.Name);
+        }
+
+        [TestDescription("Name is set if valid")]
+        public void StopEditingTest_Set_valid_Name()
+        {
+            _renameCommand
+                .CanRenameWith(Arg.Any<string>())
+                .ReturnsForAnyArgs(new Success());
+
+            // set initial name
+            _editableNameMixin.Name = "old";
+            // start editing, name is invalid, so it won't be set
+            _editableNameMixin.StartEditing();
+            _editableNameMixin.Name = "new";
+            _editableNameMixin.StopEditing(Confirmation.Confirmed);
+            // ensure that the name remains the same if invalid
+            Assert.AreEqual("new", _editableNameMixin.Name);
+        }
     }
 }
 

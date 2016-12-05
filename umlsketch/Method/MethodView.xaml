@@ -11,10 +11,9 @@
     <DockPanel
       HorizontalAlignment="Stretch">
       <ComboBox
-       DockPanel.Dock="Left"
-       Foreground="{Binding IsVisible,Converter={StaticResource IsVisibleToColor}}"
-       x:Name="Classifiers"
-       Margin="5"/>
+        Style="{StaticResource ClassifierCombobox}"
+        DockPanel.Dock="Left"
+        x:Name="Classifiers"/>
       <editor:ButtonBar
         DockPanel.Dock="Right"
         HasDeleteButton="True"

@@ -41,8 +41,9 @@ namespace UmlSketch.Editor
         {
             dynamic viewModel = CreateListViewModelWithCommand<TDomain>();
             dynamic commands = Context.CommandFactory.GetListCommands(domainList);
+            viewModel.Context = Context;
             viewModel.InitCommands(commands);
-            viewModel.Init(domainList, Context);
+            viewModel.Init(domainList);
             return viewModel;
         }
 
@@ -57,6 +58,7 @@ namespace UmlSketch.Editor
             }
             dynamic singleViewModel = (SingleItemViewModelBaseSimple<TDomain>)createFunc();
             dynamic commands = Context.CommandFactory.GetSingleCommands(domainObject,parentList);
+            singleViewModel.Context = Context;
             singleViewModel.InitCommands(commands);
             return singleViewModel;
         }

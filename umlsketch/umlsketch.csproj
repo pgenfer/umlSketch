@@ -79,6 +79,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
@@ -190,6 +193,7 @@
     <Compile Include="InterfaceImplementation\InterfaceImplementationViewModel.cs" />
     <Compile Include="Mixin\BackgroundColorMixin.cs" />
     <Compile Include="Mixin\ChangeVisibilityMixin.cs" />
+    <Compile Include="Mixin\IEditableName.cs" />
     <Compile Include="Mixin\SelectClassifierWithNullItemMixin.cs" />
     <Compile Include="Mixin\SerializationMixin.cs" />
     <Compile Include="Note\NoteView.xaml.cs">
@@ -478,6 +482,15 @@
   <ItemGroup>
     <Resource Include="Resources\Images\configuration.png" />
     <Resource Include="Resources\Images\configuration_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo - Kopie.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

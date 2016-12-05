@@ -26,11 +26,12 @@
       <ComboBox
         DockPanel.Dock="Left"
         x:Name="Associations"
-        Margin="0,5"/>
+        Margin="0,5"
+        Width="150"/>
       <ComboBox
         DockPanel.Dock="Left"
         x:Name="Classifiers"
-        Margin="5"/>
+        Style="{StaticResource ClassifierCombobox}"/>
     </DockPanel>
   </StackPanel>
 </UserControl>

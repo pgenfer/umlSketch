@@ -35,7 +35,8 @@
                Visibility="{Binding IsEditable,Converter={editor:TrueToCollapseConverter}}"
                HorizontalAlignment="Left"
                ToolTip="{x:Static editor:Tooltips.ClickToStartEditing}"
-               Foreground="{Binding ElementName=EditableTextBlockControl,Path=ForegroundTextBrush}"/>
+               Foreground="{Binding ElementName=EditableTextBlockControl,Path=ForegroundTextBrush}"
+               TextTrimming="CharacterEllipsis"/>
     <TextBox
       Name="EditNameTextBox"
       Background="Transparent"

@@ -1,4 +1,5 @@
 using Caliburn.Micro;
+using static System.Diagnostics.Contracts.Contract;
 
 namespace UmlSketch.Editor
 {
@@ -16,7 +17,7 @@ namespace UmlSketch.Editor
         /// </summary>
         private TDomain _domainObject;
 
-        public ViewModelContext Context { get; private set; }
+        public ViewModelContext Context { protected get; set; }
         /// <summary>
         /// view model converter is used to
         /// convert any domain objects to view models.
@@ -33,16 +34,17 @@ namespace UmlSketch.Editor
         /// </summary>
         /// <param name="domain"></param>
         /// <param name="parentViewModel"></param>
-        /// <param name="context"></param>
         public virtual void Init(
             TDomain domain,
-            PropertyChangedBase parentViewModel,
-            ViewModelContext context)
+            PropertyChangedBase parentViewModel)
         {
+            // ensure that initialization can only be called
+            // after the context is set
+            Requires(Context != null);
+
             _domainObject = domain;
             _toViewModel.InitViewModel(domain, this);
             _parentViewModel = parentViewModel;
-            Context = context;
             Context.MessageSystem.Subscribe(domain, this);
             CustomInit();
         }

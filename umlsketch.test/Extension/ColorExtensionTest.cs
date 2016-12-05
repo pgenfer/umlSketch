@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using UmlSketch.Editor;
 
-namespace YumlFrontEnd.editor.Test
+namespace UmlSketch.Test
 {
     [TestFixture]
     public class ColorExtensionTest

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:editor="clr-namespace:UmlSketch.Editor"
+             xmlns:pc="http://schemas.microsoft.com/prototyping/2010/controls"
              mc:Ignorable="d">
   <UserControl.Resources>
     <Style BasedOn="{StaticResource ListBox-Sketch}" TargetType="ListBox"/>
@@ -18,7 +19,9 @@
         x:Name="New"
         Style="{StaticResource NewButtonStyle}"/>
     </StackPanel>
-    <Separator DockPanel.Dock="Top"/>
+    <pc:SketchRectangleUC 
+      DockPanel.Dock="Top"
+      Style="{StaticResource HorizontalLine-Sketch}"/>
     <ScrollViewer
       Style="{StaticResource ScrollViewer-Sketch-List}"
       VerticalScrollBarVisibility="Auto"
@@ -26,7 +29,7 @@
       <ItemsControl Name="Items">
         <ItemsControl.ItemTemplate>
           <DataTemplate>
-            <ContentControl caliburn:View.Model="{Binding}"/>
+            <ContentControl caliburn:View.Model="{Binding}" FocusVisualStyle="{x:Null}"/>
           </DataTemplate>
         </ItemsControl.ItemTemplate>
       </ItemsControl>
