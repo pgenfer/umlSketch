@@ -1,6 +1,7 @@
 ﻿using System.Windows.Media;
 using Caliburn.Micro;
 using UmlSketch.Command;
+using UmlSketch.DomainObject;
 
 namespace UmlSketch.Editor
 {
@@ -11,11 +12,15 @@ namespace UmlSketch.Editor
     /// </summary>
     public class BackgroundColorMixin : PropertyChangedBase
     {
+        public DiagramColorPalette ColorPalette { get;}
         private readonly IChangeColorCommand _command;
         private Color _backgroundColor;
 
-        public BackgroundColorMixin(IChangeColorCommand command)
+        public BackgroundColorMixin(
+            IChangeColorCommand command,
+            DiagramColorPalette colorPalette)
         {
+            ColorPalette = colorPalette;
             _command = command;
         }
 

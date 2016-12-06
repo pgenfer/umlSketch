@@ -18,7 +18,7 @@
       <editor:ButtonBar 
         HorizontalAlignment="Right"
         HasNewButton="False"
-        HasColorPicker="True"
+        HasColorPicker="False"
         cal:Bind.Model="{Binding}" />
     </DockPanel>
     <DockPanel

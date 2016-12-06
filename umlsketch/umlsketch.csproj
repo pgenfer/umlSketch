@@ -223,6 +223,7 @@
     <Compile Include="UserControls\ButtonBar.xaml.cs">
       <DependentUpon>ButtonBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ColorByValueComparer.cs" />
     <Compile Include="UserControls\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
@@ -238,6 +239,7 @@
     <Compile Include="UserControls\PersistentToolTip.xaml.cs">
       <DependentUpon>PersistentToolTip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\PredefinedColor.cs" />
     <Compile Include="ViewModel\ListViewModelBase.cs" />
     <Compile Include="Method\MethodListViewModel.cs" />
     <Compile Include="Method\MethodViewModel.cs" />

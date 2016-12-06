@@ -8,10 +8,43 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              x:Name="MainControl">
+  <UserControl.Resources>
+    <DataTemplate x:Key="ColorDataTemplate">
+      <pc:SketchRectangleUC
+        Width="20"
+        Height="20"
+        Margin="5"
+        ToolTip="{Binding Name}">
+        <pc:SketchRectangleUC.Background>
+          <SolidColorBrush Color="{Binding Value}"/>
+        </pc:SketchRectangleUC.Background>
+      </pc:SketchRectangleUC>
+    </DataTemplate>
+    <Style x:Key="ColorButtonStyle"
+           TargetType="{x:Type Button}"
+           BasedOn="{StaticResource ButtonNoHighlight-Sketch}">
+      <Style.Setters>
+        <Setter Property="BorderBrush" Value="{StaticResource MouseOverBackground-Sketch}"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Width" Value="20"/>
+      </Style.Setters>
+      <Style.Triggers>
+        <Trigger Property="IsMouseOver" Value="True">
+          <Setter Property="BorderBrush" Value="{StaticResource PressedForeground-Sketch}"/>
+        </Trigger>
+        <Trigger Property="IsPressed" Value="True">
+          <Setter Property="BorderBrush" Value="{StaticResource PressedForeground-Sketch}"/>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+  </UserControl.Resources>
   <!-- 
       the color picker is a restyled combobox that looks like
       a normal button. When pressing the button, the drop down area
       will be opened and the available colors will be shown.
+      
+      There will also be a separated area where are colors
+      that are currently used in the diagram will be displayed.
       -->
   <ComboBox
     x:Name="ComboBoxWithColor"
@@ -19,7 +52,9 @@
     Margin="2,0"
     Width="20"
     Height="20"
-    SelectedItem="{Binding Color,ElementName=MainControl}">
+    SelectedItem="{Binding PredefinedColor,ElementName=MainControl}"
+    DropDownOpened="ComboBoxWithColor_OnDropDownOpened"
+    ItemTemplate="{StaticResource ColorDataTemplate}">
     <ComboBox.Style>
       <Style
         TargetType="{x:Type ComboBox}"
@@ -28,29 +63,9 @@
           <Setter.Value>
             <ControlTemplate>
               <Grid x:Name="Placement" SnapsToDevicePixels="true">
-                <Button
-                  Width="20"
-                  Height="20"
+                <Button 
+                  Style="{StaticResource ColorButtonStyle}"
                   Click="Button_OnClick">
-                  <Button.Style>
-                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonNoHighlight-Sketch}">
-                      <Style.Setters>
-                        <Setter Property="BorderBrush" Value="{StaticResource MouseOverBackground-Sketch}"/>
-                      </Style.Setters>
-                      <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                          <Setter
-                            Property="BorderBrush"
-                            Value="{StaticResource PressedForeground-Sketch}"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                          <Setter
-                            Property="BorderBrush"
-                            Value="{StaticResource PressedForeground-Sketch}"/>
-                        </Trigger>
-                      </Style.Triggers>
-                    </Style>
-                  </Button.Style>
                   <Button.Background>
                     <SolidColorBrush Color="{Binding ElementName=MainControl,Path=Color}"/>
                   </Button.Background>
@@ -66,44 +81,53 @@
                     Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
                     BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
                     BorderThickness="1">
-                    <WrapPanel
-                      IsItemsHost="True"
-                      Orientation="Horizontal"
-                      Width="375"/>
-                    <!--
-                    <ScrollViewer
-                      Style="{DynamicResource ScrollViewer-Sketch2}">
-                      <ItemsPresenter
-                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                        KeyboardNavigation.DirectionalNavigation="Contained"/>
-                    </ScrollViewer>
-                    -->
+                    <Grid>
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="50"/>
+                      </Grid.RowDefinitions>
+                      <WrapPanel
+                        IsItemsHost="True"
+                        Orientation="Horizontal"
+                        Grid.Row="0"
+                        Width="375"/>
+                      <pc:SketchRectangleUC
+                        Grid.Row="1"
+                        Style="{StaticResource HorizontalLine-Sketch}"
+                        Margin="10"/>
+                      <ItemsControl
+                        Grid.Row="2"
+                        ItemsSource="{Binding ElementName=MainControl,Path=RecentlyUsedColors}">
+                        <ItemsControl.ItemsPanel>
+                          <ItemsPanelTemplate>
+                            <WrapPanel
+                            Orientation="Horizontal"
+                            Width="375"/>
+                          </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                          <DataTemplate>
+                            <Button 
+                              Margin="5"
+                              Style="{StaticResource ColorButtonStyle}"
+                              Click="Button_OnRecentColorClicked"
+                              ToolTip="{Binding Name}">
+                              <Button.Background>
+                                <SolidColorBrush Color="{Binding .Value}"/>
+                              </Button.Background>
+                            </Button>
+                          </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                      </ItemsControl>
+                    </Grid>
                   </Border>
                 </Popup>
               </Grid>
             </ControlTemplate>
           </Setter.Value>
         </Setter>
-
       </Style>
     </ComboBox.Style>
-    <ComboBox.ItemTemplate>
-      <DataTemplate>
-        <Grid>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-          </Grid.ColumnDefinitions>
-          <pc:SketchRectangleUC
-            Width="20"
-            Height="20"
-            Margin="5">
-            <pc:SketchRectangleUC.Background>
-              <SolidColorBrush Color="{Binding}"/>
-            </pc:SketchRectangleUC.Background>
-          </pc:SketchRectangleUC>
-        </Grid>
-      </DataTemplate>
-    </ComboBox.ItemTemplate>
   </ComboBox>
 </UserControl>

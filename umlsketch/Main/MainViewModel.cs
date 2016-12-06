@@ -61,7 +61,10 @@ namespace UmlSketch.Editor
             // initialize the note directly through the diagram
             // maybe later we change this to work via Automapper as we did with
             // other viewmodels
-            Note = new NoteViewModel(_commands.ChangeNoteColor, _commands.ChangeNoteText)
+            Note = new NoteViewModel(
+                _commands.ChangeNoteColor, 
+                _commands.ChangeNoteText,
+                _context.ColorPalette)
             {
                 InitialColor = _diagram.Note.Color.ToColorFromFriendlyName(),
                 Text = _diagram.Note.Text,

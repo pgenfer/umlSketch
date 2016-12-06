@@ -13,6 +13,8 @@ namespace UmlSketch.Editor
     /// </summary>
     public class ViewModelContext
     {
+        private readonly Diagram _diagram;
+
         /// <summary>
         /// all classifiers that are available in the system
         /// </summary>
@@ -41,6 +43,8 @@ namespace UmlSketch.Editor
         /// </summary>
         public IEditableName CurrentEdit { get; set; }
 
+        public DiagramColorPalette ColorPalette => _diagram.ColorPalette;
+
         /// <summary>
         /// constructor should only be used for testing
         /// </summary>
@@ -50,11 +54,13 @@ namespace UmlSketch.Editor
         }
         
         public ViewModelContext(
+            Diagram diagram,
             ClassifierDictionary availableClassifiers,
             CommandFactory commandFactory,
             MessageSystem messageSystem,
             IWindowManager windowManager)
         {
+            _diagram = diagram;
             Contract.Requires(availableClassifiers != null);
             Contract.Requires(messageSystem != null);
 

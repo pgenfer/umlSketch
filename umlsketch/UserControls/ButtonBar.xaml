@@ -13,7 +13,9 @@
     DockPanel.Dock="Right">
     <editor:ColorPicker
      Color="{Binding BackgroundColor,Mode=TwoWay}"
-     Visibility="{Binding ElementName=ButtonBarControl,Path=HasColorPicker,Converter={editor:FalseToHideConverter}}"/>
+     Visibility="{Binding ElementName=ButtonBarControl,
+     Path=HasColorPicker,Converter={editor:FalseToHideConverter}}"
+     DiagramColorPalette="{Binding ColorPalette}"/>
     <editor:ActionButton
       HorizontalAlignment="Right"
       Style="{StaticResource ActionButtonStyle}"

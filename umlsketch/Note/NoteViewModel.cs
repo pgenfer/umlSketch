@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using UmlSketch.Command;
+using UmlSketch.DomainObject;
 
 namespace UmlSketch.Editor
 {
@@ -12,10 +13,11 @@ namespace UmlSketch.Editor
 
         public NoteViewModel(
             IChangeColorCommand changeNoteColorCommand,
-            ChangeNoteTextCommand changeNoteTextCommand)
+            ChangeNoteTextCommand changeNoteTextCommand,
+            DiagramColorPalette diagramColorPalette)
         {
             _changeNoteTextCommand = changeNoteTextCommand;
-            _backgroundColor = new BackgroundColorMixin(changeNoteColorCommand);
+            _backgroundColor = new BackgroundColorMixin(changeNoteColorCommand, diagramColorPalette);
             _backgroundColor.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
             _expandable.PropertyChanged += (s, e) => NotifyOfPropertyChange(e.PropertyName);
         }
@@ -56,5 +58,7 @@ namespace UmlSketch.Editor
             Text = string.Empty;
             IsExpanded = false;
         }
+
+        public DiagramColorPalette ColorPalette => _backgroundColor.ColorPalette;
     }
 }

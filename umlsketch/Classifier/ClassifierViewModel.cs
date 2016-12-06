@@ -48,7 +48,13 @@ namespace UmlSketch.Editor
             Classifier domainObject, 
             PropertyChangedBase parentViewModel)
         {
-            Note = new NoteViewModel(_commands.ChangeNoteColor, _commands.ChangeNoteText) { IsExpanded = false };
+            Note = new NoteViewModel(
+                _commands.ChangeNoteColor, 
+                _commands.ChangeNoteText,
+                Context.ColorPalette)
+            {
+                IsExpanded = false
+            };
 
             base.Init(domainObject, parentViewModel);
 
@@ -68,7 +74,9 @@ namespace UmlSketch.Editor
                 new BaseClassSelectionItemSource(Context.Classifiers, Name, Context.MessageSystem),
                 _commands.ChangeBaseClass);
 
-            _backgroundColor = new BackgroundColorMixin(_commands.ChangeClassifierColor)
+            _backgroundColor = new BackgroundColorMixin(
+                _commands.ChangeClassifierColor, 
+                Context.ColorPalette)
             {
                 InitialColor = InitialColor
             };
@@ -132,5 +140,7 @@ namespace UmlSketch.Editor
         }
 
         public void Collapse() => _expanded.Collapse();
+
+        public DiagramColorPalette ColorPalette => _backgroundColor.ColorPalette;
     }
 }

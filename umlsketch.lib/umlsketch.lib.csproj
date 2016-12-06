@@ -122,6 +122,7 @@
     <Compile Include="Command\Parameter\SingleParameterCommandContext.cs" />
     <Compile Include="DiagramWriter\ParameterWriter.cs" />
     <Compile Include="DomainObject\Association.cs" />
+    <Compile Include="DomainObject\DiagramColorPalette.cs" />
     <Compile Include="Event\ChangeParameterTypeEvent.cs" />
     <Compile Include="Event\DiagramSettingChangedEvent.cs" />
     <Compile Include="Event\MethodReturnTypeChanged.cs" />

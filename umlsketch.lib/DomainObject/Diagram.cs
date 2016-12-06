@@ -31,6 +31,8 @@ namespace UmlSketch.DomainObject
             Classifiers = classifiers;
         }
 
+        public DiagramColorPalette ColorPalette => new DiagramColorPalette(this);
+
         public void WriteTo(DiagramWriter.DiagramWriter writer,DiagramDirection direction)
         {
             Classifiers.WriteTo(writer,direction);

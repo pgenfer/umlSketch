@@ -17,7 +17,7 @@ namespace UmlSketch.Editor
         /// </summary>
         private TDomain _domainObject;
 
-        public ViewModelContext Context { protected get; set; }
+        public ViewModelContext Context { get; set; }
         /// <summary>
         /// view model converter is used to
         /// convert any domain objects to view models.
